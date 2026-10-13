@@ -116,7 +116,7 @@ export function CommsHome() {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Jump to a channel or person…"
-            className="min-w-0 flex-1 bg-transparent text-sm text-foreground outline-none placeholder:text-disabled"
+            className="min-w-0 flex-1 bg-transparent text-xs text-foreground outline-none placeholder:text-disabled"
           />
         </div>
       </div>
@@ -196,7 +196,7 @@ export function CommsHome() {
             <button
               type="button"
               onClick={() => setShowDiscover((v) => !v)}
-              className="mt-2 flex w-full items-center gap-1.5 px-3 pb-1.5 pt-3.5 text-2xs font-semibold uppercase tracking-[0.06em] text-secondary-foreground transition-colors hover:text-foreground cursor-pointer"
+              className="mt-2 flex w-full items-center gap-1.5 px-3 pb-1.5 pt-3.5 text-3xs font-semibold uppercase tracking-[0.06em] text-secondary-foreground transition-colors hover:text-foreground cursor-pointer"
             >
               <ChevronRight
                 size={10}
@@ -214,13 +214,13 @@ export function CommsHome() {
                   <RowIcon>
                     <Hash size={13} className="opacity-60" />
                   </RowIcon>
-                  <span className="min-w-0 flex-1 truncate text-sm">{c.name}</span>
+                  <span className="min-w-0 flex-1 truncate text-xs">{c.name}</span>
                   {/* Only public channels are self-serve joinable; a private one
                       answers 404, so no button is offered for it at all. */}
                   <button
                     type="button"
                     onClick={() => actions.joinChannel(c.id)}
-                    className="shrink-0 rounded px-1.5 py-px text-xs font-medium text-secondary-foreground opacity-0 transition-opacity hover:bg-element-hover hover:text-foreground group-hover/disc:opacity-100 cursor-pointer"
+                    className="shrink-0 rounded px-1.5 py-px text-2xs font-medium text-secondary-foreground opacity-0 transition-opacity hover:bg-element-hover hover:text-foreground group-hover/disc:opacity-100 cursor-pointer"
                   >
                     Join
                   </button>
@@ -251,7 +251,7 @@ function SectionLabel({
   action?: React.ReactNode;
 }) {
   return (
-    <div className="flex items-center gap-1.5 px-3 pb-1.5 pt-3.5 text-2xs font-semibold uppercase tracking-[0.06em] text-secondary-foreground">
+    <div className="flex items-center gap-1.5 px-3 pb-1.5 pt-3.5 text-3xs font-semibold uppercase tracking-[0.06em] text-secondary-foreground">
       <Icon size={12} className="shrink-0" />
       {label}
       {action && <span className="ml-auto flex items-center">{action}</span>}
@@ -280,7 +280,7 @@ function RowDivider() {
 }
 
 function EmptyHint({ text }: { text: string }) {
-  return <div className="py-1 pl-[50px] pr-2.5 text-xs text-muted-foreground">{text}</div>;
+  return <div className="py-1 pl-[50px] pr-2.5 text-2xs text-muted-foreground">{text}</div>;
 }
 
 function ChannelRow({
@@ -309,7 +309,7 @@ function ChannelRow({
       </RowIcon>
       <span
         className={cn(
-          "min-w-0 flex-1 truncate text-sm",
+          "min-w-0 flex-1 truncate text-xs",
           unread > 0 ? "font-medium text-foreground" : "text-secondary-foreground",
         )}
       >
@@ -380,14 +380,14 @@ function DirectRow({
       </RowIcon>
       <span
         className={cn(
-          "min-w-0 flex-1 truncate text-sm",
+          "min-w-0 flex-1 truncate text-xs",
           unread > 0 ? "font-medium text-foreground" : "text-secondary-foreground",
         )}
       >
         {title}
       </span>
       {isGroup && (
-        <span className="shrink-0 text-xs tabular-nums text-muted-foreground">
+        <span className="shrink-0 text-2xs tabular-nums text-muted-foreground">
           {others.length + 1}
         </span>
       )}
@@ -418,7 +418,7 @@ function ContactRow({
       <RowIcon>
         <CommsAvatar member={member} size={22} online={online} />
       </RowIcon>
-      <span className="min-w-0 flex-1 truncate text-sm text-secondary-foreground">
+      <span className="min-w-0 flex-1 truncate text-xs text-secondary-foreground">
         {member.name}
       </span>
       {starting && <Loader2 size={12} className="shrink-0 animate-spin text-muted-foreground" />}
@@ -469,7 +469,7 @@ function Badges({ unread, mentions }: { unread: number; mentions: number }) {
 function KeycapBadge({ ink, label }: { ink: string; label: string }) {
   return (
     <span
-      className="inline-flex min-w-[18px] shrink-0 items-center justify-center rounded-full border border-border bg-card px-1.5 font-sans text-2xs font-semibold leading-[16px] tabular-nums tracking-wide"
+      className="inline-flex min-w-[18px] shrink-0 items-center justify-center rounded-full border border-border bg-card px-1.5 font-sans text-3xs font-semibold leading-[16px] tabular-nums tracking-wide"
       style={{ color: ink }}
     >
       {label}

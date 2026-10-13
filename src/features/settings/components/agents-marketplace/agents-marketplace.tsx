@@ -288,7 +288,7 @@ export function AgentsMarketplace() {
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Search registry"
-              className="w-full h-7 pl-7 pr-7 rounded-md bg-card border border-border text-sm text-foreground placeholder:text-muted-foreground outline-none focus:border-border-strong"
+              className="w-full h-7 pl-7 pr-7 rounded-md bg-card border border-border text-xs text-foreground placeholder:text-muted-foreground outline-none focus:border-border-strong"
             />
             {query && (
               <Hint label="Clear search">
@@ -313,7 +313,7 @@ export function AgentsMarketplace() {
                 key={id}
                 onClick={() => setFilter(id)}
                 className={cn(
-                  "h-[22px] px-2.5 rounded-full text-xs font-medium transition-colors cursor-pointer",
+                  "h-[22px] px-2.5 rounded-full text-2xs font-medium transition-colors cursor-pointer",
                   filter === id
                     ? "bg-element-selected text-foreground"
                     : "text-muted-foreground hover:text-secondary-foreground",
@@ -329,7 +329,7 @@ export function AgentsMarketplace() {
           <button
             onClick={() => void refresh()}
             disabled={refreshing}
-            className="flex items-center gap-1.5 h-6 px-2 rounded-md text-xs text-secondary-foreground hover:bg-element-hover hover:text-foreground transition-colors cursor-pointer disabled:cursor-default disabled:hover:bg-transparent"
+            className="flex items-center gap-1.5 h-6 px-2 rounded-md text-2xs text-secondary-foreground hover:bg-element-hover hover:text-foreground transition-colors cursor-pointer disabled:cursor-default disabled:hover:bg-transparent"
             title={
               refreshedAt
                 ? `Last updated ${new Date(refreshedAt).toLocaleString()}`
@@ -341,7 +341,7 @@ export function AgentsMarketplace() {
           </button>
         </div>
         {error && registryEntries.length > 0 && (
-          <p className="text-2xs text-muted-foreground">
+          <p className="text-3xs text-muted-foreground">
             Last refresh failed ({error}) — showing cached data
             {refreshedAt ? ` from ${new Date(refreshedAt).toLocaleString()}` : ""}.
           </p>
@@ -358,11 +358,11 @@ export function AgentsMarketplace() {
           // blocking spinner. With a cache in hand we always paint the cache.
           <div className="h-full flex flex-col items-center justify-center gap-2">
             <Loader2 size={18} className="animate-spin text-muted-foreground" />
-            <p className="text-xs text-muted-foreground">Loading the ACP registry…</p>
+            <p className="text-2xs text-muted-foreground">Loading the ACP registry…</p>
           </div>
         ) : entries.length === 0 ? (
           <div className="h-full flex flex-col items-center justify-center gap-2 text-center">
-            <p className="text-sm text-muted-foreground">
+            <p className="text-xs text-muted-foreground">
               {registryEntries.length > 0
                 ? "No agents match."
                 : error
@@ -371,11 +371,11 @@ export function AgentsMarketplace() {
             </p>
             {registryEntries.length === 0 && error && (
               <>
-                <p className="max-w-[380px] text-xs text-muted-foreground">{error}</p>
+                <p className="max-w-[380px] text-2xs text-muted-foreground">{error}</p>
                 <button
                   onClick={() => void refresh()}
                   disabled={refreshing}
-                  className="flex items-center gap-1.5 h-6 px-2.5 rounded-md text-xs font-medium text-foreground border border-border bg-card hover:bg-element-hover transition-colors cursor-pointer disabled:cursor-default"
+                  className="flex items-center gap-1.5 h-6 px-2.5 rounded-md text-2xs font-medium text-foreground border border-border bg-card hover:bg-element-hover transition-colors cursor-pointer disabled:cursor-default"
                 >
                   <RefreshCw size={10} className={cn(refreshing && "animate-spin")} />
                   {refreshing ? "Retrying…" : "Try again"}
@@ -396,7 +396,7 @@ export function AgentsMarketplace() {
                   className={cn(section === "registry" && detectedIds.size > 0 && "mt-4")}
                 >
                   {detectedIds.size > 0 && (
-                    <h3 className="mb-1.5 text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                    <h3 className="mb-1.5 text-2xs font-medium uppercase tracking-wide text-muted-foreground">
                       {section === "detected" ? "Detected on your system" : "Registry"}
                     </h3>
                   )}
@@ -472,11 +472,13 @@ const AgentCard = memo(function AgentCard({
         </span>
         <div className="min-w-0 flex-1">
           <div className="flex items-baseline gap-1.5">
-            <span className="text-base font-semibold text-foreground truncate">{entry.name}</span>
-            <span className="text-2xs text-muted-foreground tabular-nums">v{entry.version}</span>
+            <span className="type-reading font-semibold text-foreground truncate">
+              {entry.name}
+            </span>
+            <span className="text-3xs text-muted-foreground tabular-nums">v{entry.version}</span>
             {entry.updateAvailable && entry.installedVersion && (
               <span
-                className="text-2xs text-warning tabular-nums"
+                className="text-3xs text-warning tabular-nums"
                 title={`v${entry.installedVersion} is installed; the registry lists v${entry.version}.`}
               >
                 installed v{entry.installedVersion}
@@ -484,7 +486,7 @@ const AgentCard = memo(function AgentCard({
             )}
             {entry.unverified && entry.distributionKind === "binary" && (
               <span
-                className="text-3xs px-1 rounded bg-element-hover text-muted-foreground"
+                className="text-4xs px-1 rounded bg-element-hover text-muted-foreground"
                 title="This agent's binary download publishes no checksum."
               >
                 unverified
@@ -492,7 +494,7 @@ const AgentCard = memo(function AgentCard({
             )}
           </div>
           {!entry.platformSupported && (
-            <p className="text-2xs text-warning">
+            <p className="text-3xs text-warning">
               Not supported on this platform
               {entry.unsupportedReason ? ` — ${entry.unsupportedReason}` : ""}
             </p>
@@ -510,11 +512,11 @@ const AgentCard = memo(function AgentCard({
         />
       </div>
       {entry.description && (
-        <p className="text-xs leading-snug text-secondary-foreground line-clamp-2">
+        <p className="text-2xs leading-snug text-secondary-foreground line-clamp-2">
           {entry.description}
         </p>
       )}
-      <div className="flex items-center gap-2 text-2xs text-muted-foreground">
+      <div className="flex items-center gap-2 text-3xs text-muted-foreground">
         <span className="font-mono">ID: {entry.id}</span>
         {entry.distributionKind && <span className="font-mono">[{entry.distributionKind}]</span>}
         <span className="flex-1" />
@@ -578,7 +580,7 @@ function CardAction({
   const kind = installKind(state);
   if (updatePhase) {
     return (
-      <span className="flex items-center gap-1.5 h-6 px-2 rounded-md text-xs font-medium text-secondary-foreground border border-border">
+      <span className="flex items-center gap-1.5 h-6 px-2 rounded-md text-2xs font-medium text-secondary-foreground border border-border">
         <Loader2 size={10} className="animate-spin" />
         {updatePhaseLabel(updatePhase.phase, updatePhase.version)}
       </span>
@@ -586,7 +588,7 @@ function CardAction({
   }
   if (installing) {
     return (
-      <span className="flex items-center gap-1.5 h-6 px-2 rounded-md text-xs font-medium text-secondary-foreground border border-border tabular-nums">
+      <span className="flex items-center gap-1.5 h-6 px-2 rounded-md text-2xs font-medium text-secondary-foreground border border-border tabular-nums">
         <Loader2 size={10} className="animate-spin" />
         {pct !== null ? `${Math.round(pct)}%` : "Installing…"}
       </span>
@@ -605,7 +607,7 @@ function CardAction({
               if (ok) onUninstall(entry);
             });
         }}
-        className="h-6 px-2.5 rounded-md text-xs font-medium text-secondary-foreground border border-border hover:bg-element-hover hover:text-foreground transition-colors cursor-pointer"
+        className="h-6 px-2.5 rounded-md text-2xs font-medium text-secondary-foreground border border-border hover:bg-element-hover hover:text-foreground transition-colors cursor-pointer"
       >
         Remove
       </button>
@@ -616,7 +618,7 @@ function CardAction({
         <button
           onClick={() => onUpdate(entry)}
           title={`Install v${entry.version}. Waits for any reply in progress to finish; open chats continue on the new version with your next message.`}
-          className="flex items-center gap-1 h-6 px-2.5 rounded-md text-xs font-medium text-foreground border border-border bg-card hover:bg-element-hover transition-colors cursor-pointer"
+          className="flex items-center gap-1 h-6 px-2.5 rounded-md text-2xs font-medium text-foreground border border-border bg-card hover:bg-element-hover transition-colors cursor-pointer"
         >
           <ArrowUpCircle size={10} />
           Update
@@ -634,7 +636,7 @@ function CardAction({
     return (
       <span className="flex items-center gap-1.5">
         <span
-          className="flex items-center gap-1 h-6 px-2 rounded-md text-xs font-medium text-muted-foreground border border-border"
+          className="flex items-center gap-1 h-6 px-2 rounded-md text-2xs font-medium text-muted-foreground border border-border"
           title={
             catalog?.resolvedPath ? `Found at ${catalog.resolvedPath}` : "Found on your system"
           }
@@ -649,7 +651,7 @@ function CardAction({
               ? `Add it, running your own copy at ${catalog.resolvedPath}. Nothing is downloaded.`
               : "Add it, running the copy already on your system. Nothing is downloaded."
           }
-          className="flex items-center gap-1 h-6 px-2.5 rounded-md text-xs font-medium text-foreground border border-border bg-card hover:bg-element-hover transition-colors cursor-pointer"
+          className="flex items-center gap-1 h-6 px-2.5 rounded-md text-2xs font-medium text-foreground border border-border bg-card hover:bg-element-hover transition-colors cursor-pointer"
         >
           Install
         </button>
@@ -661,7 +663,7 @@ function CardAction({
       onClick={() => onInstall(entry, kind)}
       disabled={!entry.platformSupported}
       className={cn(
-        "flex items-center gap-1 h-6 px-2.5 rounded-md text-xs font-medium border transition-colors",
+        "flex items-center gap-1 h-6 px-2.5 rounded-md text-2xs font-medium border transition-colors",
         entry.platformSupported
           ? "text-foreground border-border bg-card hover:bg-element-hover cursor-pointer"
           : "text-muted-foreground border-border opacity-50 cursor-not-allowed",

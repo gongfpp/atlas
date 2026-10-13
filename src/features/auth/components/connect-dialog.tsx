@@ -72,10 +72,10 @@ export function ConnectDialog() {
           <div className="flex items-start gap-2.5 border-b border-border px-4 py-3">
             <MonitorSmartphone className="mt-0.5 size-4 text-muted-foreground" />
             <div>
-              <Dialog.Title className="text-sm font-medium">
+              <Dialog.Title className="text-xs font-medium">
                 Connect your Atlas account
               </Dialog.Title>
-              <Dialog.Description className="mt-0.5 text-xs text-secondary-foreground">
+              <Dialog.Description className="mt-0.5 text-2xs text-secondary-foreground">
                 Approve this device in your browser to finish.
               </Dialog.Description>
             </div>
@@ -83,16 +83,16 @@ export function ConnectDialog() {
 
           <div className="p-4">
             {done ? (
-              <div className="flex items-center gap-2 px-1 py-5 text-xs text-secondary-foreground">
+              <div className="flex items-center gap-2 px-1 py-5 text-2xs text-secondary-foreground">
                 <Check size={14} className="text-success" />
                 Connected.
               </div>
             ) : error ? (
               <div className="px-1 py-4">
-                <p className="text-xs text-error">{error}</p>
+                <p className="text-2xs text-error">{error}</p>
                 <button
                   onClick={() => void beginSignIn()}
-                  className="mt-3 rounded border border-border px-2.5 py-1 text-xs text-foreground transition-colors hover:bg-element-hover"
+                  className="mt-3 rounded border border-border px-2.5 py-1 text-2xs text-foreground transition-colors hover:bg-element-hover"
                 >
                   Try again
                 </button>
@@ -112,7 +112,7 @@ export function ConnectDialog() {
                         onClick={() => void copyCode()}
                         className={cn(
                           "mx-auto mt-3 flex items-center gap-1.5 rounded border border-border",
-                          "cursor-pointer px-2.5 py-1 text-xs transition-colors",
+                          "cursor-pointer px-2.5 py-1 text-2xs transition-colors",
                           "text-secondary-foreground hover:bg-element-hover hover:text-foreground",
                         )}
                       >
@@ -135,7 +135,7 @@ export function ConnectDialog() {
                         user can point at rather than at a step they have to
                         recognise — and it has to be changed here whenever it
                         changes there. */}
-                    <p className="mt-3 px-1 text-xs leading-relaxed text-muted-foreground">
+                    <p className="mt-3 px-1 text-2xs leading-relaxed text-muted-foreground">
                       Paste this at{" "}
                       <span className="font-mono text-secondary-foreground">
                         {connecting.verificationUri}
@@ -145,7 +145,7 @@ export function ConnectDialog() {
                   </>
                 ) : null}
 
-                <div className="flex items-center gap-2 px-1 pt-4 text-xs text-secondary-foreground">
+                <div className="flex items-center gap-2 px-1 pt-4 text-2xs text-secondary-foreground">
                   <Loader2 size={14} className="animate-spin" />
                   {starting ? "Starting…" : "Waiting for you to approve in the browser…"}
                 </div>
@@ -156,7 +156,7 @@ export function ConnectDialog() {
           <div className="flex justify-end gap-2 border-t border-border px-4 py-2.5">
             <button
               onClick={() => (done ? closeDialog() : void cancelSignIn())}
-              className="rounded px-2.5 py-1 text-xs text-secondary-foreground transition-colors hover:bg-element-hover hover:text-foreground"
+              className="rounded px-2.5 py-1 text-2xs text-secondary-foreground transition-colors hover:bg-element-hover hover:text-foreground"
             >
               {done ? "Close" : "Cancel"}
             </button>

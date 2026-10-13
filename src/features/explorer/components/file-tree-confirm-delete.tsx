@@ -58,10 +58,10 @@ export function FileTreeConfirmDelete({
             }
           }}
         >
-          <Dialog.Title className="text-base font-semibold text-foreground">
+          <Dialog.Title className="type-reading font-semibold text-foreground">
             {title ?? (multi ? `Delete ${count} items?` : `Delete ${isDir ? "folder" : "file"}?`)}
           </Dialog.Title>
-          <p className="text-sm text-secondary-foreground leading-relaxed">
+          <p className="text-xs text-secondary-foreground leading-relaxed">
             {body ??
               (multi ? (
                 <>
@@ -82,7 +82,7 @@ export function FileTreeConfirmDelete({
               type="button"
               onClick={() => onOpenChange(false)}
               className={cn(
-                "px-3 h-7 rounded text-xs",
+                "px-3 h-7 rounded text-2xs",
                 "text-secondary-foreground hover:bg-element-hover hover:text-foreground",
               )}
             >
@@ -106,7 +106,7 @@ export function FileTreeConfirmDelete({
               autoFocus
               onClick={onConfirm}
               className={cn(
-                "px-3 h-7 rounded text-xs font-medium",
+                "px-3 h-7 rounded text-2xs font-medium",
                 "border border-error/40 bg-error-muted text-error transition-colors hover:bg-error/20",
               )}
             >

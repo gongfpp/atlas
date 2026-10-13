@@ -22,7 +22,7 @@ export function CommsDraftTab({ convId, draftId }: { convId: string; draftId: st
 
   if (!conv || !draft) {
     return (
-      <div className="flex h-full items-center justify-center text-sm text-muted-foreground">
+      <div className="flex h-full items-center justify-center text-xs text-muted-foreground">
         This draft is no longer available.
       </div>
     );

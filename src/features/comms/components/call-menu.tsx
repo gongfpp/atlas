@@ -229,7 +229,7 @@ export function CallMenu({ convId, mode }: { convId: string; mode: CallMode }) {
             <div className="flex w-[230px] flex-col py-1">
               {liveCall ? (
                 <>
-                  <div className="px-3 pb-1 pt-1.5 text-2xs font-semibold uppercase tracking-wider text-muted-foreground">
+                  <div className="px-3 pb-1 pt-1.5 text-3xs font-semibold uppercase tracking-wider text-muted-foreground">
                     A call is already live here
                   </div>
                   <MenuRow
@@ -303,9 +303,9 @@ function MenuRow({
         {icon}
       </span>
       <span className="min-w-0 flex-1">
-        <span className="block text-xs font-medium text-foreground">{label}</span>
+        <span className="block text-2xs font-medium text-foreground">{label}</span>
         {sub && (
-          <span className="mt-px block text-2xs leading-[1.4] text-muted-foreground">{sub}</span>
+          <span className="mt-px block text-3xs leading-[1.4] text-muted-foreground">{sub}</span>
         )}
       </span>
     </button>

@@ -230,7 +230,7 @@ export function SkillsMarketplace({
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Search the skills registry…"
           spellCheck={false}
-          className="min-w-0 flex-1 bg-transparent text-xs text-foreground outline-none placeholder:text-muted-foreground"
+          className="min-w-0 flex-1 bg-transparent text-2xs text-foreground outline-none placeholder:text-muted-foreground"
         />
         {loading && <Loader2 size={11} className="animate-spin text-muted-foreground" />}
         {query && (
@@ -247,7 +247,7 @@ export function SkillsMarketplace({
       </div>
 
       {error && (
-        <div className="mx-3 mb-2 rounded-md border border-error/30 bg-error/10 px-3 py-2 text-xs text-error">
+        <div className="mx-3 mb-2 rounded-md border border-error/30 bg-error/10 px-3 py-2 text-2xs text-error">
           {error}
         </div>
       )}
@@ -256,7 +256,7 @@ export function SkillsMarketplace({
       <div className="min-h-0 flex-1 overflow-auto hide-scrollbar">
         <div style={{ minWidth: TABLE_MIN_W }}>
           {/* sticky header */}
-          <div className="sticky top-0 z-10 flex items-center h-[28px] border-b border-border bg-background px-3 text-2xs uppercase tracking-wider text-muted-foreground">
+          <div className="sticky top-0 z-10 flex items-center h-[28px] border-b border-border bg-background px-3 text-3xs uppercase tracking-wider text-muted-foreground">
             <span className={cn(COL.rank, "text-right pr-2")}>#</span>
             <span className={COL.skill}>{query.trim() ? "Results" : "Popular"}</span>
             <span className={COL.source}>Source</span>
@@ -266,7 +266,7 @@ export function SkillsMarketplace({
           </div>
 
           {rows.length === 0 ? (
-            <div className="grid h-[180px] place-items-center text-xs text-muted-foreground">
+            <div className="grid h-[180px] place-items-center text-2xs text-muted-foreground">
               {loading
                 ? "Searching…"
                 : query.trim()
@@ -291,23 +291,23 @@ export function SkillsMarketplace({
                   <span
                     className={cn(
                       COL.rank,
-                      "text-right pr-2 font-mono text-xs tabular-nums text-muted-foreground",
+                      "text-right pr-2 font-mono text-2xs tabular-nums text-muted-foreground",
                     )}
                   >
                     {i + 1}
                   </span>
-                  <span className={cn(COL.skill, "truncate text-sm text-foreground")}>
+                  <span className={cn(COL.skill, "truncate text-xs text-foreground")}>
                     {hit.name}
                   </span>
                   <span
-                    className={cn(COL.source, "truncate font-mono text-2xs text-muted-foreground")}
+                    className={cn(COL.source, "truncate font-mono text-3xs text-muted-foreground")}
                   >
                     {hit.source}
                   </span>
                   <span
                     className={cn(
                       COL.installs,
-                      "text-right font-mono text-xs tabular-nums text-secondary-foreground",
+                      "text-right font-mono text-2xs tabular-nums text-secondary-foreground",
                     )}
                   >
                     {hit.installs.toLocaleString()}
@@ -363,7 +363,7 @@ function InstallButton({
 }) {
   if (installed) {
     return (
-      <span className="inline-flex items-center gap-1 text-xs text-muted-foreground">
+      <span className="inline-flex items-center gap-1 text-2xs text-muted-foreground">
         <Check size={12} /> Added
       </span>
     );
@@ -373,7 +373,7 @@ function InstallButton({
       type="button"
       disabled={installing}
       onClick={onClick}
-      className="inline-flex items-center gap-1.5 rounded-md border border-border px-2.5 py-1 text-xs font-medium text-secondary-foreground transition-colors hover:bg-element-hover hover:text-foreground disabled:opacity-50"
+      className="inline-flex items-center gap-1.5 rounded-md border border-border px-2.5 py-1 text-2xs font-medium text-secondary-foreground transition-colors hover:bg-element-hover hover:text-foreground disabled:opacity-50"
     >
       {installing ? <Loader2 size={12} className="animate-spin" /> : <Download size={12} />}
       Install
@@ -490,13 +490,13 @@ function SkillDetailModal({
       }
     >
       {loading ? (
-        <div className="flex items-center gap-2 text-sm text-muted-foreground">
+        <div className="flex items-center gap-2 text-xs text-muted-foreground">
           <Loader2 size={13} className="animate-spin" /> Loading details…
         </div>
       ) : preview ? (
         <>
           {preview.manifest?.description && (
-            <p className="mb-3 text-base leading-relaxed text-secondary-foreground">
+            <p className="mb-3 type-reading leading-relaxed text-secondary-foreground">
               {preview.manifest.description}
             </p>
           )}
@@ -506,7 +506,7 @@ function SkillDetailModal({
               {otherCounts.map(([kind, n]) => (
                 <span
                   key={kind}
-                  className="inline-flex items-center gap-1 rounded-full border border-border bg-background px-2 py-0.5 text-2xs text-muted-foreground"
+                  className="inline-flex items-center gap-1 rounded-full border border-border bg-background px-2 py-0.5 text-3xs text-muted-foreground"
                 >
                   <Boxes size={10} />
                   {n} {KIND_LABEL[kind]}
@@ -518,11 +518,11 @@ function SkillDetailModal({
           {!preview.manifest?.description &&
             modalSkills.length === 0 &&
             otherCounts.length === 0 && (
-              <div className="text-sm text-muted-foreground">No additional details published.</div>
+              <div className="text-xs text-muted-foreground">No additional details published.</div>
             )}
         </>
       ) : (
-        <div className="text-sm text-muted-foreground">
+        <div className="text-xs text-muted-foreground">
           Couldn’t load details — you can still install.
         </div>
       )}

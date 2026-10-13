@@ -19,9 +19,9 @@ import type { BlameLine } from "@/features/git/lib/git-blame-api";
 const setBlame = StateEffect.define<BlameLine[]>();
 
 // The trailing annotation reads a notch below the editor body; the previous
-// `0.9em` (~11.7px against the editor's 13px body) rounds onto the text-sm
+// `0.9em` (~11.7px against the editor's 13px body) rounds onto the text-xs
 // (12px) step.
-const BLAME_FONT_SIZE = "var(--text-sm)";
+const BLAME_FONT_SIZE = "var(--text-xs)";
 
 /** Convenience: dispatch a blame snapshot onto a view. */
 export function applyBlame(view: EditorView, lines: BlameLine[]): void {

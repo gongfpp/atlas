@@ -451,7 +451,7 @@ export function EditorPanel({ tabId, filePath, containerHeight }: EditorPanelPro
 
   if (!buffer) {
     return (
-      <div className="h-full flex items-center justify-center text-muted-foreground text-sm">
+      <div className="h-full flex items-center justify-center text-muted-foreground text-xs">
         Loading...
       </div>
     );
@@ -483,13 +483,13 @@ export function EditorPanel({ tabId, filePath, containerHeight }: EditorPanelPro
               type="button"
               onClick={() => void forceReload()}
               title="This file changed on disk. Reload discards your unsaved edits."
-              className="inline-flex items-center gap-1 h-control-xs px-2 rounded-full border border-border bg-card text-2xs font-medium text-secondary-foreground hover:text-foreground hover:bg-element-hover transition-colors shrink-0"
+              className="inline-flex items-center gap-1 h-control-xs px-2 rounded-full border border-border bg-card text-3xs font-medium text-secondary-foreground hover:text-foreground hover:bg-element-hover transition-colors shrink-0"
             >
               <RefreshCw size={10} /> Disk changed · Reload
             </button>
           )}
           {isMarkdownFile && (
-            <div className="inline-flex items-center h-control-xs rounded-full border border-border bg-card p-[2px] text-2xs font-medium shrink-0">
+            <div className="inline-flex items-center h-control-xs rounded-full border border-border bg-card p-[2px] text-3xs font-medium shrink-0">
               <button
                 type="button"
                 onClick={() => setRenderMode("editor")}
@@ -560,7 +560,7 @@ function Breadcrumbs({ filePath, projectPath }: { filePath: string; projectPath:
           <span key={i} className="flex items-center shrink-0">
             {i > 0 && <ChevronRight size={10} className="text-muted-foreground mx-0.5 shrink-0" />}
             <span
-              className={`text-xs font-mono ${isLast ? "text-foreground" : "text-muted-foreground"}`}
+              className={`text-2xs font-mono ${isLast ? "text-foreground" : "text-muted-foreground"}`}
             >
               {segment}
             </span>

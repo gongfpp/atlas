@@ -104,12 +104,12 @@ export const ComposerOptionsPill = memo(function ComposerOptionsPill({ tabId }: 
                       className="flex w-full items-start gap-1.5 rounded-md px-2 py-1.5 text-left transition-colors cursor-pointer hover:bg-element-hover"
                     >
                       <span className="min-w-0 flex-1">
-                        <span className="flex items-center gap-1.5 text-xs font-medium text-foreground">
+                        <span className="flex items-center gap-1.5 text-2xs font-medium text-foreground">
                           {opt.name}
                           {opt.value && <Check size={11} className="text-primary" />}
                         </span>
                         {opt.description && (
-                          <span className="mt-0.5 block text-3xs leading-snug text-muted-foreground">
+                          <span className="mt-0.5 block text-4xs leading-snug text-muted-foreground">
                             {opt.description}
                           </span>
                         )}
@@ -117,7 +117,7 @@ export const ComposerOptionsPill = memo(function ComposerOptionsPill({ tabId }: 
                     </button>
                   ) : (
                     <>
-                      <div className="px-2 pb-0.5 pt-1.5 text-3xs font-medium uppercase tracking-wider text-muted-foreground">
+                      <div className="px-2 pb-0.5 pt-1.5 text-4xs font-medium uppercase tracking-wider text-muted-foreground">
                         {opt.name}
                       </div>
                       {opt.choices.map((c) => {
@@ -135,12 +135,12 @@ export const ComposerOptionsPill = memo(function ComposerOptionsPill({ tabId }: 
                             )}
                           >
                             <span className="min-w-0 flex-1">
-                              <span className="flex items-center gap-1.5 text-xs font-medium text-foreground">
+                              <span className="flex items-center gap-1.5 text-2xs font-medium text-foreground">
                                 {c.name}
                                 {active && <Check size={11} className="text-primary" />}
                               </span>
                               {c.description && (
-                                <span className="mt-0.5 block text-3xs leading-snug text-muted-foreground">
+                                <span className="mt-0.5 block text-4xs leading-snug text-muted-foreground">
                                   {c.description}
                                 </span>
                               )}
@@ -155,8 +155,8 @@ export const ComposerOptionsPill = memo(function ComposerOptionsPill({ tabId }: 
             </div>
           ) : (
             <div className="px-3 py-2.5">
-              <div className="text-xs font-medium text-foreground">Default</div>
-              <p className="mt-0.5 text-2xs leading-snug text-muted-foreground">
+              <div className="text-2xs font-medium text-foreground">Default</div>
+              <p className="mt-0.5 text-3xs leading-snug text-muted-foreground">
                 Agent loaded with default configuration.
               </p>
             </div>

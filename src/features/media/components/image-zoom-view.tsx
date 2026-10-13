@@ -143,7 +143,7 @@ export function ImageZoomView({ src, alt, fill, checkerboard }: ImageZoomViewPro
               <ZoomOut size={13} />
             </button>
           </HintItem>
-          <span className="w-9 text-center text-2xs font-mono text-muted-foreground">
+          <span className="w-9 text-center text-3xs font-mono text-muted-foreground">
             {Math.round(scale * 100)}%
           </span>
           <HintItem label="Zoom in">

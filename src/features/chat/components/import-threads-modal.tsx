@@ -100,7 +100,7 @@ export function ImportThreadsModal({
           )}
         >
           <div className="flex items-center gap-3 border-b border-border px-4 py-2.5">
-            <Dialog.Title className="text-base font-semibold text-foreground">
+            <Dialog.Title className="type-reading font-semibold text-foreground">
               Import sessions
             </Dialog.Title>
             <Dialog.Close
@@ -111,18 +111,18 @@ export function ImportThreadsModal({
             </Dialog.Close>
           </div>
 
-          <p className="px-4 pt-3 text-xs leading-relaxed text-muted-foreground">
+          <p className="px-4 pt-3 text-2xs leading-relaxed text-muted-foreground">
             Bring in sessions your agents kept for themselves — started in a terminal, or in another
             client. Imported sessions land in your history rather than the active list.
           </p>
 
           <div className="flex-1 overflow-auto hide-scrollbar px-2 py-2">
             {candidates === null ? (
-              <div className="px-2 py-6 text-center text-xs text-muted-foreground">
+              <div className="px-2 py-6 text-center text-2xs text-muted-foreground">
                 Asking your agents…
               </div>
             ) : candidates.length === 0 ? (
-              <div className="px-2 py-6 text-center text-xs text-muted-foreground">
+              <div className="px-2 py-6 text-center text-2xs text-muted-foreground">
                 No agents installed. Install one from the Marketplace first.
               </div>
             ) : (
@@ -138,7 +138,7 @@ export function ImportThreadsModal({
           </div>
 
           <div className="flex items-center justify-end gap-2 border-t border-border px-4 py-2.5">
-            <Dialog.Close className="rounded px-2.5 py-1 text-xs text-secondary-foreground hover:bg-element-hover transition-colors cursor-pointer">
+            <Dialog.Close className="rounded px-2.5 py-1 text-2xs text-secondary-foreground hover:bg-element-hover transition-colors cursor-pointer">
               Cancel
             </Dialog.Close>
             <button
@@ -146,7 +146,7 @@ export function ImportThreadsModal({
               disabled={importing || selected.size === 0}
               onClick={() => void runImport()}
               className={cn(
-                "rounded px-2.5 py-1 text-xs font-medium transition-colors cursor-pointer",
+                "rounded px-2.5 py-1 text-2xs font-medium transition-colors cursor-pointer",
                 "bg-primary text-primary-foreground hover:bg-primary",
                 "disabled:opacity-40 disabled:cursor-not-allowed",
               )}
@@ -182,7 +182,7 @@ function CandidateRow({
         selectable && (checked ? "bg-element-selected" : "cursor-pointer hover:bg-element-hover"),
       )}
     >
-      <span className="flex-1 min-w-0 truncate text-xs text-foreground">
+      <span className="flex-1 min-w-0 truncate text-2xs text-foreground">
         {candidate.displayName}
       </span>
       <CandidateStatus status={candidate.status} />
@@ -194,7 +194,7 @@ function CandidateRow({
 function CandidateStatus({ status }: { status: ImportCandidate["status"] }) {
   if (status.kind === "ready") {
     return (
-      <span className="shrink-0 text-2xs font-mono tabular-nums text-muted-foreground">
+      <span className="shrink-0 text-3xs font-mono tabular-nums text-muted-foreground">
         {status.importable === 0
           ? "nothing new"
           : `${status.importable} ${status.importable === 1 ? "session" : "sessions"}`}
@@ -206,7 +206,7 @@ function CandidateStatus({ status }: { status: ImportCandidate["status"] }) {
   // would never appear.
   const reason = status.kind === "unsupported" ? "no session/list support" : status.message;
   return (
-    <span className="flex min-w-0 shrink items-center gap-1 text-2xs text-muted-foreground">
+    <span className="flex min-w-0 shrink items-center gap-1 text-3xs text-muted-foreground">
       <AlertTriangle size={10} className="shrink-0" />
       <span className="truncate" title={reason}>
         {reason}

@@ -77,18 +77,18 @@ export function IconThemesSettings() {
                   <div className="flex w-full items-start gap-1.5">
                     <div className="min-w-0 flex-1">
                       <div className="flex items-center gap-1.5">
-                        <span className="truncate text-sm font-medium text-foreground">
+                        <span className="truncate text-xs font-medium text-foreground">
                           {theme.name}
                         </span>
                         {selected && <span className="h-2 w-2 shrink-0 rounded-full bg-primary" />}
                       </div>
-                      <p className="mt-1 truncate text-xs text-muted-foreground">
+                      <p className="mt-1 truncate text-2xs text-muted-foreground">
                         {theme.author} · {theme.license}
                       </p>
                     </div>
                     {!theme.builtIn && <RemoveButton id={theme.id} name={theme.name} />}
                   </div>
-                  <div className="mt-2 flex items-center gap-1 text-3xs uppercase tracking-wide text-muted-foreground">
+                  <div className="mt-2 flex items-center gap-1 text-4xs uppercase tracking-wide text-muted-foreground">
                     {theme.id === MINIMAL_ICON_THEME_ID ? (
                       <span>Atlas defaults</span>
                     ) : theme.builtIn ? (
@@ -110,9 +110,9 @@ export function IconThemesSettings() {
           </div>
 
           {loading && (
-            <div className="py-4 text-center text-xs text-muted-foreground">Loading…</div>
+            <div className="py-4 text-center text-2xs text-muted-foreground">Loading…</div>
           )}
-          {error && <div className="py-4 text-center text-xs text-error">{error}</div>}
+          {error && <div className="py-4 text-center text-2xs text-error">{error}</div>}
 
           <OpenVsxSection />
         </div>
@@ -195,10 +195,10 @@ function OpenVsxSection() {
   return (
     <div className="mt-4 border-t border-border pt-3">
       <div className="mb-2 flex items-center justify-between">
-        <span className="text-2xs font-semibold uppercase tracking-wider text-muted-foreground">
+        <span className="text-3xs font-semibold uppercase tracking-wider text-muted-foreground">
           Install from Open VSX
         </span>
-        <span className="text-2xs text-muted-foreground">open-vsx.org</span>
+        <span className="text-3xs text-muted-foreground">open-vsx.org</span>
       </div>
 
       <div className="flex h-[28px] items-center gap-1.5 rounded-md border border-border bg-card px-2">
@@ -211,7 +211,7 @@ function OpenVsxSection() {
           }}
           placeholder="Search VS Code icon themes, then press Enter…"
           spellCheck={false}
-          className="min-w-0 flex-1 bg-transparent text-xs text-foreground outline-none placeholder:text-muted-foreground"
+          className="min-w-0 flex-1 bg-transparent text-2xs text-foreground outline-none placeholder:text-muted-foreground"
         />
         {query && (
           <Hint label="Clear">
@@ -230,14 +230,14 @@ function OpenVsxSection() {
       </div>
 
       {state.phase === "searching" && (
-        <div className="flex items-center justify-center gap-2 py-4 text-xs text-muted-foreground">
+        <div className="flex items-center justify-center gap-2 py-4 text-2xs text-muted-foreground">
           <Loader2 size={11} className="animate-spin" />
           Searching Open VSX…
         </div>
       )}
 
       {state.phase === "failed" && (
-        <div className="mt-2 rounded-md border border-error/40 bg-error/10 px-2 py-2 text-xs text-error">
+        <div className="mt-2 rounded-md border border-error/40 bg-error/10 px-2 py-2 text-2xs text-error">
           <p>{state.message}</p>
           <button
             type="button"
@@ -250,7 +250,7 @@ function OpenVsxSection() {
       )}
 
       {state.phase === "done" && state.results.length === 0 && (
-        <div className="py-4 text-center text-xs text-muted-foreground">
+        <div className="py-4 text-center text-2xs text-muted-foreground">
           No icon themes on Open VSX match “{query}”.
         </div>
       )}
@@ -267,21 +267,21 @@ function OpenVsxSection() {
               >
                 <div className="min-w-0 flex-1">
                   <div className="flex items-baseline gap-1.5">
-                    <span className="truncate text-sm font-medium text-foreground">
+                    <span className="truncate text-xs font-medium text-foreground">
                       {hit.displayName}
                     </span>
-                    <span className="shrink-0 text-2xs text-muted-foreground">
+                    <span className="shrink-0 text-3xs text-muted-foreground">
                       {hit.namespace} · {hit.license}
                     </span>
                   </div>
-                  <p className="truncate text-2xs text-muted-foreground">{hit.description}</p>
+                  <p className="truncate text-3xs text-muted-foreground">{hit.description}</p>
                 </div>
                 <button
                   type="button"
                   disabled={busy}
                   onClick={() => install(hit)}
                   className={cn(
-                    "flex h-6 shrink-0 cursor-pointer items-center gap-1 rounded px-2 text-2xs font-medium transition-colors",
+                    "flex h-6 shrink-0 cursor-pointer items-center gap-1 rounded px-2 text-3xs font-medium transition-colors",
                     "border border-border text-secondary-foreground hover:bg-element-hover hover:text-foreground",
                     "disabled:cursor-not-allowed disabled:opacity-50",
                   )}

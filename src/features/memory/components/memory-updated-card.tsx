@@ -61,7 +61,7 @@ export function MemoryUpdatedCard({
   return (
     <div
       className={cn(
-        "mx-auto my-2 w-full max-w-[760px] rounded-md border border-border bg-card text-xs",
+        "mx-auto my-2 w-full max-w-[760px] rounded-md border border-border bg-card text-2xs",
         className,
       )}
     >
@@ -78,7 +78,7 @@ export function MemoryUpdatedCard({
         <ul className="flex flex-col border-t border-border">
           {writes.map((w) => (
             <li key={w.rev} className="flex items-baseline gap-2 px-2.5 py-1.5">
-              <span className="w-16 shrink-0 text-3xs uppercase tracking-wide text-disabled">
+              <span className="w-16 shrink-0 text-4xs uppercase tracking-wide text-disabled">
                 {w.kind}
               </span>
               {w.live ? (
@@ -95,17 +95,17 @@ export function MemoryUpdatedCard({
                 </span>
               )}
               {w.live && w.state === "candidate" && (
-                <span className="shrink-0 text-3xs uppercase text-muted-foreground">candidate</span>
+                <span className="shrink-0 text-4xs uppercase text-muted-foreground">candidate</span>
               )}
               {/* Forgotten or archived since, by anyone: nothing left to forget. */}
               {!w.live && w.op !== "forget" && (
-                <span className="shrink-0 text-3xs uppercase text-muted-foreground">removed</span>
+                <span className="shrink-0 text-4xs uppercase text-muted-foreground">removed</span>
               )}
               {w.live && (
                 <button
                   type="button"
                   onClick={() => setForgetting(w)}
-                  className="shrink-0 text-2xs text-muted-foreground hover:text-foreground"
+                  className="shrink-0 text-3xs text-muted-foreground hover:text-foreground"
                 >
                   Forget
                 </button>

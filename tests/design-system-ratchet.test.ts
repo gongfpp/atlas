@@ -67,7 +67,8 @@ interface Rule {
 const RULES: Rule[] = [
   {
     id: "arbitrary-text-size",
-    instead: "text-3xs … text-2xl (decision 24). Half-pixel sizes round UP.",
+    instead:
+      "text-4xs … text-2xl, or type-reading for 13px (Atlas Standards' scale). Half-pixel sizes round UP.",
     pattern: /\btext-\[-?\d*\.?\d+(?:px|rem|em|pt)\]/g,
   },
   {

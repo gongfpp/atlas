@@ -96,13 +96,13 @@ import type {
  * earn its keep. If a third appears, extract then.
  */
 const FIELD =
-  "h-8 w-full rounded-lg border border-border bg-panel-input px-2.5 text-sm text-foreground placeholder:text-muted-foreground outline-none transition-colors focus:border-border-strong";
+  "h-8 w-full rounded-lg border border-border bg-panel-input px-2.5 text-xs text-foreground placeholder:text-muted-foreground outline-none transition-colors focus:border-border-strong";
 
 /** Section heading above a group of controls. */
-const SECTION_LABEL = "text-xs font-medium text-secondary-foreground";
+const SECTION_LABEL = "text-2xs font-medium text-secondary-foreground";
 
 /** Hint under a group — the sentence that explains what was just chosen. */
-const HINT = "mt-1 text-2xs text-muted-foreground";
+const HINT = "mt-1 text-3xs text-muted-foreground";
 
 /** A read-only group of facts (detection, disclosure lines). */
 const GROUP = "rounded-lg border border-element-selected bg-element-hover px-2.5 py-2";
@@ -110,7 +110,7 @@ const GROUP = "rounded-lg border border-element-selected bg-element-hover px-2.5
 /** Selectable pill — the Type/Region language from the organisation modal. */
 function pillClass(state: "on" | "off" | "disabled") {
   return cn(
-    "inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-xs leading-none transition-colors",
+    "inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-2xs leading-none transition-colors",
     state === "disabled"
       ? "cursor-not-allowed border-border bg-panel-input text-muted-foreground opacity-40"
       : state === "on"
@@ -331,7 +331,7 @@ export function CapturePopover({ projectPath, health, onChanged, onClose }: Prop
   return (
     <div
       className={cn(
-        "w-[352px] select-none overflow-hidden rounded-xl text-sm shadow-md",
+        "w-[352px] select-none overflow-hidden rounded-xl text-xs shadow-md",
         // Border, translucent fill and blur all on THIS element — the same one
         // the enter animation transforms. Splitting them across a wrapper would
         // isolate the compositing layer and flatten the blur to flat
@@ -548,7 +548,9 @@ export function CapturePopover({ projectPath, health, onChanged, onClose }: Prop
         )}
 
         {error && (
-          <p className="mt-2 rounded-lg bg-error-muted px-2.5 py-1.5 text-xs text-error">{error}</p>
+          <p className="mt-2 rounded-lg bg-error-muted px-2.5 py-1.5 text-2xs text-error">
+            {error}
+          </p>
         )}
       </div>
     </div>
@@ -597,15 +599,15 @@ function DisclosureStep({
 }) {
   return (
     <div className="atlas-fade-in space-y-2.5">
-      <p className="text-sm font-medium text-foreground">{title}</p>
+      <p className="text-xs font-medium text-foreground">{title}</p>
       <ul className={cn(GROUP, "space-y-1")}>
         {lines.map((line) => (
-          <li key={line} className="text-xs text-secondary-foreground">
+          <li key={line} className="text-2xs text-secondary-foreground">
             {line}
           </li>
         ))}
       </ul>
-      <p className="text-2xs text-muted-foreground">
+      <p className="text-3xs text-muted-foreground">
         This makes the above visible to your Organization. Nothing is sent until you confirm.
       </p>
       <div className="flex justify-end gap-2 pt-0.5">
@@ -700,7 +702,7 @@ function HealthDetail({
             key={`${index}-${issue.reason}`}
             title={issue.nextStep || undefined}
             className={cn(
-              "flex items-center gap-1.5 text-xs",
+              "flex items-center gap-1.5 text-2xs",
               issue.state === "stopped" ? "text-error" : "text-warning",
             )}
           >
@@ -863,7 +865,7 @@ function CaptureRadar({ live, health }: { live: boolean; health: CaptureHealth |
 
       <span className="absolute bottom-3 left-3.5 flex items-center gap-1.5">
         <CaptureDot live={live} tone={live ? "success" : "idle"} />
-        <span className="text-3xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+        <span className="text-4xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">
           {live ? "Capturing" : "Paused"}
         </span>
       </span>
@@ -955,14 +957,14 @@ function BoundState({
        *  nothing, forever, on purpose. Say so where it can be resolved. */}
       {binding.mode === "cloud" && !binding.importApproved && (
         <div className="flex items-center justify-between gap-2 rounded-lg border border-dashed border-element-active px-2.5 py-1.5">
-          <span className="text-xs text-secondary-foreground">
+          <span className="text-2xs text-secondary-foreground">
             History import is waiting for your review.
           </span>
           <button
             type="button"
             disabled={busy || !importPreview}
             onClick={onReviewImport}
-            className="shrink-0 cursor-pointer rounded-full px-1.5 py-0.5 text-xs text-foreground underline underline-offset-2 transition-colors duration-150 hover:no-underline disabled:cursor-not-allowed disabled:opacity-40"
+            className="shrink-0 cursor-pointer rounded-full px-1.5 py-0.5 text-2xs text-foreground underline underline-offset-2 transition-colors duration-150 hover:no-underline disabled:cursor-not-allowed disabled:opacity-40"
           >
             Review
           </button>
@@ -972,14 +974,14 @@ function BoundState({
       {/* Failed rows: the retry is a deliberate human action, never automatic. */}
       {failed > 0 && (
         <div className="flex items-center justify-between gap-2 rounded-lg bg-warning-muted px-2.5 py-1.5">
-          <span className="text-xs text-warning">
+          <span className="text-2xs text-warning">
             {failed} record{failed === 1 ? "" : "s"} could not be sent.
           </span>
           <button
             type="button"
             disabled={busy}
             onClick={() => void run(() => invoke("capture_retry_failed", { projectPath }))}
-            className="flex shrink-0 cursor-pointer items-center gap-1 rounded-full px-1.5 py-0.5 text-xs text-foreground underline underline-offset-2 transition-colors duration-150 hover:no-underline disabled:cursor-not-allowed disabled:opacity-40"
+            className="flex shrink-0 cursor-pointer items-center gap-1 rounded-full px-1.5 py-0.5 text-2xs text-foreground underline underline-offset-2 transition-colors duration-150 hover:no-underline disabled:cursor-not-allowed disabled:opacity-40"
           >
             <RefreshCw size={10} />
             Retry
@@ -990,7 +992,7 @@ function BoundState({
       <div className="flex items-center gap-2 pt-1">
         {/* Where this Project's Sessions live. A label, not a control — the
          *  way to change it is the Sync button beside it. */}
-        <span className="mr-auto flex items-center gap-1.5 text-xs text-muted-foreground">
+        <span className="mr-auto flex items-center gap-1.5 text-2xs text-muted-foreground">
           {binding.mode === "cloud" ? <Cloud size={11} /> : <Laptop size={11} />}
           {binding.mode === "cloud" ? "Cloud" : "Local"}
         </span>
@@ -1005,7 +1007,7 @@ function BoundState({
               type="button"
               disabled
               title={cloudReason}
-              className="inline-flex cursor-not-allowed items-center gap-1.5 rounded-full border border-element-selected bg-element-hover px-2.5 py-1 text-xs text-muted-foreground opacity-40"
+              className="inline-flex cursor-not-allowed items-center gap-1.5 rounded-full border border-element-selected bg-element-hover px-2.5 py-1 text-2xs text-muted-foreground opacity-40"
             >
               <Cloud size={11} />
               Sync
@@ -1015,7 +1017,7 @@ function BoundState({
               type="button"
               disabled={busy}
               onClick={onPromote}
-              className="inline-flex cursor-pointer items-center gap-1.5 rounded-full border border-element-selected bg-element-hover px-2.5 py-1 text-xs text-secondary-foreground transition-colors hover:bg-element-selected hover:text-foreground disabled:cursor-not-allowed disabled:opacity-40"
+              className="inline-flex cursor-pointer items-center gap-1.5 rounded-full border border-element-selected bg-element-hover px-2.5 py-1 text-2xs text-secondary-foreground transition-colors hover:bg-element-selected hover:text-foreground disabled:cursor-not-allowed disabled:opacity-40"
             >
               <ArrowUpRight size={11} />
               Sync
@@ -1031,7 +1033,7 @@ function BoundState({
               type="button"
               disabled
               title={cloudReason}
-              className="inline-flex cursor-not-allowed items-center gap-1.5 rounded-full border border-element-selected bg-element-hover px-2.5 py-1 text-xs text-muted-foreground opacity-40"
+              className="inline-flex cursor-not-allowed items-center gap-1.5 rounded-full border border-element-selected bg-element-hover px-2.5 py-1 text-2xs text-muted-foreground opacity-40"
             >
               <ArrowLeftRight size={11} />
               Change
@@ -1042,7 +1044,7 @@ function BoundState({
               disabled={busy}
               onClick={onSwitch}
               title="Sync to a different Project"
-              className="inline-flex cursor-pointer items-center gap-1.5 rounded-full border border-element-selected bg-element-hover px-2.5 py-1 text-xs text-secondary-foreground transition-colors hover:bg-element-selected hover:text-foreground disabled:cursor-not-allowed disabled:opacity-40"
+              className="inline-flex cursor-pointer items-center gap-1.5 rounded-full border border-element-selected bg-element-hover px-2.5 py-1 text-2xs text-secondary-foreground transition-colors hover:bg-element-selected hover:text-foreground disabled:cursor-not-allowed disabled:opacity-40"
             >
               <ArrowLeftRight size={11} />
               Change
@@ -1067,7 +1069,7 @@ function BoundState({
       </div>
 
       {!binding.enabled && (
-        <p className="text-xs text-muted-foreground">
+        <p className="text-2xs text-muted-foreground">
           Paused. Nothing already recorded has been deleted.
         </p>
       )}
@@ -1237,11 +1239,11 @@ function UnboundState({
            *  so where it blocks, with the retry right there. */}
           {mode === "cloud" && importPreview === null && (
             <div className="flex items-center justify-between gap-2 rounded-lg bg-warning-muted px-2.5 py-1.5">
-              <span className="text-xs text-warning">Couldn't read this Project's history.</span>
+              <span className="text-2xs text-warning">Couldn't read this Project's history.</span>
               <button
                 type="button"
                 onClick={onRetryPreview}
-                className="flex shrink-0 cursor-pointer items-center gap-1 rounded-full px-1.5 py-0.5 text-xs text-foreground underline underline-offset-2 transition-colors duration-150 hover:no-underline"
+                className="flex shrink-0 cursor-pointer items-center gap-1 rounded-full px-1.5 py-0.5 text-2xs text-foreground underline underline-offset-2 transition-colors duration-150 hover:no-underline"
               >
                 <RefreshCw size={10} />
                 Retry
@@ -1327,7 +1329,7 @@ function Tabs({
             disabled={disabled}
             title={disabled ? (connectReason ?? undefined) : undefined}
             className={cn(
-              "h-6 rounded-full border px-2.5 text-xs transition-colors",
+              "h-6 rounded-full border px-2.5 text-2xs transition-colors",
               disabled
                 ? "cursor-not-allowed border-element-hover bg-element-hover text-muted-foreground opacity-40"
                 : on
@@ -1425,21 +1427,21 @@ function CloudFields({
        *  tenant you are not looking at, and the mistake only shows up later in
        *  someone else's timeline. */}
       <div className="flex items-center gap-2">
-        <span className="w-[70px] shrink-0 text-xs text-muted-foreground">Organization</span>
-        <span className="truncate text-xs text-secondary-foreground">
+        <span className="w-[70px] shrink-0 text-2xs text-muted-foreground">Organization</span>
+        <span className="truncate text-2xs text-secondary-foreground">
           {cloudOrgs[0]?.name ?? "—"}
         </span>
       </div>
 
       <label className="flex items-center gap-2">
-        <span className="w-[70px] shrink-0 text-xs text-muted-foreground">Slug</span>
+        <span className="w-[70px] shrink-0 text-2xs text-muted-foreground">Slug</span>
         <input
           value={slug}
           onChange={(e) => onSlugChange(e.target.value)}
           spellCheck={false}
           autoCapitalize="off"
           placeholder="my-project"
-          className={cn(FIELD, "h-7 flex-1 font-mono text-xs")}
+          className={cn(FIELD, "h-7 flex-1 font-mono text-2xs")}
         />
       </label>
 
@@ -1449,14 +1451,14 @@ function CloudFields({
        *  this Project from their own checkout's origin. Prefilled from the
        *  detected remote, and cleared on purpose is a real answer. */}
       <label className="flex items-center gap-2">
-        <span className="w-[70px] shrink-0 text-xs text-muted-foreground">Repository</span>
+        <span className="w-[70px] shrink-0 text-2xs text-muted-foreground">Repository</span>
         <input
           value={gitUrl}
           onChange={(e) => onGitUrlChange(e.target.value)}
           spellCheck={false}
           autoCapitalize="off"
           placeholder="github.com/acme/my-project"
-          className={cn(FIELD, "h-7 flex-1 font-mono text-xs")}
+          className={cn(FIELD, "h-7 flex-1 font-mono text-2xs")}
         />
       </label>
 
@@ -1468,8 +1470,8 @@ function CloudFields({
           className="mt-0.5 size-3 shrink-0 cursor-pointer accent-primary"
         />
         <span className="min-w-0">
-          <span className="text-xs text-secondary-foreground">Restrict to named members</span>
-          <span className="block text-2xs text-muted-foreground">
+          <span className="text-2xs text-secondary-foreground">Restrict to named members</span>
+          <span className="block text-3xs text-muted-foreground">
             Otherwise every member of the Organization can read it and push to it. You can change
             this later.
           </span>
@@ -1489,7 +1491,7 @@ function SlugStatus({
 }) {
   if (state.kind === "idle") return null;
   return (
-    <p className="flex items-center gap-1 pl-[78px] text-2xs">
+    <p className="flex items-center gap-1 pl-[78px] text-3xs">
       {state.kind === "checking" && (
         <>
           <Loader2 size={10} className="animate-spin text-muted-foreground" />
@@ -1605,7 +1607,7 @@ function ConnectTab({
 
   if (cloudReason) {
     return (
-      <p className={cn(GROUP, "flex items-start gap-1.5 text-xs text-muted-foreground")}>
+      <p className={cn(GROUP, "flex items-start gap-1.5 text-2xs text-muted-foreground")}>
         <Lock size={11} className="mt-px shrink-0" />
         {cloudReason}
       </p>
@@ -1618,18 +1620,18 @@ function ConnectTab({
   return (
     <div className="space-y-2">
       {options === undefined ? (
-        <p className="flex items-center gap-1.5 py-2 text-xs text-muted-foreground">
+        <p className="flex items-center gap-1.5 py-2 text-2xs text-muted-foreground">
           <Loader2 size={11} className="animate-spin" />
           Fetching this Organization's Projects…
         </p>
       ) : options === null ? (
-        <p className="rounded-lg bg-warning-muted px-2.5 py-1.5 text-xs text-warning">
+        <p className="rounded-lg bg-warning-muted px-2.5 py-1.5 text-2xs text-warning">
           {listError
             ? `Could not list this Organization's Projects: ${listError}`
             : "Could not reach the server. Check the connection and reopen this tab."}
         </p>
       ) : workspaces.length === 0 ? (
-        <p className={cn(GROUP, "text-xs text-muted-foreground")}>
+        <p className={cn(GROUP, "text-2xs text-muted-foreground")}>
           {excludeId
             ? "This Organization has no other Projects to sync to."
             : "This Organization has no Projects yet. Create one from the Create tab instead."}
@@ -1637,7 +1639,7 @@ function ConnectTab({
       ) : (
         <>
           {options.warning && (
-            <p className="rounded-lg bg-warning-muted px-2.5 py-1.5 text-xs text-warning">
+            <p className="rounded-lg bg-warning-muted px-2.5 py-1.5 text-2xs text-warning">
               {options.warning}
             </p>
           )}
@@ -1655,9 +1657,9 @@ function ConnectTab({
             >
               <span className="min-w-0 flex-1 truncate">
                 {project ? (
-                  <span className="font-mono text-xs text-foreground">{project.slug}</span>
+                  <span className="font-mono text-2xs text-foreground">{project.slug}</span>
                 ) : (
-                  <span className="text-xs text-muted-foreground">Choose a Project…</span>
+                  <span className="text-2xs text-muted-foreground">Choose a Project…</span>
                 )}
               </span>
               <ChevronDown size={11} className="shrink-0 text-muted-foreground" />
@@ -1677,9 +1679,9 @@ function ConnectTab({
                     )}
                   />
                   <span className="min-w-0 flex-1">
-                    <span className="block truncate font-mono text-xs">{remote.slug}</span>
+                    <span className="block truncate font-mono text-2xs">{remote.slug}</span>
                     {remote.gitUrl && (
-                      <span className="block truncate text-2xs text-muted-foreground">
+                      <span className="block truncate text-3xs text-muted-foreground">
                         {remote.gitUrl}
                       </span>
                     )}
@@ -1695,7 +1697,7 @@ function ConnectTab({
        *  this repository's root commit, or none does — so the pick is handed
        *  back rather than reported as a failure. */}
       {refused && (
-        <p className="rounded-lg bg-warning-muted px-2.5 py-1.5 text-xs text-warning">{refused}</p>
+        <p className="rounded-lg bg-warning-muted px-2.5 py-1.5 text-2xs text-warning">{refused}</p>
       )}
 
       <div className="flex justify-end gap-2 pt-1">
@@ -1757,8 +1759,8 @@ function SwitchForm({
 }) {
   return (
     <div className="space-y-2">
-      <p className="text-sm font-medium text-foreground">Change Project</p>
-      <p className="text-xs text-muted-foreground">
+      <p className="text-xs font-medium text-foreground">Change Project</p>
+      <p className="text-2xs text-muted-foreground">
         Currently syncing to{" "}
         <span className="font-mono text-secondary-foreground">{binding.slug ?? "—"}</span>.
         Everything captured here will be re-sent to the Project you pick.
@@ -1828,8 +1830,8 @@ function PromoteForm({
 
   return (
     <div className="space-y-2">
-      <p className="text-sm font-medium text-foreground">Promote to Cloud</p>
-      <p className="text-xs text-muted-foreground">
+      <p className="text-xs font-medium text-foreground">Promote to Cloud</p>
+      <p className="text-2xs text-muted-foreground">
         {activeTab === "create"
           ? "Everything captured here joins your Organization's timeline. You'll see exactly what before anything is sent."
           : "Attach this Project's history to a Project your Organization already has. You'll see exactly what before anything is sent."}
@@ -1905,7 +1907,7 @@ function PrimaryButton({
       type="button"
       disabled={busy || disabled}
       onClick={onClick}
-      className="inline-flex cursor-pointer items-center gap-1.5 rounded-full border border-border bg-card px-3 py-1.5 text-xs font-medium leading-none text-foreground transition-colors hover:bg-element-hover disabled:cursor-not-allowed disabled:opacity-40"
+      className="inline-flex cursor-pointer items-center gap-1.5 rounded-full border border-border bg-card px-3 py-1.5 text-2xs font-medium leading-none text-foreground transition-colors hover:bg-element-hover disabled:cursor-not-allowed disabled:opacity-40"
     >
       {busy && <Loader2 size={11} className="animate-spin" />}
       {label}
@@ -1927,7 +1929,7 @@ function GhostButton({
       type="button"
       disabled={disabled}
       onClick={onClick}
-      className="inline-flex cursor-pointer items-center gap-1.5 rounded-full border border-border bg-card px-3 py-1.5 text-xs font-medium leading-none text-secondary-foreground transition-colors hover:bg-element-hover hover:text-foreground disabled:cursor-not-allowed disabled:opacity-40"
+      className="inline-flex cursor-pointer items-center gap-1.5 rounded-full border border-border bg-card px-3 py-1.5 text-2xs font-medium leading-none text-secondary-foreground transition-colors hover:bg-element-hover hover:text-foreground disabled:cursor-not-allowed disabled:opacity-40"
     >
       {label}
     </button>
@@ -2001,7 +2003,7 @@ function Detected({
 
   return (
     <div className={cn(GROUP, "space-y-1.5")}>
-      <p className="text-3xs font-semibold uppercase tracking-[0.12em] text-muted-foreground">
+      <p className="text-4xs font-semibold uppercase tracking-[0.12em] text-muted-foreground">
         This project
       </p>
 
@@ -2077,14 +2079,14 @@ function StatusRow({
       />
       <span
         className={cn(
-          "min-w-0 flex-1 truncate text-xs",
+          "min-w-0 flex-1 truncate text-2xs",
           mono && "font-mono",
           ok ? "text-foreground" : "text-muted-foreground",
         )}
       >
         {value}
       </span>
-      <span className="shrink-0 text-3xs uppercase tracking-[0.08em] text-disabled">{caption}</span>
+      <span className="shrink-0 text-4xs uppercase tracking-[0.08em] text-disabled">{caption}</span>
     </div>
   );
 }
@@ -2111,10 +2113,10 @@ function TimelinePreview() {
     <div className={cn(GROUP, "overflow-hidden")}>
       <div className="flex items-center gap-1.5">
         <Layers size={10} className="text-muted-foreground" />
-        <span className="text-3xs font-semibold uppercase tracking-[0.12em] text-muted-foreground">
+        <span className="text-4xs font-semibold uppercase tracking-[0.12em] text-muted-foreground">
           Timeline
         </span>
-        <span className="ml-auto text-3xs text-disabled">preview</span>
+        <span className="ml-auto text-4xs text-disabled">preview</span>
       </div>
 
       <div className="relative mt-2">
@@ -2146,7 +2148,7 @@ function TimelinePreview() {
               />
               <span
                 className={cn(
-                  "min-w-0 flex-1 truncate text-2xs",
+                  "min-w-0 flex-1 truncate text-3xs",
                   row.dot === "commit"
                     ? "font-mono text-secondary-foreground"
                     : "text-secondary-foreground",
@@ -2154,13 +2156,13 @@ function TimelinePreview() {
               >
                 {row.text}
               </span>
-              <span className="shrink-0 text-3xs text-disabled">{row.meta}</span>
+              <span className="shrink-0 text-4xs text-disabled">{row.meta}</span>
             </div>
           ))}
         </div>
       </div>
 
-      <p className="mt-2 text-2xs text-muted-foreground">
+      <p className="mt-2 text-3xs text-muted-foreground">
         Every prompt, tool call and commit, kept on one thread you can reopen months later.
       </p>
     </div>
@@ -2179,7 +2181,7 @@ function GitMissingBanner() {
   return (
     <div className="flex items-start gap-2 rounded-lg border border-dashed border-warning/40 px-2.5 py-2">
       <GitBranch size={12} className="mt-0.5 shrink-0 text-warning" />
-      <p className="min-w-0 text-xs text-secondary-foreground">
+      <p className="min-w-0 text-2xs text-secondary-foreground">
         Git is not installed on this machine. Sessions are still recorded, but they cannot be linked
         to commits and cannot be shared with an Organization.
       </p>
@@ -2199,7 +2201,7 @@ function GitInitOffer({ busy, onGitInit }: { busy: boolean; onGitInit: () => voi
     <div className="flex items-start gap-2 rounded-lg border border-dashed border-element-active px-2.5 py-2">
       <GitBranch size={12} className="mt-0.5 shrink-0 text-muted-foreground" />
       <div className="min-w-0">
-        <p className="text-xs text-secondary-foreground">
+        <p className="text-2xs text-secondary-foreground">
           Sessions are recorded here already. Initialize git to also link them to the commits they
           produce.
         </p>
@@ -2207,7 +2209,7 @@ function GitInitOffer({ busy, onGitInit }: { busy: boolean; onGitInit: () => voi
           type="button"
           disabled={busy}
           onClick={onGitInit}
-          className="mt-1 cursor-pointer text-xs text-foreground underline underline-offset-2 transition-colors duration-150 hover:no-underline disabled:cursor-not-allowed disabled:opacity-40"
+          className="mt-1 cursor-pointer text-2xs text-foreground underline underline-offset-2 transition-colors duration-150 hover:no-underline disabled:cursor-not-allowed disabled:opacity-40"
         >
           Initialize git
         </button>

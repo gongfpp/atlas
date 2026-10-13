@@ -19,7 +19,7 @@ export const MENTION_AVATAR_SIZE = 13;
 
 const BASE =
   "inline-flex items-center gap-1 rounded-full border px-1.5 py-[1px] align-middle " +
-  "text-sm font-medium leading-none";
+  "text-xs font-medium leading-none";
 
 /** Addressed to you, or to everyone — the brighter of the two. */
 const SELF = "border-border-strong bg-element-emphasis text-foreground";

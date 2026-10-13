@@ -70,7 +70,7 @@ export function MemorySharingControls({ projectPath }: { projectPath: string | n
             : "Shared memory OFF"
         }
         className={cn(
-          "flex items-center gap-1 h-6 px-2 rounded-full border text-2xs font-medium transition-colors cursor-pointer outline-none",
+          "flex items-center gap-1 h-6 px-2 rounded-full border text-3xs font-medium transition-colors cursor-pointer outline-none",
           enabled
             ? "border-border bg-element-hover text-foreground"
             : "border-border text-muted-foreground hover:text-secondary-foreground hover:bg-element-hover",
@@ -97,8 +97,8 @@ export function MemorySharingControls({ projectPath }: { projectPath: string | n
         <Popover.Portal>
           <Popover.Positioner className="z-popover" align="end" side="bottom" sideOffset={6}>
             <Popover.Popup className="w-[300px] rounded-md border border-border bg-card p-3 shadow-md">
-              <div className="eyebrow mb-2">Recent-session handoff</div>
-              <p className="mb-2.5 text-xs leading-snug text-muted-foreground">{HANDOFF_HINT}</p>
+              <div className="micro mb-2">Recent-session handoff</div>
+              <p className="mb-2.5 text-2xs leading-snug text-muted-foreground">{HANDOFF_HINT}</p>
 
               <div className="inline-flex items-center gap-0.5 rounded-full border border-border bg-card p-0.5">
                 <ModeSeg
@@ -135,7 +135,7 @@ export function MemorySharingControls({ projectPath }: { projectPath: string | n
                       onModel={(model) => void setPref({ ...pref, model })}
                     />
                   ) : (
-                    <p className="text-xs text-muted-foreground">
+                    <p className="text-2xs text-muted-foreground">
                       Add a provider key in Settings to use provider summaries.
                     </p>
                   )}
@@ -143,20 +143,22 @@ export function MemorySharingControls({ projectPath }: { projectPath: string | n
               )}
 
               {pref.mode === "raw" && (
-                <p className="mt-2.5 text-xs text-muted-foreground">{RAW_HINT}</p>
+                <p className="mt-2.5 text-2xs text-muted-foreground">{RAW_HINT}</p>
               )}
 
-              <p className="mt-2.5 text-xs text-muted-foreground">{EXTRACTION_NOTE}</p>
+              <p className="mt-2.5 text-2xs text-muted-foreground">{EXTRACTION_NOTE}</p>
 
               <div className="mt-3 border-t border-border pt-3">
                 <div className="flex items-start justify-between gap-3">
                   <div className={cn(!enabled && "opacity-60")}>
-                    <p className="text-xs font-medium text-foreground">{EXTERNAL_SESSIONS_LABEL}</p>
-                    <p className="mt-0.5 text-xs leading-snug text-muted-foreground">
+                    <p className="text-2xs font-medium text-foreground">
+                      {EXTERNAL_SESSIONS_LABEL}
+                    </p>
+                    <p className="mt-0.5 text-2xs leading-snug text-muted-foreground">
                       {EXTERNAL_SESSIONS_HINT}
                     </p>
                     {!enabled && (
-                      <p className="mt-1 text-xs text-muted-foreground">
+                      <p className="mt-1 text-2xs text-muted-foreground">
                         {EXTERNAL_SESSIONS_NEEDS_SHARING}
                       </p>
                     )}
@@ -200,7 +202,7 @@ function ModeSeg({
       onClick={() => enabled && onClick()}
       title={enabled ? label : `${label} (coming soon)`}
       className={cn(
-        "flex items-center gap-1 h-[22px] px-2 rounded-full text-2xs font-medium transition-colors",
+        "flex items-center gap-1 h-[22px] px-2 rounded-full text-3xs font-medium transition-colors",
         active
           ? "bg-element-hover text-foreground"
           : "text-muted-foreground hover:text-secondary-foreground",

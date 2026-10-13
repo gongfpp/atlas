@@ -65,7 +65,7 @@ export function ChatPinnedMenu({
               className={className}
             >
               <Pin size={12} />
-              <span className="tabular-nums text-xs leading-none">{pins.length}</span>
+              <span className="tabular-nums text-2xs leading-none">{pins.length}</span>
             </button>
           }
         />
@@ -81,13 +81,13 @@ export function ChatPinnedMenu({
                   onChange={(e) => setQuery(e.target.value)}
                   placeholder="Search pins…"
                   aria-label="Search pinned messages"
-                  className="min-w-0 flex-1 bg-transparent text-xs text-foreground outline-none placeholder:text-muted-foreground"
+                  className="min-w-0 flex-1 bg-transparent text-2xs text-foreground outline-none placeholder:text-muted-foreground"
                 />
               </div>
 
               <div className="hide-scrollbar min-h-0 flex-1 overflow-y-auto">
                 {filtered.length === 0 && (
-                  <div className="py-6 text-center text-xs text-disabled">No pins match.</div>
+                  <div className="py-6 text-center text-2xs text-disabled">No pins match.</div>
                 )}
                 {filtered.map((pin, i) => (
                   <div
@@ -105,10 +105,10 @@ export function ChatPinnedMenu({
                       }}
                       className="flex min-w-0 flex-1 cursor-pointer flex-col gap-1 text-left"
                     >
-                      <span className="line-clamp-2 text-xs leading-snug text-secondary-foreground">
+                      <span className="line-clamp-2 text-2xs leading-snug text-secondary-foreground">
                         {pin.text || "…"}
                       </span>
-                      <span className="text-3xs text-muted-foreground">
+                      <span className="text-4xs text-muted-foreground">
                         Pinned {timeAgo(pin.at, { suffix: true })}
                       </span>
                     </button>

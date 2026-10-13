@@ -111,7 +111,7 @@ export function DraftsTab({ conv }: { conv: ChatConversation }) {
           }}
           placeholder="Name a new draft…"
           aria-label="New draft title"
-          className="min-w-0 flex-1 bg-transparent text-xs text-foreground outline-none placeholder:text-muted-foreground"
+          className="min-w-0 flex-1 bg-transparent text-2xs text-foreground outline-none placeholder:text-muted-foreground"
         />
         <Hint label="Create draft">
           <button
@@ -137,7 +137,7 @@ export function DraftsTab({ conv }: { conv: ChatConversation }) {
             </div>
           ))}
         {drafts?.length === 0 && (
-          <p className="px-3 pt-4 text-center text-xs text-disabled">No drafts yet.</p>
+          <p className="px-3 pt-4 text-center text-2xs text-disabled">No drafts yet.</p>
         )}
         {drafts?.map((d) => {
           const author = members.get(d.created_by) ?? null;
@@ -157,16 +157,16 @@ export function DraftsTab({ conv }: { conv: ChatConversation }) {
             >
               <div className="min-w-0 flex-1">
                 <div className="flex min-w-0 items-center gap-1.5">
-                  <span className="min-w-0 truncate text-sm font-medium text-foreground">
+                  <span className="min-w-0 truncate text-xs font-medium text-foreground">
                     {d.title}
                   </span>
                   {d.sent_at !== null && (
-                    <span className="shrink-0 rounded-full bg-element-active px-1.5 py-px text-2xs font-medium text-foreground">
+                    <span className="shrink-0 rounded-full bg-element-active px-1.5 py-px text-3xs font-medium text-foreground">
                       sent
                     </span>
                   )}
                 </div>
-                <span className="mt-0.5 block truncate text-2xs text-disabled">
+                <span className="mt-0.5 block truncate text-3xs text-disabled">
                   Updated {timeAgo(new Date(d.updated_at).toISOString(), { suffix: true })}
                 </span>
               </div>
@@ -180,7 +180,7 @@ export function DraftsTab({ conv }: { conv: ChatConversation }) {
                   render={
                     <span className="flex min-w-0 shrink-0 items-center gap-1">
                       <CommsAvatar member={author} size={16} />
-                      <span className="max-w-[72px] truncate text-2xs text-muted-foreground">
+                      <span className="max-w-[72px] truncate text-3xs text-muted-foreground">
                         {firstName(author?.name)}
                       </span>
                     </span>
@@ -191,7 +191,7 @@ export function DraftsTab({ conv }: { conv: ChatConversation }) {
                 </TooltipContent>
               </Tooltip>
 
-              <span className="w-[62px] shrink-0 text-right text-2xs tabular-nums text-muted-foreground">
+              <span className="w-[62px] shrink-0 text-right text-3xs tabular-nums text-muted-foreground">
                 {formatCreated(d.created_at)}
               </span>
             </div>

@@ -586,7 +586,7 @@ export const MentionPicker = forwardRef<MentionPickerHandle, MentionPickerProps>
         }}
       >
         {rows.length === 0 || (rows.length === 1 && rows[0].type === "header") ? (
-          <div className="flex-1 px-3 py-6 text-center text-xs text-muted-foreground leading-snug">
+          <div className="flex-1 px-3 py-6 text-center text-2xs text-muted-foreground leading-snug">
             {indexing && (scope === null || scope === "file" || scope === "folder") ? (
               <span className="inline-flex items-center gap-1.5">
                 <span className="size-1.5 rounded-full bg-muted-foreground animate-pulse" />
@@ -614,14 +614,14 @@ export const MentionPicker = forwardRef<MentionPickerHandle, MentionPickerProps>
         )}
         <div className="border-t border-border px-3 h-[34px] flex items-center justify-between shrink-0">
           <KbdLegend
-            className="text-3xs text-muted-foreground"
+            className="text-4xs text-muted-foreground"
             items={[
               { keys: ["↑", "↓"], label: "navigate" },
               { keys: ["↵"], label: "select" },
             ]}
           />
           <KbdLegend
-            className="text-3xs text-muted-foreground"
+            className="text-4xs text-muted-foreground"
             items={[{ keys: ["esc"], label: "close" }]}
           />
         </div>
@@ -772,7 +772,7 @@ const PickerRow = memo(function PickerRow({
   };
   if (row.type === "header") {
     return (
-      <div style={style} className="eyebrow px-3 pt-2 pb-1 truncate">
+      <div style={style} className="micro px-3 pt-2 pb-1 truncate">
         {row.label}
       </div>
     );
@@ -785,7 +785,7 @@ const PickerRow = memo(function PickerRow({
       onActivate(row);
     },
     className: cn(
-      "text-left px-3 flex items-center gap-2 text-sm",
+      "text-left px-3 flex items-center gap-2 text-xs",
       isActive
         ? "bg-element-selected text-foreground"
         : "text-secondary-foreground hover:bg-element-hover",
@@ -808,7 +808,7 @@ const PickerRow = memo(function PickerRow({
           <MessageSquare size={11} />
         </span>
         <span className="truncate flex-1 min-w-0">{row.session.title}</span>
-        <span className="text-2xs text-muted-foreground shrink-0">
+        <span className="text-3xs text-muted-foreground shrink-0">
           {row.session.messageCount} msgs
         </span>
       </button>
@@ -819,13 +819,13 @@ const PickerRow = memo(function PickerRow({
     <button {...common} title={mentionTitle(m)}>
       <span className="opacity-75 w-4 flex items-center justify-center">
         {m.kind === "knowledge" && m.icon ? (
-          <span style={{ fontSize: "var(--text-sm)", lineHeight: 1 }}>{m.icon}</span>
+          <span style={{ fontSize: "var(--text-xs)", lineHeight: 1 }}>{m.icon}</span>
         ) : (
           mentionGlyph(m)
         )}
       </span>
       <span className="truncate min-w-0">{primaryLabel(m)}</span>
-      <span className="flex-1 min-w-0 text-2xs text-muted-foreground truncate">
+      <span className="flex-1 min-w-0 text-3xs text-muted-foreground truncate">
         {row.recentLabel ?? secondaryLabel(m)}
       </span>
     </button>

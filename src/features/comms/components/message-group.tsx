@@ -212,7 +212,7 @@ const MessageRow = memo(function MessageRow({
         ) : (
           // The gutter is never empty-looking on hover: a continuation
           // reveals its own time where the avatar would be.
-          <span className="hidden justify-end pr-0.5 pt-[3px] text-2xs tabular-nums leading-none text-disabled group-hover/msg:flex">
+          <span className="hidden justify-end pr-0.5 pt-[3px] text-3xs tabular-nums leading-none text-disabled group-hover/msg:flex">
             {formatClock(m.created_at)}
           </span>
         )}
@@ -232,26 +232,26 @@ const MessageRow = memo(function MessageRow({
           // An integration is named however its DM-ness: there is no "You" or
           // counterpart to fall back on, and the badge is the whole point.
           <div className="flex min-w-0 items-baseline gap-1.5" title={presented.title ?? undefined}>
-            <span className="truncate text-sm font-semibold text-foreground">{presented.name}</span>
+            <span className="truncate text-xs font-semibold text-foreground">{presented.name}</span>
             <Badge variant="outline" size="sm" className="self-center uppercase tracking-wider">
               App
             </Badge>
             {presented.via && (
-              <span className="min-w-0 truncate text-2xs text-muted-foreground">
+              <span className="min-w-0 truncate text-3xs text-muted-foreground">
                 via {presented.via}
               </span>
             )}
-            <span className="shrink-0 text-2xs tabular-nums text-disabled">
+            <span className="shrink-0 text-3xs tabular-nums text-disabled">
               {formatClock(m.created_at)}
             </span>
           </div>
         ) : (
           first && (
             <div className="flex items-baseline gap-1.5">
-              <span className="truncate text-sm font-semibold text-foreground">
+              <span className="truncate text-xs font-semibold text-foreground">
                 {showAuthor ? (author?.name ?? "Unknown") : (author?.name ?? "You")}
               </span>
-              <span className="shrink-0 text-2xs tabular-nums text-disabled">
+              <span className="shrink-0 text-3xs tabular-nums text-disabled">
                 {formatClock(m.created_at)}
               </span>
             </div>
@@ -295,7 +295,7 @@ function MessageContent({
   // The row survives a delete so a reply pointing at it still renders; the body
   // is genuinely gone from the server, so this is a tombstone, not a hide.
   if (message.deleted) {
-    return <div className="text-base italic text-disabled">Message deleted</div>;
+    return <div className="type-reading italic text-disabled">Message deleted</div>;
   }
 
   const pending = message.status === "sending";
@@ -343,7 +343,7 @@ function MessageContent({
       )}
 
       {(message.edited_at || pinned || pending || failed) && (
-        <div className="mt-0.5 flex items-center gap-1.5 text-2xs text-disabled">
+        <div className="mt-0.5 flex items-center gap-1.5 text-3xs text-disabled">
           {pinned && <Pin size={9} />}
           {message.edited_at && <span className="italic">edited</span>}
           {/* Two rungs only — nothing on this wire reports that a message
@@ -379,7 +379,7 @@ function ReplyLine({
       disabled={deleted}
       title={deleted ? undefined : "Jump to message"}
       className={cn(
-        "group/reply flex w-full min-w-0 items-center gap-1 pb-0.5 text-left text-xs text-muted-foreground",
+        "group/reply flex w-full min-w-0 items-center gap-1 pb-0.5 text-left text-2xs text-muted-foreground",
         !deleted && "cursor-pointer",
       )}
     >
@@ -443,7 +443,7 @@ function ReactionRow({
           title={c.userIds.map((id) => members.get(id)?.name ?? "Unknown").join(", ")}
           onClick={() => onReact(message.id, c.emoji, !c.mine)}
           className={cn(
-            "flex h-[21px] items-center gap-1 rounded-full border px-1.5 text-xs leading-none transition-colors cursor-pointer",
+            "flex h-[21px] items-center gap-1 rounded-full border px-1.5 text-2xs leading-none transition-colors cursor-pointer",
             c.mine
               ? "border-success/60 bg-success/15 text-foreground"
               : "border-border bg-card text-secondary-foreground hover:bg-element-hover",
@@ -591,10 +591,10 @@ function AttachmentView({ attachment, convId }: { attachment: ChatAttachment; co
         <FileText size={15} className="shrink-0 text-muted-foreground" />
       )}
       <span className="min-w-0 flex-1">
-        <span className="block truncate text-sm text-secondary-foreground">
+        <span className="block truncate text-xs text-secondary-foreground">
           {attachment.filename}
         </span>
-        <span className="block text-2xs tabular-nums text-disabled">
+        <span className="block text-3xs tabular-nums text-disabled">
           {formatBytes(attachment.bytes)}
           {failed && " · could not load"}
         </span>
@@ -733,7 +733,7 @@ function HoverActions({
                         onReact(e);
                         setPickerOpen(false);
                       }}
-                      className="flex h-7 w-7 items-center justify-center rounded text-md transition-colors hover:bg-element-hover cursor-pointer"
+                      className="flex h-7 w-7 items-center justify-center rounded text-sm transition-colors hover:bg-element-hover cursor-pointer"
                     >
                       {e}
                     </button>
@@ -801,7 +801,7 @@ const actionBtn =
   "flex h-6 w-6 items-center justify-center rounded text-muted-foreground transition-colors hover:bg-element-hover hover:text-foreground cursor-pointer";
 
 const menuItem =
-  "flex items-center gap-2 rounded px-2 py-1.5 text-sm text-secondary-foreground outline-none transition-colors data-[highlighted]:bg-element-hover data-[highlighted]:text-foreground cursor-pointer";
+  "flex items-center gap-2 rounded px-2 py-1.5 text-xs text-secondary-foreground outline-none transition-colors data-[highlighted]:bg-element-hover data-[highlighted]:text-foreground cursor-pointer";
 
 export function formatBytes(n: number): string {
   if (n < 1024) return `${n} B`;

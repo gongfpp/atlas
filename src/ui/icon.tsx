@@ -17,13 +17,26 @@ import { cn } from "@/lib/utils";
  *
  * Deliberately NOT migrated in Foundations: the primitives in `src/ui` use it,
  * and everything else moves in the colour-and-scale sweep.
+ *
+ * The steps are Atlas Standards' since the design-language sync — one step up
+ * from the old 10 / 12 / 14 / 16 / 20, to sit beside the 12px body — and are
+ * Tailwind's spacing steps, so they are applied as rem classes and follow the
+ * type scale. The numbers are what each step is at the 16px root.
  */
 export const ICON_SIZES = {
-  xs: 10,
-  sm: 12,
-  md: 14,
-  lg: 16,
-  xl: 20,
+  xs: 12,
+  sm: 14,
+  md: 16,
+  lg: 18,
+  xl: 22,
+} as const;
+
+const ICON_CLASS = {
+  xs: "size-3",
+  sm: "size-3.5",
+  md: "size-4",
+  lg: "size-4.5",
+  xl: "size-5.5",
 } as const;
 
 export type IconSize = keyof typeof ICON_SIZES;
@@ -46,9 +59,10 @@ export function Icon({
 }: IconProps) {
   return (
     <Glyph
-      size={ICON_SIZES[size]}
+      data-slot="icon"
+      size={undefined}
       strokeWidth={strokeWidth}
-      className={cn("shrink-0", className)}
+      className={cn("shrink-0", ICON_CLASS[size], className)}
       aria-hidden={props["aria-label"] ? undefined : true}
       {...props}
     />

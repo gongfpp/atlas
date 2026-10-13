@@ -65,10 +65,10 @@ export function LayoutSwitcher({
           aria-describedby={undefined}
           className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-modal w-[700px] max-w-[92vw] rounded-2xl border border-border bg-card/95 backdrop-blur-xl shadow-md p-5 outline-none"
         >
-          <Dialog.Title className="text-base font-semibold text-foreground mb-0.5">
+          <Dialog.Title className="type-reading font-semibold text-foreground mb-0.5">
             Choose a layout
           </Dialog.Title>
-          <p className="text-xs text-muted-foreground mb-4">
+          <p className="text-2xs text-muted-foreground mb-4">
             Rearranges panels and tabs into a ready-made project.
           </p>
 
@@ -86,15 +86,15 @@ export function LayoutSwitcher({
                 )}
               >
                 <LayoutThumbnail template={t} />
-                <div className="mt-2 text-sm font-medium text-foreground">{t.name}</div>
-                <div className="text-2xs text-muted-foreground leading-snug line-clamp-2">
+                <div className="mt-2 text-xs font-medium text-foreground">{t.name}</div>
+                <div className="text-3xs text-muted-foreground leading-snug line-clamp-2">
                   {t.description}
                 </div>
               </button>
             ))}
           </div>
 
-          <div className="mt-4 flex justify-center text-2xs text-muted-foreground">
+          <div className="mt-4 flex justify-center text-3xs text-muted-foreground">
             <KbdLegend
               items={[
                 { keys: ["↑", "↓", "←", "→"], label: "navigate" },

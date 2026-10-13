@@ -82,7 +82,7 @@ export function FilterBar({
         <button
           type="button"
           onClick={onClear}
-          className="flex h-6 items-center gap-1 rounded-full px-2 text-2xs text-muted-foreground transition-colors hover:bg-element-hover hover:text-foreground"
+          className="flex h-6 items-center gap-1 rounded-full px-2 text-3xs text-muted-foreground transition-colors hover:bg-element-hover hover:text-foreground"
         >
           <X size={10} /> Clear
         </button>
@@ -133,7 +133,7 @@ function FacetPill({
             type="button"
             disabled={options.length === 0}
             className={cn(
-              "flex h-control-md items-center rounded-full border px-2 text-2xs font-medium leading-none transition-colors outline-none disabled:cursor-not-allowed disabled:opacity-50",
+              "flex h-control-md items-center rounded-full border px-2 text-3xs font-medium leading-none transition-colors outline-none disabled:cursor-not-allowed disabled:opacity-50",
               on
                 ? "border-border-strong bg-element-selected text-foreground"
                 : "border-border bg-card text-secondary-foreground hover:bg-element-hover hover:text-foreground",
@@ -141,7 +141,7 @@ function FacetPill({
           >
             <span className="max-w-[160px] truncate">{label}</span>
             {selected.length > 1 && (
-              <span className="ml-1 rounded-full bg-element-active px-1 text-3xs tabular-nums">
+              <span className="ml-1 rounded-full bg-element-active px-1 text-4xs tabular-nums">
                 {selected.length}
               </span>
             )}
@@ -157,7 +157,7 @@ function FacetPill({
         <DropdownMenu.Positioner className="z-popover" align="start" sideOffset={4}>
           <DropdownMenu.Popup
             finalFocus={false}
-            className="w-[260px] rounded-lg border border-border bg-popover py-1 text-xs text-secondary-foreground shadow-md"
+            className="w-[260px] rounded-lg border border-border bg-popover py-1 text-2xs text-secondary-foreground shadow-md"
           >
             {options.length > SEARCH_ABOVE && (
               <div className="mx-1.5 mb-1 flex h-control-md items-center gap-1.5 rounded-md border border-border bg-background px-2">
@@ -171,13 +171,13 @@ function FacetPill({
                     if (e.key !== "Escape") e.stopPropagation();
                   }}
                   placeholder={`Filter ${oneLabel}s`}
-                  className="w-full bg-transparent text-xs text-foreground outline-none placeholder:text-muted-foreground"
+                  className="w-full bg-transparent text-2xs text-foreground outline-none placeholder:text-muted-foreground"
                 />
               </div>
             )}
             <div className="max-h-[280px] overflow-y-auto hide-scrollbar">
               {shown.length === 0 && (
-                <div className="px-3 py-2 text-2xs text-muted-foreground">No matches</div>
+                <div className="px-3 py-2 text-3xs text-muted-foreground">No matches</div>
               )}
               {/* No `closeOnClick`: Base UI's checkbox items keep the menu open
                   by default, which is what Radix's `onSelect` preventDefault
@@ -196,7 +196,7 @@ function FacetPill({
                     </DropdownMenu.CheckboxItemIndicator>
                   </span>
                   <span className="min-w-0 flex-1 truncate">{o.label}</span>
-                  <span className="shrink-0 text-2xs tabular-nums text-muted-foreground">
+                  <span className="shrink-0 text-3xs tabular-nums text-muted-foreground">
                     {fmtTokens(o.tokens)}
                   </span>
                 </DropdownMenu.CheckboxItem>

@@ -69,7 +69,7 @@ export function KeybindingsSearch({
               const combo = comboFromEvent(e.nativeEvent);
               if (combo) onChange({ ...state, recorded: combo });
             }}
-            className="h-full flex-1 bg-transparent text-xs text-foreground outline-none placeholder:text-muted-foreground"
+            className="h-full flex-1 bg-transparent text-2xs text-foreground outline-none placeholder:text-muted-foreground"
           />
         ) : (
           <input
@@ -84,7 +84,7 @@ export function KeybindingsSearch({
               }
               e.stopPropagation();
             }}
-            className="h-full flex-1 bg-transparent text-xs text-foreground outline-none placeholder:text-muted-foreground"
+            className="h-full flex-1 bg-transparent text-2xs text-foreground outline-none placeholder:text-muted-foreground"
           />
         )}
         {state.recordKeys && state.recorded && <KbdKeys keys={displayKeys(state.recorded)} />}

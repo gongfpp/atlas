@@ -82,7 +82,7 @@ export const SpaceNoteNode = memo(function SpaceNoteNode({ id, data, selected }:
           onChange={title.onChange}
           readOnly={title.readOnly}
           placeholder="Untitled"
-          className="nodrag min-w-0 flex-1 bg-transparent text-base font-semibold text-foreground outline-none placeholder:text-muted-foreground"
+          className="nodrag min-w-0 flex-1 bg-transparent type-reading font-semibold text-foreground outline-none placeholder:text-muted-foreground"
         />
       </div>
       <textarea
@@ -91,7 +91,7 @@ export const SpaceNoteNode = memo(function SpaceNoteNode({ id, data, selected }:
         onChange={body.onChange}
         readOnly={body.readOnly}
         placeholder="Write something…"
-        className="nodrag relative min-h-0 flex-1 resize-none rounded-b-2xl bg-transparent px-3 py-2.5 text-sm leading-relaxed text-secondary-foreground outline-none placeholder:italic placeholder:text-muted-foreground"
+        className="nodrag relative min-h-0 flex-1 resize-none rounded-b-2xl bg-transparent px-3 py-2.5 text-xs leading-relaxed text-secondary-foreground outline-none placeholder:italic placeholder:text-muted-foreground"
       />
       <SpaceResizer id={id} selected={selected} minWidth={160} minHeight={100} />
     </div>
@@ -118,7 +118,7 @@ export const SpaceTextNode = memo(function SpaceTextNode({ id, data, selected }:
         onChange={text.onChange}
         readOnly={text.readOnly}
         placeholder="Text"
-        className="nodrag h-full w-full resize-none whitespace-pre-wrap break-words bg-transparent px-1 py-0.5 text-lg leading-snug text-foreground caret-primary outline-none placeholder:text-muted-foreground"
+        className="nodrag h-full w-full resize-none whitespace-pre-wrap break-words bg-transparent px-1 py-0.5 text-md leading-snug text-foreground caret-primary outline-none placeholder:text-muted-foreground"
       />
       <SpaceResizer id={id} selected={selected} minWidth={80} minHeight={40} />
     </div>
@@ -175,7 +175,7 @@ export const SpaceShapeNode = memo(function SpaceShapeNode({ id, data, selected 
           onChange={title.onChange}
           readOnly={title.readOnly}
           rows={1}
-          className="nodrag max-h-full w-full resize-none whitespace-pre-wrap break-words bg-transparent text-center text-sm leading-snug text-foreground caret-primary outline-none"
+          className="nodrag max-h-full w-full resize-none whitespace-pre-wrap break-words bg-transparent text-center text-xs leading-snug text-foreground caret-primary outline-none"
         />
       </div>
     </div>
@@ -205,7 +205,7 @@ export const SpaceGroupNode = memo(function SpaceGroupNode({ id, data, selected 
         onChange={title.onChange}
         readOnly={title.readOnly}
         placeholder="Group"
-        className="nodrag absolute -top-6 left-1 bg-transparent text-xs font-medium text-muted-foreground outline-none placeholder:text-muted-foreground/60"
+        className="nodrag absolute -top-6 left-1 bg-transparent text-2xs font-medium text-muted-foreground outline-none placeholder:text-muted-foreground/60"
       />
       <SpaceResizer id={id} selected={selected} minWidth={120} minHeight={80} />
     </div>
@@ -259,7 +259,7 @@ export const SpaceMediaNode = memo(function SpaceMediaNode({ id, data, selected 
         {failed ? (
           <div className="flex h-full w-full flex-col items-center justify-center gap-1 text-muted-foreground">
             <ImageOff size={16} />
-            <span className="text-2xs">Media unavailable</span>
+            <span className="text-3xs">Media unavailable</span>
           </div>
         ) : url === null ? (
           <div className="flex h-full w-full items-center justify-center text-muted-foreground">

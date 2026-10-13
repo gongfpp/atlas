@@ -99,11 +99,11 @@ export function MediaLightbox() {
           )}
         >
           <div className="flex h-[34px] shrink-0 items-center gap-2 border-b border-border px-3">
-            <Dialog.Title className="min-w-0 flex-1 truncate text-sm text-secondary-foreground">
+            <Dialog.Title className="min-w-0 flex-1 truncate text-xs text-secondary-foreground">
               {item?.filename ?? ""}
             </Dialog.Title>
             {count > 1 && (
-              <span className="shrink-0 text-xs tabular-nums text-disabled">
+              <span className="shrink-0 text-2xs tabular-nums text-disabled">
                 {index + 1} / {count}
               </span>
             )}
@@ -145,7 +145,7 @@ export function MediaLightbox() {
                 <ImageZoomView key={item.id} src={convertFileSrc(path)} alt={item.filename} fill />
               )
             ) : (
-              <div className="flex h-full w-full items-center justify-center text-xs text-disabled">
+              <div className="flex h-full w-full items-center justify-center text-2xs text-disabled">
                 {failed ? (
                   "Could not load this file."
                 ) : (

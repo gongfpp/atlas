@@ -131,7 +131,7 @@ export const GroupCommentPill = memo(function GroupCommentPill({
           ))}
         </span>
       )}
-      <span className="text-2xs tabular-nums">{count > 9 ? "9+" : count}</span>
+      <span className="text-3xs tabular-nums">{count > 9 ? "9+" : count}</span>
     </button>
   );
 });

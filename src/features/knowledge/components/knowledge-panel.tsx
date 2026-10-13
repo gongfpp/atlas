@@ -463,7 +463,7 @@ export function KnowledgePanel({ tabId }: { tabId?: string }) {
 
   if (!currentProject) {
     return (
-      <div className="h-full flex items-center justify-center text-muted-foreground text-sm">
+      <div className="h-full flex items-center justify-center text-muted-foreground text-xs">
         Open a project first
       </div>
     );
@@ -642,7 +642,7 @@ export function KnowledgePanel({ tabId }: { tabId?: string }) {
                         marginBottom: 10,
                       }}
                     >
-                      <span className="eyebrow" style={{ flex: 1 }}>
+                      <span className="micro" style={{ flex: 1 }}>
                         Mentioned in · {backlinksFooter.length}{" "}
                         {backlinksFooter.length === 1 ? "place" : "places"}
                       </span>
@@ -675,7 +675,7 @@ export function KnowledgePanel({ tabId }: { tabId?: string }) {
                           }}
                         >
                           <div
-                            className="text-sm"
+                            className="text-xs"
                             style={{
                               color: "var(--foreground)",
                               fontWeight: 500,
@@ -688,7 +688,7 @@ export function KnowledgePanel({ tabId }: { tabId?: string }) {
                             {b.fromTitle}
                           </div>
                           <div
-                            className="text-sm"
+                            className="text-xs"
                             style={{
                               color: "var(--muted-foreground)",
                               lineHeight: 1.5,
@@ -715,7 +715,7 @@ export function KnowledgePanel({ tabId }: { tabId?: string }) {
             />
           </>
         ) : (
-          <div className="h-full flex items-center justify-center text-muted-foreground text-sm">
+          <div className="h-full flex items-center justify-center text-muted-foreground text-xs">
             Select or create a note
           </div>
         )}
@@ -861,7 +861,7 @@ function PageHeaderWithIcon({
       ) : null}
 
       <div
-        className="text-sm"
+        className="text-xs"
         style={{
           display: "flex",
           gap: 12,
@@ -874,7 +874,7 @@ function PageHeaderWithIcon({
           <button
             type="button"
             onClick={(e) => setCoverAnchor(e.currentTarget.getBoundingClientRect())}
-            className="text-sm"
+            className="text-xs"
             style={{
               background: "transparent",
               border: 0,
@@ -1000,10 +1000,10 @@ function RepoTopbar({
         </Hint>
       )}
       <GitBranch size={12} className="text-muted-foreground shrink-0" />
-      <span className="font-mono text-secondary-foreground truncate flex-1 min-w-0 text-sm">
+      <span className="font-mono text-secondary-foreground truncate flex-1 min-w-0 text-xs">
         {name}
       </span>
-      <span className="pill pill-bare text-2xs" style={{ height: 18, padding: "0 6px" }}>
+      <span className="pill pill-bare text-3xs" style={{ height: 18, padding: "0 6px" }}>
         REPO
       </span>
       <HintGroup>
@@ -1038,13 +1038,13 @@ function RepoEmpty({ path }: { path: string }) {
   };
   return (
     <div className="h-full flex flex-col items-center justify-center gap-3 text-muted-foreground">
-      <p className="text-sm">No README.md found</p>
+      <p className="text-xs">No README.md found</p>
       <div className="flex items-center gap-2">
         <button
           onClick={open}
           className={cn(
             "flex items-center gap-1 px-2 py-1 rounded border border-border",
-            "text-2xs text-secondary-foreground hover:bg-element-hover cursor-pointer",
+            "text-3xs text-secondary-foreground hover:bg-element-hover cursor-pointer",
           )}
         >
           <ExternalLink size={10} /> Open in new window
@@ -1053,7 +1053,7 @@ function RepoEmpty({ path }: { path: string }) {
           onClick={() => navigator.clipboard.writeText(path)}
           className={cn(
             "flex items-center gap-1 px-2 py-1 rounded border border-border",
-            "text-2xs text-secondary-foreground hover:bg-element-hover cursor-pointer",
+            "text-3xs text-secondary-foreground hover:bg-element-hover cursor-pointer",
           )}
         >
           <Copy size={10} /> Copy path

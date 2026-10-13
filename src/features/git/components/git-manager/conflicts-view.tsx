@@ -58,41 +58,41 @@ export function ConflictsView({ onOpenFile }: { onOpenFile: (path: string) => vo
   return (
     <div className="shrink-0 border-b border-border">
       <div className="flex items-center justify-between px-2 h-control-sm bg-sidebar border-b border-hairline">
-        <span className="text-2xs font-semibold text-muted-foreground uppercase tracking-wider">
+        <span className="text-3xs font-semibold text-muted-foreground uppercase tracking-wider">
           Conflicts ({state.files.length})
         </span>
-        <span className="text-3xs text-muted-foreground">resolve each file, then Continue</span>
+        <span className="text-4xs text-muted-foreground">resolve each file, then Continue</span>
       </div>
       {state.files.map((f) => (
         <div
           key={f.path}
-          className="group flex items-center gap-1.5 h-control-md px-2 text-xs hover:bg-element-hover"
+          className="group flex items-center gap-1.5 h-control-md px-2 text-2xs hover:bg-element-hover"
         >
-          <span className="shrink-0 w-3 text-center font-mono text-2xs font-semibold text-error">
+          <span className="shrink-0 w-3 text-center font-mono text-3xs font-semibold text-error">
             !
           </span>
           <span className="truncate flex-1 min-w-0 font-mono text-secondary-foreground">
             {f.path}
           </span>
           {f.markerCount > 0 ? (
-            <span className="shrink-0 text-3xs font-mono text-warning">
+            <span className="shrink-0 text-4xs font-mono text-warning">
               {f.markerCount} marker{f.markerCount === 1 ? "" : "s"}
             </span>
           ) : (
-            <span className="shrink-0 text-3xs font-mono text-muted-foreground">no markers</span>
+            <span className="shrink-0 text-4xs font-mono text-muted-foreground">no markers</span>
           )}
           <HintGroup>
             <div className="flex items-center gap-0.5 opacity-0 group-hover:opacity-100 focus-within:opacity-100 shrink-0">
               <button
                 onClick={() => void resolve(f.path, "ours")}
-                className="px-1.5 h-[16px] rounded border border-border text-3xs text-secondary-foreground hover:text-foreground hover:bg-element-hover"
+                className="px-1.5 h-[16px] rounded border border-border text-4xs text-secondary-foreground hover:text-foreground hover:bg-element-hover"
                 title="Keep your version"
               >
                 Ours
               </button>
               <button
                 onClick={() => void resolve(f.path, "theirs")}
-                className="px-1.5 h-[16px] rounded border border-border text-3xs text-secondary-foreground hover:text-foreground hover:bg-element-hover"
+                className="px-1.5 h-[16px] rounded border border-border text-4xs text-secondary-foreground hover:text-foreground hover:bg-element-hover"
                 title="Take their version"
               >
                 Theirs

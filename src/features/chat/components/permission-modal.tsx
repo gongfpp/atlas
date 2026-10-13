@@ -271,13 +271,13 @@ function PermissionModalImpl({ tabId, onSendMessage }: PermissionModalProps) {
             <div className="flex items-start gap-3 border-b border-border px-4 py-3">
               <ClipboardList className="mt-0.5 size-4 text-primary" />
               <div className="flex-1">
-                <Dialog.Title className="text-sm font-medium">Review plan</Dialog.Title>
-                <Dialog.Description className="mt-0.5 text-xs text-secondary-foreground">
+                <Dialog.Title className="text-xs font-medium">Review plan</Dialog.Title>
+                <Dialog.Description className="mt-0.5 text-2xs text-secondary-foreground">
                   The agent proposed a plan before continuing. Review it, then approve or reject.
                 </Dialog.Description>
               </div>
               {queueNote && (
-                <span className="shrink-0 rounded-sm bg-background px-2 py-0.5 text-xs text-secondary-foreground">
+                <span className="shrink-0 rounded-sm bg-background px-2 py-0.5 text-2xs text-secondary-foreground">
                   {queueNote}
                 </span>
               )}
@@ -297,13 +297,13 @@ function PermissionModalImpl({ tabId, onSendMessage }: PermissionModalProps) {
                       onClick={() => resolve(bypassOptionId, "bypassPermissions")}
                       className={cn(
                         "mt-2 flex w-full items-center gap-2 rounded-md border border-border px-2.5 py-2 text-left",
-                        "text-sm text-foreground transition-colors hover:bg-background",
+                        "text-xs text-foreground transition-colors hover:bg-background",
                       )}
                     >
                       <AlertTriangle className="size-3.5 shrink-0 text-error" />
                       <span className="flex-1">
                         Yes, and bypass permissions
-                        <span className="block text-xs text-secondary-foreground">
+                        <span className="block text-2xs text-secondary-foreground">
                           Approve the plan and stop asking for the rest of this session.
                         </span>
                       </span>
@@ -314,7 +314,7 @@ function PermissionModalImpl({ tabId, onSendMessage }: PermissionModalProps) {
                   <button
                     type="button"
                     onClick={cancel}
-                    className="inline-flex items-center gap-1.5 rounded-sm px-2.5 py-1 text-xs text-secondary-foreground hover:bg-background hover:text-foreground transition-colors"
+                    className="inline-flex items-center gap-1.5 rounded-sm px-2.5 py-1 text-2xs text-secondary-foreground hover:bg-background hover:text-foreground transition-colors"
                   >
                     Cancel <Kbd>esc</Kbd>
                   </button>
@@ -362,12 +362,12 @@ function PermissionModalImpl({ tabId, onSendMessage }: PermissionModalProps) {
             ) : outward ? (
               <OutwardActionHeading approval={outward} />
             ) : (
-              <div className="text-base font-medium leading-snug text-foreground">
+              <div className="type-reading font-medium leading-snug text-foreground">
                 The agent wants to run <span className="font-mono text-foreground">{title}</span>?
               </div>
             )}
             {queueNote && (
-              <div className="mt-0.5 text-xs text-secondary-foreground">{queueNote}</div>
+              <div className="mt-0.5 text-2xs text-secondary-foreground">{queueNote}</div>
             )}
           </div>
         </div>
@@ -393,7 +393,7 @@ function PermissionModalImpl({ tabId, onSendMessage }: PermissionModalProps) {
             }}
             rows={1}
             placeholder="Tell the agent what to do instead…"
-            className="w-full resize-none rounded-md border border-border bg-background px-2.5 py-1.5 text-sm text-foreground outline-none placeholder:text-muted-foreground focus:border-border-strong"
+            className="w-full resize-none rounded-md border border-border bg-background px-2.5 py-1.5 text-xs text-foreground outline-none placeholder:text-muted-foreground focus:border-border-strong"
           />
         </div>
       </div>
@@ -430,14 +430,14 @@ function PermissionOption({
       type="button"
       onClick={onSelect}
       className={cn(
-        "flex w-full min-w-0 items-center gap-2.5 rounded-md border px-2.5 py-2 text-left text-sm transition-colors outline-none",
+        "flex w-full min-w-0 items-center gap-2.5 rounded-md border px-2.5 py-2 text-left text-xs transition-colors outline-none",
         tone,
       )}
     >
       {index > 0 && (
         <span
           className={cn(
-            "flex h-4 w-4 shrink-0 items-center justify-center rounded text-2xs font-semibold",
+            "flex h-4 w-4 shrink-0 items-center justify-center rounded text-3xs font-semibold",
             isPrimary ? "bg-background/15 text-background" : "bg-card text-secondary-foreground",
           )}
         >
@@ -459,8 +459,8 @@ function PermissionOption({
 export function OutwardActionHeading({ approval }: { approval: OutwardApproval }) {
   return (
     <>
-      <div className="text-base font-medium leading-snug text-foreground">{approval.title}</div>
-      <div className="mt-0.5 text-xs text-secondary-foreground">{approval.recipient}</div>
+      <div className="type-reading font-medium leading-snug text-foreground">{approval.title}</div>
+      <div className="mt-0.5 text-2xs text-secondary-foreground">{approval.recipient}</div>
     </>
   );
 }
@@ -473,11 +473,11 @@ export function OutwardActionHeading({ approval }: { approval: OutwardApproval }
 export function OutwardPreparingHeading({ preparing }: { preparing: OutwardPreparing }) {
   return (
     <div role="status" aria-live="polite" data-testid="outward-preparing">
-      <div className="flex items-center gap-2 text-base font-medium leading-snug text-foreground">
+      <div className="flex items-center gap-2 type-reading font-medium leading-snug text-foreground">
         <Loader2 className="size-4 shrink-0 animate-spin text-secondary-foreground" aria-hidden />
         <span>{preparing.title}</span>
       </div>
-      <div className="mt-0.5 text-xs text-secondary-foreground">{preparing.note}</div>
+      <div className="mt-0.5 text-2xs text-secondary-foreground">{preparing.note}</div>
     </div>
   );
 }
@@ -491,7 +491,7 @@ export function OutwardActionBody({ approval }: { approval: OutwardApproval }) {
     <div className="mx-3 mt-2 rounded-md border border-border bg-background px-3 py-2">
       <div
         data-testid="outward-body"
-        className="max-h-64 overflow-auto whitespace-pre-wrap text-sm leading-snug text-foreground"
+        className="max-h-64 overflow-auto whitespace-pre-wrap text-xs leading-snug text-foreground"
       >
         {approval.body}
       </div>
@@ -506,7 +506,7 @@ function ToolCallPreview({ tc }: { tc: PendingPermission["toolCall"] }) {
   if (!formatted) return null;
   return (
     <div className="mx-3 mt-2 rounded-md border border-border bg-background px-3 py-2">
-      <pre className="max-h-32 overflow-auto whitespace-pre-wrap font-mono text-xs leading-snug text-secondary-foreground">
+      <pre className="max-h-32 overflow-auto whitespace-pre-wrap font-mono text-2xs leading-snug text-secondary-foreground">
         {formatted}
       </pre>
     </div>

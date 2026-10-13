@@ -115,7 +115,7 @@ export function CoverPicker({
       style={{ position: "fixed", left, top, width: PICKER_W, padding: 8 }}
       className="bg-popover border border-border-strong rounded-lg shadow-lg z-popover"
     >
-      <div className="eyebrow" style={{ padding: "4px 4px 6px" }}>
+      <div className="micro" style={{ padding: "4px 4px 6px" }}>
         Gradient
       </div>
       <div
@@ -154,7 +154,7 @@ export function CoverPicker({
       <button
         type="button"
         onClick={handleUpload}
-        className="text-sm"
+        className="text-xs"
         style={{
           width: "100%",
           height: 28,
@@ -184,7 +184,7 @@ export function CoverPicker({
             onPick(null);
             onClose();
           }}
-          className="text-xs"
+          className="text-2xs"
           style={{
             width: "100%",
             marginTop: 6,

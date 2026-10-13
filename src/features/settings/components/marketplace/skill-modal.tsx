@@ -45,9 +45,9 @@ export function SkillModalShell({
         >
           <div className="flex items-start gap-3 border-b border-border px-4 py-3">
             <div className="min-w-0 flex-1">
-              <Dialog.Title className="truncate text-sm font-semibold">{title}</Dialog.Title>
+              <Dialog.Title className="truncate text-xs font-semibold">{title}</Dialog.Title>
               {subtitle && (
-                <div className="mt-0.5 truncate font-mono text-xs text-muted-foreground">
+                <div className="mt-0.5 truncate font-mono text-2xs text-muted-foreground">
                   {subtitle}
                 </div>
               )}
@@ -85,24 +85,24 @@ export function SkillDescriptions({
 }) {
   if (skills.length === 0) {
     return (
-      <div className="text-sm text-muted-foreground">{fallback ?? "No description published."}</div>
+      <div className="text-xs text-muted-foreground">{fallback ?? "No description published."}</div>
     );
   }
   if (skills.length === 1) {
     const s = skills[0];
     return s.description ? (
-      <p className="text-base leading-relaxed text-secondary-foreground">{s.description}</p>
+      <p className="type-reading leading-relaxed text-secondary-foreground">{s.description}</p>
     ) : (
-      <div className="text-sm text-muted-foreground">{fallback ?? "No description published."}</div>
+      <div className="text-xs text-muted-foreground">{fallback ?? "No description published."}</div>
     );
   }
   return (
     <div className="flex flex-col gap-3.5">
       {skills.map((s) => (
         <div key={s.name}>
-          <div className="text-sm font-medium text-foreground">{s.name}</div>
+          <div className="text-xs font-medium text-foreground">{s.name}</div>
           {s.description && (
-            <div className="mt-0.5 text-sm leading-relaxed text-muted-foreground">
+            <div className="mt-0.5 text-xs leading-relaxed text-muted-foreground">
               {s.description}
             </div>
           )}
@@ -134,7 +134,7 @@ export function ModalAction({
       onClick={onClick}
       disabled={disabled || busy}
       className={cn(
-        "flex w-full items-center gap-2 rounded-md border px-2.5 py-2 text-sm font-medium transition-colors disabled:opacity-50",
+        "flex w-full items-center gap-2 rounded-md border px-2.5 py-2 text-xs font-medium transition-colors disabled:opacity-50",
         variant === "primary"
           ? "border-border text-foreground hover:bg-element-hover"
           : variant === "danger"

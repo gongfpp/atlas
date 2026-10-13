@@ -42,13 +42,13 @@ export function InsightsCard({ insights }: { insights: Insight[] }) {
             >
               {cur.stat}
             </div>
-            <p className="mt-2 text-sm leading-snug">
+            <p className="mt-2 text-xs leading-snug">
               <span className="text-foreground">{cur.lead}</span>{" "}
               <span className="text-muted-foreground">{cur.rest}</span>
             </p>
           </>
         ) : (
-          <p className="text-xs text-muted-foreground">
+          <p className="text-2xs text-muted-foreground">
             Not enough in this window to say anything yet.
           </p>
         )}

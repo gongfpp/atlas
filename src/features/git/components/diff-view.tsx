@@ -146,7 +146,7 @@ export function DiffView({
     <HintGroup>
       <div className="shrink-0 border-b border-border">
         <div className="flex items-center justify-between px-3 pt-2">
-          <span className="text-2xs font-mono text-muted-foreground">
+          <span className="text-3xs font-mono text-muted-foreground">
             {files.length} file{files.length !== 1 ? "s" : ""}{" "}
             <span className="text-success">+{totalAdd}</span>{" "}
             <span className="text-error">-{totalDel}</span>
@@ -182,7 +182,7 @@ export function DiffView({
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Filter files…"
-              className="flex-1 bg-transparent outline-none text-2xs text-foreground placeholder:text-muted-foreground min-w-0"
+              className="flex-1 bg-transparent outline-none text-3xs text-foreground placeholder:text-muted-foreground min-w-0"
             />
           </div>
           <HintItem label="Sort by most changes">
@@ -212,7 +212,7 @@ export function DiffView({
     <div className={cn("flex flex-col min-h-0 min-w-0", className)}>
       {header}
       {files.length === 0 ? (
-        <div className="px-3 py-8 text-center text-xs text-muted-foreground">{emptyLabel}</div>
+        <div className="px-3 py-8 text-center text-2xs text-muted-foreground">{emptyLabel}</div>
       ) : (
         <div
           ref={scrollRef}
@@ -251,7 +251,7 @@ export function DiffView({
                           !isCollapsed && "rotate-90",
                         )}
                       />
-                      <span className="text-xs text-secondary-foreground font-mono truncate flex-1 select-text">
+                      <span className="text-2xs text-secondary-foreground font-mono truncate flex-1 select-text">
                         {file.path}
                       </span>
                       {onOpenDiff && (
@@ -280,7 +280,7 @@ export function DiffView({
                           </button>
                         </HintItem>
                       )}
-                      <span className="text-3xs font-mono shrink-0">
+                      <span className="text-4xs font-mono shrink-0">
                         <span className="text-success">+{file.additions}</span>{" "}
                         <span className="text-error">-{file.deletions}</span>
                       </span>
@@ -300,7 +300,7 @@ export function DiffView({
                     data-index={vr.index}
                     ref={virtualizer.measureElement}
                     style={{ ...base, backgroundColor: "var(--atlas-diff-context-background)" }}
-                    className="group/hunk flex items-center gap-2 px-2 h-[22px] border-x border-border text-2xs font-mono text-muted-foreground"
+                    className="group/hunk flex items-center gap-2 px-2 h-[22px] border-x border-border text-3xs font-mono text-muted-foreground"
                   >
                     <span className="truncate flex-1 text-info/70 select-text">
                       {row.hunk.header}
@@ -318,7 +318,7 @@ export function DiffView({
                                 row.hunkIndex,
                               )
                             }
-                            className="px-1.5 h-[16px] rounded border border-border text-3xs text-secondary-foreground hover:text-foreground hover:bg-element-hover"
+                            className="px-1.5 h-[16px] rounded border border-border text-4xs text-secondary-foreground hover:text-foreground hover:bg-element-hover"
                           >
                             {label("Stage")}
                           </button>
@@ -334,7 +334,7 @@ export function DiffView({
                                 row.hunkIndex,
                               )
                             }
-                            className="px-1.5 h-[16px] rounded border border-border text-3xs text-secondary-foreground hover:text-foreground hover:bg-element-hover"
+                            className="px-1.5 h-[16px] rounded border border-border text-4xs text-secondary-foreground hover:text-foreground hover:bg-element-hover"
                           >
                             {label("Unstage")}
                           </button>
@@ -350,7 +350,7 @@ export function DiffView({
                                 row.hunkIndex,
                               )
                             }
-                            className="px-1.5 h-[16px] rounded border border-border text-3xs text-secondary-foreground hover:text-error hover:bg-element-hover"
+                            className="px-1.5 h-[16px] rounded border border-border text-4xs text-secondary-foreground hover:text-error hover:bg-element-hover"
                           >
                             {label("Discard")}
                           </button>
@@ -411,7 +411,7 @@ export function DiffView({
                           ? "var(--atlas-diff-removed-background)"
                           : "var(--atlas-diff-context-background)",
                   }}
-                  className="flex text-xs font-mono leading-[20px] select-text border-x border-border"
+                  className="flex text-2xs font-mono leading-[20px] select-text border-x border-border"
                 >
                   <span
                     className={cn(
@@ -420,10 +420,10 @@ export function DiffView({
                       line.type === "remove" && "bg-error",
                     )}
                   />
-                  <span className="w-[36px] shrink-0 text-right pr-2 text-2xs text-muted-foreground select-none">
+                  <span className="w-[36px] shrink-0 text-right pr-2 text-3xs text-muted-foreground select-none">
                     {line.oldLine ?? ""}
                   </span>
-                  <span className="w-[36px] shrink-0 text-right pr-2 text-2xs text-muted-foreground select-none">
+                  <span className="w-[36px] shrink-0 text-right pr-2 text-3xs text-muted-foreground select-none">
                     {line.newLine ?? ""}
                   </span>
                   <DiffCode
@@ -496,7 +496,7 @@ function LangFilterPopover({
             <button
               onClick={() => onSelect(null)}
               className={cn(
-                "w-full text-left px-3 h-control-md text-2xs hover:bg-element-hover cursor-default outline-none",
+                "w-full text-left px-3 h-control-md text-3xs hover:bg-element-hover cursor-default outline-none",
                 !active ? "text-primary" : "text-secondary-foreground",
               )}
             >
@@ -507,7 +507,7 @@ function LangFilterPopover({
                 key={lang}
                 onClick={() => onSelect(active === lang ? null : lang)}
                 className={cn(
-                  "w-full text-left px-3 h-control-md text-2xs hover:bg-element-hover cursor-default outline-none",
+                  "w-full text-left px-3 h-control-md text-3xs hover:bg-element-hover cursor-default outline-none",
                   active === lang ? "text-primary" : "text-secondary-foreground",
                 )}
               >
@@ -550,7 +550,7 @@ function FileListPopover({
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 placeholder="Search files…"
-                className="flex-1 bg-transparent outline-none text-2xs text-foreground placeholder:text-muted-foreground"
+                className="flex-1 bg-transparent outline-none text-3xs text-foreground placeholder:text-muted-foreground"
                 autoFocus
                 onKeyDown={(e) => {
                   // Keep keys from the popup's typeahead and arrow nav, but let Escape
@@ -564,7 +564,7 @@ function FileListPopover({
                 <button
                   key={file.path}
                   onClick={() => onOpen?.(file.path)}
-                  className="w-full flex items-center gap-2 px-3 h-control-md text-2xs text-secondary-foreground hover:bg-element-hover hover:text-foreground cursor-default outline-none font-mono"
+                  className="w-full flex items-center gap-2 px-3 h-control-md text-3xs text-secondary-foreground hover:bg-element-hover hover:text-foreground cursor-default outline-none font-mono"
                 >
                   <span className="truncate flex-1 text-left">{file.path}</span>
                   <span className="shrink-0">
@@ -574,7 +574,7 @@ function FileListPopover({
                 </button>
               ))}
               {filtered.length === 0 && (
-                <div className="px-3 py-2 text-2xs text-muted-foreground text-center">
+                <div className="px-3 py-2 text-3xs text-muted-foreground text-center">
                   No files found
                 </div>
               )}

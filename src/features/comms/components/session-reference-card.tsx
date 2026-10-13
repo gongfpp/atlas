@@ -75,8 +75,8 @@ export function SessionReferenceCard({ reference }: { reference: ChatSessionRefe
     >
       <Icon size={15} className="shrink-0 text-muted-foreground" />
       <span className="min-w-0 flex-1">
-        <span className="block truncate text-sm text-secondary-foreground">{title}</span>
-        <span className="block truncate text-2xs tabular-nums text-disabled">
+        <span className="block truncate text-xs text-secondary-foreground">{title}</span>
+        <span className="block truncate text-3xs tabular-nums text-disabled">
           {detailOf(reference)}
         </span>
       </span>

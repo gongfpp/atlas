@@ -192,11 +192,11 @@ export function FilePicker({ open, onOpenChange }: FilePickerProps) {
             onChange={(e) => setQuery(e.target.value)}
             placeholder={project ? "Search files by name or path…" : "Open a project first"}
             disabled={!project}
-            className="px-4 h-11 bg-transparent border-b border-border text-sm text-foreground placeholder:text-muted-foreground outline-none"
+            className="px-4 h-11 bg-transparent border-b border-border text-xs text-foreground placeholder:text-muted-foreground outline-none"
           />
           <div ref={scrollRef} className="max-h-[420px] overflow-y-auto hide-scrollbar">
             {showEmpty ? (
-              <div className="px-4 py-3 text-xs text-muted-foreground">
+              <div className="px-4 py-3 text-2xs text-muted-foreground">
                 {!project ? (
                   <>
                     Open a project to enable{" "}
@@ -244,14 +244,14 @@ export function FilePicker({ open, onOpenChange }: FilePickerProps) {
                       )}
                     >
                       <FileIcon path={m.path} size={12} fallback={kindIcon(classifyFile(m.path))} />
-                      <span className="truncate text-sm font-mono">{m.rel}</span>
+                      <span className="truncate text-xs font-mono">{m.rel}</span>
                     </button>
                   );
                 })}
               </div>
             )}
           </div>
-          <div className="flex items-center justify-between px-3 h-7 border-t border-border text-2xs text-muted-foreground font-mono">
+          <div className="flex items-center justify-between px-3 h-7 border-t border-border text-3xs text-muted-foreground font-mono">
             <div className="flex items-center gap-2">
               <button
                 onClick={handleReindex}

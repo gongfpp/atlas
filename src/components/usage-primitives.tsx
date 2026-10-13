@@ -46,8 +46,8 @@ export function useMounted(): boolean {
   return mounted;
 }
 
-export const CAPTION = "text-2xs font-medium uppercase tracking-wider text-muted-foreground";
-export const VALUE = "text-xs tabular-nums text-foreground";
+export const CAPTION = "text-3xs font-medium uppercase tracking-wider text-muted-foreground";
+export const VALUE = "text-2xs tabular-nums text-foreground";
 
 /** One staggered section card; `index` drives the `atlas-usage-in` delay. */
 export function Card({
@@ -85,7 +85,7 @@ export function StatusPill({ status, label }: { status: "ok" | "warn" | "full"; 
   return (
     <span
       className={cn(
-        "inline-flex h-4 items-center rounded-full border px-1.5 text-3xs font-medium uppercase tracking-wider",
+        "inline-flex h-4 items-center rounded-full border px-1.5 text-4xs font-medium uppercase tracking-wider",
         tone,
       )}
     >
@@ -120,7 +120,7 @@ export function Bar({
 /** The "est." chip beside any cost that came from the price map, not the provider. */
 export function EstTag() {
   return (
-    <span className="rounded-full border border-element-active px-1 text-3xs font-medium uppercase tracking-wider text-muted-foreground">
+    <span className="rounded-full border border-element-active px-1 text-4xs font-medium uppercase tracking-wider text-muted-foreground">
       est.
     </span>
   );

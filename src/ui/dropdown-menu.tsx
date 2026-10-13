@@ -98,7 +98,7 @@ function DropdownMenuLabel({
     <MenuPrimitive.GroupLabel
       data-slot="dropdown-menu-label"
       data-inset={inset ? "" : undefined}
-      className={cn("eyebrow px-2 py-1 text-muted-foreground", "data-[inset]:pl-7", className)}
+      className={cn("micro px-2 py-1 text-muted-foreground", "data-[inset]:pl-7", className)}
       {...props}
     />
   );
@@ -106,7 +106,7 @@ function DropdownMenuLabel({
 
 const ITEM = [
   "group/dropdown-menu-item relative flex items-center gap-2 rounded px-2 py-1",
-  "text-xs cursor-pointer select-none outline-none",
+  "text-2xs cursor-pointer select-none outline-none",
   "text-secondary-foreground",
   "focus:bg-element-hover focus:text-foreground",
   "data-[inset]:pl-6",
@@ -186,7 +186,7 @@ function DropdownMenuSubContent({
 
 const MARKED_ITEM = [
   "relative flex items-center gap-2 rounded py-1 pr-2 pl-7",
-  "text-xs cursor-pointer select-none outline-none",
+  "text-2xs cursor-pointer select-none outline-none",
   "text-secondary-foreground",
   "focus:bg-element-hover focus:text-foreground",
   "data-disabled:pointer-events-none data-disabled:opacity-50",
@@ -253,7 +253,7 @@ function DropdownMenuShortcut({ className, children, ...props }: React.Component
     <span
       data-slot="dropdown-menu-shortcut"
       className={cn(
-        "ml-auto inline-flex pl-3 text-3xs text-disabled",
+        "ml-auto inline-flex pl-3 text-4xs text-disabled",
         "group-focus/dropdown-menu-item:text-secondary-foreground",
         className,
       )}

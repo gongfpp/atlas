@@ -108,7 +108,7 @@ export const CommitRowView = memo(function CommitRowView({
             <span
               key={`${r.kind}:${r.name}`}
               className={cn(
-                "px-1 h-[14px] rounded-sm border text-3xs font-mono leading-none flex items-center shrink-0",
+                "px-1 h-[14px] rounded-sm border text-4xs font-mono leading-none flex items-center shrink-0",
                 badgeClass(r.kind, r.isCurrent),
               )}
               title={`${r.kind}: ${r.name}`}
@@ -116,7 +116,7 @@ export const CommitRowView = memo(function CommitRowView({
               {r.name}
             </span>
           ))}
-          <span className={cn("text-sm truncate", selected ? "text-foreground font-medium" : "")}>
+          <span className={cn("text-xs truncate", selected ? "text-foreground font-medium" : "")}>
             {row.message}
           </span>
         </div>
@@ -125,14 +125,14 @@ export const CommitRowView = memo(function CommitRowView({
             {/* Author column — fixed width, avatar + name, aligned across all rows */}
             <div className="flex items-center gap-1.5 w-[200px] shrink-0">
               <CommitAvatar email={row.email} repoPath={repoPath} size={16} />
-              <span className="text-xs text-secondary-foreground truncate">{row.author}</span>
+              <span className="text-2xs text-secondary-foreground truncate">{row.author}</span>
             </div>
             {/* Short sha column */}
-            <span className="text-xs font-mono text-muted-foreground shrink-0 w-[68px]">
+            <span className="text-2xs font-mono text-muted-foreground shrink-0 w-[68px]">
               {row.shortSha}
             </span>
             {/* Date column */}
-            <span className="text-xs font-mono text-muted-foreground shrink-0 w-[160px] text-right">
+            <span className="text-2xs font-mono text-muted-foreground shrink-0 w-[160px] text-right">
               {row.date}
             </span>
           </>

@@ -47,7 +47,7 @@ export const TextNode = memo(function TextNode({ id, data, selected }: NodeProps
         ref={ref}
         className={cn(
           "whitespace-pre-wrap break-words min-w-[40px] min-h-[1.25em] px-1 py-0.5 outline-none",
-          "text-lg leading-snug text-foreground caret-primary",
+          "text-md leading-snug text-foreground caret-primary",
           editing ? "nodrag cursor-text select-text" : "cursor-default select-none",
         )}
         contentEditable={editing}

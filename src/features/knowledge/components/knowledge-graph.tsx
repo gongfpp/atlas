@@ -152,7 +152,7 @@ export function KnowledgeGraph() {
 
   if (!currentProject) {
     return (
-      <div className="h-full flex items-center justify-center text-muted-foreground text-sm">
+      <div className="h-full flex items-center justify-center text-muted-foreground text-xs">
         Open a project first
       </div>
     );
@@ -169,7 +169,7 @@ export function KnowledgeGraph() {
       ) : graph.nodes.length === 0 ? (
         <EmptyState />
       ) : graph.nodes.length > NODE_CAP ? (
-        <div className="h-full w-full flex items-center justify-center text-muted-foreground text-sm">
+        <div className="h-full w-full flex items-center justify-center text-muted-foreground text-xs">
           Graph too large — {graph.nodes.length} nodes (cap {NODE_CAP}).
         </div>
       ) : size.width > 0 && size.height > 0 && layout !== undefined ? (
@@ -881,7 +881,7 @@ function buildScene(
 function LoadingState() {
   return (
     <div className="h-full w-full flex items-center justify-center text-muted-foreground">
-      <span className="text-xs">Building graph…</span>
+      <span className="text-2xs">Building graph…</span>
     </div>
   );
 }
@@ -889,9 +889,9 @@ function LoadingState() {
 function EmptyState() {
   return (
     <div className="h-full w-full flex flex-col items-center justify-center text-muted-foreground gap-2">
-      <div className="text-sm">No notes yet — create some and reference them with</div>
-      <div className="mono text-xs text-muted-foreground">[[note-id]]</div>
-      <div className="text-sm">to see them connect here.</div>
+      <div className="text-xs">No notes yet — create some and reference them with</div>
+      <div className="mono text-2xs text-muted-foreground">[[note-id]]</div>
+      <div className="text-xs">to see them connect here.</div>
     </div>
   );
 }

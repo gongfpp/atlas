@@ -36,7 +36,7 @@ export function GitOpOutput() {
     <div className="shrink-0 border-t border-border">
       <button
         onClick={() => setCollapsed((c) => !c)}
-        className="flex w-full items-center gap-1.5 px-2 h-[22px] text-2xs text-muted-foreground hover:text-secondary-foreground"
+        className="flex w-full items-center gap-1.5 px-2 h-[22px] text-3xs text-muted-foreground hover:text-secondary-foreground"
       >
         {collapsed ? <ChevronRight size={10} /> : <ChevronDown size={10} />}
         {activeOp.running ? (
@@ -66,7 +66,7 @@ export function GitOpOutput() {
             <div
               key={i}
               className={cn(
-                "font-mono text-2xs leading-[15px] whitespace-pre-wrap break-all",
+                "font-mono text-3xs leading-[15px] whitespace-pre-wrap break-all",
                 l.stream === "stderr" && failed ? "text-error" : "text-secondary-foreground",
               )}
             >

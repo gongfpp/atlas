@@ -147,7 +147,7 @@ export function KnowledgeSidebar({
           sidebars read as one consistent system. */}
       <HintGroup>
         <div className="flex items-center px-3 pt-3.5 pb-2 shrink-0">
-          <span className="text-2xs font-semibold text-muted-foreground uppercase tracking-wider truncate flex-1">
+          <span className="text-3xs font-semibold text-muted-foreground uppercase tracking-wider truncate flex-1">
             Knowledge
           </span>
           <HintItem label={treeExpandedCount > 0 ? "Collapse all" : "Expand all"}>
@@ -208,13 +208,13 @@ export function KnowledgeSidebar({
                 <DropdownMenu.Popup className="min-w-[180px] rounded-md border border-border bg-card py-1 shadow-md">
                   <DropdownMenu.Item
                     onClick={onImportFiles}
-                    className="flex items-center gap-2 px-2.5 h-control-md text-xs text-secondary-foreground hover:bg-element-hover hover:text-foreground cursor-pointer outline-none"
+                    className="flex items-center gap-2 px-2.5 h-control-md text-2xs text-secondary-foreground hover:bg-element-hover hover:text-foreground cursor-pointer outline-none"
                   >
                     <FileText size={13} /> Import .md files…
                   </DropdownMenu.Item>
                   <DropdownMenu.Item
                     onClick={onImportFolder}
-                    className="flex items-center gap-2 px-2.5 h-control-md text-xs text-secondary-foreground hover:bg-element-hover hover:text-foreground cursor-pointer outline-none"
+                    className="flex items-center gap-2 px-2.5 h-control-md text-2xs text-secondary-foreground hover:bg-element-hover hover:text-foreground cursor-pointer outline-none"
                   >
                     <Folder size={13} /> Import folder…
                   </DropdownMenu.Item>
@@ -242,7 +242,7 @@ export function KnowledgeSidebar({
               if (!folderInputValue.trim()) onFolderInputCancel?.();
             }}
             placeholder="Folder name…"
-            className="w-full bg-panel-input border border-border rounded text-xs text-foreground placeholder:text-muted-foreground outline-none focus:border-border-strong transition-colors"
+            className="w-full bg-panel-input border border-border rounded text-2xs text-foreground placeholder:text-muted-foreground outline-none focus:border-border-strong transition-colors"
             style={{ height: 26, padding: "0 8px" }}
           />
         </div>
@@ -265,7 +265,7 @@ export function KnowledgeSidebar({
             <div className="group flex items-center gap-1 px-2 pt-3 pb-1">
               <button
                 onClick={() => setRecentsCollapsed((v) => !v)}
-                className="flex items-center gap-1 text-2xs font-semibold text-muted-foreground uppercase tracking-wider hover:text-secondary-foreground transition-colors"
+                className="flex items-center gap-1 text-3xs font-semibold text-muted-foreground uppercase tracking-wider hover:text-secondary-foreground transition-colors"
                 title={recentsCollapsed ? "Expand" : "Collapse"}
               >
                 {recentsCollapsed ? (
@@ -291,7 +291,7 @@ export function KnowledgeSidebar({
                   <button
                     key={r.id}
                     onClick={() => onSelectEntry(r.id)}
-                    className="flex items-center gap-1.5 w-full px-2 py-1 rounded-md text-left text-muted-foreground hover:bg-element-hover hover:text-secondary-foreground transition-colors text-sm"
+                    className="flex items-center gap-1.5 w-full px-2 py-1 rounded-md text-left text-muted-foreground hover:bg-element-hover hover:text-secondary-foreground transition-colors text-xs"
                   >
                     <span className="truncate flex-1">{r.title}</span>
                   </button>
@@ -305,7 +305,7 @@ export function KnowledgeSidebar({
       {/* Repositories — bottom section */}
       {clonedRepos.length > 0 && (
         <div className="border-t border-hairline shrink-0 py-2.5 px-1.5">
-          <div className="px-2 pb-1.5 text-2xs font-semibold text-muted-foreground uppercase tracking-wider">
+          <div className="px-2 pb-1.5 text-3xs font-semibold text-muted-foreground uppercase tracking-wider">
             Repositories
           </div>
           <div className="flex flex-col gap-px max-h-[208px] overflow-y-auto hide-scrollbar">
@@ -324,7 +324,7 @@ export function KnowledgeSidebar({
                     }
                   }}
                   className={cn(
-                    "group flex items-center gap-1.5 px-2 rounded-md cursor-pointer select-none transition-colors text-sm",
+                    "group flex items-center gap-1.5 px-2 rounded-md cursor-pointer select-none transition-colors text-xs",
                     isActive
                       ? "text-foreground"
                       : "text-muted-foreground hover:bg-element-hover hover:text-secondary-foreground",

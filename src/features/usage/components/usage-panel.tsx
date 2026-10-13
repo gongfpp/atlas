@@ -110,14 +110,14 @@ export function UsagePanel() {
           onScroll={onScroll}
         >
           {!data && loading && (
-            <div className="p-6 text-sm text-muted-foreground">Reading usage…</div>
+            <div className="p-6 text-xs text-muted-foreground">Reading usage…</div>
           )}
-          {error && <div className="p-6 text-sm text-error">Failed to load: {error}</div>}
+          {error && <div className="p-6 text-xs text-error">Failed to load: {error}</div>}
           {data && view.all.length === 0 && !loading && (
             <div className="p-4">
               <Card index={0} section="empty">
-                <div className="text-xs font-medium text-foreground">Nothing yet</div>
-                <div className="mt-0.5 text-2xs leading-snug text-muted-foreground">
+                <div className="text-2xs font-medium text-foreground">Nothing yet</div>
+                <div className="mt-0.5 text-3xs leading-snug text-muted-foreground">
                   Usage appears after the first agent turn in one of this organization's projects.
                 </div>
               </Card>

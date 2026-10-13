@@ -103,7 +103,7 @@ export function SessionChatMessage({
   if (message.role === "user") {
     return (
       <div className="flex justify-end px-3 py-1.5">
-        <div className="max-w-[85%] whitespace-pre-wrap break-words rounded-2xl rounded-br-md bg-card px-3.5 py-2 text-base leading-[1.55] text-foreground">
+        <div className="max-w-[85%] whitespace-pre-wrap break-words rounded-2xl rounded-br-md bg-card px-3.5 py-2 type-reading leading-[1.55] text-foreground">
           {message.content}
         </div>
       </div>
@@ -152,7 +152,7 @@ function Assistant({
           >
             <CachedMarkdown
               source={part.body}
-              className="text-base leading-[1.6] text-secondary-foreground"
+              className="type-reading leading-[1.6] text-secondary-foreground"
             />
           </div>
         ),
@@ -169,7 +169,7 @@ function Assistant({
 function Marker({ children }: { children: React.ReactNode }) {
   return (
     <div role="status" className="flex justify-center px-3 py-2">
-      <span className="text-sm text-muted-foreground">{children}</span>
+      <span className="text-xs text-muted-foreground">{children}</span>
     </div>
   );
 }
@@ -192,7 +192,7 @@ function Sources({ sources }: { sources: SourceRef[] }) {
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
-        className="flex cursor-pointer items-center gap-1 text-xs text-disabled transition-colors hover:text-secondary-foreground"
+        className="flex cursor-pointer items-center gap-1 text-2xs text-disabled transition-colors hover:text-secondary-foreground"
       >
         <ChevronDown size={11} className={cn("transition-transform", open && "rotate-180")} />
         Grounded in {sources.length} {sources.length === 1 ? "source" : "sources"}
@@ -210,7 +210,7 @@ function Sources({ sources }: { sources: SourceRef[] }) {
                 onClick={() => jumpToSource(source)}
                 disabled={!jumpable}
                 className={cn(
-                  "flex h-[22px] max-w-full items-center gap-1.5 rounded-full border border-border bg-card px-2 text-xs transition-colors",
+                  "flex h-[22px] max-w-full items-center gap-1.5 rounded-full border border-border bg-card px-2 text-2xs transition-colors",
                   jumpable
                     ? "cursor-pointer text-muted-foreground hover:border-border-strong hover:text-foreground"
                     : "cursor-default text-disabled",

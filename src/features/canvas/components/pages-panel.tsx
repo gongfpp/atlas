@@ -35,7 +35,7 @@ export function PagesPanel({ width = 240 }: { width?: number }) {
       <div
         key={entry.id}
         className={cn(
-          "group/row flex h-control-md items-center gap-1.5 rounded px-1.5 text-xs cursor-pointer",
+          "group/row flex h-control-md items-center gap-1.5 rounded px-1.5 text-2xs cursor-pointer",
           active
             ? "bg-element-selected text-foreground"
             : "text-secondary-foreground hover:bg-element-hover",
@@ -52,7 +52,7 @@ export function PagesPanel({ width = 240 }: { width?: number }) {
             }}
             className="flex h-4 w-4 shrink-0 items-center justify-center rounded hover:bg-element-hover"
           >
-            <span className="text-xs leading-none">{entry.icon || DEFAULT_PAGE_ICON}</span>
+            <span className="text-2xs leading-none">{entry.icon || DEFAULT_PAGE_ICON}</span>
           </button>
         </Hint>
 
@@ -71,7 +71,7 @@ export function PagesPanel({ width = 240 }: { width?: number }) {
               if (e.key === "Enter") (e.currentTarget as HTMLInputElement).blur();
               else if (e.key === "Escape") setEditingId(null);
             }}
-            className="min-w-0 flex-1 rounded bg-panel-input px-1 text-xs text-foreground outline-none"
+            className="min-w-0 flex-1 rounded bg-panel-input px-1 text-2xs text-foreground outline-none"
           />
         ) : (
           <span
@@ -105,7 +105,7 @@ export function PagesPanel({ width = 240 }: { width?: number }) {
   return (
     <div className="flex h-full shrink-0 flex-col border-r border-border bg-card" style={{ width }}>
       <div className="flex h-8 shrink-0 items-center gap-1 px-2 pl-3">
-        <span className="flex-1 text-2xs font-semibold uppercase leading-none tracking-wider text-muted-foreground">
+        <span className="flex-1 text-3xs font-semibold uppercase leading-none tracking-wider text-muted-foreground">
           Pages
         </span>
         <Hint label="New page">

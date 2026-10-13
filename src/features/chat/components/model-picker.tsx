@@ -90,7 +90,7 @@ function GroupMark({
     return (
       <AgentMark
         agentType={agentType as AgentType}
-        className={small ? "!h-3 !w-3 !rounded-sm !text-3xs" : "!h-4 !w-4 !rounded"}
+        className={small ? "!h-3 !w-3 !rounded-sm !text-4xs" : "!h-4 !w-4 !rounded"}
       />
     );
   }
@@ -479,7 +479,7 @@ export function ModelPicker({
             aria-expanded={entries.length > 0}
             aria-controls={listId}
             aria-activedescendant={active}
-            className="min-w-0 flex-1 bg-transparent text-xs text-foreground outline-none placeholder:text-muted-foreground"
+            className="min-w-0 flex-1 bg-transparent text-2xs text-foreground outline-none placeholder:text-muted-foreground"
           />
           {toolbar}
         </div>
@@ -727,7 +727,7 @@ function ProviderRail({
 
 function Empty({ children, note }: { children: ReactNode; note?: string }) {
   return (
-    <div className="px-2 py-2 text-xs text-muted-foreground">
+    <div className="px-2 py-2 text-2xs text-muted-foreground">
       {children}
       {note && <span className="mt-0.5 block caption">{note}</span>}
     </div>

@@ -93,10 +93,10 @@ export function KnowledgeFinder({
             onKeyDown={onKeyDown}
             placeholder="Find notes by title…"
             spellCheck={false}
-            className="min-w-0 flex-1 bg-transparent text-base text-foreground outline-none placeholder:text-muted-foreground"
+            className="min-w-0 flex-1 bg-transparent type-reading text-foreground outline-none placeholder:text-muted-foreground"
           />
           {q && (
-            <span className="shrink-0 text-2xs tabular-nums text-muted-foreground">
+            <span className="shrink-0 text-3xs tabular-nums text-muted-foreground">
               {results.length}
               {results.length >= MAX_RESULTS ? "+" : ""}
             </span>
@@ -113,7 +113,7 @@ export function KnowledgeFinder({
         {q.trim() && (
           <div className="max-h-[340px] overflow-y-auto hide-scrollbar py-1">
             {results.length === 0 ? (
-              <div className="px-3 py-3 text-sm text-muted-foreground">No matches</div>
+              <div className="px-3 py-3 text-xs text-muted-foreground">No matches</div>
             ) : (
               results.map((r, i) => (
                 <button
@@ -125,8 +125,8 @@ export function KnowledgeFinder({
                     i === active ? "bg-element-hover" : "hover:bg-element-hover/60",
                   )}
                 >
-                  <span className="shrink-0 text-base leading-none">{r.icon}</span>
-                  <span className="truncate text-sm font-medium text-foreground">{r.title}</span>
+                  <span className="shrink-0 type-reading leading-none">{r.icon}</span>
+                  <span className="truncate text-xs font-medium text-foreground">{r.title}</span>
                 </button>
               ))
             )}

@@ -41,17 +41,17 @@ export function GitErrorDialog({ onForcePush }: { onForcePush?: () => void }) {
           {payload && (
             <>
               <div className="px-4 pt-3.5 pb-3 border-b border-border">
-                <Dialog.Title className="text-base font-semibold text-foreground flex items-center gap-1.5">
+                <Dialog.Title className="type-reading font-semibold text-foreground flex items-center gap-1.5">
                   <AlertTriangle size={13} className="text-error shrink-0" />
                   {gitErrorTitle(payload)}
                 </Dialog.Title>
-                <Dialog.Description className="text-xs text-secondary-foreground mt-1.5">
+                <Dialog.Description className="text-2xs text-secondary-foreground mt-1.5">
                   {payload.message}
                 </Dialog.Description>
                 {payload.files && payload.files.length > 0 && (
                   <div className="mt-2 max-h-[96px] overflow-y-auto hide-scrollbar">
                     {payload.files.map((f) => (
-                      <div key={f} className="font-mono text-2xs text-muted-foreground truncate">
+                      <div key={f} className="font-mono text-3xs text-muted-foreground truncate">
                         {f}
                       </div>
                     ))}
@@ -61,7 +61,7 @@ export function GitErrorDialog({ onForcePush }: { onForcePush?: () => void }) {
 
               {payload.rawStderr && (
                 <div className="max-h-[180px] overflow-y-auto hide-scrollbar bg-background px-3 py-2">
-                  <pre className="font-mono text-2xs leading-[15px] text-secondary-foreground whitespace-pre-wrap break-all">
+                  <pre className="font-mono text-3xs leading-[15px] text-secondary-foreground whitespace-pre-wrap break-all">
                     {payload.rawStderr}
                   </pre>
                 </div>
@@ -70,7 +70,7 @@ export function GitErrorDialog({ onForcePush }: { onForcePush?: () => void }) {
               <div className="border-t border-border px-3 py-2.5 flex items-center justify-between gap-2">
                 <div className="min-w-0 flex items-center gap-2">
                   {payload.command && (
-                    <span className="truncate font-mono text-2xs text-muted-foreground">
+                    <span className="truncate font-mono text-3xs text-muted-foreground">
                       {payload.command}
                     </span>
                   )}
@@ -79,7 +79,7 @@ export function GitErrorDialog({ onForcePush }: { onForcePush?: () => void }) {
                   {payload.rawStderr && (
                     <button
                       onClick={() => onCopy(payload.rawStderr)}
-                      className="flex items-center gap-1 px-2 h-7 rounded text-xs text-secondary-foreground hover:bg-element-hover transition-colors"
+                      className="flex items-center gap-1 px-2 h-7 rounded text-2xs text-secondary-foreground hover:bg-element-hover transition-colors"
                       title="Copy git output"
                     >
                       <CopyGlyph copied={copied} size="sm" />
@@ -89,7 +89,7 @@ export function GitErrorDialog({ onForcePush }: { onForcePush?: () => void }) {
                   {canForcePush && (
                     <button
                       onClick={() => actions.dismissErrorDialog()}
-                      className="px-3 h-7 rounded text-xs text-secondary-foreground hover:bg-element-hover transition-colors"
+                      className="px-3 h-7 rounded text-2xs text-secondary-foreground hover:bg-element-hover transition-colors"
                     >
                       Cancel
                     </button>
@@ -103,7 +103,7 @@ export function GitErrorDialog({ onForcePush }: { onForcePush?: () => void }) {
                     // IS white in this theme, so a white label on it renders an
                     // empty button. Every other filled accent button in the app
                     // pairs the fill with the inverse token for this reason.
-                    className="px-3 h-7 rounded text-xs font-medium text-primary-foreground bg-primary hover:opacity-90 transition-colors"
+                    className="px-3 h-7 rounded text-2xs font-medium text-primary-foreground bg-primary hover:opacity-90 transition-colors"
                   >
                     {canForcePush ? "Force push" : "Dismiss"}
                   </button>

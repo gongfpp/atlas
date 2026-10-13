@@ -591,7 +591,7 @@ export function SessionDetail({
                   comments={comments}
                 />
                 {renderCount < groups.length && (
-                  <p className="py-6 text-center font-mono text-xs text-muted-foreground">
+                  <p className="py-6 text-center font-mono text-2xs text-muted-foreground">
                     {groups.length - renderCount} more…
                   </p>
                 )}
@@ -649,11 +649,11 @@ export function SessionDetail({
                 placeholder="Search this session…"
                 spellCheck={false}
                 aria-label="Search this session"
-                className="min-w-0 flex-1 border-0 bg-transparent p-0 text-base text-foreground outline-none placeholder:text-muted-foreground"
+                className="min-w-0 flex-1 border-0 bg-transparent p-0 type-reading text-foreground outline-none placeholder:text-muted-foreground"
               />
               {search && (
                 <>
-                  <span className="shrink-0 font-mono text-xs text-disabled">{groups.length}</span>
+                  <span className="shrink-0 font-mono text-2xs text-disabled">{groups.length}</span>
                   <Hint label="Clear search">
                     <button
                       type="button"
@@ -820,12 +820,12 @@ function Masthead({ detail, comments }: { detail: Detail; comments: RowComments 
             {branch}
           </Chip>
         )}
-        <span className="font-mono text-xs text-muted-foreground">
+        <span className="font-mono text-2xs text-muted-foreground">
           {timeAgo(s.lastActivityAt, { suffix: true })} · {formatDuration(s.activeSeconds)}
         </span>
         {s.needsAttention && (
           <span
-            className="flex h-[22px] items-center gap-1.5 rounded-full border border-warning/25 bg-warning-muted px-2.5 font-mono text-xs text-warning"
+            className="flex h-[22px] items-center gap-1.5 rounded-full border border-warning/25 bg-warning-muted px-2.5 font-mono text-2xs text-warning"
             title={s.attentionReason ?? undefined}
           >
             <TriangleAlert size={11} />
@@ -870,7 +870,7 @@ function Masthead({ detail, comments }: { detail: Detail; comments: RowComments 
 function Cell({ label, children }: { label: string; children: ReactNode }) {
   return (
     <div className="min-w-0 bg-card px-3.5 py-3">
-      <p className="text-2xs font-semibold uppercase tracking-[0.08em] text-muted-foreground">
+      <p className="text-3xs font-semibold uppercase tracking-[0.08em] text-muted-foreground">
         {label}
       </p>
       {children}
@@ -898,13 +898,13 @@ function Metric({
     <Cell label={label}>
       <p
         className={cn(
-          "mt-1.5 truncate font-mono text-lg font-medium tracking-[-0.02em]",
+          "mt-1.5 truncate font-mono text-md font-medium tracking-[-0.02em]",
           absent ? "text-disabled" : "text-foreground",
         )}
       >
         {value}
       </p>
-      <p className="mt-0.5 truncate font-mono text-2xs text-disabled">{sub}</p>
+      <p className="mt-0.5 truncate font-mono text-3xs text-disabled">{sub}</p>
     </Cell>
   );
 }
@@ -935,7 +935,7 @@ function TokenMix({ spend, total }: { spend: TokenSpend; total: number }) {
     return (
       <Cell label="Token mix">
         <div className="mt-3.5 h-1.5 w-full rounded-full bg-element-hover" />
-        <p className="mt-2.5 truncate font-mono text-2xs text-disabled">not reported</p>
+        <p className="mt-2.5 truncate font-mono text-3xs text-disabled">not reported</p>
       </Cell>
     );
   }
@@ -979,7 +979,7 @@ function TokenMix({ spend, total }: { spend: TokenSpend; total: number }) {
           />
         ))}
       </div>
-      <p className="mt-2.5 truncate font-mono text-2xs text-disabled" title={exact}>
+      <p className="mt-2.5 truncate font-mono text-3xs text-disabled" title={exact}>
         {caption}
       </p>
     </Cell>
@@ -1006,7 +1006,7 @@ function costLabel(cost: number): string {
 
 function Chip({ children }: { children: ReactNode }) {
   return (
-    <span className="flex h-[22px] items-center gap-1.5 rounded-full border border-border bg-card px-2.5 font-mono text-xs text-muted-foreground">
+    <span className="flex h-[22px] items-center gap-1.5 rounded-full border border-border bg-card px-2.5 font-mono text-2xs text-muted-foreground">
       {children}
     </span>
   );
@@ -1019,7 +1019,7 @@ function Chip({ children }: { children: ReactNode }) {
  */
 function LiveChip() {
   return (
-    <span className="flex h-[22px] items-center gap-1.5 rounded-full border border-success/25 bg-success-muted px-2.5 font-mono text-xs text-success">
+    <span className="flex h-[22px] items-center gap-1.5 rounded-full border border-success/25 bg-success-muted px-2.5 font-mono text-2xs text-success">
       <span
         aria-hidden
         className="atlas-live-pulse size-1.5 rounded-full bg-success"
@@ -1229,7 +1229,7 @@ const Row = memo(function Row({
         <div className="flex items-baseline gap-2">
           <span
             className={cn(
-              "text-base font-medium",
+              "type-reading font-medium",
               group.kind === "checkpoint"
                 ? "text-success"
                 : group.kind === "prompt"
@@ -1240,9 +1240,9 @@ const Row = memo(function Row({
             {kindLabel(group)}
           </span>
           <span className="text-border-strong">·</span>
-          <span className="font-mono text-xs text-muted-foreground">{time(head.at)}</span>
+          <span className="font-mono text-2xs text-muted-foreground">{time(head.at)}</span>
           {group.kind === "tool_call" && group.entries.length > 1 && (
-            <span className="font-mono text-xs text-disabled">{group.entries.length} calls</span>
+            <span className="font-mono text-2xs text-disabled">{group.entries.length} calls</span>
           )}
           {group.kind === "tool_call" && <CallStat calls={group.entries} />}
 
@@ -1298,7 +1298,7 @@ const Row = memo(function Row({
           <Prompt entry={head} projectPath={projectPath} />
         ) : (
           <Clamp>
-            <div className="mt-1.5 text-base leading-[1.65] text-secondary-foreground">
+            <div className="mt-1.5 type-reading leading-[1.65] text-secondary-foreground">
               <Body entry={head} projectPath={projectPath} markdown={group.kind === "response"} />
             </div>
           </Clamp>
@@ -1345,7 +1345,7 @@ const ActivityLog = memo(function ActivityLog({
             ) : (
               <span className="size-[14px] shrink-0 rounded-full bg-element-selected" />
             )}
-            <span className="min-w-0 truncate text-xs text-muted-foreground">
+            <span className="min-w-0 truncate text-2xs text-muted-foreground">
               <span className="text-secondary-foreground">{line.actorName}</span>{" "}
               {!line.isReply
                 ? "commented on this"
@@ -1513,7 +1513,7 @@ function Calls({
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className="mt-1.5 flex cursor-pointer items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
+        className="mt-1.5 flex cursor-pointer items-center gap-1.5 text-xs text-muted-foreground transition-colors hover:text-foreground"
       >
         Show tool calls
         <ChevronRight size={12} />
@@ -1523,7 +1523,7 @@ function Calls({
             aria-label={`${inside} ${inside === 1 ? "comment" : "comments"} on these tool calls`}
           >
             <MessageSquare size={11} />
-            <span className="text-2xs tabular-nums">{inside > 9 ? "9+" : inside}</span>
+            <span className="text-3xs tabular-nums">{inside > 9 ? "9+" : inside}</span>
           </span>
         )}
       </button>
@@ -1542,7 +1542,7 @@ function Calls({
       <button
         type="button"
         onClick={() => setOpen(false)}
-        className="mt-1.5 flex cursor-pointer items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-foreground"
+        className="mt-1.5 flex cursor-pointer items-center gap-1 text-xs text-muted-foreground transition-colors hover:text-foreground"
       >
         Hide tool calls
         <ChevronDown size={12} className="rotate-180" />
@@ -1566,13 +1566,13 @@ function CallStat({ calls }: { calls: TimelineEntry[] }) {
   return (
     <>
       {stat.parts.length > 0 && (
-        <span className="truncate font-mono text-xs text-disabled">{stat.parts.join(" · ")}</span>
+        <span className="truncate font-mono text-2xs text-disabled">{stat.parts.join(" · ")}</span>
       )}
       {stat.added > 0 && (
-        <span className="font-mono text-xs text-diff-added-foreground">+{stat.added}</span>
+        <span className="font-mono text-2xs text-diff-added-foreground">+{stat.added}</span>
       )}
       {stat.removed > 0 && (
-        <span className="font-mono text-xs text-diff-removed-foreground">−{stat.removed}</span>
+        <span className="font-mono text-2xs text-diff-removed-foreground">−{stat.removed}</span>
       )}
     </>
   );
@@ -1691,7 +1691,7 @@ function CallTable({
 
   if (calls.length === 0) {
     return (
-      <p className="py-10 text-center text-sm text-muted-foreground">
+      <p className="py-10 text-center text-xs text-muted-foreground">
         No tool calls match the current filters.
       </p>
     );
@@ -1720,7 +1720,7 @@ function CallTable({
         <button
           type="button"
           onClick={() => setShown((cur) => cur + CALL_WINDOW_GROW)}
-          className="flex h-9 w-full cursor-pointer items-center justify-center bg-card font-mono text-xs text-muted-foreground transition-colors hover:bg-element-hover hover:text-foreground"
+          className="flex h-9 w-full cursor-pointer items-center justify-center bg-card font-mono text-2xs text-muted-foreground transition-colors hover:bg-element-hover hover:text-foreground"
         >
           Show {Math.min(CALL_WINDOW_GROW, hidden)} more of {hidden}…
         </button>
@@ -1780,7 +1780,7 @@ const CallRow = memo(function CallRow({
         )}
       >
         {!dense && (
-          <span className="shrink-0 font-mono text-xs text-disabled">{time(call.at)}</span>
+          <span className="shrink-0 font-mono text-2xs text-disabled">{time(call.at)}</span>
         )}
         <button
           type="button"
@@ -1795,7 +1795,7 @@ const CallRow = memo(function CallRow({
               command truncates as a line rather than as a separate column. */}
           <span
             className={cn(
-              "min-w-0 truncate text-sm",
+              "min-w-0 truncate text-xs",
               failed ? "text-error" : "text-secondary-foreground",
             )}
           >
@@ -1842,7 +1842,7 @@ const CallRow = memo(function CallRow({
       {expanded && (
         <div className="space-y-2.5 border-b border-hairline bg-background px-3 py-3">
           {call.paths.length > 0 && (
-            <p className="font-mono text-xs text-muted-foreground">{call.paths.join("  ·  ")}</p>
+            <p className="font-mono text-2xs text-muted-foreground">{call.paths.join("  ·  ")}</p>
           )}
           {call.arguments && (
             <Pre
@@ -1856,7 +1856,7 @@ const CallRow = memo(function CallRow({
             />
           )}
           {call.resultBinary ? (
-            <p className="font-mono text-xs text-muted-foreground">
+            <p className="font-mono text-2xs text-muted-foreground">
               The result is binary and is not shown.
             </p>
           ) : (
@@ -1873,7 +1873,7 @@ const CallRow = memo(function CallRow({
             )
           )}
           {!call.arguments && !call.result && !call.resultBinary && (
-            <p className="font-mono text-xs text-disabled">
+            <p className="font-mono text-2xs text-disabled">
               Nothing else was recorded for this call.
             </p>
           )}
@@ -1904,12 +1904,12 @@ function Checkpoint({ entry }: { entry: TimelineEntry }) {
     >
       <div className="flex items-center gap-2.5 border-b border-hairline bg-card px-3 py-2">
         <GitCommitHorizontal size={13} className="shrink-0 text-muted-foreground" />
-        <span className="shrink-0 font-mono text-xs text-muted-foreground">
+        <span className="shrink-0 font-mono text-2xs text-muted-foreground">
           {entry.commitSha?.slice(0, 7)}
         </span>
         <span
           className={cn(
-            "min-w-0 flex-1 truncate text-sm",
+            "min-w-0 flex-1 truncate text-xs",
             orphaned ? "text-secondary-foreground" : "text-foreground",
           )}
         >
@@ -1928,19 +1928,19 @@ function Checkpoint({ entry }: { entry: TimelineEntry }) {
          *  whole subsystem exists to avoid. */}
         {orphaned && (
           <span
-            className="shrink-0 rounded-full bg-warning-muted px-2 py-px font-mono text-2xs text-warning"
+            className="shrink-0 rounded-full bg-warning-muted px-2 py-px font-mono text-3xs text-warning"
             title="This commit is no longer in history — rewritten or squashed. The Session record is kept."
           >
             orphaned
           </span>
         )}
         {entry.insertions > 0 && (
-          <span className="shrink-0 font-mono text-xs text-diff-added-foreground">
+          <span className="shrink-0 font-mono text-2xs text-diff-added-foreground">
             +{entry.insertions}
           </span>
         )}
         {entry.deletions > 0 && (
-          <span className="shrink-0 font-mono text-xs text-diff-removed-foreground">
+          <span className="shrink-0 font-mono text-2xs text-diff-removed-foreground">
             −{entry.deletions}
           </span>
         )}
@@ -1951,13 +1951,13 @@ function Checkpoint({ entry }: { entry: TimelineEntry }) {
           {entry.files.slice(0, 12).map((file) => (
             <li
               key={file}
-              className="truncate font-mono text-xs leading-[1.75] text-muted-foreground"
+              className="truncate font-mono text-2xs leading-[1.75] text-muted-foreground"
             >
               {file}
             </li>
           ))}
           {entry.files.length > 12 && (
-            <li className="font-mono text-xs leading-[1.75] text-disabled">
+            <li className="font-mono text-2xs leading-[1.75] text-disabled">
               +{entry.files.length - 12} more
             </li>
           )}
@@ -1967,7 +1967,7 @@ function Checkpoint({ entry }: { entry: TimelineEntry }) {
       {/* Suppressed when orphaned: the branch no longer contains this commit,
        *  so showing it would assert exactly the link that was lost. */}
       {entry.branch && !orphaned && (
-        <p className="border-t border-hairline px-3 py-1.5 font-mono text-xs text-disabled">
+        <p className="border-t border-hairline px-3 py-1.5 font-mono text-2xs text-disabled">
           {entry.branch}
         </p>
       )}
@@ -2072,7 +2072,7 @@ function FilterDrawer({
         <div className="hide-scrollbar flex min-h-0 flex-1 flex-col gap-5 overflow-y-auto px-4 pb-8 pt-4">
           {activeFilters > 0 && (
             <div className="flex items-center gap-2 pr-8">
-              <span className="font-mono text-2xs text-muted-foreground">
+              <span className="font-mono text-3xs text-muted-foreground">
                 {activeFilters} active
               </span>
               <button
@@ -2082,7 +2082,7 @@ function FilterDrawer({
                   setFailedOnly(false);
                   setTools(() => new Set());
                 }}
-                className="h-[22px] cursor-pointer rounded-full border border-border bg-card px-2.5 font-mono text-2xs uppercase tracking-[0.06em] text-muted-foreground transition-colors hover:text-foreground"
+                className="h-[22px] cursor-pointer rounded-full border border-border bg-card px-2.5 font-mono text-3xs uppercase tracking-[0.06em] text-muted-foreground transition-colors hover:text-foreground"
               >
                 Reset
               </button>
@@ -2160,7 +2160,7 @@ function FilterDrawer({
           </Section>
 
           <div className="border-t border-dashed border-hairline pt-4">
-            <p className="text-2xs font-semibold uppercase tracking-[0.08em] text-muted-foreground">
+            <p className="text-3xs font-semibold uppercase tracking-[0.08em] text-muted-foreground">
               Session
             </p>
             <dl className="mt-2.5 flex flex-col gap-2">
@@ -2181,7 +2181,7 @@ function FilterDrawer({
             </dl>
 
             {s.source === "external_jsonl" && (
-              <p className="mt-4 rounded-md border border-dashed border-border px-3 py-2.5 text-sm leading-[1.55] text-muted-foreground">
+              <p className="mt-4 rounded-md border border-dashed border-border px-3 py-2.5 text-xs leading-[1.55] text-muted-foreground">
                 Imported session — read from a transcript on disk. Commits aren&apos;t linked to
                 imported history, and token usage wasn&apos;t recorded.
               </p>
@@ -2242,7 +2242,7 @@ function CheckpointJump({
         render={
           <button
             type="button"
-            className="flex h-9 w-full cursor-pointer items-center gap-2 rounded-lg border border-border bg-card px-3 text-left text-base text-secondary-foreground transition-colors hover:border-border-strong hover:text-foreground"
+            className="flex h-9 w-full cursor-pointer items-center gap-2 rounded-lg border border-border bg-card px-3 text-left type-reading text-secondary-foreground transition-colors hover:border-border-strong hover:text-foreground"
           >
             <span className="flex-1">Jump to</span>
             <ChevronDown size={13} className="shrink-0 text-muted-foreground" />
@@ -2262,14 +2262,14 @@ function CheckpointJump({
                   placeholder="Find a commit…"
                   spellCheck={false}
                   autoFocus
-                  className="min-w-0 flex-1 border-0 bg-transparent p-0 text-sm text-foreground outline-none placeholder:text-muted-foreground"
+                  className="min-w-0 flex-1 border-0 bg-transparent p-0 text-xs text-foreground outline-none placeholder:text-muted-foreground"
                 />
               </div>
             )}
 
             <div className="hide-scrollbar min-h-0 flex-1 overflow-y-auto p-1">
               {matches.length === 0 ? (
-                <p className="px-2 py-3 text-center text-sm text-muted-foreground">No match.</p>
+                <p className="px-2 py-3 text-center text-xs text-muted-foreground">No match.</p>
               ) : (
                 matches.map((checkpoint, i) => {
                   const sha = checkpoint.commitSha ?? "";
@@ -2284,12 +2284,12 @@ function CheckpointJump({
                       }}
                       className="flex w-full cursor-pointer flex-col gap-0.5 rounded-md px-2 py-1.5 text-left transition-colors hover:bg-element-hover"
                     >
-                      <span className="truncate text-base text-secondary-foreground">
+                      <span className="truncate type-reading text-secondary-foreground">
                         {checkpoint.commitSubject ?? (
                           <span className="text-muted-foreground">Subject unavailable</span>
                         )}
                       </span>
-                      <span className="flex items-center gap-1.5 font-mono text-xs text-disabled">
+                      <span className="flex items-center gap-1.5 font-mono text-2xs text-disabled">
                         <span>
                           #{ordinal.get(checkpoint.id) ?? i + 1} · {sha.slice(0, 7)}
                         </span>
@@ -2321,10 +2321,10 @@ function Section({ label, note, children }: { label: string; note?: string; chil
   return (
     <div>
       <div className="flex items-baseline gap-2">
-        <span className="text-2xs font-semibold uppercase tracking-[0.08em] text-muted-foreground">
+        <span className="text-3xs font-semibold uppercase tracking-[0.08em] text-muted-foreground">
           {label}
         </span>
-        {note && <span className="font-mono text-2xs text-disabled">{note}</span>}
+        {note && <span className="font-mono text-3xs text-disabled">{note}</span>}
       </div>
       <div className="mt-2.5 flex flex-wrap gap-1.5">{children}</div>
     </div>
@@ -2352,7 +2352,7 @@ function FilterChip({
       disabled={!enabled}
       onClick={onClick}
       className={cn(
-        "flex h-[26px] items-center gap-1.5 rounded-full border px-2.5 text-sm transition-colors",
+        "flex h-[26px] items-center gap-1.5 rounded-full border px-2.5 text-xs transition-colors",
         !enabled
           ? "cursor-default border-hairline text-disabled"
           : on
@@ -2364,7 +2364,7 @@ function FilterChip({
         <span className="size-[5px] rounded-full" style={{ backgroundColor: dot }} />
       )}
       {label}
-      <span className="font-mono text-2xs text-disabled">{count}</span>
+      <span className="font-mono text-3xs text-disabled">{count}</span>
     </button>
   );
 }
@@ -2372,8 +2372,8 @@ function FilterChip({
 function Meta({ label, value }: { label: string; value: string }) {
   return (
     <div className="flex items-baseline justify-between gap-3">
-      <dt className="shrink-0 text-sm text-muted-foreground">{label}</dt>
-      <dd className="truncate font-mono text-xs text-secondary-foreground">{value}</dd>
+      <dt className="shrink-0 text-xs text-muted-foreground">{label}</dt>
+      <dd className="truncate font-mono text-2xs text-secondary-foreground">{value}</dd>
     </div>
   );
 }
@@ -2424,7 +2424,7 @@ function BarButton({
       >
         {children}
         {badge !== undefined && (
-          <span className="absolute -right-0.5 -top-0.5 flex h-3.5 min-w-3.5 items-center justify-center rounded-full bg-primary px-0.5 font-mono text-3xs font-semibold text-primary-foreground tabular-nums">
+          <span className="absolute -right-0.5 -top-0.5 flex h-3.5 min-w-3.5 items-center justify-center rounded-full bg-primary px-0.5 font-mono text-4xs font-semibold text-primary-foreground tabular-nums">
             {badge > 9 ? "9+" : badge}
           </span>
         )}
@@ -2494,7 +2494,7 @@ function Clamp({ children }: { children: ReactNode }) {
           <button
             type="button"
             onClick={() => setExpanded((v) => !v)}
-            className="flex h-7 cursor-pointer items-center gap-1.5 rounded-full border border-border bg-card px-3 text-sm text-secondary-foreground shadow-md transition-colors hover:border-border-strong hover:text-foreground"
+            className="flex h-7 cursor-pointer items-center gap-1.5 rounded-full border border-border bg-card px-3 text-xs text-secondary-foreground shadow-md transition-colors hover:border-border-strong hover:text-foreground"
           >
             <ChevronDown
               size={12}
@@ -2577,13 +2577,13 @@ function MemoryBlock({ block }: { block: InjectedBlock }) {
         className="flex w-full cursor-pointer items-center gap-2 px-3 py-2 text-left transition-colors hover:bg-element-hover"
       >
         <AtlasIcon size={12} className="shrink-0 rounded-sm" />
-        <span className="text-sm text-secondary-foreground">
+        <span className="text-xs text-secondary-foreground">
           {MEMORY_LABELS[block.label] ?? block.label.toLowerCase()}
         </span>
-        <span className="font-mono text-xs text-disabled">from Atlas memory</span>
+        <span className="font-mono text-2xs text-disabled">from Atlas memory</span>
         <span className="flex-1" />
         {lines > 0 && (
-          <span className="font-mono text-xs text-disabled">
+          <span className="font-mono text-2xs text-disabled">
             {lines} line{lines === 1 ? "" : "s"}
           </span>
         )}
@@ -2593,7 +2593,7 @@ function MemoryBlock({ block }: { block: InjectedBlock }) {
         />
       </button>
       {open && (
-        <div className="hide-scrollbar max-h-[320px] overflow-auto whitespace-pre-wrap break-words border-t border-hairline px-3.5 py-2.5 font-mono text-xs leading-[1.7] text-muted-foreground">
+        <div className="hide-scrollbar max-h-[320px] overflow-auto whitespace-pre-wrap break-words border-t border-hairline px-3.5 py-2.5 font-mono text-2xs leading-[1.7] text-muted-foreground">
           {block.body || "(empty)"}
         </div>
       )}
@@ -2612,7 +2612,7 @@ function Block({
   projectPath: string;
 }) {
   return (
-    <div className="mt-2.5 whitespace-pre-wrap break-words rounded-md border border-hairline bg-card px-3.5 py-3 font-mono text-sm leading-[1.75] text-secondary-foreground">
+    <div className="mt-2.5 whitespace-pre-wrap break-words rounded-md border border-hairline bg-card px-3.5 py-3 font-mono text-xs leading-[1.75] text-secondary-foreground">
       <Body entry={entry} projectPath={projectPath} raw={text} />
     </div>
   );
@@ -2695,7 +2695,7 @@ function Body({
 
   const notice = truncated && (
     <>
-      <span className="ml-1 text-xs text-muted-foreground">
+      <span className="ml-1 text-2xs text-muted-foreground">
         … {compact(entry.bodyBytes)} bytes not shown
       </span>
       {(entry.bodyRef || remote) && (
@@ -2783,14 +2783,14 @@ function ShowFull({
   };
 
   if (error) {
-    return <span className="ml-1.5 text-xs text-muted-foreground">{error}</span>;
+    return <span className="ml-1.5 text-2xs text-muted-foreground">{error}</span>;
   }
   return (
     <button
       type="button"
       disabled={busy}
       onClick={() => void fetchFull()}
-      className="ml-1.5 inline-flex cursor-pointer items-center gap-1 text-xs text-secondary-foreground underline underline-offset-2 transition-colors hover:no-underline hover:text-foreground disabled:opacity-60"
+      className="ml-1.5 inline-flex cursor-pointer items-center gap-1 text-2xs text-secondary-foreground underline underline-offset-2 transition-colors hover:no-underline hover:text-foreground disabled:opacity-60"
     >
       {busy && <Loader2 size={10} className="animate-spin" />}
       Show full
@@ -2812,14 +2812,14 @@ function Empty({
 }) {
   if (pending) {
     return (
-      <p className="flex items-center justify-center gap-2 py-16 text-center text-sm text-muted-foreground">
+      <p className="flex items-center justify-center gap-2 py-16 text-center text-xs text-muted-foreground">
         <Loader2 size={12} className="animate-spin" />
         Loading the timeline…
       </p>
     );
   }
   return (
-    <p className="py-16 text-center text-sm text-muted-foreground">
+    <p className="py-16 text-center text-xs text-muted-foreground">
       {detail.entries.length === 0
         ? "Nothing was recorded in this session."
         : failedOnly && failedCount === 0

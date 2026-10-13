@@ -152,7 +152,7 @@ export function CommsPanel() {
     return (
       <div className="atlas-vibrant-panel flex h-full flex-col bg-sidebar">
         <div className="flex h-[38px] shrink-0 items-center pl-2">
-          <div className="flex h-[26px] items-center gap-1.5 rounded-lg bg-element-selected pl-2.5 pr-2.5 text-sm font-medium text-foreground select-none">
+          <div className="flex h-[26px] items-center gap-1.5 rounded-lg bg-element-selected pl-2.5 pr-2.5 text-xs font-medium text-foreground select-none">
             <MessagesSquare size={11} className="shrink-0 opacity-70" />
             Chats
           </div>
@@ -318,7 +318,7 @@ function TabButton({
         }
       }}
       className={cn(
-        "group/tab relative flex h-[26px] shrink-0 cursor-pointer items-center gap-1.5 rounded-lg pl-2.5 text-sm font-medium select-none",
+        "group/tab relative flex h-[26px] shrink-0 cursor-pointer items-center gap-1.5 rounded-lg pl-2.5 text-xs font-medium select-none",
         "transition-[background-color,color] duration-150",
         "pr-6",
         active
@@ -371,8 +371,8 @@ function CommsConnecting({
   if (state === "unavailable") {
     return (
       <div className="flex min-w-0 flex-1 flex-col items-center justify-center gap-2 px-8 text-center">
-        <div className="text-sm font-medium text-foreground">Chat is unavailable</div>
-        <p className="max-w-[220px] text-xs leading-relaxed text-secondary-foreground">
+        <div className="text-xs font-medium text-foreground">Chat is unavailable</div>
+        <p className="max-w-[220px] text-2xs leading-relaxed text-secondary-foreground">
           {reason === "not_a_member"
             ? "Your account isn't a member of this organization's chat."
             : reason === "evicted"
@@ -382,7 +382,7 @@ function CommsConnecting({
         <button
           type="button"
           onClick={onRetry}
-          className="mt-1 flex h-[26px] items-center rounded-md border border-border bg-element-hover px-3 text-xs font-medium text-foreground transition-colors hover:bg-element-active cursor-pointer"
+          className="mt-1 flex h-[26px] items-center rounded-md border border-border bg-element-hover px-3 text-2xs font-medium text-foreground transition-colors hover:bg-element-active cursor-pointer"
         >
           Try again
         </button>
@@ -392,7 +392,7 @@ function CommsConnecting({
   return (
     <div className="flex min-w-0 flex-1 flex-col items-center justify-center gap-2 px-8 text-center">
       <Loader2 size={16} className="animate-spin text-muted-foreground" />
-      <div className="text-sm text-secondary-foreground">
+      <div className="text-xs text-secondary-foreground">
         {state === "backoff" ? "Reconnecting…" : "Connecting to team chat…"}
       </div>
     </div>

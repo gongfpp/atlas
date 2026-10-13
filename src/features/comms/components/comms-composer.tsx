@@ -344,20 +344,20 @@ export function CommsComposer({
                   )}
                 >
                   <CommsAvatar member={m} size={16} />
-                  <span className="min-w-0 flex-1 truncate text-xs text-foreground">{m.name}</span>
+                  <span className="min-w-0 flex-1 truncate text-2xs text-foreground">{m.name}</span>
                 </button>
               ))}
             </div>
             <div className="flex h-control-md shrink-0 items-center justify-between border-t border-border px-2">
               <KbdLegend
-                className="text-3xs text-muted-foreground"
+                className="text-4xs text-muted-foreground"
                 items={[
                   { keys: ["↑", "↓"], label: "navigate" },
                   { keys: ["↵"], label: "select" },
                 ]}
               />
               <KbdLegend
-                className="text-3xs text-muted-foreground"
+                className="text-4xs text-muted-foreground"
                 items={[{ keys: ["esc"], label: "close" }]}
               />
             </div>
@@ -379,10 +379,10 @@ export function CommsComposer({
           ) : (
             <CornerUpRight size={11} className="shrink-0 -scale-y-100 text-muted-foreground" />
           )}
-          <span className="shrink-0 text-2xs font-medium uppercase tracking-wide text-muted-foreground">
+          <span className="shrink-0 text-3xs font-medium uppercase tracking-wide text-muted-foreground">
             {editing ? "Editing" : "Replying to"}
           </span>
-          <span className="min-w-0 flex-1 truncate text-xs text-secondary-foreground">
+          <span className="min-w-0 flex-1 truncate text-2xs text-secondary-foreground">
             {editing
               ? null
               : intentTarget
@@ -424,7 +424,7 @@ export function CommsComposer({
         >
           {isDropTarget && (
             <div className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center rounded-2xl bg-primary/8 backdrop-blur-[1px]">
-              <span className="rounded-full bg-card px-3 py-1 text-xs font-medium text-secondary-foreground shadow">
+              <span className="rounded-full bg-card px-3 py-1 text-2xs font-medium text-secondary-foreground shadow">
                 Drop files to attach
               </span>
             </div>
@@ -466,7 +466,7 @@ export function CommsComposer({
               ) : (
                 // Same geometry, so the composer does not resize when the real
                 // editor lands. Only ever seen on a cold first open.
-                <div className="px-[10px] py-[8px] text-base leading-[18px] text-disabled">
+                <div className="px-[10px] py-[8px] type-reading leading-[18px] text-disabled">
                   {draft || placeholder}
                 </div>
               )}
@@ -541,7 +541,7 @@ export function CommsComposer({
               {bytes > CHAT_BODY_MAX_BYTES * 0.8 && (
                 <span
                   className={cn(
-                    "mr-1 text-2xs tabular-nums",
+                    "mr-1 text-3xs tabular-nums",
                     overLimit ? "text-error" : "text-disabled",
                   )}
                 >
@@ -652,7 +652,7 @@ function AttachmentChip({
   return (
     <div
       className={cn(
-        "group/chip relative flex h-control-md max-w-[220px] items-center gap-1.5 overflow-hidden rounded-md border px-2 text-xs",
+        "group/chip relative flex h-control-md max-w-[220px] items-center gap-1.5 overflow-hidden rounded-md border px-2 text-2xs",
         failed ? "border-error text-error" : "border-border bg-card text-secondary-foreground",
       )}
     >

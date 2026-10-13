@@ -52,7 +52,7 @@ export function SlideStrip({
         <div
           key={key}
           ref={(el) => labelRef(key, el)}
-          className="flex h-[22px] shrink-0 items-center whitespace-nowrap px-2.5 text-xs leading-none"
+          className="flex h-[22px] shrink-0 items-center whitespace-nowrap px-2.5 text-2xs leading-none"
         >
           {label}
           {shortcut && <KbdCombo combo={shortcut} size="2xs" className="ml-2" />}

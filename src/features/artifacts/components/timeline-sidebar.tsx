@@ -373,7 +373,7 @@ export function TimelineSidebar({ sessions, loading, filtered, openKey, period, 
           type="button"
           onClick={() => virtualizer.scrollToIndex(0, { align: "start" })}
           className={cn(
-            "pointer-events-auto flex h-7 cursor-pointer items-center gap-1.5 rounded-full border border-border bg-card/85 px-3 text-xs text-secondary-foreground shadow-md backdrop-blur-xl transition-opacity duration-150 hover:text-foreground",
+            "pointer-events-auto flex h-7 cursor-pointer items-center gap-1.5 rounded-full border border-border bg-card/85 px-3 text-2xs text-secondary-foreground shadow-md backdrop-blur-xl transition-opacity duration-150 hover:text-foreground",
             edges.top ? "opacity-100" : "pointer-events-none opacity-0",
           )}
           tabIndex={edges.top ? undefined : -1}
@@ -493,7 +493,7 @@ const DayRow = memo(function DayRow({ row }: { row: Extract<Row, { kind: "day" }
   return (
     <div
       title={`${row.date} · ${row.meta}`}
-      className="relative flex h-full items-center pr-3 text-sm font-medium"
+      className="relative flex h-full items-center pr-3 text-xs font-medium"
       style={{ paddingLeft: laneX(0) + LABEL_GAP }}
     >
       <Dot
@@ -631,7 +631,7 @@ const SessionMeta = memo(function SessionMeta({
   const Icon = session.synced ? Check : Laptop;
   const author = authorOf(session.authorId, directory);
   return (
-    <span className="flex w-full min-w-0 items-center gap-1.5 text-2xs leading-tight text-muted-foreground">
+    <span className="flex w-full min-w-0 items-center gap-1.5 text-3xs leading-tight text-muted-foreground">
       <Icon
         size={9}
         className={cn("shrink-0", session.synced ? "text-success" : "text-disabled")}
@@ -719,7 +719,7 @@ const FadingTitle = memo(function FadingTitle({
   return (
     <span
       className={cn(
-        "w-full min-w-0 overflow-hidden whitespace-nowrap text-sm leading-tight tracking-[-0.01em]",
+        "w-full min-w-0 overflow-hidden whitespace-nowrap text-xs leading-tight tracking-[-0.01em]",
         className,
       )}
       style={TITLE_FADE_STYLE}
@@ -754,13 +754,13 @@ const ClusterRow = memo(function ClusterRow({
       <Dot lane={1} r={SESSION_R} cy={SESSION_DOT_Y} style={{ background: DOT_NEUTRAL }} />
       <span
         className={cn(
-          "min-w-0 truncate text-base leading-tight tracking-[-0.01em]",
+          "min-w-0 truncate type-reading leading-tight tracking-[-0.01em]",
           holdsOpen ? "text-foreground" : "text-secondary-foreground",
         )}
       >
         {row.title}
       </span>
-      <span className="ml-1.5 shrink-0 font-mono text-2xs text-muted-foreground">
+      <span className="ml-1.5 shrink-0 font-mono text-3xs text-muted-foreground">
         ×{row.sessions.length}
       </span>
       <Chevron size={11} strokeWidth={1.5} className="ml-auto shrink-0 text-muted-foreground" />
@@ -816,11 +816,11 @@ export function clusterRows(rows: BoardSession[]): ListItem[] {
 function Empty({ filtered }: { filtered: boolean }) {
   return (
     <div className="px-4 py-12 text-center">
-      <p className="text-sm text-secondary-foreground">
+      <p className="text-xs text-secondary-foreground">
         {filtered ? "No sessions match this filter." : "No sessions captured yet."}
       </p>
       {!filtered && (
-        <p className="mt-1 text-xs text-muted-foreground">
+        <p className="mt-1 text-2xs text-muted-foreground">
           Send a prompt to an agent in this Project and it will appear here.
         </p>
       )}

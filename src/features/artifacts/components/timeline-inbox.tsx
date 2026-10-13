@@ -37,11 +37,11 @@ export function TimelineInbox({
   return (
     <div className="flex h-full min-h-0 flex-col items-center justify-center px-8">
       <Layers size={26} strokeWidth={1.2} className="text-disabled" />
-      <p className="mt-3 text-base text-secondary-foreground">Select a session</p>
+      <p className="mt-3 type-reading text-secondary-foreground">Select a session</p>
 
       {recent.length > 0 && (
         <div className="mt-9 w-full max-w-[460px]">
-          <p className="px-3 pb-2 font-mono text-2xs uppercase tracking-[0.08em] text-disabled">
+          <p className="px-3 pb-2 font-mono text-3xs uppercase tracking-[0.08em] text-disabled">
             Recent
           </p>
           <div className="flex flex-col gap-0.5">
@@ -63,7 +63,7 @@ export function TimelineInbox({
                   )}
                   <span
                     className={cn(
-                      "min-w-0 flex-1 truncate text-base leading-tight",
+                      "min-w-0 flex-1 truncate type-reading leading-tight",
                       title ? "text-secondary-foreground" : "text-muted-foreground",
                     )}
                   >
@@ -71,7 +71,7 @@ export function TimelineInbox({
                   </span>
                   <span
                     className={cn(
-                      "shrink-0 font-mono text-xs tabular-nums",
+                      "shrink-0 font-mono text-2xs tabular-nums",
                       live ? "text-success" : "text-disabled",
                     )}
                   >

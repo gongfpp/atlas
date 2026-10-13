@@ -377,9 +377,9 @@ export const BlockTerminal = memo(function BlockTerminal({
               else if (e.key === "Enter") navMatch(e.shiftKey ? -1 : 1);
             }}
             placeholder="Search output…"
-            className="w-44 bg-transparent text-sm text-foreground outline-none placeholder:text-muted-foreground"
+            className="w-44 bg-transparent text-xs text-foreground outline-none placeholder:text-muted-foreground"
           />
-          <span className="w-10 shrink-0 text-right text-2xs tabular-nums text-muted-foreground">
+          <span className="w-10 shrink-0 text-right text-3xs tabular-nums text-muted-foreground">
             {matchCount}
           </span>
           <HintGroup>
@@ -445,11 +445,11 @@ export const BlockTerminal = memo(function BlockTerminal({
           <ChevronRight size={13} className="shrink-0 text-primary" />
         )}
         {exited ? (
-          <span className="min-w-0 flex-1 truncate text-xs text-muted-foreground">
+          <span className="min-w-0 flex-1 truncate text-2xs text-muted-foreground">
             Shell exited — close this terminal or open a new one
           </span>
         ) : altScreen ? (
-          <span className="min-w-0 flex-1 truncate text-xs text-muted-foreground">
+          <span className="min-w-0 flex-1 truncate text-2xs text-muted-foreground">
             Interactive process
           </span>
         ) : (
@@ -510,7 +510,7 @@ function BlockPasswordInput({ onSubmit }: { onSubmit: (pw: string) => void }) {
         autoComplete="off"
         spellCheck={false}
         placeholder="Enter password, then press Enter…"
-        className="flex-1 bg-transparent text-sm text-foreground outline-none placeholder:text-muted-foreground"
+        className="flex-1 bg-transparent text-xs text-foreground outline-none placeholder:text-muted-foreground"
         style={{ fontFamily: 'var(--font-mono, "JetBrains Mono", monospace)' }}
       />
     </div>
@@ -525,7 +525,7 @@ function StatusBadge({ cwd, git }: { cwd: string; git: TermGit | null }) {
     // Progressive disclosure as the PANE narrows (container query against the
     // terminal root): the git segment goes first, then the whole badge, so the
     // command input always keeps usable width. Long dir/branch names truncate.
-    <div className="ml-auto hidden shrink-0 items-center gap-2 text-2xs text-muted-foreground @[300px]:flex">
+    <div className="ml-auto hidden shrink-0 items-center gap-2 text-3xs text-muted-foreground @[300px]:flex">
       <span className="flex min-w-0 items-center gap-1" title={cwd}>
         <Folder size={9} className="shrink-0" />
         <span className="max-w-[96px] truncate">{dir}</span>
@@ -617,7 +617,7 @@ const BlockCard = memo(function BlockCard({
       }
     >
       {hasHeader && (
-        <div className="flex items-center gap-2 border-b border-hairline px-2.5 h-control-md text-sm">
+        <div className="flex items-center gap-2 border-b border-hairline px-2.5 h-control-md text-xs">
           {block.running ? (
             <Loader2 size={12} className="shrink-0 animate-spin text-primary" />
           ) : block.exitCode && block.exitCode !== 0 ? (
@@ -636,14 +636,14 @@ const BlockCard = memo(function BlockCard({
 
           {block.firehose && (
             <span
-              className="flex shrink-0 items-center gap-1 rounded bg-warning/15 px-1.5 py-0.5 text-3xs text-warning"
+              className="flex shrink-0 items-center gap-1 rounded bg-warning/15 px-1.5 py-0.5 text-4xs text-warning"
               title="Large output — live view is throttled to keep the UI responsive"
             >
               {block.running ? "large output · throttled" : "large output"}
             </span>
           )}
 
-          <div className="ml-auto flex items-center gap-2 text-2xs text-muted-foreground">
+          <div className="ml-auto flex items-center gap-2 text-3xs text-muted-foreground">
             {/* Hover actions */}
             <HintGroup>
               <div className="flex items-center gap-0.5 opacity-0 transition-opacity group-hover:opacity-100 focus-within:opacity-100">
@@ -685,7 +685,7 @@ const BlockCard = memo(function BlockCard({
         </div>
       )}
       {!collapsed && (hidden > 0 || block.truncated) && (
-        <div className="px-3 pt-2 text-2xs italic text-muted-foreground">
+        <div className="px-3 pt-2 text-3xs italic text-muted-foreground">
           earlier output hidden — showing the latest {visible.length} lines (Copy gets more)
         </div>
       )}
@@ -759,7 +759,7 @@ const LineList = memo(function LineList({
     // and back on only for inputs, `pre`, `code` and this class. This surface
     // used to be a `<pre>` and got selection for free; the line emulator
     // rework made it a `<div>` and selection silently died with the tag.
-    <div className="select-text whitespace-pre-wrap break-words px-3 py-2 font-mono text-sm leading-[1.45] text-secondary-foreground">
+    <div className="select-text whitespace-pre-wrap break-words px-3 py-2 font-mono text-xs leading-[1.45] text-secondary-foreground">
       {lines.map((line) => (
         <OutputLine
           key={line.id}

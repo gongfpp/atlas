@@ -64,7 +64,7 @@ export function KeymapOnboarding() {
         </div>
 
         <DialogFooter className="items-center sm:justify-between">
-          <span className="text-2xs text-muted-foreground">
+          <span className="text-3xs text-muted-foreground">
             Change this any time in Settings → Keybindings.
           </span>
           <Button variant="ghost" size="sm" onClick={() => choose(null)}>
@@ -102,8 +102,8 @@ function Choice({
       <span className="flex min-w-0 items-center gap-2.5">
         <span className="flex size-4 shrink-0 items-center justify-center">{icon}</span>
         <span className="min-w-0">
-          <span className="block text-xs font-medium text-foreground">{label}</span>
-          <span className="block truncate text-2xs text-muted-foreground">{description}</span>
+          <span className="block text-2xs font-medium text-foreground">{label}</span>
+          <span className="block truncate text-3xs text-muted-foreground">{description}</span>
         </span>
       </span>
       {keys && <KbdKeys keys={keys} className="shrink-0" />}

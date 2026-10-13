@@ -89,7 +89,7 @@ export function UsageTables({
             aria-selected={tab === t.id}
             onClick={() => onTab(t.id)}
             className={cn(
-              "-mb-px flex h-[36px] items-center gap-1.5 border-b-2 px-2.5 text-xs font-medium transition-colors",
+              "-mb-px flex h-[36px] items-center gap-1.5 border-b-2 px-2.5 text-2xs font-medium transition-colors",
               tab === t.id
                 ? "border-b-primary text-foreground"
                 : "border-b-transparent text-secondary-foreground hover:text-foreground",
@@ -101,7 +101,7 @@ export function UsageTables({
                 rather than the white one a literal would keep. */}
             <span
               className={cn(
-                "rounded-full px-1.5 py-px text-3xs tabular-nums transition-colors",
+                "rounded-full px-1.5 py-px text-4xs tabular-nums transition-colors",
                 tab === t.id
                   ? "bg-element-active text-secondary-foreground"
                   : "bg-element-hover text-muted-foreground",
@@ -118,7 +118,7 @@ export function UsageTables({
             value={search}
             onChange={(e) => onSearch(e.target.value)}
             placeholder={tab === "sessions" ? "Search sessions" : "Filter rows"}
-            className="w-full bg-transparent text-xs text-foreground outline-none placeholder:text-muted-foreground"
+            className="w-full bg-transparent text-2xs text-foreground outline-none placeholder:text-muted-foreground"
           />
         </div>
         <DropdownMenu.Root>
@@ -126,7 +126,7 @@ export function UsageTables({
             render={
               <button
                 type="button"
-                className="flex h-control-md items-center gap-1.5 rounded-md border border-border px-2 text-xs text-secondary-foreground outline-none hover:bg-element-hover hover:text-foreground"
+                className="flex h-control-md items-center gap-1.5 rounded-md border border-border px-2 text-2xs text-secondary-foreground outline-none hover:bg-element-hover hover:text-foreground"
                 title="Sort"
               >
                 <ArrowDownWideNarrow size={12} className="text-muted-foreground" />
@@ -138,7 +138,7 @@ export function UsageTables({
             {/* z-index on the Positioner, not the Popup — the Popup is
                 statically positioned inside it. */}
             <DropdownMenu.Positioner className="z-popover" align="end" sideOffset={4}>
-              <DropdownMenu.Popup className="min-w-[160px] rounded-lg border border-border bg-popover py-1 text-xs text-secondary-foreground shadow-md">
+              <DropdownMenu.Popup className="min-w-[160px] rounded-lg border border-border bg-popover py-1 text-2xs text-secondary-foreground shadow-md">
                 <DropdownMenu.RadioGroup value={sort} onValueChange={(v) => setSort(v as SortKey)}>
                   {(Object.keys(SORT_LABEL) as SortKey[]).map((k) => (
                     <DropdownMenu.RadioItem
@@ -222,7 +222,7 @@ function SessionsTable({
   const capped = data.sessions.length < sessionsTotal;
   return (
     <>
-      <div className="flex h-control-md shrink-0 items-center border-b border-element-selected px-3 text-3xs font-semibold uppercase tracking-wider text-muted-foreground">
+      <div className="flex h-control-md shrink-0 items-center border-b border-element-selected px-3 text-4xs font-semibold uppercase tracking-wider text-muted-foreground">
         <span className={COL.title}>Session</span>
         <span className={COL.project}>Project</span>
         <span className={COL.agent}>Agent</span>
@@ -236,7 +236,7 @@ function SessionsTable({
       </div>
       <div ref={parentRef} className="hide-scrollbar h-[420px] overflow-y-auto">
         {sorted.length === 0 ? (
-          <div className="p-4 text-xs text-muted-foreground">No sessions match.</div>
+          <div className="p-4 text-2xs text-muted-foreground">No sessions match.</div>
         ) : (
           <div className="relative w-full" style={{ height: v.getTotalSize() }}>
             {v.getVirtualItems().map((item) => {
@@ -244,7 +244,7 @@ function SessionsTable({
               return (
                 <div
                   key={item.key}
-                  className="absolute left-0 top-0 flex w-full items-center border-b border-hairline px-3 text-xs hover:bg-element-hover"
+                  className="absolute left-0 top-0 flex w-full items-center border-b border-hairline px-3 text-2xs hover:bg-element-hover"
                   style={{ height: ROW_H, transform: `translateY(${item.start}px)` }}
                 >
                   <span className={cn(COL.title, "flex min-w-0 items-center gap-2 pr-3")}>
@@ -295,7 +295,7 @@ function SessionsTable({
         )}
       </div>
       {capped && (
-        <div className="flex h-control-md shrink-0 items-center border-t border-element-selected px-3 text-2xs text-muted-foreground">
+        <div className="flex h-control-md shrink-0 items-center border-t border-element-selected px-3 text-3xs text-muted-foreground">
           Showing the {fmtNum(data.sessions.length)} most recent of {fmtNum(sessionsTotal)}{" "}
           sessions.
         </div>
@@ -347,7 +347,7 @@ function RollupTable({
   const top = list.reduce((m, r) => Math.max(m, tokensOf(r.metrics)), 0);
   return (
     <>
-      <div className="flex h-control-md shrink-0 items-center border-b border-element-selected px-3 text-3xs font-semibold uppercase tracking-wider text-muted-foreground">
+      <div className="flex h-control-md shrink-0 items-center border-b border-element-selected px-3 text-4xs font-semibold uppercase tracking-wider text-muted-foreground">
         <span className="min-w-[160px] flex-1">{axis}</span>
         <span className="w-[160px] shrink-0">Share</span>
         <span className="w-[72px] shrink-0 text-right">Tokens</span>
@@ -360,12 +360,12 @@ function RollupTable({
       </div>
       <div className="hide-scrollbar max-h-[420px] overflow-y-auto">
         {list.length === 0 && (
-          <div className="p-4 text-xs text-muted-foreground">Nothing matches.</div>
+          <div className="p-4 text-2xs text-muted-foreground">Nothing matches.</div>
         )}
         {list.map((r, i) => (
           <div
             key={r.key}
-            className="flex h-[30px] items-center border-b border-hairline px-3 text-xs hover:bg-element-hover"
+            className="flex h-[30px] items-center border-b border-hairline px-3 text-2xs hover:bg-element-hover"
           >
             <span className="flex min-w-[160px] flex-1 items-center gap-2 truncate pr-3">
               {axis === "agent" ? (
@@ -384,7 +384,7 @@ function RollupTable({
                   color={seriesColor(i)}
                 />
               </span>
-              <span className="w-[34px] text-right text-2xs tabular-nums text-muted-foreground">
+              <span className="w-[34px] text-right text-3xs tabular-nums text-muted-foreground">
                 {fmtPct(r.share)}
               </span>
             </span>

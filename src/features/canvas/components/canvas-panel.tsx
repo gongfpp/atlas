@@ -404,10 +404,10 @@ function CanvasSurface({
 
   if (!projectPath) {
     return (
-      <div className="h-full flex flex-col items-center justify-center text-sm text-muted-foreground gap-2 px-6 text-center">
+      <div className="h-full flex flex-col items-center justify-center text-xs text-muted-foreground gap-2 px-6 text-center">
         <StickyNote size={18} className="opacity-60" />
         <div>No project open.</div>
-        <div className="text-2xs">Spaces are per-project. Open a folder to start a board.</div>
+        <div className="text-3xs">Spaces are per-project. Open a folder to start a board.</div>
       </div>
     );
   }
@@ -420,7 +420,7 @@ function CanvasSurface({
         className="relative min-h-0 min-w-0 flex-1 bg-background overflow-hidden"
       >
         {!loaded && (
-          <div className="absolute inset-0 flex items-center justify-center text-xs text-muted-foreground z-panel">
+          <div className="absolute inset-0 flex items-center justify-center text-2xs text-muted-foreground z-panel">
             Loading…
           </div>
         )}

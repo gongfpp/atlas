@@ -186,7 +186,7 @@ export function HintOverlay() {
             // A macOS-native keycap: a fully-rounded frosted pill that has to
             // read over whatever it lands on — code, an image, the browser.
             // `glass-hud` is the shared recipe; see globals.css.
-            className={`absolute inline-flex items-center rounded-full px-1.5 font-sans text-2xs font-semibold uppercase leading-[16px] tracking-wide text-foreground ${HUD}`}
+            className={`absolute inline-flex items-center rounded-full px-1.5 font-sans text-3xs font-semibold uppercase leading-[16px] tracking-wide text-foreground ${HUD}`}
             style={{
               left: Math.max(0, t.rect.left),
               top: Math.max(0, t.rect.top),
@@ -205,7 +205,7 @@ export function HintOverlay() {
           // Matches the hint keycaps above — the same `glass-hud` recipe.
           className={`flex items-center gap-3 rounded-2xl px-3.5 py-2.5 ${HUD}`}
         >
-          <span className="font-mono text-sm text-foreground">
+          <span className="font-mono text-xs text-foreground">
             {typed ? (
               <span className="tracking-widest">{typed.toUpperCase()}</span>
             ) : (
@@ -214,7 +214,7 @@ export function HintOverlay() {
               </span>
             )}
           </span>
-          <span className="flex items-center gap-1.5 text-2xs text-muted-foreground">
+          <span className="flex items-center gap-1.5 text-3xs text-muted-foreground">
             <Kbd>⌥</Kbd> focus
             <Kbd>esc</Kbd> close
           </span>

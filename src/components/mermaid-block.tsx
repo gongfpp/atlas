@@ -216,17 +216,17 @@ export function MermaidBlock({ code, controls = false }: { code: string; control
   if (failed) {
     return (
       <details className="rounded-md border border-hairline bg-card/30 p-2 text-muted-foreground">
-        <summary className="cursor-pointer text-xs">
+        <summary className="cursor-pointer text-2xs">
           Diagram couldn't be rendered — show source
         </summary>
-        <pre className="mt-1.5 text-2xs font-mono text-secondary-foreground overflow-auto whitespace-pre-wrap">
+        <pre className="mt-1.5 text-3xs font-mono text-secondary-foreground overflow-auto whitespace-pre-wrap">
           {code}
         </pre>
       </details>
     );
   }
   if (!svg) {
-    return <div className="p-3 text-xs text-muted-foreground">Rendering diagram…</div>;
+    return <div className="p-3 text-2xs text-muted-foreground">Rendering diagram…</div>;
   }
   if (!controls) {
     return (
@@ -315,7 +315,7 @@ function DiagramViewer({ svg, code }: { svg: string; code: string }) {
             <button
               type="button"
               onClick={() => setZoom(1)}
-              className="cursor-pointer px-1 font-mono text-2xs tabular-nums text-muted-foreground transition-colors hover:text-foreground"
+              className="cursor-pointer px-1 font-mono text-3xs tabular-nums text-muted-foreground transition-colors hover:text-foreground"
             >
               {Math.round(zoom * 100)}%
             </button>
@@ -389,7 +389,7 @@ function Fullscreen({
       className="animate-fade-in fixed inset-0 z-modal flex flex-col bg-background/95 backdrop-blur-2xl"
     >
       <header className="flex h-10 shrink-0 items-center gap-1 border-b border-border px-3">
-        <span className="text-sm text-secondary-foreground">Diagram</span>
+        <span className="text-xs text-secondary-foreground">Diagram</span>
         <div className="flex-1" />
         <HintGroup>
           <IconButton label="Zoom out" onClick={() => step(-ZOOM_STEP)} disabled={zoom <= MIN_ZOOM}>
@@ -399,7 +399,7 @@ function Fullscreen({
             <button
               type="button"
               onClick={() => setZoom(1)}
-              className="cursor-pointer px-1.5 font-mono text-xs tabular-nums text-muted-foreground transition-colors hover:text-foreground"
+              className="cursor-pointer px-1.5 font-mono text-2xs tabular-nums text-muted-foreground transition-colors hover:text-foreground"
             >
               {Math.round(zoom * 100)}%
             </button>

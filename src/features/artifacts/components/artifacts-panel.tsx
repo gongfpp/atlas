@@ -140,7 +140,7 @@ function PeriodPill({
           aria-pressed={period === p.value}
           onClick={() => onChange(p.value)}
           className={cn(
-            "flex h-full cursor-pointer items-center rounded-full px-2 text-xs leading-none outline-none transition-colors",
+            "flex h-full cursor-pointer items-center rounded-full px-2 text-2xs leading-none outline-none transition-colors",
             period === p.value
               ? "bg-element-active font-medium text-foreground"
               : "text-muted-foreground hover:text-secondary-foreground",
@@ -697,7 +697,7 @@ export function ArtifactsPanel() {
     // shares its background with the list under it needs a rule to separate
     // them, and a curve says it better than a line.
     <div className="flex h-full min-h-0 flex-col bg-card">
-      {error && <p className="shrink-0 bg-error-muted px-4 py-1.5 text-xs text-error">{error}</p>}
+      {error && <p className="shrink-0 bg-error-muted px-4 py-1.5 text-2xs text-error">{error}</p>}
 
       {/* Chrome, then one card.
        *
@@ -756,7 +756,7 @@ export function ArtifactsPanel() {
                 className="flex h-full shrink-0 items-center gap-2 px-1.5"
                 style={{ width: sidebarWidth }}
               >
-                <span className="min-w-0 truncate text-sm font-semibold text-foreground">
+                <span className="min-w-0 truncate text-xs font-semibold text-foreground">
                   Timeline
                 </span>
                 <OnlineTeammates members={teammatesOnline} />
@@ -876,7 +876,7 @@ export function ArtifactsPanel() {
               {/* Say what is being left out. A nav that silently stops at the
                *  newest few hundred reads as "this is everything". */}
               {capped && (
-                <p className="shrink-0 border-t border-hairline px-3 py-1.5 text-xs leading-snug text-muted-foreground">
+                <p className="shrink-0 border-t border-hairline px-3 py-1.5 text-2xs leading-snug text-muted-foreground">
                   Showing the newest {BOARD_LIMIT} sessions — filter by project for a full history.
                 </p>
               )}
@@ -1007,7 +1007,7 @@ function BoardSearch({ query, onQuery }: { query: string; onQuery: (q: string) =
         placeholder="Search sessions…"
         spellCheck={false}
         aria-label="Search sessions"
-        className="min-w-0 flex-1 border-0 bg-transparent p-0 text-sm leading-none text-foreground outline-none placeholder:text-muted-foreground"
+        className="min-w-0 flex-1 border-0 bg-transparent p-0 text-xs leading-none text-foreground outline-none placeholder:text-muted-foreground"
       />
       {query && (
         <Hint label="Clear search">
@@ -1068,7 +1068,7 @@ function Breadcrumb({
   return (
     <span
       title={projectPath}
-      className="flex min-w-0 items-center gap-1 text-sm text-muted-foreground"
+      className="flex min-w-0 items-center gap-1 text-xs text-muted-foreground"
     >
       <button
         type="button"
@@ -1177,7 +1177,7 @@ function BoardFilter({
                 values are inside the menu, and a funnel that looks identical
                 either way hides an empty board behind a control nobody checks. */}
               {active > 0 && (
-                <span className="absolute -right-1 -top-1 flex h-[13px] min-w-[13px] items-center justify-center rounded-full bg-foreground px-[3px] font-mono text-3xs font-medium text-primary-foreground">
+                <span className="absolute -right-1 -top-1 flex h-[13px] min-w-[13px] items-center justify-center rounded-full bg-foreground px-[3px] font-mono text-4xs font-medium text-primary-foreground">
                   {active}
                 </span>
               )}
@@ -1190,13 +1190,13 @@ function BoardFilter({
           <Popover.Popup className="flex max-h-[420px] w-[262px] origin-(--transform-origin) flex-col overflow-hidden rounded-lg border border-border bg-popover shadow-md data-closed:animate-scale-out data-open:animate-scale-in">
             {active > 0 && (
               <div className="flex h-[28px] shrink-0 items-center justify-between border-b border-border px-3">
-                <span className="font-mono text-2xs text-muted-foreground">{active} active</span>
+                <span className="font-mono text-3xs text-muted-foreground">{active} active</span>
                 <Popover.Close
                   render={
                     <button
                       type="button"
                       onClick={onClear}
-                      className="cursor-pointer font-mono text-2xs uppercase tracking-[0.06em] text-secondary-foreground underline underline-offset-2 transition-colors hover:no-underline hover:text-foreground"
+                      className="cursor-pointer font-mono text-3xs uppercase tracking-[0.06em] text-secondary-foreground underline underline-offset-2 transition-colors hover:no-underline hover:text-foreground"
                     >
                       Clear all
                     </button>
@@ -1210,7 +1210,7 @@ function BoardFilter({
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Search projects…"
-              className="h-[28px] shrink-0 border-b border-border bg-transparent px-3 text-xs text-foreground outline-none placeholder:text-muted-foreground"
+              className="h-[28px] shrink-0 border-b border-border bg-transparent px-3 text-2xs text-foreground outline-none placeholder:text-muted-foreground"
             />
 
             <div className="hide-scrollbar min-h-0 flex-1 overflow-y-auto p-1">
@@ -1234,7 +1234,7 @@ function BoardFilter({
                 />
               ))}
               {shownProjects.length === 0 && (
-                <p className="px-2 py-2 text-center text-xs text-muted-foreground">
+                <p className="px-2 py-2 text-center text-2xs text-muted-foreground">
                   No project matches “{query.trim()}”.
                 </p>
               )}
@@ -1263,7 +1263,7 @@ function BoardFilter({
 
 function GroupLabel({ children }: { children: React.ReactNode }) {
   return (
-    <p className="px-2 pb-1 pt-2 text-2xs font-semibold uppercase tracking-[0.08em] text-muted-foreground">
+    <p className="px-2 pb-1 pt-2 text-3xs font-semibold uppercase tracking-[0.08em] text-muted-foreground">
       {children}
     </p>
   );
@@ -1302,7 +1302,7 @@ function Option({
       <span className="min-w-0 flex-1">
         <span
           className={cn(
-            "block truncate text-xs leading-tight",
+            "block truncate text-2xs leading-tight",
             selected ? "font-medium text-foreground" : "text-secondary-foreground",
           )}
         >
@@ -1315,7 +1315,7 @@ function Option({
       ) : (
         (trail ??
         (count !== undefined ? (
-          <span className="shrink-0 font-mono text-2xs tabular-nums text-muted-foreground">
+          <span className="shrink-0 font-mono text-3xs tabular-nums text-muted-foreground">
             {count}
           </span>
         ) : null))
@@ -1334,8 +1334,8 @@ function Option({
 function NotEnabled() {
   return (
     <div className="flex h-full flex-col items-center justify-center px-8 text-center">
-      <h2 className="text-md font-medium text-foreground">Nothing captured yet</h2>
-      <p className="mt-1.5 max-w-[420px] text-sm leading-relaxed text-muted-foreground">
+      <h2 className="text-sm font-medium text-foreground">Nothing captured yet</h2>
+      <p className="mt-1.5 max-w-[420px] text-xs leading-relaxed text-muted-foreground">
         Turn capture on for a project and Atlas records what you asked, what the agent did, and
         which commits came out of it — stored on this machine, with secrets scrubbed before anything
         is written.
@@ -1343,7 +1343,7 @@ function NotEnabled() {
       {/* The control is deliberately not repeated here. Capture is per project
        *  and this board spans all of them, so the honest place to switch it on
        *  is the project pill in the titlebar, which names the one it applies to. */}
-      <p className="mt-3 max-w-[420px] text-xs text-disabled">
+      <p className="mt-3 max-w-[420px] text-2xs text-disabled">
         Click the project name in the titlebar to turn it on.
       </p>
     </div>
@@ -1362,13 +1362,13 @@ function NotEnabled() {
 function NotFound({ reason, onBack }: { reason: string | null; onBack: () => void }) {
   return (
     <div className="flex h-full flex-col items-center justify-center px-8 text-center">
-      <p className="text-base text-secondary-foreground">
+      <p className="type-reading text-secondary-foreground">
         {reason ?? "This session no longer exists."}
       </p>
       <button
         type="button"
         onClick={onBack}
-        className="mt-3 cursor-pointer rounded-md border border-border px-3 py-1.5 text-sm text-secondary-foreground transition-colors hover:bg-element-hover hover:text-foreground"
+        className="mt-3 cursor-pointer rounded-md border border-border px-3 py-1.5 text-xs text-secondary-foreground transition-colors hover:bg-element-hover hover:text-foreground"
       >
         Back to sessions
       </button>

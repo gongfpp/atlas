@@ -103,9 +103,9 @@ export function NoteEditorPanel({ noteId, projectPath, onClose }: NoteEditorPane
                 className="flex h-5 w-5 items-center justify-center rounded-md bg-element-hover hover:bg-element-active transition-colors cursor-pointer shrink-0"
               >
                 {note.icon ? (
-                  <span className="text-sm leading-none">{note.icon}</span>
+                  <span className="text-xs leading-none">{note.icon}</span>
                 ) : (
-                  <span className="text-xs leading-none text-muted-foreground">＋</span>
+                  <span className="text-2xs leading-none text-muted-foreground">＋</span>
                 )}
               </button>
             </HintItem>
@@ -113,7 +113,7 @@ export function NoteEditorPanel({ noteId, projectPath, onClose }: NoteEditorPane
               value={note.title}
               onChange={(e) => updateNote(noteId, { title: e.target.value })}
               placeholder="Untitled"
-              className="flex-1 min-w-0 bg-transparent outline-none text-sm font-semibold text-foreground placeholder:text-muted-foreground"
+              className="flex-1 min-w-0 bg-transparent outline-none text-xs font-semibold text-foreground placeholder:text-muted-foreground"
             />
             <HintItem label="Delete note">
               <button

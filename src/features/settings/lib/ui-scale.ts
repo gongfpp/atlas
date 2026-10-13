@@ -3,15 +3,19 @@
 //! Uses the native WebView zoom — the same thing browser ⌘±/⌘0 drives — so it
 //! scales the ENTIRE UI (text + layout), not just `rem`-based sizes. Root
 //! font-size scaling wouldn't work because the app uses px-based utilities
-//! (`text-xs`, `h-[32px]`) everywhere.
+//! (`text-2xs`, `h-[32px]`) everywhere.
 //!
 //! The factor is persisted as `AppSettings.uiScale` (Rust `state.json`) and
 //! re-applied on boot via the project store's `hydrate`.
 
 import { getCurrentWebview } from "@tauri-apps/api/webview";
 
-export const MIN_SCALE = 0.5;
-export const MAX_SCALE = 2.0;
+/** Atlas Standards' range. The density is the design system's; the scale is
+ *  how big the reader wants it, and outside 0.9–1.4 layouts stop holding.
+ *  Rust's `validate` keeps wider bounds so an older saved value still loads;
+ *  `clampScale` brings it inside on the next apply. */
+export const MIN_SCALE = 0.9;
+export const MAX_SCALE = 1.4;
 export const SCALE_STEP = 0.1;
 export const DEFAULT_SCALE = 1;
 

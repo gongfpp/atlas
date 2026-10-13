@@ -115,14 +115,14 @@ export function PdfViewer({ filePath, tabId }: PdfViewerProps) {
 
       <div ref={scrollRef} className="flex flex-1 justify-center overflow-auto bg-panel p-8">
         {error ? (
-          <div className="mt-20 text-sm text-error">{error}</div>
+          <div className="mt-20 text-xs text-error">{error}</div>
         ) : pdfFile ? (
           <Document
             file={pdfFile}
             onLoadSuccess={(pdf) => setNumPages(pdf.numPages)}
             onLoadError={(e) => setError(e.message || "Failed to load PDF document.")}
             loading={<PdfSpinner label="Loading PDF" />}
-            error={<div className="mt-20 text-sm text-error">Failed to load PDF document.</div>}
+            error={<div className="mt-20 text-xs text-error">Failed to load PDF document.</div>}
             className="flex flex-col items-center gap-4"
           >
             {Array.from({ length: numPages }, (_, i) => (
@@ -183,7 +183,7 @@ function PdfSpinner({ label }: { label: string }) {
   return (
     <div className="mt-20 flex flex-col items-center gap-2 text-muted-foreground">
       <Loader2 size={18} className="animate-spin" />
-      <span className="text-xs">{label}</span>
+      <span className="text-2xs">{label}</span>
     </div>
   );
 }

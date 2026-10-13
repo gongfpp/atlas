@@ -74,7 +74,7 @@ export function RenameChannelMenu({
                     }
                   }}
                   aria-label="Channel name"
-                  className="min-w-0 flex-1 bg-transparent text-xs text-foreground outline-none placeholder:text-muted-foreground"
+                  className="min-w-0 flex-1 bg-transparent text-2xs text-foreground outline-none placeholder:text-muted-foreground"
                 />
               </div>
               <div className="p-2">
@@ -82,7 +82,7 @@ export function RenameChannelMenu({
                   type="button"
                   disabled={!name.trim() || pending}
                   onClick={() => void save()}
-                  className="flex h-[26px] w-full items-center justify-center gap-1.5 rounded-md bg-element-active text-xs font-medium text-foreground transition-colors hover:bg-element-emphasis disabled:cursor-not-allowed disabled:opacity-45 cursor-pointer"
+                  className="flex h-[26px] w-full items-center justify-center gap-1.5 rounded-md bg-element-active text-2xs font-medium text-foreground transition-colors hover:bg-element-emphasis disabled:cursor-not-allowed disabled:opacity-45 cursor-pointer"
                 >
                   {pending && <Loader2 size={11} className="animate-spin" />}
                   Rename

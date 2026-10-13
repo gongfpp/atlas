@@ -216,7 +216,7 @@ export function TreeRow({
           row that does not — a knowledge page, a group — keeps lucide. */}
       {leafIconNode && !isDir ? (
         <span
-          className="shrink-0 inline-flex items-center justify-center text-sm"
+          className="shrink-0 inline-flex items-center justify-center text-xs"
           style={{ width: 13, height: 13, lineHeight: 1 }}
         >
           {leafIconNode}
@@ -261,14 +261,14 @@ export function TreeRow({
             else onCancel?.();
           }}
           className={cn(
-            "flex-1 min-w-0 font-mono text-xs leading-4 bg-panel-input border border-border rounded px-1 py-0.5",
+            "flex-1 min-w-0 font-mono text-2xs leading-4 bg-panel-input border border-border rounded px-1 py-0.5",
             "text-foreground outline-none focus:border-border-strong",
           )}
         />
       ) : (
         <span
           className={cn(
-            "truncate font-mono text-xs leading-4 flex-1 min-w-0",
+            "truncate font-mono text-2xs leading-4 flex-1 min-w-0",
             isDir && "text-foreground",
           )}
           style={!isDir && gitColor ? { color: gitColor } : undefined}

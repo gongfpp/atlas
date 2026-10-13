@@ -232,7 +232,7 @@ function DockMenu({
         >
           <Popover.Popup className="atlas-panel-in-tl inset-highlight shadow-md select-none overflow-hidden rounded-xl border border-hairline bg-card/95 backdrop-blur-2xl">
             <div className="flex w-[168px] flex-col py-1">
-              <div className="px-3 pb-1 pt-1 text-2xs font-semibold uppercase tracking-wider text-muted-foreground">
+              <div className="px-3 pb-1 pt-1 text-3xs font-semibold uppercase tracking-wider text-muted-foreground">
                 Dock position
               </div>
               {DOCKS.map((d) => (
@@ -244,7 +244,7 @@ function DockMenu({
                     setOpen(false);
                   }}
                   className={cn(
-                    "flex cursor-pointer items-center gap-2 px-3 py-1.5 text-left text-xs transition-colors hover:bg-element-hover",
+                    "flex cursor-pointer items-center gap-2 px-3 py-1.5 text-left text-2xs transition-colors hover:bg-element-hover",
                     dock === d.dock ? "text-foreground" : "text-secondary-foreground",
                   )}
                 >

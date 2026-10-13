@@ -36,9 +36,9 @@
   --sidebar-accent-foreground: oklch(0.97 0 0);
   --sidebar-border: oklch(1 0 0 / 6%);
   --sidebar-ring: oklch(0.97 0 0 / 40%);
-  --font-sans: -apple-system, "SF Pro Text", system-ui, sans-serif;
+  --font-sans: "Geist Variable", -apple-system, "SF Pro Text", system-ui, sans-serif;
   --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", serif;
-  --font-mono: "SF Mono", "Geist Mono", "JetBrains Mono", "Fira Code", monospace;
+  --font-mono: "Geist Mono Variable", "SF Mono", "JetBrains Mono", "Fira Code", monospace;
   /* Decision 26's default. Deliberately px, not rem — see `--radius-base`. */
   --radius: 8px;
   --tracking-normal: 0em;
@@ -105,14 +105,27 @@
      author who disagrees can set it. */
   --inset-highlight: inset 0 1px 0 0 var(--atlas-element-highlight);
 
-  /* Control heights (decision 25). 22 / 28 / 30 snap to the nearest step. */
-  --control-xs: 20px;
-  --control-sm: 24px;
-  --control-md: 26px;
-  --control-lg: 32px;
-  /* Named layout constants — not controls, so they are not on the scale. */
+  /* Control heights — Atlas Standards' ladder, in rem: 20 / 24 / 28 / 32 / 36.
+     `md` (28) is the default control; it was 26. An in-between height snaps to
+     the nearest step. */
+  --control-xs: 1.25rem;
+  --control-sm: 1.5rem;
+  --control-md: 1.75rem;
+  --control-lg: 2rem;
+  --control-xl: 2.25rem;
+  /* Named layout constants — so a screen never writes w-[224px]. The titlebar
+     stays in px: it lines up with the native traffic lights, which do not
+     follow the type scale. */
   --titlebar-height: 30px;
-  --tab-strip-height: 36px;
+  --tab-strip-height: 2.25rem;
+  --sidebar-width: 14rem;
+  --sidebar-width-collapsed: 3.25rem;
+  --dock-width: 23.75rem;
+  --list-pane-width: 20rem;
+  --properties-width: 16.25rem;
+  --row-height: 2rem;
+  --settings-nav-width: 14rem;
+  --settings-content-max: 40rem;
 
   /* Motion (decision 29). Four durations; the three easings live in the
      `--ease-*` theme namespace in globals.css and are the only curves allowed.
@@ -150,9 +163,9 @@
    keyboard hints / pill badges). Self-contained — no JS dependency.
    ========================================================================== */
 
-/* `.eyebrow` moved to globals.css as `@utility eyebrow`, one of the six named
-   text styles of decision 24. Same rendering; it now sits in the utilities
-   layer so a class next to it can override a single property. */
+/* `.eyebrow` moved to globals.css as a named text style, and is `micro` now
+   (Atlas Standards' name); it sits in the utilities layer so a class next to
+   it can override a single property. */
 
 .mono {
   font-family: var(--font-mono);

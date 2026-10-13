@@ -289,7 +289,7 @@ function NativeMemoryPill() {
       onClick={reindex}
       disabled={indexing}
       title="Codebase index that grounds the agent's memory recall — click to re-index"
-      className="flex items-center px-2 h-6.5 rounded-full border border-border bg-card text-2xs leading-none font-medium text-muted-foreground hover:bg-element-hover hover:text-foreground transition-colors cursor-pointer tabular-nums disabled:cursor-default"
+      className="flex items-center px-2 h-6.5 rounded-full border border-border bg-card text-3xs leading-none font-medium text-muted-foreground hover:bg-element-hover hover:text-foreground transition-colors cursor-pointer tabular-nums disabled:cursor-default"
     >
       {indexing ? (
         <Loader2 size={11} className="animate-spin text-primary" />
@@ -322,7 +322,7 @@ function EffortPill({ tabId }: { tabId: string }) {
   return (
     <button
       onClick={cycle}
-      className="flex items-center px-2 h-6.5 rounded-full border border-border bg-card text-2xs leading-none font-medium text-secondary-foreground hover:bg-element-hover hover:text-foreground transition-colors cursor-pointer"
+      className="flex items-center px-2 h-6.5 rounded-full border border-border bg-card text-3xs leading-none font-medium text-secondary-foreground hover:bg-element-hover hover:text-foreground transition-colors cursor-pointer"
       title="Reasoning effort (thinking budget) — Anthropic models"
     >
       <Brain size={11} className={active ? "text-primary" : "text-muted-foreground"} />
@@ -519,7 +519,7 @@ function ComposerGroupsMenu({
   // worse than it looks (deliberately skipped).
   const pillCls = (active: boolean) =>
     cn(
-      "flex items-center px-1.5 h-6.5 rounded-full border text-2xs leading-none font-medium transition-colors cursor-pointer",
+      "flex items-center px-1.5 h-6.5 rounded-full border text-3xs leading-none font-medium transition-colors cursor-pointer",
       active
         ? "border-border-strong bg-element-selected text-foreground"
         : "border-border bg-card text-secondary-foreground hover:bg-element-hover hover:text-foreground",
@@ -570,7 +570,7 @@ function ComposerGroupsMenu({
                           active ? "bg-element-selected" : "hover:bg-element-hover",
                         )}
                       >
-                        <AgentMark agentType={a} className="!h-4 !w-4 !text-3xs !rounded" />
+                        <AgentMark agentType={a} className="!h-4 !w-4 !text-4xs !rounded" />
                         <span className="flex-1 truncate label">{agentMeta(a).label}</span>
                         {active && <Check size={11} className="text-primary" />}
                       </button>
@@ -592,7 +592,7 @@ function ComposerGroupsMenu({
                     close();
                     openSettingsSection("agents");
                   }}
-                  className="flex w-full items-center gap-1.5 px-3 py-2 text-xs text-secondary-foreground transition-colors cursor-pointer hover:bg-element-hover hover:text-foreground"
+                  className="flex w-full items-center gap-1.5 px-3 py-2 text-2xs text-secondary-foreground transition-colors cursor-pointer hover:bg-element-hover hover:text-foreground"
                 >
                   <Plus size={11} className="shrink-0" />
                   Add more agents
@@ -630,7 +630,7 @@ function ComposerGroupsMenu({
             {openGroup === "mode" && !isClaude && (
               <div className="p-1">
                 {!hasAcpModes ? (
-                  <div className="flex items-center gap-1.5 px-2 py-2 text-xs text-muted-foreground">
+                  <div className="flex items-center gap-1.5 px-2 py-2 text-2xs text-muted-foreground">
                     <Loader2 size={11} className="animate-spin" /> Loading modes…
                   </div>
                 ) : (
@@ -658,7 +658,7 @@ function ComposerGroupsMenu({
                             {active && <Check size={11} className="text-primary" />}
                           </span>
                           {m.description && (
-                            <span className="mt-0.5 block text-3xs leading-snug text-muted-foreground">
+                            <span className="mt-0.5 block text-4xs leading-snug text-muted-foreground">
                               {m.description}
                             </span>
                           )}
@@ -702,7 +702,7 @@ function ComposerGroupsMenu({
                   )
                 }
                 emptyState={
-                  <div className="px-2 py-2 text-xs text-muted-foreground">
+                  <div className="px-2 py-2 text-2xs text-muted-foreground">
                     No models
                     {isNative && (
                       <span className="mt-0.5 block caption">
@@ -725,7 +725,7 @@ function ComposerGroupsMenu({
         side="top"
       >
         <button onClick={() => toggle("agent")} className={pillCls(openGroup === "agent")}>
-          <AgentMark agentType={agentType} className="!h-4 !w-4 !text-3xs !rounded" />
+          <AgentMark agentType={agentType} className="!h-4 !w-4 !text-4xs !rounded" />
           <span className={composerPillLabelClass("late")}>{agentMeta(currentAgent).label}</span>
         </button>
       </Hint>
@@ -1894,7 +1894,7 @@ export function MessageInput({
         {/* Queued messages above the input */}
         {queue.length > 0 && (
           <div className="mb-2 flex flex-col gap-1">
-            <div className="text-2xs uppercase tracking-wider text-muted-foreground px-1">
+            <div className="text-3xs uppercase tracking-wider text-muted-foreground px-1">
               Queued · {queue.length}
             </div>
             <div className="flex flex-wrap gap-1.5">
@@ -1980,7 +1980,7 @@ export function MessageInput({
         >
           {githubSyncing !== null && (
             <div className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center rounded-2xl bg-background/40 backdrop-blur-[1px]">
-              <span className="flex items-center gap-2 rounded-full bg-card px-3 py-1 text-xs font-medium text-secondary-foreground shadow">
+              <span className="flex items-center gap-2 rounded-full bg-card px-3 py-1 text-2xs font-medium text-secondary-foreground shadow">
                 <Loader2 size={12} className="animate-spin" />
                 Syncing {githubSyncing}…
               </span>
@@ -2010,11 +2010,11 @@ export function MessageInput({
               >
                 <div className="flex flex-col items-center gap-1 rounded-xl border border-border bg-card px-4 py-3 shadow-md">
                   <AtSign size={16} className="text-primary" />
-                  <span className="text-sm font-medium text-foreground">Drop to reference</span>
+                  <span className="text-xs font-medium text-foreground">Drop to reference</span>
                   {/* Says what will happen, because the two gestures now differ:
                       a drop writes a chip into the sentence, the "+" menu
                       attaches. */}
-                  <span className="text-xs text-muted-foreground">
+                  <span className="text-2xs text-muted-foreground">
                     Added as an @mention in your message
                   </span>
                 </div>
@@ -2241,7 +2241,7 @@ function QueueChip({
   onRemove: () => void;
 }) {
   return (
-    <div className="group flex items-center gap-1 max-w-[260px] h-6 pl-2 pr-1 rounded-full border border-border bg-card text-xs text-secondary-foreground">
+    <div className="group flex items-center gap-1 max-w-[260px] h-6 pl-2 pr-1 rounded-full border border-border bg-card text-2xs text-secondary-foreground">
       <button
         onClick={onEdit}
         className="flex items-center gap-1 min-w-0 cursor-pointer hover:text-foreground"

@@ -55,7 +55,7 @@ export function CodeModelNudge({ labelClassName }: { labelClassName?: string }) 
     <div
       role="group"
       aria-label="Semantic code search"
-      className="flex items-center h-6.5 rounded-full border border-border bg-card text-2xs leading-none font-medium overflow-hidden"
+      className="flex items-center h-6.5 rounded-full border border-border bg-card text-3xs leading-none font-medium overflow-hidden"
     >
       <Hint label={hint} side="top" wrap>
         <button

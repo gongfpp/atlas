@@ -9,7 +9,7 @@ import { splitGlyphCombo } from "@/features/keybindings/lib/combo";
  * shadcn's base-style `Kbd` in shape, moved onto the Foundations scales: the
  * cap is `--control-xs` tall rather than a hand-written 18px, its corner is
  * `rounded` (the control radius) rather than a literal 4px, and its text is
- * `text-2xs`.
+ * `text-3xs`.
  *
  * `KbdKeys` and `KbdCombo` are the two ways the app actually uses it — from a
  * `displayKeys` array, or from a combo string like "⌘⇧F" or "Ctrl+Shift+F".
@@ -33,9 +33,9 @@ const kbdVariants = cva(
   {
     variants: {
       size: {
-        "2xs": "h-4 min-w-4 px-1 text-3xs",
-        xs: "h-control-xs min-w-(--control-xs) text-2xs",
-        sm: "h-control-sm min-w-(--control-sm) text-xs",
+        "2xs": "h-4 min-w-4 px-1 text-4xs",
+        xs: "h-control-xs min-w-(--control-xs) text-3xs",
+        sm: "h-control-sm min-w-(--control-sm) text-2xs",
       },
     },
     defaultVariants: { size: "xs" },

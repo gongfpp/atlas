@@ -194,13 +194,13 @@ export function NewTabPalette({
               onChange={(e) => setQuery(e.target.value)}
               onKeyDown={handleKeyDown}
               placeholder="Open a module..."
-              className="flex-1 bg-transparent border-none outline-none text-sm text-foreground placeholder:text-muted-foreground"
+              className="flex-1 bg-transparent border-none outline-none text-xs text-foreground placeholder:text-muted-foreground"
             />
           </div>
 
           <div ref={listRef} className="overflow-y-auto flex-1 py-1">
             {items.length === 0 && (
-              <div className="px-4 py-6 text-center text-xs text-muted-foreground">
+              <div className="px-4 py-6 text-center text-2xs text-muted-foreground">
                 No modules match "{query}"
               </div>
             )}
@@ -214,7 +214,7 @@ export function NewTabPalette({
                   onClick={() => commit(item)}
                   onMouseEnter={() => setSelectedIndex(i)}
                   className={cn(
-                    "w-full flex items-center gap-3 px-4 h-[36px] text-left text-sm transition-colors",
+                    "w-full flex items-center gap-3 px-4 h-[36px] text-left text-xs transition-colors",
                     active ? "bg-element-hover text-foreground" : "text-secondary-foreground",
                   )}
                 >

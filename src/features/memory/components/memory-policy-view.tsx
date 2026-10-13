@@ -122,7 +122,7 @@ export function MemoryPolicyView() {
       <Centered>
         <div className="text-center space-y-2">
           <Loader2 size={18} className="animate-spin text-muted-foreground mx-auto" />
-          <p className="text-xs text-muted-foreground">
+          <p className="text-2xs text-muted-foreground">
             {phase === "loading" ? "Distilling preferences…" : "Checking…"}
           </p>
         </div>
@@ -137,14 +137,14 @@ export function MemoryPolicyView() {
           <div className="w-12 h-12 mx-auto rounded-xl bg-card border border-border flex items-center justify-center">
             <Sparkles size={22} className="text-secondary-foreground" />
           </div>
-          <p className="text-base font-medium text-foreground">Enable preference learning</p>
-          <p className="text-xs leading-relaxed text-muted-foreground">
+          <p className="type-reading font-medium text-foreground">Enable preference learning</p>
+          <p className="text-2xs leading-relaxed text-muted-foreground">
             Download the on-device embedding model to distill your saved preferences into an
             editable policy table — no LLM, purely semantic.
           </p>
           <button
             onClick={() => void download()}
-            className="inline-flex items-center gap-1.5 h-8 px-3.5 rounded-md bg-primary text-background text-xs font-medium hover:opacity-90 transition-opacity cursor-pointer"
+            className="inline-flex items-center gap-1.5 h-8 px-3.5 rounded-md bg-primary text-background text-2xs font-medium hover:opacity-90 transition-opacity cursor-pointer"
           >
             <Download size={13} />
             Download model
@@ -166,14 +166,14 @@ export function MemoryPolicyView() {
       <Centered>
         <div className="text-center max-w-[360px] px-6 w-full space-y-2">
           <Loader2 size={20} className="animate-spin text-secondary-foreground mx-auto" />
-          <p className="text-sm text-foreground">Downloading model…</p>
+          <p className="text-xs text-foreground">Downloading model…</p>
           <div className="h-1.5 rounded-full bg-card overflow-hidden">
             <div
               className="h-full bg-primary transition-[width] duration-200"
               style={{ width: `${pct}%` }}
             />
           </div>
-          <p className="text-2xs text-muted-foreground font-mono">{pct}%</p>
+          <p className="text-3xs text-muted-foreground font-mono">{pct}%</p>
         </div>
       </Centered>
     );
@@ -184,11 +184,11 @@ export function MemoryPolicyView() {
       <Centered>
         <div className="text-center max-w-[340px] px-6 space-y-3">
           <AlertTriangle size={20} className="text-error mx-auto" />
-          <p className="text-sm text-secondary-foreground">Couldn't load policies</p>
-          {error && <p className="text-2xs text-muted-foreground font-mono break-words">{error}</p>}
+          <p className="text-xs text-secondary-foreground">Couldn't load policies</p>
+          {error && <p className="text-3xs text-muted-foreground font-mono break-words">{error}</p>}
           <button
             onClick={() => void init(projectPath)}
-            className="inline-flex items-center gap-1.5 h-7 px-3 rounded-md border border-border text-xs text-secondary-foreground hover:bg-element-hover hover:text-foreground transition-colors cursor-pointer"
+            className="inline-flex items-center gap-1.5 h-7 px-3 rounded-md border border-border text-2xs text-secondary-foreground hover:bg-element-hover hover:text-foreground transition-colors cursor-pointer"
           >
             <RotateCw size={12} /> Retry
           </button>
@@ -201,9 +201,9 @@ export function MemoryPolicyView() {
   return (
     <div className="h-full flex flex-col bg-background">
       <div className="flex items-center gap-2 px-3 h-[32px] shrink-0 border-b border-border">
-        <span className="text-xs font-medium text-secondary-foreground">
+        <span className="text-2xs font-medium text-secondary-foreground">
           Preferences
-          <span className="ml-1.5 text-3xs text-muted-foreground tabular-nums">
+          <span className="ml-1.5 text-4xs text-muted-foreground tabular-nums">
             {policies.length}
           </span>
         </span>
@@ -220,7 +220,7 @@ export function MemoryPolicyView() {
 
       {policies.length === 0 ? (
         <Centered>
-          <p className="text-sm text-muted-foreground max-w-[300px] text-center px-4">
+          <p className="text-xs text-muted-foreground max-w-[300px] text-center px-4">
             No preferences detected yet. As Claude Code & Codex record how you like to work, they'll
             surface here.
           </p>
@@ -266,13 +266,13 @@ export function MemoryPolicyView() {
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Filter…"
-              className="ml-auto h-[22px] w-[130px] rounded-md border border-border bg-card px-2 text-xs text-foreground outline-none placeholder:text-muted-foreground focus:border-border-strong"
+              className="ml-auto h-[22px] w-[130px] rounded-md border border-border bg-card px-2 text-2xs text-foreground outline-none placeholder:text-muted-foreground focus:border-border-strong"
             />
           </div>
 
           <div className="flex-1 min-h-0 overflow-auto hide-scrollbar">
             <div style={{ minWidth: TABLE_MIN_W }}>
-              <div className="sticky top-0 z-10 flex items-center h-[28px] border-b border-border bg-background px-3 text-2xs uppercase tracking-wider text-muted-foreground">
+              <div className="sticky top-0 z-10 flex items-center h-[28px] border-b border-border bg-background px-3 text-3xs uppercase tracking-wider text-muted-foreground">
                 <span className={COL.policy}>Policy</span>
                 <span className={COL.value}>Value</span>
                 <span className={COL.source}>Source</span>
@@ -280,7 +280,7 @@ export function MemoryPolicyView() {
                 <span className={COL.actions} />
               </div>
               {visible.length === 0 ? (
-                <div className="px-3 py-6 text-center text-xs text-muted-foreground">
+                <div className="px-3 py-6 text-center text-2xs text-muted-foreground">
                   No policies match these filters.
                 </div>
               ) : (
@@ -311,7 +311,7 @@ function FilterGroup<T extends string>({
           key={v}
           onClick={() => onChange(v)}
           className={cn(
-            "h-[18px] rounded px-1.5 text-2xs transition-colors cursor-pointer",
+            "h-[18px] rounded px-1.5 text-3xs transition-colors cursor-pointer",
             value === v
               ? "bg-element-selected text-foreground"
               : "text-muted-foreground hover:text-secondary-foreground",
@@ -359,7 +359,7 @@ function PolicyRow({
         <div className="flex items-center gap-1.5 min-w-0">
           <span
             className={cn(
-              "shrink-0 rounded px-1 py-px text-3xs font-semibold uppercase tracking-wide border",
+              "shrink-0 rounded px-1 py-px text-4xs font-semibold uppercase tracking-wide border",
               policy.category === "strong"
                 ? "border-error/40 bg-error/10 text-error"
                 : "border-border bg-card text-muted-foreground",
@@ -372,9 +372,9 @@ function PolicyRow({
           >
             {policy.category}
           </span>
-          <span className="text-sm text-foreground truncate">{policy.key}</span>
+          <span className="text-xs text-foreground truncate">{policy.key}</span>
         </div>
-        <div className="text-2xs text-muted-foreground truncate mt-0.5">{policy.hint}</div>
+        <div className="text-3xs text-muted-foreground truncate mt-0.5">{policy.hint}</div>
       </div>
 
       <div className={cn(COL.value, "pr-3")}>
@@ -387,7 +387,7 @@ function PolicyRow({
           }}
           spellCheck={false}
           className={cn(
-            "w-full bg-transparent outline-none text-sm text-secondary-foreground rounded px-1.5 py-1 border transition-colors",
+            "w-full bg-transparent outline-none text-xs text-secondary-foreground rounded px-1.5 py-1 border transition-colors",
             dirty
               ? "border-border-strong bg-card text-foreground"
               : "border-transparent hover:border-border",
@@ -401,12 +401,12 @@ function PolicyRow({
         ) : (
           <ClaudeIcon className="size-3 shrink-0 opacity-70" />
         )}
-        <span className="text-2xs text-muted-foreground truncate" title={policy.file_path}>
+        <span className="text-3xs text-muted-foreground truncate" title={policy.file_path}>
           {basename(policy.file_path)}
         </span>
       </div>
 
-      <div className={cn(COL.score, "text-right tabular-nums text-2xs text-muted-foreground")}>
+      <div className={cn(COL.score, "text-right tabular-nums text-3xs text-muted-foreground")}>
         {Math.round(policy.score * 100)}%
       </div>
 
@@ -455,7 +455,7 @@ function basename(p: string): string {
 
 function Centered({ children }: { children: React.ReactNode }) {
   return (
-    <div className="h-full flex items-center justify-center text-muted-foreground text-sm">
+    <div className="h-full flex items-center justify-center text-muted-foreground text-xs">
       {children}
     </div>
   );

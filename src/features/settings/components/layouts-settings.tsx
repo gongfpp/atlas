@@ -16,8 +16,8 @@ export function LayoutsSettings() {
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-sm font-semibold text-foreground">Layouts</h2>
-        <p className="text-xs text-muted-foreground mt-0.5">
+        <h2 className="text-xs font-semibold text-foreground">Layouts</h2>
+        <p className="text-2xs text-muted-foreground mt-0.5">
           Rearrange panels and tabs into a ready-made project. Press{" "}
           <ActionKbd id="nav.layoutSwitcher" size="2xs" fallback="⌘⌥L" /> anytime to switch layouts.
         </p>
@@ -34,8 +34,8 @@ export function LayoutsSettings() {
             )}
           >
             <LayoutThumbnail template={t} />
-            <div className="mt-2 text-sm font-medium text-foreground">{t.name}</div>
-            <div className="text-2xs text-muted-foreground leading-snug">{t.description}</div>
+            <div className="mt-2 text-xs font-medium text-foreground">{t.name}</div>
+            <div className="text-3xs text-muted-foreground leading-snug">{t.description}</div>
           </button>
         ))}
       </div>

@@ -61,7 +61,7 @@ export function KnowledgeInspector({
               key={id}
               onClick={() => setTab(id)}
               className={cn(
-                "transition-colors text-sm",
+                "transition-colors text-xs",
                 active
                   ? "bg-foreground text-primary-foreground font-semibold"
                   : "text-muted-foreground hover:text-secondary-foreground",
@@ -86,13 +86,13 @@ export function KnowledgeInspector({
         {tab === "outline" && (
           <>
             <div
-              className="text-muted-foreground uppercase mb-2 text-xs"
+              className="text-muted-foreground uppercase mb-2 text-2xs"
               style={{ letterSpacing: "0.08em" }}
             >
               On this page
             </div>
             {outline.length === 0 ? (
-              <div className="text-muted-foreground italic text-xs">
+              <div className="text-muted-foreground italic text-2xs">
                 Add H2 or H3 headings to build an outline
               </div>
             ) : (
@@ -105,7 +105,7 @@ export function KnowledgeInspector({
                     key={`${h.id}-${idx}`}
                     onClick={() => onJumpToHeading(h.id)}
                     className={cn(
-                      "block w-full text-left transition-colors text-base",
+                      "block w-full text-left transition-colors type-reading",
                       isActive
                         ? "text-foreground"
                         : "text-muted-foreground hover:text-secondary-foreground",
@@ -126,11 +126,11 @@ export function KnowledgeInspector({
             )}
 
             <div className="mt-6 pt-3.5 border-t border-hairline" style={{ marginTop: 22 }}>
-              <div className="eyebrow mb-2.5">Page stats</div>
+              <div className="micro mb-2.5">Page stats</div>
               {pageStats.map(([k, v]) => (
                 <div
                   key={k}
-                  className="flex justify-between border-b border-hairline text-muted-foreground text-sm"
+                  className="flex justify-between border-b border-hairline text-muted-foreground text-xs"
                   style={{ padding: "5px 0" }}
                 >
                   <span>{k}</span>
@@ -143,9 +143,9 @@ export function KnowledgeInspector({
 
         {tab === "links" && (
           <>
-            <div className="eyebrow mb-2.5">Pages linking here · {backlinks.length}</div>
+            <div className="micro mb-2.5">Pages linking here · {backlinks.length}</div>
             {backlinks.length === 0 ? (
-              <div className="text-muted-foreground italic text-xs">
+              <div className="text-muted-foreground italic text-2xs">
                 No backlinks yet. Reference this page from another note with
                 <span className="mono"> [[note-id]] </span>
                 and it'll show up here.
@@ -177,14 +177,14 @@ export function KnowledgeInspector({
                     }}
                   >
                     <span
-                      className="text-md"
+                      className="text-sm"
                       style={{ lineHeight: 1, color: "var(--muted-foreground)" }}
                     >
                       ›
                     </span>
                     <div style={{ minWidth: 0 }}>
                       <div
-                        className="text-base"
+                        className="type-reading"
                         style={{
                           color: "var(--foreground)",
                           overflow: "hidden",
@@ -195,7 +195,7 @@ export function KnowledgeInspector({
                         {b.fromTitle}
                       </div>
                       <div
-                        className="text-xs"
+                        className="text-2xs"
                         style={{
                           color: "var(--muted-foreground)",
                           lineHeight: 1.4,

@@ -142,7 +142,7 @@ export function SpaceCursors({ actors }: { actors: ReadonlyMap<string, SpaceActo
               // ratchet-allow: the name rides on the collaborator's OWN cursor
               // colour, which is theirs and saturated; white is the only label
               // that reads on every value in that palette.
-              "text-3xs font-medium leading-none text-white",
+              "text-4xs font-medium leading-none text-white",
             )}
             style={{ backgroundColor: a.colour }}
           >

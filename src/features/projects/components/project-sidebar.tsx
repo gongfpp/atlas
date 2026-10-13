@@ -181,7 +181,7 @@ const ProjectRow = memo(function ProjectRow({
               if (e.key === "Enter") commitRename();
               if (e.key === "Escape") endRenameProject();
             }}
-            className="block w-full bg-transparent outline-none text-sm leading-tight text-foreground"
+            className="block w-full bg-transparent outline-none text-xs leading-tight text-foreground"
           />
         ) : (
           <span
@@ -190,7 +190,7 @@ const ProjectRow = memo(function ProjectRow({
               beginRenameProject(ws.id);
             }}
             className={cn(
-              "block truncate text-sm leading-tight",
+              "block truncate text-xs leading-tight",
               active
                 ? "text-foreground font-medium"
                 : "text-secondary-foreground group-hover:text-foreground",
@@ -199,7 +199,7 @@ const ProjectRow = memo(function ProjectRow({
             {ws.name}
           </span>
         )}
-        <span className="mt-0.5 block truncate text-2xs leading-tight text-muted-foreground">
+        <span className="mt-0.5 block truncate text-3xs leading-tight text-muted-foreground">
           {summary?.isRepo ? summary.branch || "—" : "no source control"}
         </span>
       </div>
@@ -254,7 +254,7 @@ const ProjectRow = memo(function ProjectRow({
                     // commitRename → edit mode exits. `finalFocus={false}`
                     // leaves focus alone so the input keeps it.
                     finalFocus={false}
-                    className="min-w-[148px] rounded-md border border-border bg-popover py-0.5 shadow-md text-xs text-secondary-foreground"
+                    className="min-w-[148px] rounded-md border border-border bg-popover py-0.5 shadow-md text-2xs text-secondary-foreground"
                   >
                     <DropdownMenu.Item
                       onClick={() => beginRenameProject(ws.id)}
@@ -280,7 +280,7 @@ const ProjectRow = memo(function ProjectRow({
                       </DropdownMenu.SubmenuTrigger>
                       <DropdownMenu.Portal>
                         <DropdownMenu.Positioner className="z-popover" side="right" align="start">
-                          <DropdownMenu.Popup className="min-w-[140px] rounded-md border border-border bg-popover py-0.5 shadow-md text-xs text-secondary-foreground">
+                          <DropdownMenu.Popup className="min-w-[140px] rounded-md border border-border bg-popover py-0.5 shadow-md text-2xs text-secondary-foreground">
                             {groups.map((g) => (
                               <DropdownMenu.Item
                                 key={g.id}
@@ -385,7 +385,7 @@ const GroupHeaderRow = memo(function GroupHeaderRow({
             if (e.key === "Enter") commit();
             if (e.key === "Escape") endRenameGroup();
           }}
-          className="min-w-0 flex-1 bg-transparent outline-none text-xs leading-none text-foreground"
+          className="min-w-0 flex-1 bg-transparent outline-none text-2xs leading-none text-foreground"
         />
       ) : (
         <span
@@ -393,7 +393,7 @@ const GroupHeaderRow = memo(function GroupHeaderRow({
             e.stopPropagation();
             beginRenameGroup(group.id);
           }}
-          className="min-w-0 flex-1 truncate text-xs leading-normal text-secondary-foreground group-hover/h:text-foreground"
+          className="min-w-0 flex-1 truncate text-2xs leading-normal text-secondary-foreground group-hover/h:text-foreground"
         >
           {group.name}
         </span>
@@ -496,7 +496,7 @@ const SectionHeaderRow = memo(function SectionHeaderRow({
         style={{ height: HEADER_H }}
         className="group/s flex w-full items-center gap-1 rounded-md px-2 outline-none cursor-pointer hover:bg-element-hover"
       >
-        <span className="text-xs font-semibold leading-none text-secondary-foreground group-hover/s:text-foreground">
+        <span className="text-2xs font-semibold leading-none text-secondary-foreground group-hover/s:text-foreground">
           {label}
         </span>
         {/* Promoted, and NO opacity tween on the action: fading an unpromoted
@@ -545,7 +545,7 @@ const RecentProjectRow = memo(function RecentProjectRow({
       title={path}
     >
       <Folder size={13} className="shrink-0 text-muted-foreground" />
-      <span className="flex-1 min-w-0 truncate text-sm leading-normal text-secondary-foreground group-hover:text-foreground">
+      <span className="flex-1 min-w-0 truncate text-xs leading-normal text-secondary-foreground group-hover:text-foreground">
         {name}
       </span>
     </div>
@@ -606,17 +606,17 @@ const ChatRow = memo(function ChatRow({
       <div className="min-w-0 flex-1 pr-9">
         <span
           className={cn(
-            "block truncate text-sm leading-tight",
+            "block truncate text-xs leading-tight",
             running ? "text-foreground" : "text-secondary-foreground group-hover:text-foreground",
           )}
         >
           {stripInjectedContext(chat.title) || chat.projectName}
         </span>
-        <span className="mt-0.5 block truncate text-2xs leading-tight text-muted-foreground">
+        <span className="mt-0.5 block truncate text-3xs leading-tight text-muted-foreground">
           {chat.projectName}
         </span>
       </div>
-      <span className="absolute right-2 top-2 shrink-0 text-2xs leading-none tabular-nums text-muted-foreground">
+      <span className="absolute right-2 top-2 shrink-0 text-3xs leading-none tabular-nums text-muted-foreground">
         {relTime(chat.updatedAt)}
       </span>
     </div>
@@ -1135,7 +1135,7 @@ function NavItem({
       disabled={disabled}
       aria-pressed={active}
       className={cn(
-        "group/nav flex h-7 w-full items-center gap-2.5 rounded-md px-2 text-left text-sm leading-none outline-none transition-colors cursor-pointer",
+        "group/nav flex h-7 w-full items-center gap-2.5 rounded-md px-2 text-left text-xs leading-none outline-none transition-colors cursor-pointer",
         "disabled:cursor-default disabled:opacity-40",
         active
           ? "bg-element-active text-foreground"
@@ -1424,7 +1424,7 @@ function VirtualRail({
 }
 
 function EmptyRail() {
-  return <div className="px-2 py-3 text-xs text-muted-foreground">No projects yet.</div>;
+  return <div className="px-2 py-3 text-2xs text-muted-foreground">No projects yet.</div>;
 }
 
 /** Where the help menu points. Grouped as they render: docs and support, then
@@ -1447,7 +1447,7 @@ function HelpItem({
   return (
     <DropdownMenu.Item
       onClick={onSelect}
-      className="flex h-control-md items-center gap-2 rounded-md px-1.5 text-xs text-secondary-foreground outline-none transition-colors hover:bg-element-hover hover:text-foreground cursor-pointer"
+      className="flex h-control-md items-center gap-2 rounded-md px-1.5 text-2xs text-secondary-foreground outline-none transition-colors hover:bg-element-hover hover:text-foreground cursor-pointer"
     >
       <span className="flex size-3.5 shrink-0 items-center justify-center text-muted-foreground">
         {icon}
@@ -1580,7 +1580,7 @@ function AppVersion() {
           else toast.error("Could not copy the version.");
         });
       }}
-      className="cursor-pointer select-none pr-1 font-mono text-2xs tabular-nums text-muted-foreground transition-colors hover:text-secondary-foreground"
+      className="cursor-pointer select-none pr-1 font-mono text-3xs tabular-nums text-muted-foreground transition-colors hover:text-secondary-foreground"
     >
       v{version}
     </button>

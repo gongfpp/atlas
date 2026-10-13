@@ -38,13 +38,13 @@ export function ClassTrackers({ totals }: { totals: Metrics }) {
             <div key={c.key} className="min-w-0 px-3 py-2.5">
               <div className="flex items-baseline justify-between gap-2">
                 <span className={CAPTION}>{c.label}</span>
-                <span className="text-3xs tabular-nums text-muted-foreground">
+                <span className="text-4xs tabular-nums text-muted-foreground">
                   {all > 0 ? fmtPct(c.value / all) : "—"}
                 </span>
               </div>
               <div
-                // `text-lg` after VALUE, because VALUE carries `text-xs`.
-                className={cn("mt-1 leading-none font-semibold tabular-nums", VALUE, "text-lg")}
+                // `text-md` after VALUE, because VALUE carries `text-2xs`.
+                className={cn("mt-1 leading-none font-semibold tabular-nums", VALUE, "text-md")}
               >
                 {fmtTokens(c.value)}
               </div>

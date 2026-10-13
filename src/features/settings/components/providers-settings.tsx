@@ -135,14 +135,14 @@ export function ProvidersSettings() {
             key={t.id}
             onClick={() => setCategory(t.id)}
             className={cn(
-              "flex items-center gap-1.5 px-2.5 h-[40px] text-xs font-medium transition-colors border-b-2 -mb-px",
+              "flex items-center gap-1.5 px-2.5 h-[40px] text-2xs font-medium transition-colors border-b-2 -mb-px",
               category === t.id
                 ? "text-foreground border-b-primary"
                 : "text-secondary-foreground hover:text-foreground border-b-transparent",
             )}
           >
             {t.label}
-            <span className="text-3xs text-muted-foreground tabular-nums">{t.count}</span>
+            <span className="text-4xs text-muted-foreground tabular-nums">{t.count}</span>
           </button>
         ))}
 
@@ -161,7 +161,7 @@ export function ProvidersSettings() {
             }}
             placeholder="Search providers…"
             spellCheck={false}
-            className="flex-1 min-w-0 bg-transparent outline-none text-xs text-foreground placeholder:text-muted-foreground"
+            className="flex-1 min-w-0 bg-transparent outline-none text-2xs text-foreground placeholder:text-muted-foreground"
           />
         </div>
 
@@ -184,7 +184,7 @@ export function ProvidersSettings() {
                   checked={configuredOnly}
                   closeOnClick
                   onCheckedChange={(c) => setConfiguredOnly(!!c)}
-                  className="flex items-center gap-2 px-3 h-control-md text-xs text-secondary-foreground hover:bg-element-hover hover:text-foreground cursor-pointer outline-none"
+                  className="flex items-center gap-2 px-3 h-control-md text-2xs text-secondary-foreground hover:bg-element-hover hover:text-foreground cursor-pointer outline-none"
                 >
                   <span className="inline-flex w-3.5 justify-center">
                     {configuredOnly && <Check size={11} className="text-foreground" />}
@@ -198,14 +198,14 @@ export function ProvidersSettings() {
                     reads it from context and throws without one, where Radix's
                     `Label` stood alone. */}
                 <DropdownMenu.Group>
-                  <DropdownMenu.GroupLabel className="px-3 pb-1 pt-1 text-3xs uppercase tracking-wider text-muted-foreground">
+                  <DropdownMenu.GroupLabel className="px-3 pb-1 pt-1 text-4xs uppercase tracking-wider text-muted-foreground">
                     Sort by
                   </DropdownMenu.GroupLabel>
                   {(Object.keys(SORT_LABELS) as SortKey[]).map((k) => (
                     <DropdownMenu.Item
                       key={k}
                       onClick={() => setSortKey(k)}
-                      className="flex items-center justify-between gap-2 px-3 h-control-md text-xs text-secondary-foreground hover:bg-element-hover hover:text-foreground cursor-pointer outline-none"
+                      className="flex items-center justify-between gap-2 px-3 h-control-md text-2xs text-secondary-foreground hover:bg-element-hover hover:text-foreground cursor-pointer outline-none"
                     >
                       {SORT_LABELS[k]}
                       {sortKey === k && <Check size={11} className="text-foreground" />}
@@ -220,7 +220,7 @@ export function ProvidersSettings() {
 
       <div className="flex-1 min-h-0 overflow-auto hide-scrollbar">
         <div style={{ minWidth: TABLE_MIN_W }}>
-          <div className="sticky top-0 z-10 flex items-center h-[28px] border-b border-border bg-background px-3 text-2xs uppercase tracking-wider text-muted-foreground">
+          <div className="sticky top-0 z-10 flex items-center h-[28px] border-b border-border bg-background px-3 text-3xs uppercase tracking-wider text-muted-foreground">
             <span className={COL.provider}>Provider</span>
             <span className={COL.env}>Env Var</span>
             <span className={COL.category}>Category</span>
@@ -230,7 +230,7 @@ export function ProvidersSettings() {
           </div>
 
           {rows.length === 0 ? (
-            <div className="grid place-items-center h-[160px] text-xs text-muted-foreground">
+            <div className="grid place-items-center h-[160px] text-2xs text-muted-foreground">
               No providers match.
             </div>
           ) : (
@@ -275,16 +275,16 @@ function ProviderTableRow({
       >
         <span className={cn(COL.provider, "flex items-center gap-2 min-w-0")}>
           <ProviderLogo id={provider.id} size={18} />
-          <span className="truncate text-sm text-foreground">{provider.name}</span>
+          <span className="truncate text-xs text-foreground">{provider.name}</span>
         </span>
         {/* The var it was actually found as — which may be an alias spelling. */}
-        <span className={cn(COL.env, "truncate font-mono text-2xs text-muted-foreground")}>
+        <span className={cn(COL.env, "truncate font-mono text-3xs text-muted-foreground")}>
           {entry?.envVar ?? provider.env}
         </span>
-        <span className={cn(COL.category, "truncate text-xs text-secondary-foreground")}>
+        <span className={cn(COL.category, "truncate text-2xs text-secondary-foreground")}>
           {provider.category}
         </span>
-        <span className={cn(COL.key, "font-mono text-xs")}>
+        <span className={cn(COL.key, "font-mono text-2xs")}>
           {entry ? (
             <span className="text-secondary-foreground">••••{entry.last4}</span>
           ) : (
@@ -295,11 +295,11 @@ function ProviderTableRow({
           {!entry ? (
             <>
               <Minus size={12} className="text-muted-foreground shrink-0" />
-              <span className="text-xs text-muted-foreground">Not set</span>
+              <span className="text-2xs text-muted-foreground">Not set</span>
             </>
           ) : entry.editable ? (
             <span
-              className="truncate font-mono text-2xs text-secondary-foreground"
+              className="truncate font-mono text-3xs text-secondary-foreground"
               title={`${entry.file}${entry.line ? `:${entry.line}` : ""}`}
             >
               {tildePath(entry.file!)}
@@ -307,7 +307,7 @@ function ProviderTableRow({
             </span>
           ) : (
             <span
-              className="flex items-center gap-1 text-2xs font-medium text-muted-foreground border border-border rounded-full px-1.5 h-[18px]"
+              className="flex items-center gap-1 text-3xs font-medium text-muted-foreground border border-border rounded-full px-1.5 h-[18px]"
               title="Set outside your shell profile — Atlas can read it but not edit it."
             >
               <Lock size={9} />
@@ -392,7 +392,7 @@ function ProviderEditor({
   return (
     <div className="bg-card/40 border-t border-hairline px-3 py-3">
       {readOnly && (
-        <p className="mb-2.5 max-w-[640px] text-xs leading-snug text-muted-foreground">
+        <p className="mb-2.5 max-w-[640px] text-2xs leading-snug text-muted-foreground">
           <span className="font-mono">{envVar}</span> is set outside your shell profile — Atlas
           found it in the environment but not in any file it reads, so it can&apos;t edit or remove
           it here. Change it wherever it&apos;s exported (a login script, launchd, or a wrapper).
@@ -401,7 +401,7 @@ function ProviderEditor({
 
       {entry && (
         <div className="mb-2.5 flex items-center gap-2">
-          <code className="flex-1 min-w-0 truncate rounded bg-background border border-hairline px-2 py-1 font-mono text-xs text-secondary-foreground">
+          <code className="flex-1 min-w-0 truncate rounded bg-background border border-hairline px-2 py-1 font-mono text-2xs text-secondary-foreground">
             {revealed !== null ? revealed || "(empty)" : `${envVar}=••••${entry.last4}`}
           </code>
           <Hint label={revealed !== null ? "Hide" : "Reveal"}>
@@ -417,7 +417,7 @@ function ProviderEditor({
             <button
               type="button"
               onClick={() => void copyText(revealed)}
-              className="h-6 rounded-md px-2 text-xs text-muted-foreground hover:text-foreground hover:bg-element-hover transition-colors"
+              className="h-6 rounded-md px-2 text-2xs text-muted-foreground hover:text-foreground hover:bg-element-hover transition-colors"
             >
               Copy
             </button>
@@ -429,14 +429,14 @@ function ProviderEditor({
         <div className="flex items-start gap-3 max-w-[640px]">
           <div className="flex-1 min-w-0 space-y-2">
             <div className="flex items-center justify-between">
-              <label className="text-xs font-medium text-foreground">
+              <label className="text-2xs font-medium text-foreground">
                 {entry ? "Replace key" : "API key"}
               </label>
               {provider.docsUrl && (
                 <button
                   type="button"
                   onClick={() => void openUrl(provider.docsUrl!)}
-                  className="flex items-center gap-1 text-2xs text-muted-foreground hover:text-foreground transition-colors"
+                  className="flex items-center gap-1 text-3xs text-muted-foreground hover:text-foreground transition-colors"
                 >
                   Get key
                   <ExternalLink size={10} />
@@ -457,7 +457,7 @@ function ProviderEditor({
                 onClick={() => void onSave()}
                 disabled={busy || !draft.trim()}
                 className={cn(
-                  "flex items-center gap-1.5 h-7 rounded-md px-3 text-xs font-medium",
+                  "flex items-center gap-1.5 h-7 rounded-md px-3 text-2xs font-medium",
                   "bg-primary text-background",
                   "hover:opacity-90 transition-opacity",
                   "disabled:opacity-40 disabled:cursor-not-allowed",
@@ -471,14 +471,14 @@ function ProviderEditor({
                   type="button"
                   onClick={() => void onRemove()}
                   disabled={busy}
-                  className="flex items-center gap-1 h-7 rounded-md px-2.5 text-xs text-muted-foreground hover:text-destructive hover:bg-element-hover transition-colors disabled:opacity-50"
+                  className="flex items-center gap-1 h-7 rounded-md px-2.5 text-2xs text-muted-foreground hover:text-destructive hover:bg-element-hover transition-colors disabled:opacity-50"
                 >
                   <Trash2 size={12} />
                   Remove
                 </button>
               )}
             </div>
-            <p className="pt-0.5 font-mono text-2xs text-muted-foreground">
+            <p className="pt-0.5 font-mono text-3xs text-muted-foreground">
               {entry ? "Rewrites" : "Appends"}{" "}
               <span className="text-secondary-foreground">export {envVar}=…</span>
               {writesTo ? ` in ${tildePath(writesTo)}` : ""}

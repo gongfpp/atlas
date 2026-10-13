@@ -473,7 +473,7 @@ const TabColumn = memo(function TabColumn({
                     if (e.key === "Enter" || e.key === " ") setActiveTab(tab.id);
                   }}
                   className={cn(
-                    "atlas-tab group relative flex items-center gap-1.5 px-4 h-full text-sm font-medium shrink-0 cursor-pointer select-none border-r border-border",
+                    "atlas-tab group relative flex items-center gap-1.5 px-4 h-full text-xs font-medium shrink-0 cursor-pointer select-none border-r border-border",
                     "transition-[background-color,color] duration-150",
                     isActive
                       ? "text-foreground bg-background"
@@ -671,7 +671,7 @@ const TabContentContainer = memo(function TabContentContainer({
       <div
         ref={ref}
         style={{ flex: "1 1 0%", minHeight: 0, overflow: "hidden" }}
-        className="flex items-center justify-center text-sm text-muted-foreground"
+        className="flex items-center justify-center text-xs text-muted-foreground"
       >
         <span className="inline-flex items-center gap-1.5">
           Empty split — open a tab with +
@@ -873,7 +873,7 @@ function ProjectlessCenter() {
             if (e.key === "Enter") setAtHome(true);
           }}
           className={cn(
-            "flex items-center gap-1.5 border-r border-border px-3 text-sm font-medium cursor-pointer select-none",
+            "flex items-center gap-1.5 border-r border-border px-3 text-xs font-medium cursor-pointer select-none",
             active === null
               ? "bg-background text-foreground"
               : "bg-background text-muted-foreground hover:bg-element-hover hover:text-secondary-foreground",
@@ -903,7 +903,7 @@ function ProjectlessCenter() {
                 }
               }}
               className={cn(
-                "atlas-tab group relative flex shrink-0 cursor-pointer select-none items-center gap-1.5 border-r border-border px-4 text-sm font-medium",
+                "atlas-tab group relative flex shrink-0 cursor-pointer select-none items-center gap-1.5 border-r border-border px-4 text-xs font-medium",
                 "transition-[background-color,color] duration-150",
                 isActive
                   ? "bg-background text-foreground"
@@ -1031,8 +1031,8 @@ function PlaceholderContent({ tab }: { tab: Tab }) {
           <Icon size={24} className="text-muted-foreground" />
         </div>
         <div>
-          <p className="text-sm font-medium text-foreground">{tab.title}</p>
-          <p className="text-xs text-muted-foreground mt-1">Coming soon</p>
+          <p className="text-xs font-medium text-foreground">{tab.title}</p>
+          <p className="text-2xs text-muted-foreground mt-1">Coming soon</p>
         </div>
       </div>
     </div>
@@ -1091,7 +1091,7 @@ function NewTabDropdown({
               <DropdownMenu.Item
                 key={type}
                 onClick={() => handleAdd(type, label)}
-                className="flex items-center gap-2 px-3 h-[30px] text-xs text-secondary-foreground hover:bg-element-hover hover:text-foreground cursor-default outline-none"
+                className="flex items-center gap-2 px-3 h-[30px] text-2xs text-secondary-foreground hover:bg-element-hover hover:text-foreground cursor-default outline-none"
               >
                 <Icon size={12} className="text-muted-foreground" />
                 {label}

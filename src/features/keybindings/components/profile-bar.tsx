@@ -28,7 +28,7 @@ import { PresetIcon } from "./preset-icon";
 const CONTENT_CLASS =
   "min-w-[200px] max-w-[280px] rounded-md border border-border " + "bg-card shadow-md py-1";
 const ITEM_CLASS =
-  "flex items-center gap-2 px-3 h-[26px] text-xs cursor-pointer outline-none " +
+  "flex items-center gap-2 px-3 h-[26px] text-2xs cursor-pointer outline-none " +
   "text-secondary-foreground data-[highlighted]:bg-element-hover " +
   "data-[highlighted]:text-foreground";
 
@@ -107,7 +107,7 @@ export function ProfileBar() {
     <div className="flex h-[29px] shrink-0 items-center gap-1 border-b border-border px-2">
       {naming ? (
         <div className="flex items-center gap-1.5 px-2">
-          <span className="text-xs font-normal text-muted-foreground">Profile</span>
+          <span className="text-2xs font-normal text-muted-foreground">Profile</span>
           <input
             ref={inputRef}
             value={draft}
@@ -122,7 +122,7 @@ export function ProfileBar() {
               e.stopPropagation();
             }}
             className={cn(
-              "h-6 w-[200px] rounded-md border border-border-strong bg-card px-2 text-xs",
+              "h-6 w-[200px] rounded-md border border-border-strong bg-card px-2 text-2xs",
               "text-foreground outline-none placeholder:text-muted-foreground",
             )}
           />
@@ -134,7 +134,7 @@ export function ProfileBar() {
               <button
                 type="button"
                 className={cn(
-                  "flex h-6 items-center gap-1.5 rounded-md px-2 text-xs font-medium",
+                  "flex h-6 items-center gap-1.5 rounded-md px-2 text-2xs font-medium",
                   "text-foreground hover:bg-element-hover transition-colors cursor-pointer",
                 )}
               >
@@ -167,7 +167,7 @@ export function ProfileBar() {
                     {p.builtIn ? (
                       <Lock size={10} className="text-muted-foreground" />
                     ) : (
-                      <span className="text-2xs tabular-nums text-muted-foreground">
+                      <span className="text-3xs tabular-nums text-muted-foreground">
                         {Object.keys(p.bindings).length || ""}
                       </span>
                     )}
@@ -199,7 +199,7 @@ export function ProfileBar() {
                   <span className="flex-1 truncate">Duplicate “{active.name}”…</span>
                 </DropdownMenu.Item>
                 <DropdownMenu.Separator className="my-1 h-px bg-border" />
-                <div className="px-3 pb-0.5 pt-1 text-2xs text-muted-foreground">
+                <div className="px-3 pb-0.5 pt-1 text-3xs text-muted-foreground">
                   New from an editor's keys
                 </div>
                 {PRESETS.map((preset) => (
@@ -226,7 +226,7 @@ export function ProfileBar() {
       )}
 
       {!locked && overrideCount > 0 && (
-        <span className="text-2xs tabular-nums text-muted-foreground">
+        <span className="text-3xs tabular-nums text-muted-foreground">
           {overrideCount} {overrideCount === 1 ? "override" : "overrides"}
         </span>
       )}
@@ -303,7 +303,7 @@ function PresetPicker({
             <button
               type="button"
               className={cn(
-                "flex h-6 items-center gap-1.5 rounded-md px-2 text-xs",
+                "flex h-6 items-center gap-1.5 rounded-md px-2 text-2xs",
                 "text-secondary-foreground hover:bg-element-hover hover:text-foreground",
                 "transition-colors cursor-pointer",
               )}

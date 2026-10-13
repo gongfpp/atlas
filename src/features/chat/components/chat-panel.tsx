@@ -1700,7 +1700,7 @@ function DisconnectedBanner({ tabId }: { tabId: string }) {
     !agentCatalogEntry(pluginId)?.installed;
   if (removed) return null;
   return (
-    <div className="max-w-[720px] mx-auto mb-2 flex items-center justify-between gap-3 px-3 py-2 rounded-lg border border-border bg-card text-sm">
+    <div className="max-w-[720px] mx-auto mb-2 flex items-center justify-between gap-3 px-3 py-2 rounded-lg border border-border bg-card text-xs">
       <span className="select-text text-secondary-foreground">
         {bindError
           ? `The agent exited while starting (${bindError.slice(0, 160)}). Your message is back in the queue — restart to try again.`
@@ -1718,7 +1718,7 @@ function DisconnectedBanner({ tabId }: { tabId: string }) {
             setRestarting(false);
           }
         }}
-        className="shrink-0 px-2.5 h-6 rounded-md bg-foreground text-background text-xs font-medium hover:bg-secondary-foreground disabled:opacity-50 cursor-pointer"
+        className="shrink-0 px-2.5 h-6 rounded-md bg-foreground text-background text-2xs font-medium hover:bg-secondary-foreground disabled:opacity-50 cursor-pointer"
       >
         {restarting ? "Restarting…" : "Restart agent"}
       </button>
@@ -1818,7 +1818,7 @@ const JumpToBottomPill = memo(function JumpToBottomPill({
         className={cn(
           "pointer-events-auto atlas-pill-in inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full",
           "border border-border bg-card",
-          "text-xs leading-none font-medium text-secondary-foreground",
+          "text-2xs leading-none font-medium text-secondary-foreground",
           "shadow-md cursor-pointer transition-colors",
           "hover:bg-element-hover hover:text-foreground",
         )}
@@ -1885,7 +1885,7 @@ function WelcomeState() {
         <h2 className="bg-gradient-to-b from-foreground to-foreground/55 bg-clip-text text-[22px] font-semibold tracking-tight text-transparent">
           Atlas
         </h2>
-        <p className="mt-1.5 text-base text-muted-foreground">
+        <p className="mt-1.5 type-reading text-muted-foreground">
           Code with Agents. Tools, plans, and edits all live.
         </p>
 
@@ -1911,7 +1911,7 @@ function WelcomeState() {
                   className="-translate-x-1 text-disabled opacity-0 transition-all group-hover:translate-x-0 group-hover:text-secondary-foreground group-hover:opacity-100"
                 />
               </div>
-              <span className="text-sm font-medium leading-snug text-secondary-foreground transition-colors group-hover:text-foreground">
+              <span className="text-xs font-medium leading-snug text-secondary-foreground transition-colors group-hover:text-foreground">
                 {text}
               </span>
             </button>

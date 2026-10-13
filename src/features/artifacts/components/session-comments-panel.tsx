@@ -134,8 +134,8 @@ export function CommentsPanelBase({
     <div className="flex h-full min-h-0 w-full flex-col bg-background">
       <header className="flex h-9 shrink-0 items-center gap-2 border-b border-border pl-3 pr-2">
         <MessageSquare size={13} className="shrink-0 text-muted-foreground" />
-        <span className="text-xs font-medium text-foreground">Comments</span>
-        <span className="font-mono text-2xs text-disabled">
+        <span className="text-2xs font-medium text-foreground">Comments</span>
+        <span className="font-mono text-3xs text-disabled">
           {shown.length}
           {narrowed && threads.length !== shown.length && ` / ${threads.length}`}
         </span>
@@ -174,7 +174,7 @@ export function CommentsPanelBase({
           placeholder="Search comments…"
           spellCheck={false}
           aria-label="Search comments"
-          className="min-w-0 flex-1 border-0 bg-transparent p-0 text-xs text-foreground outline-none placeholder:text-muted-foreground"
+          className="min-w-0 flex-1 border-0 bg-transparent p-0 text-2xs text-foreground outline-none placeholder:text-muted-foreground"
         />
         {filters.query && (
           <button
@@ -274,10 +274,10 @@ const ThreadRow = memo(function ThreadRow({
             ))}
           </span>
         )}
-        <span className="min-w-0 truncate text-2xs font-medium text-foreground">{name}</span>
+        <span className="min-w-0 truncate text-3xs font-medium text-foreground">{name}</span>
         <span className="flex-1" />
         {thread.resolved && <Check size={10} className="shrink-0 text-success" />}
-        <span className="shrink-0 font-mono text-3xs text-disabled">
+        <span className="shrink-0 font-mono text-4xs text-disabled">
           {timeAgo(thread.lastActivityAt, { suffix: true })}
         </span>
       </span>
@@ -285,13 +285,13 @@ const ThreadRow = memo(function ThreadRow({
       {excerpt && !thread.root.deletedAt && (
         <span
           aria-label="Selected passage"
-          className="line-clamp-2 w-full whitespace-pre-wrap break-words border-l-2 border-border pl-2 text-xs text-muted-foreground"
+          className="line-clamp-2 w-full whitespace-pre-wrap break-words border-l-2 border-border pl-2 text-2xs text-muted-foreground"
         >
           {excerpt.selection}
         </span>
       )}
       {/* The comment itself, unprefixed — the byline above already said who. */}
-      <span className="line-clamp-2 w-full text-xs leading-snug text-secondary-foreground">
+      <span className="line-clamp-2 w-full text-2xs leading-snug text-secondary-foreground">
         {thread.root.deletedAt ? (
           <span className="italic text-disabled">deleted this comment</span>
         ) : (
@@ -307,7 +307,7 @@ const ThreadRow = memo(function ThreadRow({
       {/* What it is attached to, and how big the discussion got. The anchor is
        *  the footnote rather than the headline: it tells you where you will land
        *  once you have decided the comment is worth landing on. */}
-      <span className="flex w-full min-w-0 items-center gap-2 text-2xs text-muted-foreground">
+      <span className="flex w-full min-w-0 items-center gap-2 text-3xs text-muted-foreground">
         <span className="flex min-w-0 items-center gap-1">
           {/* The glyph says this line points *somewhere* — the row is a link to
            *  a node, and the anchor kind alone reads as a label rather than a
@@ -378,7 +378,7 @@ function FilterMenu({
           <Tick on={filters.showResolved} />
           Show resolved
           {resolvedCount > 0 && (
-            <span className="ml-auto pl-2 font-mono text-2xs text-disabled">{resolvedCount}</span>
+            <span className="ml-auto pl-2 font-mono text-3xs text-disabled">{resolvedCount}</span>
           )}
         </DropdownMenuItem>
 
@@ -429,20 +429,20 @@ function Empty({
 }) {
   return (
     <div className="px-4 py-10 text-center">
-      <p className="text-xs text-muted-foreground">
+      <p className="text-2xs text-muted-foreground">
         {hasAny ? "No comments match these filters." : "No comments on this session yet."}
       </p>
       {hasAny && narrowed && (
         <button
           type="button"
           onClick={onClear}
-          className="mt-2 cursor-pointer text-2xs text-secondary-foreground underline underline-offset-2 transition-colors hover:text-foreground"
+          className="mt-2 cursor-pointer text-3xs text-secondary-foreground underline underline-offset-2 transition-colors hover:text-foreground"
         >
           Clear filters
         </button>
       )}
       {!hasAny && (
-        <p className="mt-1.5 text-2xs text-disabled">
+        <p className="mt-1.5 text-3xs text-disabled">
           Comment on any step from its row in the transcript.
         </p>
       )}

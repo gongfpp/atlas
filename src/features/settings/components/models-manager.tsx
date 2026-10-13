@@ -109,7 +109,7 @@ export function ModelsManager() {
             placeholder="Filter models…"
             className={cn(
               "w-full h-7 pl-8 pr-2.5 rounded-md bg-card border border-border",
-              "text-xs text-foreground placeholder:text-muted-foreground",
+              "text-2xs text-foreground placeholder:text-muted-foreground",
               "focus:outline-none focus:border-border-strong",
             )}
           />
@@ -119,11 +119,11 @@ export function ModelsManager() {
       {/* Table */}
       <div className="flex-1 min-h-0 overflow-auto">
         {!loaded ? (
-          <div className="p-8 text-center text-xs text-muted-foreground">Loading models…</div>
+          <div className="p-8 text-center text-2xs text-muted-foreground">Loading models…</div>
         ) : (
           <div className="min-w-[560px]">
             {/* header */}
-            <div className="sticky top-0 z-10 flex items-center gap-3 px-4 h-8 bg-background border-b border-border text-2xs uppercase tracking-wider text-muted-foreground">
+            <div className="sticky top-0 z-10 flex items-center gap-3 px-4 h-8 bg-background border-b border-border text-3xs uppercase tracking-wider text-muted-foreground">
               <div className={COL.name}>Model</div>
               <div className={COL.size}>Size</div>
               <div className={COL.dim}>Dim</div>
@@ -140,40 +140,40 @@ export function ModelsManager() {
                 >
                   <div className={COL.name}>
                     <div className="flex items-center gap-1.5">
-                      <span className="text-sm font-medium text-foreground">{m.name}</span>
+                      <span className="text-xs font-medium text-foreground">{m.name}</span>
                       {m.selected && (
-                        <span className="text-3xs uppercase tracking-wide text-background bg-primary rounded px-1 py-px">
+                        <span className="text-4xs uppercase tracking-wide text-background bg-primary rounded px-1 py-px">
                           In use
                         </span>
                       )}
                       {m.kind === "code_embedding" && (
-                        <span className="text-3xs uppercase tracking-wide text-muted-foreground border border-border rounded px-1 py-px">
+                        <span className="text-4xs uppercase tracking-wide text-muted-foreground border border-border rounded px-1 py-px">
                           Code search
                         </span>
                       )}
                     </div>
-                    <div className="text-2xs text-muted-foreground mt-0.5 truncate">
+                    <div className="text-3xs text-muted-foreground mt-0.5 truncate">
                       {m.description}
                     </div>
                   </div>
-                  <div className={cn(COL.size, "text-xs text-secondary-foreground")}>
+                  <div className={cn(COL.size, "text-2xs text-secondary-foreground")}>
                     {fmtSize(m.sizeMb)}
                   </div>
-                  <div className={cn(COL.dim, "text-xs text-secondary-foreground")}>
+                  <div className={cn(COL.dim, "text-2xs text-secondary-foreground")}>
                     {m.dim ?? "—"}
                   </div>
                   <div className={COL.status}>
                     {dl ? (
                       <ProgressBar dl={dl} />
                     ) : m.downloaded ? (
-                      <span className="inline-flex items-center gap-1 text-2xs text-secondary-foreground">
+                      <span className="inline-flex items-center gap-1 text-3xs text-secondary-foreground">
                         <Check size={12} className="text-secondary-foreground" /> Downloaded
                       </span>
                     ) : (
                       <button
                         type="button"
                         onClick={() => void doDownload(m)}
-                        className="inline-flex items-center gap-1 h-6 rounded-md px-2 text-2xs font-medium border border-border bg-card text-foreground hover:bg-element-hover transition-colors"
+                        className="inline-flex items-center gap-1 h-6 rounded-md px-2 text-3xs font-medium border border-border bg-card text-foreground hover:bg-element-hover transition-colors"
                       >
                         <Download size={11} /> Download
                       </button>
@@ -181,7 +181,7 @@ export function ModelsManager() {
                   </div>
                   <div className={cn(COL.use, "flex items-center justify-end gap-1")}>
                     {m.selected ? (
-                      <span className="inline-flex items-center gap-1 h-6 px-2 text-2xs font-medium text-secondary-foreground">
+                      <span className="inline-flex items-center gap-1 h-6 px-2 text-3xs font-medium text-secondary-foreground">
                         <Check size={11} /> In use
                       </span>
                     ) : (
@@ -202,7 +202,7 @@ export function ModelsManager() {
                             : "Download this model first"
                         }
                         onClick={() => void doUse(m)}
-                        className="h-6 rounded-md px-2 text-2xs font-medium border border-border bg-card text-foreground hover:bg-element-hover transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+                        className="h-6 rounded-md px-2 text-3xs font-medium border border-border bg-card text-foreground hover:bg-element-hover transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
                       >
                         {busy ? <Loader2 size={11} className="animate-spin" /> : "Use"}
                       </button>
@@ -257,7 +257,7 @@ function ProgressBar({
           style={{ width: `${pct}%` }}
         />
       </div>
-      <span className="text-2xs tabular-nums text-muted-foreground">{pct}%</span>
+      <span className="text-3xs tabular-nums text-muted-foreground">{pct}%</span>
     </div>
   );
 }
@@ -283,8 +283,8 @@ function ConfirmReindex({
         <div className="flex items-start gap-2.5">
           <AlertTriangle size={16} className="text-warning shrink-0 mt-0.5" />
           <div>
-            <p className="text-base font-semibold text-foreground">Switch embedding model?</p>
-            <p className="text-xs text-secondary-foreground mt-1 leading-relaxed">
+            <p className="type-reading font-semibold text-foreground">Switch embedding model?</p>
+            <p className="text-2xs text-secondary-foreground mt-1 leading-relaxed">
               Using <span className="text-foreground">{name}</span> re-embeds your memory in a new
               vector space. Atlas will wipe this project's memory index and rebuild it in the
               background. Your notes and files are untouched.
@@ -295,14 +295,14 @@ function ConfirmReindex({
           <button
             type="button"
             onClick={onCancel}
-            className="h-7 rounded-md px-3 text-xs font-medium border border-border bg-card text-secondary-foreground hover:bg-element-hover transition-colors"
+            className="h-7 rounded-md px-3 text-2xs font-medium border border-border bg-card text-secondary-foreground hover:bg-element-hover transition-colors"
           >
             Cancel
           </button>
           <button
             type="button"
             onClick={onConfirm}
-            className="h-7 rounded-md px-3 text-xs font-medium bg-primary text-background hover:opacity-90 transition-opacity"
+            className="h-7 rounded-md px-3 text-2xs font-medium bg-primary text-background hover:opacity-90 transition-opacity"
           >
             Switch & rebuild
           </button>

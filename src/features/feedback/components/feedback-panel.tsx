@@ -121,7 +121,7 @@ export function FeedbackPanel() {
     >
       <div className="flex items-center gap-2 px-3.5 h-9 border-b border-hairline">
         <MessageCircleQuestion size={13} strokeWidth={1.5} className="text-secondary-foreground" />
-        <span className="text-3xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+        <span className="text-4xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">
           Send feedback
         </span>
         <div className="flex-1" />
@@ -142,11 +142,11 @@ export function FeedbackPanel() {
           <div className="grid h-9 w-9 place-items-center rounded-full border border-hairline bg-element-hover">
             <Check size={16} strokeWidth={1.75} className="text-success" />
           </div>
-          <p className="text-sm text-foreground">Thanks — we got it.</p>
+          <p className="text-xs text-foreground">Thanks — we got it.</p>
           <button
             type="button"
             onClick={a.dismissSent}
-            className="mt-1 h-6 rounded-full px-3 text-xs text-muted-foreground hover:text-foreground hover:bg-element-selected transition-colors cursor-pointer"
+            className="mt-1 h-6 rounded-full px-3 text-2xs text-muted-foreground hover:text-foreground hover:bg-element-selected transition-colors cursor-pointer"
           >
             Send another
           </button>
@@ -169,7 +169,7 @@ export function FeedbackPanel() {
                 tabIndex={category === c.id ? 0 : -1}
                 onClick={() => a.setCategory(c.id)}
                 className={cn(
-                  "h-6 rounded-full px-2.5 text-xs border transition-colors cursor-pointer",
+                  "h-6 rounded-full px-2.5 text-2xs border transition-colors cursor-pointer",
                   category === c.id
                     ? "border-border bg-element-active text-foreground"
                     : "border-hairline bg-element-hover text-muted-foreground hover:text-secondary-foreground hover:bg-element-selected",
@@ -188,7 +188,7 @@ export function FeedbackPanel() {
             maxLength={4000}
             aria-label="Your feedback"
             placeholder={active.placeholder}
-            className="w-full resize-none bg-transparent px-3.5 pt-3 pb-1 text-sm leading-relaxed text-foreground placeholder:text-disabled outline-none select-text"
+            className="w-full resize-none bg-transparent px-3.5 pt-3 pb-1 text-xs leading-relaxed text-foreground placeholder:text-disabled outline-none select-text"
           />
 
           <div className="flex items-center gap-2 px-3.5 pb-2.5">
@@ -220,7 +220,7 @@ export function FeedbackPanel() {
                 type="button"
                 onClick={() => void a.attachScreenshot()}
                 title="Drag a region — or press Space, then click the Atlas window."
-                className="inline-flex h-6 items-center gap-1.5 rounded-md border border-hairline bg-element-hover px-2 text-xs text-muted-foreground hover:bg-element-selected hover:text-foreground transition-colors cursor-pointer"
+                className="inline-flex h-6 items-center gap-1.5 rounded-md border border-hairline bg-element-hover px-2 text-2xs text-muted-foreground hover:bg-element-selected hover:text-foreground transition-colors cursor-pointer"
               >
                 <Camera size={11} strokeWidth={1.75} />
                 Attach screenshot
@@ -229,7 +229,7 @@ export function FeedbackPanel() {
           </div>
 
           {error && (
-            <p role="alert" className="px-3.5 pb-2 text-2xs text-error">
+            <p role="alert" className="px-3.5 pb-2 text-3xs text-error">
               {error}
             </p>
           )}
@@ -238,7 +238,7 @@ export function FeedbackPanel() {
             // Say it plainly rather than in a tooltip: this is the one path that
             // transmits with usage data switched off, and the user pressed a
             // button labelled "Send".
-            <p className="px-3.5 pb-2 text-2xs leading-snug text-disabled">
+            <p className="px-3.5 pb-2 text-3xs leading-snug text-disabled">
               Usage data is off. This feedback is still sent, because you asked for it to be.
             </p>
           )}
@@ -251,7 +251,7 @@ export function FeedbackPanel() {
                 title={
                   anonymous ? "Send with your Atlas account instead" : "Send anonymously instead"
                 }
-                className="inline-flex min-w-0 items-center gap-1.5 text-2xs text-muted-foreground hover:text-secondary-foreground transition-colors cursor-pointer"
+                className="inline-flex min-w-0 items-center gap-1.5 text-3xs text-muted-foreground hover:text-secondary-foreground transition-colors cursor-pointer"
               >
                 {/* The face is the point: at a glance you can tell whether this
                     report will be attributable to you. Anonymous swaps it for a
@@ -267,7 +267,7 @@ export function FeedbackPanel() {
                 </span>
               </button>
             ) : (
-              <span className="inline-flex items-center gap-1.5 text-2xs text-disabled">
+              <span className="inline-flex items-center gap-1.5 text-3xs text-disabled">
                 <EyeOff size={11} strokeWidth={1.75} className="shrink-0" />
                 Sending anonymously
               </span>
@@ -278,7 +278,7 @@ export function FeedbackPanel() {
               onClick={() => void a.submit()}
               disabled={!canSubmit}
               className={cn(
-                "inline-flex h-6 items-center gap-1.5 rounded-full px-3 text-xs font-medium transition-colors",
+                "inline-flex h-6 items-center gap-1.5 rounded-full px-3 text-2xs font-medium transition-colors",
                 canSubmit
                   ? "bg-primary text-primary-foreground hover:opacity-90 cursor-pointer"
                   : "bg-element-selected text-disabled cursor-not-allowed",
@@ -294,7 +294,7 @@ export function FeedbackPanel() {
         <button
           type="button"
           onClick={() => void openExternal(issueUrl(category, message))}
-          className="inline-flex items-center gap-1.5 text-2xs text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
+          className="inline-flex items-center gap-1.5 text-3xs text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
         >
           <GithubIcon size={10} />
           Open a GitHub issue
@@ -303,7 +303,7 @@ export function FeedbackPanel() {
         <button
           type="button"
           onClick={() => void openExternal(DISCORD_URL)}
-          className="inline-flex items-center gap-1.5 text-2xs text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
+          className="inline-flex items-center gap-1.5 text-3xs text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
         >
           <MessagesSquare size={10} />
           Join the community

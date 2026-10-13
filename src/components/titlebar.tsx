@@ -362,7 +362,7 @@ function ProjectLabel({
               // inherited line-height the label spans set a taller line box than
               // the dot, and `items-center` centred the dot against *that* — which
               // is why it sat visibly high.
-              className="group flex h-[19px] max-w-[320px] min-w-0 cursor-pointer items-center gap-1 rounded-full border border-hairline bg-card px-2 text-xs leading-none font-medium transition-colors hover:bg-element-hover"
+              className="group flex h-[19px] max-w-[320px] min-w-0 cursor-pointer items-center gap-1 rounded-full border border-hairline bg-card px-2 text-2xs leading-none font-medium transition-colors hover:bg-element-hover"
               title={health?.summary ?? "Session capture"}
               aria-label={health?.summary ?? "Session capture"}
             >
@@ -457,7 +457,7 @@ function DevModePill() {
         // ratchet-allow: the label on the dev-build capsule, whose fill is the
         // fixed blue above — it is an out-of-band marker that must look the same
         // in every theme, which is the whole point of it.
-        className="relative flex h-5 shrink-0 items-center gap-1 overflow-hidden rounded-full px-2 text-xs leading-none font-medium text-white"
+        className="relative flex h-5 shrink-0 items-center gap-1 overflow-hidden rounded-full px-2 text-2xs leading-none font-medium text-white"
         style={{ background: DEV_PILL_FILL, boxShadow: DEV_PILL_GLOW }}
       >
         {/* Crown highlight — the light source. Blurred so its lower edge melts
@@ -500,7 +500,7 @@ function ProjectToggle() {
       >
         <Layers size={14} />
         {count > 1 && (
-          <span className="absolute -bottom-0.5 -right-0.5 text-3xs font-mono text-foreground">
+          <span className="absolute -bottom-0.5 -right-0.5 text-4xs font-mono text-foreground">
             {count}
           </span>
         )}

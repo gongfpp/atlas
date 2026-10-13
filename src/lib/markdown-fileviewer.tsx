@@ -29,7 +29,7 @@ interface Props {
 }
 export const MarkdownFile = memo(function MarkdownFile({ children, trusted = false }: Props) {
   return (
-    <div className="atlas-markdown text-md leading-relaxed text-foreground break-words select-text">
+    <div className="atlas-markdown text-sm leading-relaxed text-foreground break-words select-text">
       <ReactMarkdown
         remarkPlugins={[remarkGfm]}
         rehypePlugins={[...(trusted ? [rehypeRaw] : []), rehypeHighlight]}
@@ -46,9 +46,9 @@ export const MarkdownFile = memo(function MarkdownFile({ children, trusted = fal
             </h2>
           ),
 
-          h3: (p) => <h3 className="mt-6 mb-2 text-lg font-semibold">{p.children}</h3>,
+          h3: (p) => <h3 className="mt-6 mb-2 text-md font-semibold">{p.children}</h3>,
 
-          h4: (p) => <h4 className="mt-4 mb-1.5 text-md font-semibold">{p.children}</h4>,
+          h4: (p) => <h4 className="mt-4 mb-1.5 text-sm font-semibold">{p.children}</h4>,
 
           p: (p) => <p className="my-3">{p.children}</p>,
 
@@ -83,7 +83,7 @@ export const MarkdownFile = memo(function MarkdownFile({ children, trusted = fal
             if (isInline) {
               return (
                 <code
-                  className="rounded bg-card px-1.5 py-0.5 font-mono text-base text-foreground"
+                  className="rounded bg-card px-1.5 py-0.5 font-mono type-reading text-foreground"
                   {...rest}
                 >
                   {children}
@@ -100,7 +100,7 @@ export const MarkdownFile = memo(function MarkdownFile({ children, trusted = fal
 
           pre: (p) => (
             <pre
-              className="my-4 overflow-x-auto rounded-md border border-border bg-card text-base"
+              className="my-4 overflow-x-auto rounded-md border border-border bg-card type-reading"
               style={{
                 whiteSpace: "pre",
                 wordBreak: "normal",
@@ -124,7 +124,7 @@ export const MarkdownFile = memo(function MarkdownFile({ children, trusted = fal
               className="my-4 overflow-x-auto rounded-md border border-border"
               onWheel={handleWheel}
             >
-              <table className="min-w-max text-base">{p.children}</table>
+              <table className="min-w-max type-reading">{p.children}</table>
             </div>
           ),
 
@@ -133,13 +133,13 @@ export const MarkdownFile = memo(function MarkdownFile({ children, trusted = fal
           tr: (p) => <tr className="border-b border-hairline last:border-b-0">{p.children}</tr>,
 
           th: (p) => (
-            <th className="border-r border-border border-b border-border px-3 py-2 text-left text-sm font-semibold whitespace-nowrap text-secondary-foreground last:border-r-0">
+            <th className="border-r border-border border-b border-border px-3 py-2 text-left text-xs font-semibold whitespace-nowrap text-secondary-foreground last:border-r-0">
               {p.children}
             </th>
           ),
 
           td: (p) => (
-            <td className="border-r border-hairline px-3 py-2 align-top whitespace-nowrap text-base text-foreground last:border-r-0">
+            <td className="border-r border-hairline px-3 py-2 align-top whitespace-nowrap type-reading text-foreground last:border-r-0">
               {p.children}
             </td>
           ),

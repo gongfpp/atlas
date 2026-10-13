@@ -4,7 +4,7 @@ import type { NotificationTier } from "@/features/notifications/lib/catalog";
 import { SectionTitle, SettingRow, Toggle } from "./settings-controls";
 
 const SELECT_CLASS =
-  "h-7 rounded-md border border-border bg-card px-2 text-xs text-foreground outline-none disabled:opacity-40";
+  "h-7 rounded-md border border-border bg-card px-2 text-2xs text-foreground outline-none disabled:opacity-40";
 
 const DURATION_OPTIONS: { value: number; label: string }[] = [
   { value: 0, label: "Always" },
@@ -67,8 +67,8 @@ function TierGroup({ tier, masterOn }: { tier: NotificationTier; masterOn: boole
   return (
     <div className="flex flex-col gap-3">
       <div>
-        <h3 className="text-xs font-semibold text-foreground">{group.title}</h3>
-        <p className="text-2xs text-muted-foreground mt-0.5">{group.description}</p>
+        <h3 className="text-2xs font-semibold text-foreground">{group.title}</h3>
+        <p className="text-3xs text-muted-foreground mt-0.5">{group.description}</p>
       </div>
       <SettingRow
         label="System notification"
@@ -102,9 +102,9 @@ function TierGroup({ tier, masterOn }: { tier: NotificationTier; masterOn: boole
       <ul className="flex flex-col gap-1.5 border-l border-border pl-3">
         {kinds.map(({ kind, entry }) => (
           <li key={kind} className="flex items-center justify-between gap-4">
-            <span className="text-2xs text-muted-foreground">{entry.label}</span>
+            <span className="text-3xs text-muted-foreground">{entry.label}</span>
             {entry.locked ? (
-              <span className="text-2xs text-muted-foreground">Always on</span>
+              <span className="text-3xs text-muted-foreground">Always on</span>
             ) : (
               <Toggle
                 checked={!disabled.has(kind)}

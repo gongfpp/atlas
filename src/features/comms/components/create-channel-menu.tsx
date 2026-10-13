@@ -83,14 +83,14 @@ export function CreateChannelMenu() {
                   }}
                   placeholder="new-channel"
                   aria-label="Channel name"
-                  className="min-w-0 flex-1 bg-transparent text-xs text-foreground outline-none placeholder:text-muted-foreground"
+                  className="min-w-0 flex-1 bg-transparent text-2xs text-foreground outline-none placeholder:text-muted-foreground"
                 />
               </div>
 
               <button
                 type="button"
                 onClick={() => setIsPrivate((v) => !v)}
-                className="flex items-center gap-2 px-3 py-2 text-left text-xs text-secondary-foreground transition-colors hover:bg-element-hover cursor-pointer"
+                className="flex items-center gap-2 px-3 py-2 text-left text-2xs text-secondary-foreground transition-colors hover:bg-element-hover cursor-pointer"
               >
                 <span
                   className={cn(
@@ -103,7 +103,7 @@ export function CreateChannelMenu() {
                   <Check size={10} />
                 </span>
                 Private
-                <span className="ml-auto text-2xs text-disabled">invite-only</span>
+                <span className="ml-auto text-3xs text-disabled">invite-only</span>
               </button>
 
               <div className="border-t border-hairline p-2">
@@ -111,7 +111,7 @@ export function CreateChannelMenu() {
                   type="button"
                   disabled={!name.trim() || pending}
                   onClick={() => void create()}
-                  className="flex h-[26px] w-full items-center justify-center gap-1.5 rounded-md bg-element-active text-xs font-medium text-foreground transition-colors hover:bg-element-emphasis disabled:cursor-not-allowed disabled:opacity-45 cursor-pointer"
+                  className="flex h-[26px] w-full items-center justify-center gap-1.5 rounded-md bg-element-active text-2xs font-medium text-foreground transition-colors hover:bg-element-emphasis disabled:cursor-not-allowed disabled:opacity-45 cursor-pointer"
                 >
                   {pending && <Loader2 size={11} className="animate-spin" />}
                   Create channel

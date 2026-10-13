@@ -87,10 +87,10 @@ export function GitGraphPanel() {
 
   if (!path || !isRepo) {
     return (
-      <div className="h-full flex flex-col items-center justify-center text-sm text-muted-foreground gap-2 px-6 text-center">
+      <div className="h-full flex flex-col items-center justify-center text-xs text-muted-foreground gap-2 px-6 text-center">
         <GitBranch size={18} className="opacity-60" />
         <div>Not a git repository.</div>
-        <div className="text-2xs">
+        <div className="text-3xs">
           Open a project that contains a `.git` folder to see its history.
         </div>
       </div>
@@ -207,7 +207,7 @@ function GraphView({
       <div className="flex items-center justify-between px-3 h-control-lg shrink-0 border-b border-hairline">
         <div className="flex items-center gap-1.5">
           {rows.length > 0 && (
-            <span className="text-2xs font-semibold text-muted-foreground uppercase tracking-wide">
+            <span className="text-3xs font-semibold text-muted-foreground uppercase tracking-wide">
               {commitCountLabel(rows.length, totalCommits)}
             </span>
           )}
@@ -240,9 +240,9 @@ function GraphView({
       {/* Virtualized commit list */}
       <div className="flex-1 min-h-0 relative">
         <div ref={parentRef} className="absolute inset-0 overflow-auto hide-scrollbar">
-          {isLoading && <div className="px-3 py-3 text-xs text-muted-foreground">Loading…</div>}
+          {isLoading && <div className="px-3 py-3 text-2xs text-muted-foreground">Loading…</div>}
           {rows.length === 0 && !isLoading && (
-            <div className="px-3 py-3 text-xs text-muted-foreground">No commits.</div>
+            <div className="px-3 py-3 text-2xs text-muted-foreground">No commits.</div>
           )}
           {rows.length > 0 && (
             <div style={{ height: totalSize, width: "100%", position: "relative" }}>
@@ -285,7 +285,7 @@ function GraphView({
             />
             <button
               onClick={onShowMore}
-              className="absolute bottom-3 left-1/2 -translate-x-1/2 z-20 flex items-center gap-1.5 px-3 h-7 rounded-full border border-border bg-card text-xs text-secondary-foreground hover:text-foreground hover:bg-card shadow-md transition-colors cursor-pointer"
+              className="absolute bottom-3 left-1/2 -translate-x-1/2 z-20 flex items-center gap-1.5 px-3 h-7 rounded-full border border-border bg-card text-2xs text-secondary-foreground hover:text-foreground hover:bg-card shadow-md transition-colors cursor-pointer"
               style={{ backdropFilter: "blur(4px)" }}
               title={`Show ${DEFAULT_LIMIT} more commits`}
             >

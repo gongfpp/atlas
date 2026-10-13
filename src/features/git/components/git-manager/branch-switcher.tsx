@@ -44,7 +44,7 @@ export function BranchSwitcher() {
       <Popover.Trigger
         render={
           <button
-            className="flex items-center gap-1.5 h-6 px-2 rounded text-xs font-medium text-secondary-foreground hover:text-foreground hover:bg-element-hover transition-colors cursor-pointer min-w-0"
+            className="flex items-center gap-1.5 h-6 px-2 rounded text-2xs font-medium text-secondary-foreground hover:text-foreground hover:bg-element-hover transition-colors cursor-pointer min-w-0"
             title="Switch branch"
           >
             <GitBranch size={12} className="shrink-0" />
@@ -62,7 +62,7 @@ export function BranchSwitcher() {
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="Filter branches…"
                 autoFocus
-                className="flex-1 bg-transparent outline-none text-xs text-foreground placeholder:text-muted-foreground min-w-0"
+                className="flex-1 bg-transparent outline-none text-2xs text-foreground placeholder:text-muted-foreground min-w-0"
               />
             </div>
 
@@ -71,7 +71,7 @@ export function BranchSwitcher() {
                 <div
                   key={b.name}
                   className={cn(
-                    "group flex items-center gap-2 px-2 h-[28px] text-xs cursor-pointer",
+                    "group flex items-center gap-2 px-2 h-[28px] text-2xs cursor-pointer",
                     b.isCurrent
                       ? "text-foreground"
                       : "text-secondary-foreground hover:bg-element-hover hover:text-foreground",
@@ -92,12 +92,12 @@ export function BranchSwitcher() {
                   />
                   <span className="truncate flex-1 font-mono">{b.name}</span>
                   {b.isRemote && (
-                    <span className="shrink-0 text-3xs font-mono uppercase tracking-wide text-muted-foreground border border-border rounded px-1">
+                    <span className="shrink-0 text-4xs font-mono uppercase tracking-wide text-muted-foreground border border-border rounded px-1">
                       remote
                     </span>
                   )}
                   {(b.ahead > 0 || b.behind > 0) && (
-                    <span className="shrink-0 text-3xs font-mono text-muted-foreground">
+                    <span className="shrink-0 text-4xs font-mono text-muted-foreground">
                       {b.ahead > 0 && `↑${b.ahead}`} {b.behind > 0 && `↓${b.behind}`}
                     </span>
                   )}
@@ -132,7 +132,7 @@ export function BranchSwitcher() {
                 </div>
               ))}
               {filtered.length === 0 && (
-                <div className="px-3 py-2 text-2xs text-muted-foreground text-center">
+                <div className="px-3 py-2 text-3xs text-muted-foreground text-center">
                   No branches
                 </div>
               )}
@@ -145,7 +145,7 @@ export function BranchSwitcher() {
                   onChange={(e) => setNewName(e.target.value)}
                   autoFocus
                   placeholder="new-branch-name"
-                  className="w-full h-7 rounded border border-border bg-panel-input px-2 text-xs font-mono text-foreground outline-none focus:border-border-strong"
+                  className="w-full h-7 rounded border border-border bg-panel-input px-2 text-2xs font-mono text-foreground outline-none focus:border-border-strong"
                   onKeyDown={(e) => {
                     if (e.key === "Enter" && newName.trim()) {
                       void run(() => actions.createBranch(newName.trim()));
@@ -159,7 +159,7 @@ export function BranchSwitcher() {
               ) : (
                 <button
                   onClick={() => setCreating(true)}
-                  className="w-full flex items-center gap-1.5 h-7 px-2 rounded text-xs text-secondary-foreground hover:bg-element-hover hover:text-foreground transition-colors"
+                  className="w-full flex items-center gap-1.5 h-7 px-2 rounded text-2xs text-secondary-foreground hover:bg-element-hover hover:text-foreground transition-colors"
                 >
                   <Plus size={12} />
                   New branch from {branch}

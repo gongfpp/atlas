@@ -306,7 +306,7 @@ export function SharedMemoryView({ projectPath, className }: Props) {
             onChange={(e) => setQuery(e.target.value)}
             placeholder={`Search ${tab}…`}
             spellCheck={false}
-            className="flex-1 min-w-0 bg-transparent outline-none text-xs text-foreground placeholder:text-muted-foreground"
+            className="flex-1 min-w-0 bg-transparent outline-none text-2xs text-foreground placeholder:text-muted-foreground"
           />
         </div>
 
@@ -420,10 +420,10 @@ function EventRow({
           expanded ? "bg-card/50" : "hover:bg-element-hover",
         )}
       >
-        <span className={cn(EVENT_COL.seq, "font-mono text-2xs tabular-nums text-disabled")}>
+        <span className={cn(EVENT_COL.seq, "font-mono text-3xs tabular-nums text-disabled")}>
           {e.seq}
         </span>
-        <span className={cn(EVENT_COL.time, "text-2xs text-muted-foreground")}>
+        <span className={cn(EVENT_COL.time, "text-3xs text-muted-foreground")}>
           {eventTime(e.ts)}
         </span>
         <span className={EVENT_COL.agent}>
@@ -433,7 +433,7 @@ function EventRow({
           <KindChip kind={e.kind} />
         </span>
         <span className={cn(EVENT_COL.detail, "min-w-0 pr-3")}>
-          <span className="block truncate text-sm text-secondary-foreground">
+          <span className="block truncate text-xs text-secondary-foreground">
             {eventDetail(e) || <span className="text-disabled">—</span>}
           </span>
         </span>
@@ -462,7 +462,7 @@ function EventDetail({ event: e }: { event: MemoryEvent }) {
       </div>
       {detail && (
         <div className="rounded-lg border border-border bg-background px-3 py-2">
-          <pre className="whitespace-pre-wrap break-words font-sans text-sm leading-[1.55] text-secondary-foreground">
+          <pre className="whitespace-pre-wrap break-words font-sans text-xs leading-[1.55] text-secondary-foreground">
             {detail}
           </pre>
         </div>
@@ -524,10 +524,10 @@ function PlanRow({
           expanded ? "bg-card/50" : "hover:bg-element-hover",
         )}
       >
-        <span className={cn(PLAN_COL.seq, "font-mono text-2xs tabular-nums text-disabled")}>
+        <span className={cn(PLAN_COL.seq, "font-mono text-3xs tabular-nums text-disabled")}>
           {e.seq}
         </span>
-        <span className={cn(PLAN_COL.time, "text-2xs text-muted-foreground")}>
+        <span className={cn(PLAN_COL.time, "text-3xs text-muted-foreground")}>
           {eventTime(e.ts)}
         </span>
         <span className={PLAN_COL.agent}>
@@ -537,7 +537,7 @@ function PlanRow({
           <StatusChip status={status} />
         </span>
         <span className={cn(PLAN_COL.plan, "min-w-0 pr-3")}>
-          <span className="block truncate text-sm text-secondary-foreground">
+          <span className="block truncate text-xs text-secondary-foreground">
             {firstLine || <span className="text-disabled">—</span>}
           </span>
         </span>
@@ -556,7 +556,7 @@ function PlanRow({
             <MetaChip label="When" value={fmtDateTime(e.ts)} />
           </div>
           <div className="rounded-lg border border-border bg-background px-3 py-2">
-            <pre className="whitespace-pre-wrap break-words font-sans text-sm leading-[1.55] text-secondary-foreground">
+            <pre className="whitespace-pre-wrap break-words font-sans text-xs leading-[1.55] text-secondary-foreground">
               {text || "—"}
             </pre>
           </div>
@@ -612,12 +612,12 @@ function MemoriesTable({ rows }: { rows: MemoryEntry[] }) {
   return (
     <div ref={scroller} className="flex-1 min-h-0 overflow-auto hide-scrollbar">
       {chosen.length > 0 && (
-        <div className="flex items-center gap-2 border-b border-border px-3 py-1.5 text-xs text-muted-foreground">
+        <div className="flex items-center gap-2 border-b border-border px-3 py-1.5 text-2xs text-muted-foreground">
           <span>{chosen.length} selected</span>
           <button
             type="button"
             onClick={() => setExporting(true)}
-            className="ml-auto h-6 rounded-md border border-border px-2 text-xs text-secondary-foreground transition-colors hover:bg-element-hover hover:text-foreground"
+            className="ml-auto h-6 rounded-md border border-border px-2 text-2xs text-secondary-foreground transition-colors hover:bg-element-hover hover:text-foreground"
           >
             Export to AGENTS.md
           </button>
@@ -693,7 +693,7 @@ function EntryRow({
             expanded ? "bg-card/50" : "hover:bg-element-hover",
           )}
         >
-          <span className={cn(ENTRY_COL.time, "text-2xs text-muted-foreground")}>
+          <span className={cn(ENTRY_COL.time, "text-3xs text-muted-foreground")}>
             {eventTime(e.updatedAt)}
           </span>
           <span className={ENTRY_COL.kind}>
@@ -707,16 +707,16 @@ function EntryRow({
             {entryAgent(e.agent) ? (
               <AgentTag agent={e.agent} />
             ) : (
-              <span className="font-mono text-2xs uppercase tracking-wider text-muted-foreground">
+              <span className="font-mono text-3xs uppercase tracking-wider text-muted-foreground">
                 {e.agent || "—"}
               </span>
             )}
           </span>
-          <span className={cn(ENTRY_COL.confidence, "tabular-nums text-2xs text-muted-foreground")}>
+          <span className={cn(ENTRY_COL.confidence, "tabular-nums text-3xs text-muted-foreground")}>
             {confidenceLabel(e.confidence)}
           </span>
           <span className={cn(ENTRY_COL.content, "min-w-0 pr-3")}>
-            <span className="block truncate text-sm text-secondary-foreground">
+            <span className="block truncate text-xs text-secondary-foreground">
               {e.content || <span className="text-disabled">—</span>}
             </span>
           </span>
@@ -866,13 +866,13 @@ function EntryDetail({ entry: e }: { entry: MemoryEntry }) {
           rows={Math.min(8, Math.max(2, draft.split("\n").length))}
           aria-label="Memory content"
           className={cn(
-            "block w-full resize-y rounded-lg border bg-background px-3 py-2 font-sans text-sm leading-[1.55] text-foreground outline-none transition-colors",
+            "block w-full resize-y rounded-lg border bg-background px-3 py-2 font-sans text-xs leading-[1.55] text-foreground outline-none transition-colors",
             dirty ? "border-border-strong" : "border-border",
           )}
         />
       ) : (
         <div className="rounded-lg border border-border bg-background px-3 py-2">
-          <pre className="whitespace-pre-wrap break-words font-sans text-sm leading-[1.55] text-secondary-foreground">
+          <pre className="whitespace-pre-wrap break-words font-sans text-xs leading-[1.55] text-secondary-foreground">
             {e.content || "—"}
           </pre>
         </div>
@@ -880,7 +880,7 @@ function EntryDetail({ entry: e }: { entry: MemoryEntry }) {
       {provenance.length > 0 && (
         <div className="space-y-0.5">
           {provenance.map((p, i) => (
-            <p key={`${p.source}-${i}`} className="text-xs text-muted-foreground">
+            <p key={`${p.source}-${i}`} className="text-2xs text-muted-foreground">
               {provenanceLine(p)}
             </p>
           ))}
@@ -980,7 +980,7 @@ function ExportAgentsModal({
           )}
         >
           <div className="flex items-center gap-3 border-b border-border px-4 py-2.5">
-            <Dialog.Title className="text-base font-semibold text-foreground">
+            <Dialog.Title className="type-reading font-semibold text-foreground">
               Export to AGENTS.md
             </Dialog.Title>
             <Dialog.Close
@@ -990,7 +990,7 @@ function ExportAgentsModal({
               <X size={13} />
             </Dialog.Close>
           </div>
-          <p className="px-4 pt-3 text-xs leading-relaxed text-muted-foreground">
+          <p className="px-4 pt-3 text-2xs leading-relaxed text-muted-foreground">
             {preview
               ? `${preview.path}: only the block between the atlas-memory markers changes.`
               : error
@@ -999,13 +999,13 @@ function ExportAgentsModal({
           </p>
           <div className="flex-1 overflow-auto px-4 py-2">
             {preview && (
-              <pre className="whitespace-pre-wrap break-words rounded border border-border bg-background p-2 font-mono text-2xs text-secondary-foreground">
+              <pre className="whitespace-pre-wrap break-words rounded border border-border bg-background p-2 font-mono text-3xs text-secondary-foreground">
                 {preview.after}
               </pre>
             )}
           </div>
           <div className="flex items-center justify-end gap-2 border-t border-border px-4 py-2.5">
-            <Dialog.Close className="rounded px-2.5 py-1 text-xs text-secondary-foreground hover:bg-element-hover transition-colors cursor-pointer">
+            <Dialog.Close className="rounded px-2.5 py-1 text-2xs text-secondary-foreground hover:bg-element-hover transition-colors cursor-pointer">
               Cancel
             </Dialog.Close>
             <button
@@ -1013,7 +1013,7 @@ function ExportAgentsModal({
               disabled={writing || preview === null}
               onClick={() => void write()}
               className={cn(
-                "rounded px-2.5 py-1 text-xs font-medium transition-colors cursor-pointer",
+                "rounded px-2.5 py-1 text-2xs font-medium transition-colors cursor-pointer",
                 "bg-primary text-primary-foreground hover:bg-primary",
                 "disabled:opacity-40 disabled:cursor-not-allowed",
               )}
@@ -1111,7 +1111,7 @@ function ImportRepoModal({
           )}
         >
           <div className="flex items-center gap-3 border-b border-border px-4 py-2.5">
-            <Dialog.Title className="text-base font-semibold text-foreground">
+            <Dialog.Title className="type-reading font-semibold text-foreground">
               Import memory repo
             </Dialog.Title>
             <Dialog.Close
@@ -1121,11 +1121,11 @@ function ImportRepoModal({
               <X size={13} />
             </Dialog.Close>
           </div>
-          <p className="px-4 pt-3 text-xs leading-relaxed text-muted-foreground">
+          <p className="px-4 pt-3 text-2xs leading-relaxed text-muted-foreground">
             Bring in an Agent Memory Repo (a folder with a MEMORY.md). Lines land as unconfirmed
             candidates: no agent is briefed on them until you approve them in Review.
           </p>
-          <div className="flex items-center gap-2 px-4 pt-2 text-xs">
+          <div className="flex items-center gap-2 px-4 pt-2 text-2xs">
             <button
               type="button"
               onClick={() => void choose()}
@@ -1137,23 +1137,23 @@ function ImportRepoModal({
           </div>
           <div className="flex-1 overflow-auto px-4 py-2">
             {error ? (
-              <div className="text-xs text-muted-foreground">{error}</div>
+              <div className="text-2xs text-muted-foreground">{error}</div>
             ) : lines && lines.length === 0 ? (
-              <div className="text-xs text-muted-foreground">No memory lines in that folder.</div>
+              <div className="text-2xs text-muted-foreground">No memory lines in that folder.</div>
             ) : (
               lines?.map((l) => (
-                <label key={l.id} className="flex items-baseline gap-2 py-1 text-xs">
+                <label key={l.id} className="flex items-baseline gap-2 py-1 text-2xs">
                   <input
                     type="checkbox"
                     disabled={!l.isNew}
                     checked={selected.has(l.id)}
                     onChange={() => toggle(l.id)}
                   />
-                  <span className="w-20 shrink-0 text-2xs text-muted-foreground">{l.kind}</span>
+                  <span className="w-20 shrink-0 text-3xs text-muted-foreground">{l.kind}</span>
                   <span className={cn("min-w-0 flex-1", !l.isNew && "text-muted-foreground")}>
                     {l.content}
                     {l.meta && (
-                      <span className="block text-2xs text-muted-foreground">{l.meta}</span>
+                      <span className="block text-3xs text-muted-foreground">{l.meta}</span>
                     )}
                   </span>
                 </label>
@@ -1161,7 +1161,7 @@ function ImportRepoModal({
             )}
           </div>
           <div className="flex items-center justify-end gap-2 border-t border-border px-4 py-2.5">
-            <Dialog.Close className="rounded px-2.5 py-1 text-xs text-secondary-foreground hover:bg-element-hover transition-colors cursor-pointer">
+            <Dialog.Close className="rounded px-2.5 py-1 text-2xs text-secondary-foreground hover:bg-element-hover transition-colors cursor-pointer">
               Cancel
             </Dialog.Close>
             <button
@@ -1169,7 +1169,7 @@ function ImportRepoModal({
               disabled={busy || selected.size === 0}
               onClick={() => void runImport()}
               className={cn(
-                "rounded px-2.5 py-1 text-xs font-medium transition-colors cursor-pointer",
+                "rounded px-2.5 py-1 text-2xs font-medium transition-colors cursor-pointer",
                 "bg-primary text-primary-foreground hover:bg-primary",
                 "disabled:opacity-40 disabled:cursor-not-allowed",
               )}
@@ -1261,7 +1261,7 @@ function ImportClaudeMemoryModal({
           )}
         >
           <div className="flex items-center gap-3 border-b border-border px-4 py-2.5">
-            <Dialog.Title className="text-base font-semibold text-foreground">
+            <Dialog.Title className="type-reading font-semibold text-foreground">
               Import Claude memory
             </Dialog.Title>
             <Dialog.Close
@@ -1272,7 +1272,7 @@ function ImportClaudeMemoryModal({
             </Dialog.Close>
           </div>
 
-          <p className="px-4 pt-3 text-xs leading-relaxed text-muted-foreground">
+          <p className="px-4 pt-3 text-2xs leading-relaxed text-muted-foreground">
             {preview?.alreadyImported
               ? "Already imported: Claude's memory for this project was brought in before, so there is nothing new to import."
               : "Bring the memories Claude Code kept for this project into shared memory, so every agent sees them. Imported lines are marked as from Claude, at 70% confidence."}
@@ -1280,11 +1280,11 @@ function ImportClaudeMemoryModal({
 
           <div className="flex-1 overflow-auto hide-scrollbar px-2 py-2">
             {preview === null ? (
-              <div className="px-2 py-6 text-center text-xs text-muted-foreground">
+              <div className="px-2 py-6 text-center text-2xs text-muted-foreground">
                 Reading Claude's memory…
               </div>
             ) : preview.lines.length === 0 ? (
-              <div className="px-2 py-6 text-center text-xs text-muted-foreground">
+              <div className="px-2 py-6 text-center text-2xs text-muted-foreground">
                 Claude has no memory for this project.
               </div>
             ) : (
@@ -1300,7 +1300,7 @@ function ImportClaudeMemoryModal({
           </div>
 
           <div className="flex items-center justify-end gap-2 border-t border-border px-4 py-2.5">
-            <Dialog.Close className="rounded px-2.5 py-1 text-xs text-secondary-foreground hover:bg-element-hover transition-colors cursor-pointer">
+            <Dialog.Close className="rounded px-2.5 py-1 text-2xs text-secondary-foreground hover:bg-element-hover transition-colors cursor-pointer">
               Cancel
             </Dialog.Close>
             <button
@@ -1308,7 +1308,7 @@ function ImportClaudeMemoryModal({
               disabled={importing || fresh === 0 || selected.size === 0}
               onClick={() => void runImport()}
               className={cn(
-                "rounded px-2.5 py-1 text-xs font-medium transition-colors cursor-pointer",
+                "rounded px-2.5 py-1 text-2xs font-medium transition-colors cursor-pointer",
                 "bg-primary text-primary-foreground hover:bg-primary",
                 "disabled:opacity-40 disabled:cursor-not-allowed",
               )}
@@ -1347,9 +1347,9 @@ function ImportLineRow({
       <span className="w-[64px] shrink-0">
         <KindChip kind={line.kind} />
       </span>
-      <span className="flex-1 min-w-0 truncate text-xs text-foreground">{line.content}</span>
+      <span className="flex-1 min-w-0 truncate text-2xs text-foreground">{line.content}</span>
       {!line.isNew && (
-        <span className="shrink-0 text-2xs text-muted-foreground">already in memory</span>
+        <span className="shrink-0 text-3xs text-muted-foreground">already in memory</span>
       )}
       {checked && <Check size={12} className="text-secondary-foreground shrink-0" />}
     </button>
@@ -1360,7 +1360,7 @@ function ImportLineRow({
 
 function HeaderRow({ children }: { children: React.ReactNode }) {
   return (
-    <div className="sticky top-0 z-10 flex items-center h-[28px] border-b border-border bg-background px-3 text-2xs uppercase tracking-wider text-muted-foreground">
+    <div className="sticky top-0 z-10 flex items-center h-[28px] border-b border-border bg-background px-3 text-3xs uppercase tracking-wider text-muted-foreground">
       {children}
     </div>
   );
@@ -1368,7 +1368,7 @@ function HeaderRow({ children }: { children: React.ReactNode }) {
 
 function EmptyRows({ label }: { label: string }) {
   return (
-    <div className="grid place-items-center h-[160px] text-xs text-muted-foreground">{label}</div>
+    <div className="grid place-items-center h-[160px] text-2xs text-muted-foreground">{label}</div>
   );
 }
 
@@ -1389,7 +1389,7 @@ function SegBtn({
     <button
       onClick={onClick}
       className={cn(
-        "flex items-center gap-1.5 h-control-xs px-2.5 rounded-full text-xs font-medium transition-colors cursor-pointer",
+        "flex items-center gap-1.5 h-control-xs px-2.5 rounded-full text-2xs font-medium transition-colors cursor-pointer",
         active
           ? "bg-element-selected text-foreground"
           : "text-muted-foreground hover:text-secondary-foreground",
@@ -1397,7 +1397,7 @@ function SegBtn({
     >
       <span className={active ? "opacity-100" : "opacity-60"}>{icon}</span>
       {label}
-      {count > 0 && <span className="text-3xs tabular-nums text-disabled">{count}</span>}
+      {count > 0 && <span className="text-4xs tabular-nums text-disabled">{count}</span>}
     </button>
   );
 }
@@ -1444,7 +1444,7 @@ function FilterMenu({
         onClick={() => setOpen((o) => !o)}
         title={`Filter by ${label.toLowerCase()}`}
         className={cn(
-          "flex items-center gap-1 h-6 rounded-md border px-2 text-xs transition-colors cursor-pointer",
+          "flex items-center gap-1 h-6 rounded-md border px-2 text-2xs transition-colors cursor-pointer",
           active
             ? "border-border-strong bg-card text-foreground"
             : "border-border text-muted-foreground hover:bg-element-hover hover:text-secondary-foreground",
@@ -1497,7 +1497,7 @@ function FilterOption({
     <button
       onClick={onClick}
       className={cn(
-        "flex w-full items-center gap-1.5 rounded-md px-2 py-1.5 text-left text-xs transition-colors cursor-pointer",
+        "flex w-full items-center gap-1.5 rounded-md px-2 py-1.5 text-left text-2xs transition-colors cursor-pointer",
         active
           ? "bg-element-selected text-foreground"
           : "text-secondary-foreground hover:bg-element-hover",
@@ -1515,7 +1515,7 @@ function AgentTag({ agent }: { agent: string }) {
   return (
     <span className="inline-flex items-center gap-1.5 min-w-0">
       <AgentMark agentType={pluginIdForSource(agent)} />
-      <span className="truncate font-mono text-2xs uppercase tracking-wider text-muted-foreground">
+      <span className="truncate font-mono text-3xs uppercase tracking-wider text-muted-foreground">
         {agentMetaForSource(agent).label}
       </span>
     </span>
@@ -1537,7 +1537,7 @@ const KIND_LABEL: Record<string, string> = {
 /** The table's small label chip (kind, source). */
 function Chip({ children }: { children: React.ReactNode }) {
   return (
-    <span className="inline-flex max-w-full items-center rounded bg-card px-1.5 py-0.5 text-2xs text-muted-foreground">
+    <span className="inline-flex max-w-full items-center rounded bg-card px-1.5 py-0.5 text-3xs text-muted-foreground">
       <span className="truncate">{children}</span>
     </span>
   );
@@ -1557,7 +1557,7 @@ export function provenanceLine(p: Provenance): string {
 /** A candidate or archived entry's state, beside its source. */
 function StateChip({ state }: { state: string }) {
   return (
-    <span className="text-3xs uppercase tracking-wide text-muted-foreground border border-border rounded px-1 py-px">
+    <span className="text-4xs uppercase tracking-wide text-muted-foreground border border-border rounded px-1 py-px">
       {state}
     </span>
   );
@@ -1577,7 +1577,7 @@ function StatusChip({ status }: { status: string }) {
   return (
     <span
       className={cn(
-        "inline-flex items-center gap-1 rounded px-1.5 py-0.5 text-2xs",
+        "inline-flex items-center gap-1 rounded px-1.5 py-0.5 text-3xs",
         done ? "bg-success-muted text-success" : "bg-card text-muted-foreground",
       )}
     >
@@ -1589,8 +1589,8 @@ function StatusChip({ status }: { status: string }) {
 function MetaChip({ label, value, mono }: { label: string; value: string; mono?: boolean }) {
   return (
     <span className="inline-flex items-center gap-1.5">
-      <span className="text-3xs uppercase tracking-wider text-disabled">{label}</span>
-      <span className={cn("text-xs text-secondary-foreground", mono && "font-mono text-2xs")}>
+      <span className="text-4xs uppercase tracking-wider text-disabled">{label}</span>
+      <span className={cn("text-2xs text-secondary-foreground", mono && "font-mono text-3xs")}>
         {value}
       </span>
     </span>
@@ -1626,10 +1626,10 @@ function EmptyState() {
         <Share2 size={16} />
       </div>
       <div className="flex flex-col gap-1">
-        <span className="text-base font-medium text-secondary-foreground">
+        <span className="type-reading font-medium text-secondary-foreground">
           No shared memory yet
         </span>
-        <p className="max-w-[34ch] text-sm leading-[1.5] text-muted-foreground">
+        <p className="max-w-[34ch] text-xs leading-[1.5] text-muted-foreground">
           As agents plan, decide, and edit files, their work is captured here as events and shared
           with every agent on this project.
         </p>

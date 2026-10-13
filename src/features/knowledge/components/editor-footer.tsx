@@ -135,7 +135,7 @@ export function EditorFooter({ wordCount, charCount, projectPath, entryId }: Edi
 
   return (
     <div
-      className="flex items-center shrink-0 border-t border-hairline text-muted-foreground text-2xs"
+      className="flex items-center shrink-0 border-t border-hairline text-muted-foreground text-3xs"
       style={{
         height: 24,
         gap: 14,
@@ -162,7 +162,7 @@ export function EditorFooter({ wordCount, charCount, projectPath, entryId }: Edi
               className={cn(
                 "inline-flex items-center gap-1 h-5 px-2 rounded-full",
                 "border border-border bg-card text-foreground",
-                "text-2xs font-medium leading-none cursor-pointer",
+                "text-3xs font-medium leading-none cursor-pointer",
                 "hover:bg-element-hover transition-colors",
                 isBusy && "opacity-80 cursor-wait",
               )}
@@ -243,7 +243,7 @@ function ExportMenuItem({
       onClick={() => void onSelect()}
       className={cn(
         "flex items-center gap-2 rounded px-2 py-1 outline-none cursor-pointer",
-        "text-sm text-secondary-foreground",
+        "text-xs text-secondary-foreground",
         "focus:bg-element-hover focus:text-foreground",
         "data-[disabled]:pointer-events-none data-[disabled]:opacity-40",
       )}

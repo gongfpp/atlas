@@ -308,7 +308,7 @@ function PaneView({
                 setActivePane(tabId, pane.id);
               }}
               className={cn(
-                "group flex items-center gap-1 px-1.5 h-5 rounded text-2xs font-mono cursor-pointer shrink-0",
+                "group flex items-center gap-1 px-1.5 h-5 rounded text-3xs font-mono cursor-pointer shrink-0",
                 ptyId === activePty
                   ? "text-foreground bg-element-selected"
                   : "text-muted-foreground hover:text-secondary-foreground hover:bg-element-hover",
@@ -339,7 +339,7 @@ function PaneView({
         <HintGroup>
           <div className="flex items-center gap-0.5 shrink-0">
             {zoomed && (
-              <span className="mr-1 rounded bg-element-selected px-1.5 py-px text-3xs text-muted-foreground">
+              <span className="mr-1 rounded bg-element-selected px-1.5 py-px text-4xs text-muted-foreground">
                 zoomed
               </span>
             )}

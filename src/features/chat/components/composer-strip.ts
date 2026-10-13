@@ -12,7 +12,7 @@
  */
 export const COMPOSER_STRIP =
   "atlas-pill-in relative z-0 mx-2 -mb-3.5 flex items-center justify-between gap-3 " +
-  "rounded-t-2xl bg-popover px-3.5 pt-1.5 pb-5 text-xs";
+  "rounded-t-2xl bg-popover px-3.5 pt-1.5 pb-5 text-2xs";
 
 /** A text action on the strip's right: quiet until hovered. */
 export const COMPOSER_STRIP_ACTION =

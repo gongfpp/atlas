@@ -48,9 +48,9 @@ export function UsageHeader({
       className="flex h-control-lg shrink-0 items-center gap-2"
       style={{ paddingInline: inset + 6 }}
     >
-      <span className="shrink-0 text-sm font-semibold text-foreground">Usage</span>
+      <span className="shrink-0 text-xs font-semibold text-foreground">Usage</span>
       {orgName && (
-        <span className="min-w-0 truncate text-xs text-muted-foreground" title={orgName}>
+        <span className="min-w-0 truncate text-2xs text-muted-foreground" title={orgName}>
           {orgName}
         </span>
       )}
@@ -116,12 +116,12 @@ function ExportMenu({
                   <button
                     type="button"
                     onClick={() => onExport(item.kind)}
-                    className="flex h-control-md w-full cursor-pointer items-center gap-2 rounded-md px-2 text-left text-xs text-secondary-foreground outline-none transition-colors hover:bg-element-hover hover:text-foreground"
+                    className="flex h-control-md w-full cursor-pointer items-center gap-2 rounded-md px-2 text-left text-2xs text-secondary-foreground outline-none transition-colors hover:bg-element-hover hover:text-foreground"
                   >
                     <item.icon size={12} className="shrink-0 text-muted-foreground" />
                     <span className="min-w-0 flex-1 truncate">{item.label}</span>
                     {item.ext && (
-                      <span className="shrink-0 text-2xs text-disabled">{item.ext}</span>
+                      <span className="shrink-0 text-3xs text-disabled">{item.ext}</span>
                     )}
                   </button>
                 }

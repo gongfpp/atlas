@@ -6,6 +6,11 @@ import { App } from "./App";
 import { TelemetryErrorBoundary } from "./features/telemetry/error-boundary";
 import { installGlobalErrorHandlers } from "./features/telemetry/error-handlers";
 import { initTelemetry } from "./features/telemetry/posthog-client";
+// Geist and Geist Mono, Atlas Standards' faces, bundled so they work offline
+// and under the renderer's `font-src 'self'`. Imported before the stylesheet
+// that names them.
+import "@fontsource-variable/geist";
+import "@fontsource-variable/geist-mono";
 import "./styles/globals.css";
 
 // Opt-in crash reporting. Handlers are installed unconditionally (cheap); they

@@ -63,7 +63,7 @@ export function CanvasExportToolbar({
         title="Export canvas"
         className={cn(
           "flex items-center gap-1.5 rounded-xl border border-hairline bg-card/70 backdrop-blur-2xl px-2.5 h-8 shadow-md",
-          "text-xs font-medium text-secondary-foreground hover:text-foreground transition-colors cursor-pointer disabled:opacity-60",
+          "text-2xs font-medium text-secondary-foreground hover:text-foreground transition-colors cursor-pointer disabled:opacity-60",
         )}
       >
         {busy ? <Loader2 size={13} className="animate-spin" /> : <Download size={13} />}
@@ -79,7 +79,7 @@ export function CanvasExportToolbar({
                 key={f.format}
                 type="button"
                 onClick={() => void run(f.format)}
-                className="flex w-full items-center gap-2 px-2.5 py-1.5 text-left text-xs text-secondary-foreground hover:bg-element-hover hover:text-foreground transition-colors cursor-pointer"
+                className="flex w-full items-center gap-2 px-2.5 py-1.5 text-left text-2xs text-secondary-foreground hover:bg-element-hover hover:text-foreground transition-colors cursor-pointer"
               >
                 <f.icon size={13} className="shrink-0 text-muted-foreground" />
                 {f.label}

@@ -26,7 +26,7 @@ export function AgentUpdateBar({ tabId }: { tabId: string }) {
   if (!entry || (!phase && !entry.updateAvailable)) return null;
 
   return (
-    <div className="max-w-[720px] mx-auto mb-2 flex items-center justify-between gap-3 px-3 py-2 rounded-lg border border-border bg-card text-sm">
+    <div className="max-w-[720px] mx-auto mb-2 flex items-center justify-between gap-3 px-3 py-2 rounded-lg border border-border bg-card text-xs">
       <span className="select-text text-secondary-foreground">
         {phase
           ? `Updating ${entry.name} to v${phase.version}. Your conversation continues on it with your next message.`
@@ -35,7 +35,7 @@ export function AgentUpdateBar({ tabId }: { tabId: string }) {
             }.`}
       </span>
       {phase ? (
-        <span className="shrink-0 flex items-center gap-1.5 px-2.5 h-6 text-xs font-medium text-muted-foreground">
+        <span className="shrink-0 flex items-center gap-1.5 px-2.5 h-6 text-2xs font-medium text-muted-foreground">
           <Loader2 size={11} className="animate-spin" />
           {updatePhaseLabel(phase.phase, phase.version)}
         </span>
@@ -43,7 +43,7 @@ export function AgentUpdateBar({ tabId }: { tabId: string }) {
         <button
           onClick={() => void updateAgent(entry.id, entry.name, entry.version)}
           title="Waits for any reply in progress to finish, then installs the new version."
-          className="shrink-0 flex items-center gap-1.5 px-2.5 h-6 rounded-md bg-foreground text-background text-xs font-medium hover:bg-secondary-foreground cursor-pointer"
+          className="shrink-0 flex items-center gap-1.5 px-2.5 h-6 rounded-md bg-foreground text-background text-2xs font-medium hover:bg-secondary-foreground cursor-pointer"
         >
           <ArrowUpCircle size={11} />
           Update

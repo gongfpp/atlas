@@ -59,7 +59,7 @@ export function EditorTopbar({
       )}
       {/* Breadcrumbs */}
       <div
-        className="flex items-center min-w-0 text-sm"
+        className="flex items-center min-w-0 text-xs"
         style={{ gap: 6, color: "var(--muted-foreground)" }}
       >
         {breadcrumbs.map((segment, i) => (
@@ -75,7 +75,7 @@ export function EditorTopbar({
         </span>
       </div>
 
-      <span className="pill pill-bare text-2xs" style={{ height: 18, padding: "0 6px" }}>
+      <span className="pill pill-bare text-3xs" style={{ height: 18, padding: "0 6px" }}>
         {kind}
       </span>
 

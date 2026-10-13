@@ -39,7 +39,7 @@ export function WelcomeScreen() {
         <div className="text-center space-y-2">
           <AtlasIcon size={64} className="mx-auto mb-4 rounded-2xl" />
           <h1 className="text-xl font-semibold text-foreground">Atlas</h1>
-          <p className="text-sm text-secondary-foreground">Multiplayer AI development</p>
+          <p className="text-xs text-secondary-foreground">Multiplayer AI development</p>
         </div>
 
         {/* Primary action */}
@@ -48,7 +48,7 @@ export function WelcomeScreen() {
           className="w-full flex items-center gap-2.5 px-3 py-2 rounded-md border border-border bg-card hover:bg-element-hover hover:border-border-strong transition-colors text-left group"
         >
           <FolderOpen size={14} className="text-primary shrink-0" />
-          <span className="text-sm font-medium text-foreground">Open Folder</span>
+          <span className="text-xs font-medium text-foreground">Open Folder</span>
           {/* "Open Folder" is the same pick-a-folder-and-add-it flow as the
               `workspace.add` action, so it shows that action's live chord
               (nothing if unbound). */}
@@ -60,7 +60,7 @@ export function WelcomeScreen() {
           <div className="space-y-2">
             <div className="flex items-center gap-1.5 px-1">
               <Clock size={11} className="text-muted-foreground" />
-              <span className="text-2xs font-semibold text-muted-foreground uppercase tracking-wide">
+              <span className="text-3xs font-semibold text-muted-foreground uppercase tracking-wide">
                 Recent Projects
               </span>
             </div>
@@ -73,10 +73,10 @@ export function WelcomeScreen() {
                 >
                   <Folder size={14} className="text-primary shrink-0" />
                   <div className="flex-1 min-w-0">
-                    <div className="text-sm font-medium text-foreground truncate">
+                    <div className="text-xs font-medium text-foreground truncate">
                       {project.name}
                     </div>
-                    <div className="text-2xs text-muted-foreground truncate font-mono">
+                    <div className="text-3xs text-muted-foreground truncate font-mono">
                       {project.path}
                     </div>
                   </div>
@@ -99,7 +99,7 @@ export function WelcomeScreen() {
 
         {/* Hint */}
         <div className="text-center">
-          <span className="text-2xs text-muted-foreground">
+          <span className="text-3xs text-muted-foreground">
             Press <ActionKbd id="nav.commandPalette" size="2xs" fallback="⌘K" /> for command palette
           </span>
         </div>

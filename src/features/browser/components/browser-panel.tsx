@@ -637,7 +637,7 @@ export function BrowserPanel({ tabId, initialUrl, groupId }: BrowserPanelProps) 
             onKeyDown={(e) => {
               if (e.key === "Enter") navigate(inputUrl);
             }}
-            className="flex-1 bg-transparent outline-none text-xs text-foreground font-mono placeholder:text-muted-foreground"
+            className="flex-1 bg-transparent outline-none text-2xs text-foreground font-mono placeholder:text-muted-foreground"
             placeholder="Search or enter URL"
           />
         </div>
@@ -655,7 +655,7 @@ export function BrowserPanel({ tabId, initialUrl, groupId }: BrowserPanelProps) 
           title={mode === "reader" ? "Back to live page" : "Reader view of this page"}
         >
           {mode === "reader" ? <Zap size={11} /> : <BookText size={11} />}
-          <span className="text-2xs">{mode === "reader" ? "Live" : "Reader"}</span>
+          <span className="text-3xs">{mode === "reader" ? "Live" : "Reader"}</span>
         </button>
 
         <HintGroup side="top">
@@ -709,7 +709,7 @@ export function BrowserPanel({ tabId, initialUrl, groupId }: BrowserPanelProps) 
               if (e.key === "Enter") handleSearch();
               if (e.key === "Escape") setSearchOpen(false);
             }}
-            className="flex-1 bg-transparent outline-none text-xs text-foreground placeholder:text-muted-foreground"
+            className="flex-1 bg-transparent outline-none text-2xs text-foreground placeholder:text-muted-foreground"
             placeholder="Find in page..."
             autoFocus
           />
@@ -728,33 +728,33 @@ export function BrowserPanel({ tabId, initialUrl, groupId }: BrowserPanelProps) 
                   <Globe size={22} className="text-muted-foreground" />
                 </div>
                 <div className="space-y-1.5">
-                  <p className="text-sm font-medium text-foreground">Native Embed Fallback</p>
-                  <p className="text-xs leading-relaxed text-muted-foreground">
+                  <p className="text-xs font-medium text-foreground">Native Embed Fallback</p>
+                  <p className="text-2xs leading-relaxed text-muted-foreground">
                     The embedded live browser could not be native-contained in this panel area. You
                     can view in Reader mode or open in a separate window:
                   </p>
-                  <p className="truncate pt-1 font-mono text-2xs text-muted-foreground">
+                  <p className="truncate pt-1 font-mono text-3xs text-muted-foreground">
                     {embedError}
                   </p>
                 </div>
                 <div className="flex flex-col gap-2 pt-1 w-full max-w-[280px]">
                   <button
                     onClick={toggleReader}
-                    className="flex items-center justify-center gap-2 rounded-md bg-foreground px-3 py-2 text-xs font-medium text-background transition-opacity hover:opacity-90 cursor-pointer"
+                    className="flex items-center justify-center gap-2 rounded-md bg-foreground px-3 py-2 text-2xs font-medium text-background transition-opacity hover:opacity-90 cursor-pointer"
                   >
                     <BookOpen size={14} />
                     Switch to Reader mode
                   </button>
                   <button
                     onClick={openBrowserWindow}
-                    className="flex items-center justify-center gap-2 rounded-md border border-border bg-card px-3 py-2 text-xs text-secondary-foreground transition-colors hover:bg-element-hover hover:text-foreground cursor-pointer"
+                    className="flex items-center justify-center gap-2 rounded-md border border-border bg-card px-3 py-2 text-2xs text-secondary-foreground transition-colors hover:bg-element-hover hover:text-foreground cursor-pointer"
                   >
                     <AppWindow size={14} />
                     Open in a new window
                   </button>
                   <button
                     onClick={openExternal}
-                    className="flex items-center justify-center gap-2 rounded-md border border-border bg-card px-3 py-2 text-xs text-secondary-foreground transition-colors hover:bg-element-hover hover:text-foreground cursor-pointer"
+                    className="flex items-center justify-center gap-2 rounded-md border border-border bg-card px-3 py-2 text-2xs text-secondary-foreground transition-colors hover:bg-element-hover hover:text-foreground cursor-pointer"
                   >
                     <ExternalLink size={14} />
                     Open in default browser
@@ -772,12 +772,12 @@ export function BrowserPanel({ tabId, initialUrl, groupId }: BrowserPanelProps) 
                   <Globe size={22} className="text-muted-foreground" />
                 </div>
                 <div className="space-y-1.5">
-                  <p className="text-sm font-medium text-foreground">Browser paused</p>
-                  <p className="text-xs leading-relaxed text-muted-foreground">
+                  <p className="text-xs font-medium text-foreground">Browser paused</p>
+                  <p className="text-2xs leading-relaxed text-muted-foreground">
                     A menu or dialog is open on top. Keep browsing without interruption:
                   </p>
                   {(liveNav?.title || currentUrl()) && (
-                    <p className="truncate pt-1 font-mono text-2xs text-secondary-foreground">
+                    <p className="truncate pt-1 font-mono text-3xs text-secondary-foreground">
                       {liveNav?.title || currentUrl()}
                     </p>
                   )}
@@ -785,14 +785,14 @@ export function BrowserPanel({ tabId, initialUrl, groupId }: BrowserPanelProps) 
                 <div className="flex flex-col gap-2 pt-1 w-full max-w-[280px]">
                   <button
                     onClick={openBrowserWindow}
-                    className="flex items-center justify-center gap-2 rounded-md bg-foreground px-3 py-2 text-xs font-medium text-background transition-opacity hover:opacity-90 cursor-pointer"
+                    className="flex items-center justify-center gap-2 rounded-md bg-foreground px-3 py-2 text-2xs font-medium text-background transition-opacity hover:opacity-90 cursor-pointer"
                   >
                     <AppWindow size={14} />
                     Continue in a new window
                   </button>
                   <button
                     onClick={openExternal}
-                    className="flex items-center justify-center gap-2 rounded-md border border-border bg-card px-3 py-2 text-xs text-secondary-foreground transition-colors hover:bg-element-hover hover:text-foreground cursor-pointer"
+                    className="flex items-center justify-center gap-2 rounded-md border border-border bg-card px-3 py-2 text-2xs text-secondary-foreground transition-colors hover:bg-element-hover hover:text-foreground cursor-pointer"
                   >
                     <ExternalLink size={14} />
                     Open in default browser
@@ -808,7 +808,7 @@ export function BrowserPanel({ tabId, initialUrl, groupId }: BrowserPanelProps) 
             <div className="absolute inset-0 flex items-center justify-center">
               <div className="text-center space-y-3">
                 <Globe size={32} className="text-muted-foreground mx-auto" />
-                <p className="text-sm text-secondary-foreground">Enter a URL to browse</p>
+                <p className="text-xs text-secondary-foreground">Enter a URL to browse</p>
                 <div className="flex flex-wrap gap-2 justify-center max-w-[320px] pt-2">
                   {["google.com", "youtube.com", "github.com", "news.ycombinator.com"].map(
                     (site) => (
@@ -818,7 +818,7 @@ export function BrowserPanel({ tabId, initialUrl, groupId }: BrowserPanelProps) 
                           setInputUrl(`https://${site}`);
                           navigate(site);
                         }}
-                        className="px-2.5 py-1 rounded border border-border bg-card text-2xs text-secondary-foreground hover:bg-element-hover hover:text-foreground transition-colors font-mono cursor-pointer"
+                        className="px-2.5 py-1 rounded border border-border bg-card text-3xs text-secondary-foreground hover:bg-element-hover hover:text-foreground transition-colors font-mono cursor-pointer"
                       >
                         {site}
                       </button>
@@ -847,10 +847,10 @@ export function BrowserPanel({ tabId, initialUrl, groupId }: BrowserPanelProps) 
                 )}
                 {error && (
                   <div className="px-6 py-8 text-center">
-                    <p className="text-sm text-error">{error}</p>
+                    <p className="text-xs text-error">{error}</p>
                     <button
                       onClick={() => fetchPage(inputUrl)}
-                      className="mt-2 text-xs text-primary underline cursor-pointer"
+                      className="mt-2 text-2xs text-primary underline cursor-pointer"
                     >
                       Retry
                     </button>
@@ -859,10 +859,10 @@ export function BrowserPanel({ tabId, initialUrl, groupId }: BrowserPanelProps) 
                 {!loading && !error && page && (
                   <div className="select-text">
                     <div className="px-4 py-3 border-b border-border">
-                      <h1 className="text-lg font-semibold text-foreground leading-snug">
+                      <h1 className="text-md font-semibold text-foreground leading-snug">
                         {page.title}
                       </h1>
-                      <span className="text-2xs text-muted-foreground font-mono">{page.url}</span>
+                      <span className="text-3xs text-muted-foreground font-mono">{page.url}</span>
                     </div>
                     <div
                       ref={contentRef}
@@ -876,7 +876,7 @@ export function BrowserPanel({ tabId, initialUrl, groupId }: BrowserPanelProps) 
                   <div className="h-full flex items-center justify-center py-16">
                     <div className="text-center space-y-3">
                       <BookText size={32} className="text-muted-foreground mx-auto" />
-                      <p className="text-sm text-secondary-foreground">
+                      <p className="text-xs text-secondary-foreground">
                         Reader mode — enter a URL for a clean, JS-free view
                       </p>
                       <div className="flex flex-wrap gap-2 justify-center max-w-[300px] pt-2">
@@ -889,7 +889,7 @@ export function BrowserPanel({ tabId, initialUrl, groupId }: BrowserPanelProps) 
                           <button
                             key={site}
                             onClick={() => fetchPage(`https://${site}`)}
-                            className="px-2.5 py-1 rounded border border-border bg-card text-2xs text-secondary-foreground hover:bg-element-hover hover:text-foreground transition-colors font-mono cursor-pointer"
+                            className="px-2.5 py-1 rounded border border-border bg-card text-3xs text-secondary-foreground hover:bg-element-hover hover:text-foreground transition-colors font-mono cursor-pointer"
                           >
                             {site}
                           </button>
@@ -909,32 +909,32 @@ export function BrowserPanel({ tabId, initialUrl, groupId }: BrowserPanelProps) 
               <ContextMenu.Popup className="w-[180px] rounded-lg border border-border bg-card shadow-md py-1">
                 <ContextMenu.Item
                   onClick={copySelection}
-                  className="flex items-center gap-2 px-3 h-control-md text-xs text-secondary-foreground hover:bg-element-hover hover:text-foreground cursor-default outline-none"
+                  className="flex items-center gap-2 px-3 h-control-md text-2xs text-secondary-foreground hover:bg-element-hover hover:text-foreground cursor-default outline-none"
                 >
                   <Copy size={11} className="text-muted-foreground" /> Copy Selection
                 </ContextMenu.Item>
                 <ContextMenu.Item
                   onClick={copyLink}
-                  className="flex items-center gap-2 px-3 h-control-md text-xs text-secondary-foreground hover:bg-element-hover hover:text-foreground cursor-default outline-none"
+                  className="flex items-center gap-2 px-3 h-control-md text-2xs text-secondary-foreground hover:bg-element-hover hover:text-foreground cursor-default outline-none"
                 >
                   <Globe size={11} className="text-muted-foreground" /> Copy Link
                 </ContextMenu.Item>
                 <ContextMenu.Separator className="h-px bg-border my-1" />
                 <ContextMenu.Item
                   onClick={() => setSearchOpen(true)}
-                  className="flex items-center gap-2 px-3 h-control-md text-xs text-secondary-foreground hover:bg-element-hover hover:text-foreground cursor-default outline-none"
+                  className="flex items-center gap-2 px-3 h-control-md text-2xs text-secondary-foreground hover:bg-element-hover hover:text-foreground cursor-default outline-none"
                 >
                   <Search size={11} className="text-muted-foreground" /> Find in Page
                 </ContextMenu.Item>
                 <ContextMenu.Item
                   onClick={openBrowserWindow}
-                  className="flex items-center gap-2 px-3 h-control-md text-xs text-secondary-foreground hover:bg-element-hover hover:text-foreground cursor-default outline-none"
+                  className="flex items-center gap-2 px-3 h-control-md text-2xs text-secondary-foreground hover:bg-element-hover hover:text-foreground cursor-default outline-none"
                 >
                   <AppWindow size={11} className="text-muted-foreground" /> Open in Browser Window
                 </ContextMenu.Item>
                 <ContextMenu.Item
                   onClick={openExternal}
-                  className="flex items-center gap-2 px-3 h-control-md text-xs text-secondary-foreground hover:bg-element-hover hover:text-foreground cursor-default outline-none"
+                  className="flex items-center gap-2 px-3 h-control-md text-2xs text-secondary-foreground hover:bg-element-hover hover:text-foreground cursor-default outline-none"
                 >
                   <ExternalLink size={11} className="text-muted-foreground" /> Open in System
                   Browser
@@ -944,7 +944,7 @@ export function BrowserPanel({ tabId, initialUrl, groupId }: BrowserPanelProps) 
                     <ContextMenu.Separator className="h-px bg-border my-1" />
                     <ContextMenu.Item
                       onClick={saveToKnowledge}
-                      className="flex items-center gap-2 px-3 h-control-md text-xs text-secondary-foreground hover:bg-element-hover hover:text-foreground cursor-default outline-none"
+                      className="flex items-center gap-2 px-3 h-control-md text-2xs text-secondary-foreground hover:bg-element-hover hover:text-foreground cursor-default outline-none"
                     >
                       <BookOpen size={11} className="text-muted-foreground" /> Save to Knowledge
                     </ContextMenu.Item>

@@ -657,7 +657,7 @@ export function FileTree() {
           line across the file tree and the tab bar. No refresh button — the
           file-tree updates live off the filesystem watcher. */}
       <div className="flex items-center justify-between px-3 h-[29px] shrink-0 border-b border-border">
-        <span className="text-2xs font-semibold text-muted-foreground uppercase tracking-wider truncate flex-1">
+        <span className="text-3xs font-semibold text-muted-foreground uppercase tracking-wider truncate flex-1">
           {rootPath ? basename(rootPath) : "Files"}
         </span>
         <HintGroup>
@@ -704,7 +704,7 @@ export function FileTree() {
               {loading ? (
                 <PanelSkeleton rows={10} className="p-2 gap-1.5" />
               ) : flat.length === 0 ? (
-                <div className="px-3 py-4 text-xs text-muted-foreground text-center">
+                <div className="px-3 py-4 text-2xs text-muted-foreground text-center">
                   Empty folder
                 </div>
               ) : (

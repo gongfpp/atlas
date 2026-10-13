@@ -181,7 +181,7 @@ export const ChatInput = forwardRef<ChatInputHandle, ChatInputProps>(function Ch
           "&": {
             backgroundColor: "transparent",
             color: "var(--foreground)",
-            fontSize: "var(--text-base)",
+            fontSize: "var(--text-reading)",
             lineHeight: "1.55",
           },
           ".cm-scroller": {

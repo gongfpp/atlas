@@ -146,17 +146,17 @@ export function ApprovalCard({
           <CircleHelp className="mt-0.5 size-4 shrink-0 text-muted-foreground" />
           <div className="min-w-0 flex-1">
             {q.header && (
-              <div className="text-2xs uppercase tracking-[0.08em] text-muted-foreground">
+              <div className="text-3xs uppercase tracking-[0.08em] text-muted-foreground">
                 {q.header}
               </div>
             )}
-            <div className="text-md font-medium leading-snug text-foreground">
+            <div className="text-sm font-medium leading-snug text-foreground">
               {q.question || "The agent has a question"}
             </div>
-            {queueNote && <div className="mt-0.5 text-xs text-muted-foreground">{queueNote}</div>}
+            {queueNote && <div className="mt-0.5 text-2xs text-muted-foreground">{queueNote}</div>}
           </div>
           {questions.length > 1 && (
-            <span className="shrink-0 font-mono text-xs tabular-nums text-muted-foreground">
+            <span className="shrink-0 font-mono text-2xs tabular-nums text-muted-foreground">
               {step + 1}/{questions.length}
             </span>
           )}
@@ -194,14 +194,14 @@ export function ApprovalCard({
                     ))}
                 </span>
                 <span className="min-w-0 flex-1">
-                  <span className="block text-base leading-snug text-foreground">{o.label}</span>
+                  <span className="block type-reading leading-snug text-foreground">{o.label}</span>
                   {o.description && (
-                    <span className="mt-0.5 block text-xs leading-snug text-secondary-foreground">
+                    <span className="mt-0.5 block text-2xs leading-snug text-secondary-foreground">
                       {o.description}
                     </span>
                   )}
                 </span>
-                <span className="mt-0.5 shrink-0 font-mono text-2xs text-disabled">{i + 1}</span>
+                <span className="mt-0.5 shrink-0 font-mono text-3xs text-disabled">{i + 1}</span>
               </button>
             );
           })}
@@ -218,7 +218,7 @@ export function ApprovalCard({
             }
             placeholder={q.options.length > 0 ? "Answer in your own words…" : "Type your answer…"}
             className={cn(
-              "h-10 w-full rounded-lg border-0 bg-background/70 px-3 text-base text-foreground outline-none transition-colors placeholder:text-muted-foreground focus:bg-background",
+              "h-10 w-full rounded-lg border-0 bg-background/70 px-3 type-reading text-foreground outline-none transition-colors placeholder:text-muted-foreground focus:bg-background",
               q.options.length > 0 && "mt-1.5",
             )}
           />
@@ -270,7 +270,7 @@ export function ApprovalCard({
                   clearAdvance();
                   onSkip();
                 }}
-                className="ml-auto cursor-pointer rounded-full px-2.5 py-1.5 text-sm text-muted-foreground transition-colors hover:bg-element-hover hover:text-foreground"
+                className="ml-auto cursor-pointer rounded-full px-2.5 py-1.5 text-xs text-muted-foreground transition-colors hover:bg-element-hover hover:text-foreground"
               >
                 {skipLabel}
               </button>
@@ -285,7 +285,7 @@ export function ApprovalCard({
                 disabled={!isAnswered(answer)}
                 onClick={() => goNext()}
                 className={cn(
-                  "flex h-9 items-center gap-1.5 rounded-full px-3 text-sm font-medium transition-colors",
+                  "flex h-9 items-center gap-1.5 rounded-full px-3 text-xs font-medium transition-colors",
                   isAnswered(answer)
                     ? "cursor-pointer bg-primary text-primary-foreground hover:bg-primary-hover"
                     : "cursor-default bg-background text-disabled",

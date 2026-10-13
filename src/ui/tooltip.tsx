@@ -237,7 +237,7 @@ function TooltipContent({
             } as React.CSSProperties
           }
           className={cn(
-            "group w-fit text-balance rounded-md px-2.5 py-1 text-xs",
+            "group w-fit text-balance rounded-md px-2.5 py-1 text-2xs",
             "bg-popover text-foreground",
             "outline outline-1 outline-border",
             "animate-scale-in origin-(--transform-origin)",

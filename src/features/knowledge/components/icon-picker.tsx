@@ -152,7 +152,7 @@ export function IconPicker({ value, anchorRect, onPick, onClose }: IconPickerPro
     >
       {GROUPS.map((g) => (
         <div key={g.label} style={{ marginBottom: 6 }}>
-          <div className="eyebrow" style={{ padding: "4px 4px 2px" }}>
+          <div className="micro" style={{ padding: "4px 4px 2px" }}>
             {g.label}
           </div>
           <div
@@ -220,7 +220,7 @@ export function IconPicker({ value, anchorRect, onPick, onClose }: IconPickerPro
             }
           }}
           placeholder="Custom emoji or text…"
-          className="text-sm"
+          className="text-xs"
           style={{
             flex: 1,
             height: 26,
@@ -239,7 +239,7 @@ export function IconPicker({ value, anchorRect, onPick, onClose }: IconPickerPro
               onPick(null);
               onClose();
             }}
-            className="text-xs"
+            className="text-2xs"
             style={{
               color: "var(--muted-foreground)",
               background: "transparent",

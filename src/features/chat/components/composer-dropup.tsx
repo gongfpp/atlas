@@ -25,7 +25,7 @@ import { cn } from "@/lib/utils";
 /** The pill trigger's class string, so every footer pill reads as one set. */
 export function composerPillClass(open: boolean, opts: { disabled?: boolean } = {}): string {
   return cn(
-    "flex h-6.5 items-center rounded-full border px-1.5 text-2xs font-medium leading-none transition-colors",
+    "flex h-6.5 items-center rounded-full border px-1.5 text-3xs font-medium leading-none transition-colors",
     open
       ? "border-border-strong bg-element-selected text-foreground"
       : "border-border bg-card text-secondary-foreground",

@@ -136,9 +136,9 @@ export function SearchOverlay({
               onChange={(e) => setQuery(e.target.value)}
               onKeyDown={handleKeyDown}
               placeholder="Search in files..."
-              className="flex-1 bg-transparent border-none outline-none text-sm text-foreground placeholder:text-muted-foreground"
+              className="flex-1 bg-transparent border-none outline-none text-xs text-foreground placeholder:text-muted-foreground"
             />
-            {searching && <span className="text-2xs text-muted-foreground">Searching...</span>}
+            {searching && <span className="text-3xs text-muted-foreground">Searching...</span>}
             {TOGGLES.map(({ key, glyph, label }) => (
               <Hint key={key} label={label}>
                 <button
@@ -147,7 +147,7 @@ export function SearchOverlay({
                   aria-pressed={options[key]}
                   onClick={() => toggle(key)}
                   className={cn(
-                    "h-6 min-w-6 px-1 rounded-md font-mono text-2xs shrink-0 transition-colors",
+                    "h-6 min-w-6 px-1 rounded-md font-mono text-3xs shrink-0 transition-colors",
                     options[key]
                       ? "bg-element-hover text-foreground"
                       : "text-muted-foreground hover:text-foreground",
@@ -161,17 +161,17 @@ export function SearchOverlay({
 
           <div className="overflow-y-auto flex-1 py-1">
             {error && !searching && (
-              <div className="px-4 py-6 text-center text-xs text-muted-foreground">{error}</div>
+              <div className="px-4 py-6 text-center text-2xs text-muted-foreground">{error}</div>
             )}
             {results.length === 0 && hasSearched && !searching && !error && (
-              <div className="px-4 py-6 text-center text-xs text-muted-foreground">
+              <div className="px-4 py-6 text-center text-2xs text-muted-foreground">
                 No results found
               </div>
             )}
             {!query.trim() && !hasSearched && session.searchHistory.length > 0 && (
               <div className="py-1">
                 <div className="flex items-center justify-between px-4 py-1">
-                  <span className="text-2xs text-muted-foreground uppercase tracking-wide font-semibold">
+                  <span className="text-3xs text-muted-foreground uppercase tracking-wide font-semibold">
                     Recent searches
                   </span>
                   <button
@@ -179,7 +179,7 @@ export function SearchOverlay({
                       clearSearchHistory();
                       if (currentProject) saveSession(currentProject.path);
                     }}
-                    className="text-3xs text-muted-foreground hover:text-secondary-foreground cursor-pointer"
+                    className="text-4xs text-muted-foreground hover:text-secondary-foreground cursor-pointer"
                   >
                     Clear all
                   </button>
@@ -197,7 +197,7 @@ export function SearchOverlay({
                       className="flex items-center gap-2 flex-1 min-w-0 text-left"
                     >
                       <Clock size={11} className="text-muted-foreground shrink-0" />
-                      <span className="text-xs text-secondary-foreground font-mono truncate">
+                      <span className="text-2xs text-secondary-foreground font-mono truncate">
                         {q}
                       </span>
                     </button>
@@ -217,7 +217,7 @@ export function SearchOverlay({
               </div>
             )}
             {!query.trim() && !hasSearched && session.searchHistory.length === 0 && (
-              <div className="px-4 py-6 text-center text-xs text-muted-foreground">
+              <div className="px-4 py-6 text-center text-2xs text-muted-foreground">
                 Type to search across all files
               </div>
             )}
@@ -233,18 +233,18 @@ export function SearchOverlay({
               >
                 <div className="flex items-center gap-2">
                   <FileCode size={12} className="text-muted-foreground shrink-0" />
-                  <span className="text-xs text-primary font-mono truncate">{result.path}</span>
-                  <span className="text-2xs text-muted-foreground font-mono shrink-0">
+                  <span className="text-2xs text-primary font-mono truncate">{result.path}</span>
+                  <span className="text-3xs text-muted-foreground font-mono shrink-0">
                     :{result.line}
                   </span>
                 </div>
-                <div className="ml-5 text-xs font-mono text-secondary-foreground truncate mt-0.5">
+                <div className="ml-5 text-2xs font-mono text-secondary-foreground truncate mt-0.5">
                   {result.text.trim()}
                 </div>
               </button>
             ))}
             {truncated && results.length > 0 && !searching && (
-              <div className="px-4 py-2 text-2xs text-muted-foreground">
+              <div className="px-4 py-2 text-3xs text-muted-foreground">
                 Showing the first {results.length} matches. Narrow the search to see the rest.
               </div>
             )}

@@ -87,7 +87,7 @@ export function PinnedMenu({
           render={
             <button
               type="button"
-              className="flex h-5 items-center gap-1 rounded px-1.5 text-2xs text-muted-foreground transition-colors hover:bg-element-hover hover:text-foreground cursor-pointer"
+              className="flex h-5 items-center gap-1 rounded px-1.5 text-3xs text-muted-foreground transition-colors hover:bg-element-hover hover:text-foreground cursor-pointer"
             >
               <Pin size={10} />
               <span className="tabular-nums">{count}</span>
@@ -106,19 +106,19 @@ export function PinnedMenu({
                   onChange={(e) => setQuery(e.target.value)}
                   placeholder="Search pins…"
                   aria-label="Search pinned messages"
-                  className="min-w-0 flex-1 bg-transparent text-xs text-foreground outline-none placeholder:text-muted-foreground"
+                  className="min-w-0 flex-1 bg-transparent text-2xs text-foreground outline-none placeholder:text-muted-foreground"
                 />
               </div>
 
               <div className="hide-scrollbar min-h-0 flex-1 overflow-y-auto">
                 {rows === null && (
-                  <div className="flex items-center justify-center gap-1.5 py-6 text-xs text-muted-foreground">
+                  <div className="flex items-center justify-center gap-1.5 py-6 text-2xs text-muted-foreground">
                     <Loader2 size={11} className="animate-spin" />
                     Loading pins…
                   </div>
                 )}
                 {rows !== null && filtered.length === 0 && (
-                  <div className="py-6 text-center text-xs text-disabled">
+                  <div className="py-6 text-center text-2xs text-disabled">
                     {rows.length === 0 ? "Nothing pinned yet." : "No pins match."}
                   </div>
                 )}
@@ -148,16 +148,16 @@ export function PinnedMenu({
                         ) : (
                           <CommsAvatar member={author} size={16} />
                         )}
-                        <span className="min-w-0 truncate text-xs font-medium text-foreground">
+                        <span className="min-w-0 truncate text-2xs font-medium text-foreground">
                           {msg && isWebhookMessage(msg)
                             ? authorLabel(msg, () => "Unknown")
                             : (author?.name ?? "Unknown")}
                         </span>
-                        <span className="ml-auto shrink-0 text-3xs text-muted-foreground">
+                        <span className="ml-auto shrink-0 text-4xs text-muted-foreground">
                           {timeAgo(new Date(pin.at).toISOString(), { suffix: true })}
                         </span>
                       </div>
-                      <span className="line-clamp-2 pl-[22px] text-xs leading-snug text-secondary-foreground">
+                      <span className="line-clamp-2 pl-[22px] text-2xs leading-snug text-secondary-foreground">
                         {(msg && toPlainText(msg.body, members)) ||
                           (msg?.attachments?.length ? "(attachment)" : "…")}
                       </span>

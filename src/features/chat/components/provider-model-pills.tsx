@@ -61,7 +61,7 @@ function loadModelIds(provider: string): Promise<string[]> {
 }
 
 const PILL_CLASS =
-  "flex min-w-0 items-center gap-1.5 px-2 h-6.5 rounded-full border border-border bg-card text-2xs leading-none font-medium text-secondary-foreground hover:bg-element-hover hover:text-foreground transition-colors outline-none cursor-pointer";
+  "flex min-w-0 items-center gap-1.5 px-2 h-6.5 rounded-full border border-border bg-card text-3xs leading-none font-medium text-secondary-foreground hover:bg-element-hover hover:text-foreground transition-colors outline-none cursor-pointer";
 
 export function ProviderModelPills({
   provider,
@@ -201,12 +201,12 @@ export function ProviderModelPills({
       <button
         key={id}
         onClick={() => pickModel(id)}
-        className="flex w-full items-center gap-2 px-2.5 h-[26px] text-left text-xs font-mono text-secondary-foreground hover:bg-element-hover hover:text-foreground cursor-pointer outline-none"
+        className="flex w-full items-center gap-2 px-2.5 h-[26px] text-left text-2xs font-mono text-secondary-foreground hover:bg-element-hover hover:text-foreground cursor-pointer outline-none"
       >
         {starred && <Star size={10} className="shrink-0 fill-primary text-primary" />}
         <span className="min-w-0 flex-1 truncate">{id}</span>
         <span
-          className="shrink-0 text-2xs tabular-nums text-muted-foreground"
+          className="shrink-0 text-3xs tabular-nums text-muted-foreground"
           title="Price per 1M tokens (input / output) — models.dev"
         >
           {price}
@@ -279,7 +279,7 @@ export function ProviderModelPills({
                         onChange={(e) => setQ(e.target.value)}
                         placeholder="Search models…"
                         spellCheck={false}
-                        className="min-w-0 flex-1 bg-transparent text-xs text-foreground outline-none placeholder:text-muted-foreground"
+                        className="min-w-0 flex-1 bg-transparent text-2xs text-foreground outline-none placeholder:text-muted-foreground"
                       />
                       <Hint label="Refresh model pricing (models.dev)" side="top">
                         <button
@@ -296,14 +296,14 @@ export function ProviderModelPills({
                         popover has no dead "footer" gap below it. */}
                     <div className="flex-1 min-h-0 overflow-y-auto hide-scrollbar py-1">
                       {pinned.length === 0 && rest.length === 0 ? (
-                        <div className="px-2.5 py-2 text-xs text-muted-foreground">
+                        <div className="px-2.5 py-2 text-2xs text-muted-foreground">
                           {loadingModels ? "Loading…" : "No models"}
                         </div>
                       ) : (
                         <>
                           {pinned.length > 0 && (
                             <>
-                              <div className="px-2.5 pt-1 pb-0.5 text-3xs font-semibold uppercase tracking-wide text-muted-foreground">
+                              <div className="px-2.5 pt-1 pb-0.5 text-4xs font-semibold uppercase tracking-wide text-muted-foreground">
                                 Recommended for coding
                               </div>
                               {pinned.map((id) => renderModel(id, true))}
@@ -319,7 +319,7 @@ export function ProviderModelPills({
                   /* No key for the browsed provider — prompt to set one up. */
                   <div className="flex flex-1 flex-col items-center justify-center gap-2 px-4 py-8 text-center">
                     <ProviderLogo id={viewProvider} size={22} />
-                    <div className="text-sm text-secondary-foreground">
+                    <div className="text-xs text-secondary-foreground">
                       No API key for{" "}
                       <span className="text-foreground">
                         {providerById(viewProvider)?.name ?? viewProvider}
@@ -327,7 +327,7 @@ export function ProviderModelPills({
                     </div>
                     <button
                       onClick={openApiKeys}
-                      className="rounded-md border border-border bg-background px-3 py-1.5 text-xs font-medium text-foreground hover:bg-element-hover transition-colors cursor-pointer"
+                      className="rounded-md border border-border bg-background px-3 py-1.5 text-2xs font-medium text-foreground hover:bg-element-hover transition-colors cursor-pointer"
                     >
                       Set up key in Settings
                     </button>

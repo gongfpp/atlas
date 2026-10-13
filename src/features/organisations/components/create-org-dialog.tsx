@@ -157,10 +157,10 @@ export function CreateOrgDialog({
   };
 
   const fieldBase =
-    "h-8 w-full rounded-lg border border-input bg-panel-input px-2.5 text-sm text-foreground placeholder:text-muted-foreground outline-none transition-colors focus:border-border-strong";
+    "h-8 w-full rounded-lg border border-input bg-panel-input px-2.5 text-xs text-foreground placeholder:text-muted-foreground outline-none transition-colors focus:border-border-strong";
   /** The app's pill-button language (matches "Save to KB" / "Commit changes"). */
   const pillButton =
-    "inline-flex items-center gap-1.5 rounded-full border border-border px-3 py-1.5 text-xs font-medium leading-none cursor-pointer transition-colors";
+    "inline-flex items-center gap-1.5 rounded-full border border-border px-3 py-1.5 text-2xs font-medium leading-none cursor-pointer transition-colors";
 
   return (
     <Dialog.Root open={open} onOpenChange={onOpenChange}>
@@ -192,7 +192,7 @@ export function CreateOrgDialog({
           </Hint>
 
           <div className="px-4 pt-3.5 pb-4">
-            <Dialog.Title className="flex items-center gap-2 text-base font-semibold tracking-[-0.01em] text-foreground">
+            <Dialog.Title className="flex items-center gap-2 type-reading font-semibold tracking-[-0.01em] text-foreground">
               <Building2 size={13} className="text-muted-foreground" />
               Create organization
             </Dialog.Title>
@@ -200,7 +200,7 @@ export function CreateOrgDialog({
             <div className="mt-3.5 space-y-3">
               {/* Display name — anything the user wants. */}
               <label className="block">
-                <span className="text-xs font-medium text-secondary-foreground">Name</span>
+                <span className="text-2xs font-medium text-secondary-foreground">Name</span>
                 <input
                   autoFocus
                   value={name}
@@ -212,14 +212,14 @@ export function CreateOrgDialog({
 
               {/* Handle — prefix + input, with live availability. */}
               <div>
-                <span className="text-xs font-medium text-secondary-foreground">Handle</span>
+                <span className="text-2xs font-medium text-secondary-foreground">Handle</span>
                 <div
                   className={cn(
                     "mt-1 flex h-8 items-center overflow-hidden rounded-lg border bg-panel-input transition-colors focus-within:border-border-strong",
                     slug.kind === "taken" ? "border-error" : "border-input",
                   )}
                 >
-                  <span className="flex h-full shrink-0 select-none items-center border-r border-input px-2.5 text-xs text-muted-foreground">
+                  <span className="flex h-full shrink-0 select-none items-center border-r border-input px-2.5 text-2xs text-muted-foreground">
                     {HANDLE_PREFIX}
                   </span>
                   <input
@@ -229,7 +229,7 @@ export function CreateOrgDialog({
                       setHandle(e.target.value);
                     }}
                     placeholder="acme"
-                    className="h-full min-w-0 flex-1 bg-transparent px-2.5 text-sm text-foreground placeholder:text-muted-foreground outline-none"
+                    className="h-full min-w-0 flex-1 bg-transparent px-2.5 text-xs text-foreground placeholder:text-muted-foreground outline-none"
                   />
                   <span className="flex w-7 shrink-0 items-center justify-center text-muted-foreground">
                     {slug.kind === "checking" && <Loader2 size={11} className="animate-spin" />}
@@ -239,7 +239,7 @@ export function CreateOrgDialog({
                 {/* Fixed-height hint row so the modal never jumps as you type. */}
                 <p
                   className={cn(
-                    "mt-1 h-[13px] text-2xs leading-[13px]",
+                    "mt-1 h-[13px] text-3xs leading-[13px]",
                     slug.kind === "taken" ? "text-error" : "text-muted-foreground",
                   )}
                 >
@@ -256,7 +256,7 @@ export function CreateOrgDialog({
               {/* Cloud vs local. Signed out there is nothing to sync to, so
                   cloud is unavailable rather than merely unselected. */}
               <div>
-                <span className="text-xs font-medium text-secondary-foreground">Type</span>
+                <span className="text-2xs font-medium text-secondary-foreground">Type</span>
                 <div className="mt-1 flex gap-1.5">
                   {(
                     [
@@ -272,7 +272,7 @@ export function CreateOrgDialog({
                         title={isDisabled ? "Sign in to create a cloud organization" : undefined}
                         onClick={() => setMode(id)}
                         className={cn(
-                          "rounded-full border px-2.5 py-1 text-xs transition-colors",
+                          "rounded-full border px-2.5 py-1 text-2xs transition-colors",
                           isDisabled
                             ? "cursor-not-allowed border-border bg-panel-input text-muted-foreground opacity-40"
                             : on
@@ -285,7 +285,7 @@ export function CreateOrgDialog({
                     );
                   })}
                 </div>
-                <p className="mt-1 text-2xs text-muted-foreground">
+                <p className="mt-1 text-3xs text-muted-foreground">
                   {cloud
                     ? "Synced across your devices and shareable with your team."
                     : "Private and offline. Turn on sync later to share it."}
@@ -295,7 +295,7 @@ export function CreateOrgDialog({
               {/* Region — pill selector. Meaningless for a local org, which
                   never leaves this machine. */}
               <div className={cn(!cloud && "opacity-40")}>
-                <span className="text-xs font-medium text-secondary-foreground">Region</span>
+                <span className="text-2xs font-medium text-secondary-foreground">Region</span>
                 <div className="mt-1 flex gap-1.5">
                   {REGIONS.map((r) => {
                     const on = region === r.id;
@@ -313,7 +313,7 @@ export function CreateOrgDialog({
                         }
                         onClick={() => setRegion(r.id)}
                         className={cn(
-                          "rounded-full border px-2.5 py-1 text-xs transition-colors",
+                          "rounded-full border px-2.5 py-1 text-2xs transition-colors",
                           isDisabled
                             ? "cursor-not-allowed border-border bg-panel-input text-muted-foreground opacity-40"
                             : on

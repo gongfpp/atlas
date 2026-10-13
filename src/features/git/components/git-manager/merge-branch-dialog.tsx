@@ -182,13 +182,13 @@ export function MergeBranchDialog({
           initialFocus={false}
         >
           <div className="px-4 pt-3.5 pb-3 border-b border-border">
-            <Dialog.Title className="text-base font-semibold text-foreground flex items-center gap-1.5">
+            <Dialog.Title className="type-reading font-semibold text-foreground flex items-center gap-1.5">
               <GitMerge size={13} className="text-secondary-foreground shrink-0" />
               <span>
                 Merge into <span className="font-mono text-primary">{branch || "—"}</span>
               </span>
             </Dialog.Title>
-            <Dialog.Description className="text-xs text-muted-foreground mt-1">
+            <Dialog.Description className="text-2xs text-muted-foreground mt-1">
               Choose a branch to merge into{" "}
               <span className="font-mono">{branch || "the current branch"}</span>.
             </Dialog.Description>
@@ -202,7 +202,7 @@ export function MergeBranchDialog({
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Filter branches…"
               autoFocus
-              className="flex-1 bg-transparent outline-none text-xs text-foreground placeholder:text-muted-foreground min-w-0"
+              className="flex-1 bg-transparent outline-none text-2xs text-foreground placeholder:text-muted-foreground min-w-0"
             />
           </div>
 
@@ -217,7 +217,7 @@ export function MergeBranchDialog({
                   aria-selected={isSel}
                   onClick={() => setSelected(b.name)}
                   className={cn(
-                    "group flex items-center gap-2 px-3 h-[28px] text-xs cursor-pointer",
+                    "group flex items-center gap-2 px-3 h-[28px] text-2xs cursor-pointer",
                     isSel
                       ? "bg-element-selected text-foreground"
                       : "text-secondary-foreground hover:bg-element-hover hover:text-foreground",
@@ -229,7 +229,7 @@ export function MergeBranchDialog({
                   />
                   <span className="truncate flex-1 font-mono">{b.name}</span>
                   {b.isRemote && (
-                    <span className="shrink-0 text-3xs font-mono uppercase tracking-wide text-muted-foreground border border-border rounded px-1">
+                    <span className="shrink-0 text-4xs font-mono uppercase tracking-wide text-muted-foreground border border-border rounded px-1">
                       remote
                     </span>
                   )}
@@ -237,7 +237,7 @@ export function MergeBranchDialog({
               );
             })}
             {filtered.length === 0 && (
-              <div className="px-3 py-3 text-2xs text-muted-foreground text-center">
+              <div className="px-3 py-3 text-3xs text-muted-foreground text-center">
                 No other branches
               </div>
             )}
@@ -246,13 +246,13 @@ export function MergeBranchDialog({
           {/* Preview + actions */}
           <div className="border-t border-border px-3 py-2.5 flex flex-col gap-2.5">
             {fetching && (
-              <p className="text-2xs text-muted-foreground flex items-center gap-1.5">
+              <p className="text-3xs text-muted-foreground flex items-center gap-1.5">
                 <Loader2 size={10} className="animate-spin shrink-0" />
                 Checking origin for new commits…
               </p>
             )}
             {staleUpstream && (
-              <p className="text-xs text-warning flex items-start gap-1.5">
+              <p className="text-2xs text-warning flex items-start gap-1.5">
                 <AlertTriangle size={11} className="shrink-0 mt-0.5" />
                 <span>
                   <span className="font-mono">{selected}</span> is behind{" "}
@@ -278,7 +278,7 @@ export function MergeBranchDialog({
             <div className="flex items-center justify-end gap-2">
               <button
                 onClick={() => onOpenChange(false)}
-                className="px-3 h-7 rounded text-xs text-secondary-foreground hover:bg-element-hover transition-colors"
+                className="px-3 h-7 rounded text-2xs text-secondary-foreground hover:bg-element-hover transition-colors"
               >
                 Cancel
               </button>
@@ -287,7 +287,7 @@ export function MergeBranchDialog({
                 disabled={!canMerge}
                 title={selected ? `Rebase ${branch} onto ${selected}` : "Rebase"}
                 className={cn(
-                  "px-3 h-7 rounded text-xs font-medium transition-colors",
+                  "px-3 h-7 rounded text-2xs font-medium transition-colors",
                   canMerge
                     ? "text-foreground border border-border hover:bg-element-hover"
                     : "text-muted-foreground bg-element-hover cursor-not-allowed",
@@ -301,7 +301,7 @@ export function MergeBranchDialog({
                 // `text-primary-foreground` on the accent fill, never the white literal —
                 // see the note in `git-error-dialog`.
                 className={cn(
-                  "flex items-center gap-1.5 px-3 h-7 rounded text-xs font-medium transition-colors",
+                  "flex items-center gap-1.5 px-3 h-7 rounded text-2xs font-medium transition-colors",
                   canMerge
                     ? "text-primary-foreground bg-primary hover:opacity-90"
                     : "text-muted-foreground bg-element-hover cursor-not-allowed",
@@ -331,14 +331,14 @@ function MergePreviewLine({
 }) {
   if (!selected) {
     return (
-      <p className="text-xs text-muted-foreground">
+      <p className="text-2xs text-muted-foreground">
         Select a branch to see what merging it would do.
       </p>
     );
   }
   if (previewing || !preview) {
     return (
-      <p className="text-xs text-muted-foreground flex items-center gap-1.5">
+      <p className="text-2xs text-muted-foreground flex items-center gap-1.5">
         <Loader2 size={11} className="animate-spin shrink-0" />
         Checking for ability to merge automatically…
       </p>
@@ -353,20 +353,20 @@ function MergePreviewLine({
   switch (preview.kind) {
     case "uptodate":
       return (
-        <p className="text-xs text-muted-foreground">
+        <p className="text-2xs text-muted-foreground">
           {dst} is already up to date with {src}.
         </p>
       );
     case "invalid":
       return (
-        <p className="text-xs text-error flex items-center gap-1.5">
+        <p className="text-2xs text-error flex items-center gap-1.5">
           <Ban size={11} className="shrink-0" />
           Unable to merge unrelated histories.
         </p>
       );
     case "conflicts":
       return (
-        <p className="text-xs text-warning flex items-center gap-1.5">
+        <p className="text-2xs text-warning flex items-center gap-1.5">
           <AlertTriangle size={11} className="shrink-0" />
           <span>
             {plural(preview.conflictedFiles, "file")} will conflict when merging {src} into {dst}.
@@ -376,14 +376,14 @@ function MergePreviewLine({
       );
     case "unsupported":
       return (
-        <p className="text-xs text-secondary-foreground">
+        <p className="text-2xs text-secondary-foreground">
           This will merge {plural(n, "commit")} from {src} into {dst}.
         </p>
       );
     case "clean":
     default:
       return (
-        <p className="text-xs text-secondary-foreground">
+        <p className="text-2xs text-secondary-foreground">
           This will merge {plural(n, "commit")} from {src} into {dst}.
         </p>
       );

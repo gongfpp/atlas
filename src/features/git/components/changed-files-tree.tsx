@@ -60,10 +60,10 @@ function CommitPicker({
         type="button"
         onClick={() => setOpen((o) => !o)}
         title="Inspect a commit's changes"
-        className="flex h-6 w-full min-w-0 items-center gap-1 rounded border border-border bg-card px-1.5 text-2xs text-foreground outline-none hover:bg-element-hover"
+        className="flex h-6 w-full min-w-0 items-center gap-1 rounded border border-border bg-card px-1.5 text-3xs text-foreground outline-none hover:bg-element-hover"
       >
         {branch && (
-          <span className="flex shrink-0 items-center gap-0.5 rounded bg-card px-1 py-px text-3xs text-muted-foreground">
+          <span className="flex shrink-0 items-center gap-0.5 rounded bg-card px-1 py-px text-4xs text-muted-foreground">
             <GitBranch size={8} />
             <span className="max-w-[70px] truncate">{branch}</span>
           </span>
@@ -83,7 +83,7 @@ function CommitPicker({
                 onChange={(e) => setQ(e.target.value)}
                 placeholder="Search commits…"
                 spellCheck={false}
-                className="min-w-0 flex-1 bg-transparent text-2xs text-foreground outline-none placeholder:text-muted-foreground"
+                className="min-w-0 flex-1 bg-transparent text-3xs text-foreground outline-none placeholder:text-muted-foreground"
               />
             </div>
             <div className="max-h-[280px] overflow-y-auto hide-scrollbar py-1">
@@ -91,7 +91,7 @@ function CommitPicker({
                 type="button"
                 onClick={() => pick("")}
                 className={cn(
-                  "flex w-full items-center px-2 py-1.5 text-left text-2xs hover:bg-element-hover",
+                  "flex w-full items-center px-2 py-1.5 text-left text-3xs hover:bg-element-hover",
                   !commit ? "text-foreground" : "text-secondary-foreground",
                 )}
               >
@@ -103,7 +103,7 @@ function CommitPicker({
                   type="button"
                   onClick={() => pick(c.hash)}
                   className={cn(
-                    "flex w-full items-center gap-1.5 px-2 py-1.5 text-left text-2xs hover:bg-element-hover",
+                    "flex w-full items-center gap-1.5 px-2 py-1.5 text-left text-3xs hover:bg-element-hover",
                     c.hash === commit ? "text-foreground" : "text-secondary-foreground",
                   )}
                 >
@@ -112,7 +112,7 @@ function CommitPicker({
                 </button>
               ))}
               {filtered.length === 0 && (
-                <div className="px-2 py-2 text-2xs text-muted-foreground">No commits</div>
+                <div className="px-2 py-2 text-3xs text-muted-foreground">No commits</div>
               )}
             </div>
           </div>
@@ -350,7 +350,7 @@ export const ChangedFilesTree = memo(function ChangedFilesTree({
         {!hidePicker && (
           <CommitPicker commit={commit} branch={branch} log={log} onPick={onPickCommit} />
         )}
-        <span className="shrink-0 text-2xs tabular-nums text-muted-foreground">
+        <span className="shrink-0 text-3xs tabular-nums text-muted-foreground">
           {rows.filter((r) => !r.node.isDir).length}
         </span>
       </div>
@@ -370,7 +370,7 @@ export const ChangedFilesTree = memo(function ChangedFilesTree({
                 <button
                   key={`d:${node.path}`}
                   onClick={() => toggle(node.path)}
-                  className={`${common.className} text-xs text-muted-foreground`}
+                  className={`${common.className} text-2xs text-muted-foreground`}
                   style={common.style}
                 >
                   {open ? <ChevronDown size={11} /> : <ChevronRight size={11} />}
@@ -384,13 +384,13 @@ export const ChangedFilesTree = memo(function ChangedFilesTree({
                 key={`f:${node.path}`}
                 onClick={() => openFile(node.path)}
                 title={node.path}
-                className={`${common.className} gap-1.5 text-xs ${
+                className={`${common.className} gap-1.5 text-2xs ${
                   active ? "bg-element-active text-foreground" : "text-secondary-foreground"
                 }`}
                 style={{ ...common.style, paddingLeft: pad + 12 }}
               >
                 <span
-                  className="w-2 shrink-0 text-center font-mono text-3xs"
+                  className="w-2 shrink-0 text-center font-mono text-4xs"
                   style={{ color: statusColor(node.status) }}
                 >
                   {statusLetter(node.status)}

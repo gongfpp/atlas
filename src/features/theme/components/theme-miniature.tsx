@@ -109,8 +109,8 @@ export function ThemeMiniature({
         <span className="size-1.5 shrink-0 rounded-full bg-error" />
         <span className="size-1.5 shrink-0 rounded-full bg-warning" />
         <span className="size-1.5 shrink-0 rounded-full bg-success" />
-        <span className="ml-1 truncate text-3xs text-muted-foreground">atlas</span>
-        <span className="ml-auto shrink-0 rounded-sm bg-primary px-1 text-3xs font-medium text-primary-foreground">
+        <span className="ml-1 truncate text-4xs text-muted-foreground">atlas</span>
+        <span className="ml-auto shrink-0 rounded-sm bg-primary px-1 text-4xs font-medium text-primary-foreground">
           Run
         </span>
       </div>
@@ -125,7 +125,7 @@ export function ThemeMiniature({
 
         {/* Editor. */}
         <div
-          className="flex min-w-0 flex-1 py-1 font-mono text-3xs"
+          className="flex min-w-0 flex-1 py-1 font-mono text-4xs"
           style={{ backgroundColor: "var(--atlas-editor-background)" }}
         >
           <div
@@ -180,7 +180,7 @@ export function ThemeMiniature({
 
       {/* Terminal. */}
       <div
-        className="flex h-5 shrink-0 items-center gap-1 border-t border-hairline px-1.5 font-mono text-3xs"
+        className="flex h-5 shrink-0 items-center gap-1 border-t border-hairline px-1.5 font-mono text-4xs"
         style={{
           backgroundColor: "var(--atlas-terminal-background)",
           color: "var(--atlas-terminal-foreground)",

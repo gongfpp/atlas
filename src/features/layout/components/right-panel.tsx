@@ -63,7 +63,7 @@ export function RightPanel() {
             key={s.id}
             onClick={() => setRightSection(s.id)}
             className={cn(
-              "flex items-center gap-1.5 px-2 py-1 rounded text-xs font-medium transition-colors cursor-pointer shrink-0 whitespace-nowrap",
+              "flex items-center gap-1.5 px-2 py-1 rounded text-2xs font-medium transition-colors cursor-pointer shrink-0 whitespace-nowrap",
               activeSection === s.id
                 ? "text-foreground bg-element-selected"
                 : "text-muted-foreground hover:text-secondary-foreground hover:bg-element-hover",

@@ -32,7 +32,7 @@ import type { TimelineEntry } from "../types";
  */
 const STRIP =
   "relative z-0 mx-2 -mb-3.5 flex items-center justify-between gap-3 rounded-t-xl " +
-  "bg-popover px-3.5 pt-1.5 pb-5 text-xs";
+  "bg-popover px-3.5 pt-1.5 pb-5 text-2xs";
 
 /** Checkpoints of one Session, newest first. */
 function sessionCheckpoints(entries: TimelineEntry[]): TimelineEntry[] {
@@ -166,13 +166,13 @@ export function CheckpointScopePicker({
                   onChange={(e) => setQuery(e.target.value)}
                   placeholder="Search…"
                   aria-label="Search checkpoints"
-                  className="min-w-0 flex-1 bg-transparent text-xs text-foreground outline-none placeholder:text-muted-foreground"
+                  className="min-w-0 flex-1 bg-transparent text-2xs text-foreground outline-none placeholder:text-muted-foreground"
                 />
               </div>
 
               <div className="min-h-0 flex-1 overflow-y-auto hide-scrollbar">
                 {shown.length === 0 ? (
-                  <p className="px-3 py-4 text-center text-xs text-muted-foreground">
+                  <p className="px-3 py-4 text-center text-2xs text-muted-foreground">
                     No checkpoint matches.
                   </p>
                 ) : (
@@ -200,10 +200,10 @@ export function CheckpointScopePicker({
                 className="flex shrink-0 items-center gap-2 border-t border-hairline px-3 py-2 text-left transition-colors hover:bg-element-hover cursor-pointer"
               >
                 <Layers size={12} className="shrink-0 text-muted-foreground" />
-                <span className="min-w-0 flex-1 truncate text-xs text-foreground">
+                <span className="min-w-0 flex-1 truncate text-2xs text-foreground">
                   Full timeline
                 </span>
-                <span className="shrink-0 font-mono text-2xs text-muted-foreground">
+                <span className="shrink-0 font-mono text-3xs text-muted-foreground">
                   {checkpoints.length} checkpoints
                 </span>
                 {isFull && <Check size={12} className="shrink-0 text-foreground" />}
@@ -265,8 +265,8 @@ function Row({
       <span className="min-w-0 flex-1">
         {/* Subject on its own line: it is what gets scanned. The sha, branch and
             diffstat are supporting detail and belong under it. */}
-        <span className="block truncate text-xs text-foreground">{title}</span>
-        <span className="flex items-center gap-1.5 font-mono text-2xs text-muted-foreground">
+        <span className="block truncate text-2xs text-foreground">{title}</span>
+        <span className="flex items-center gap-1.5 font-mono text-3xs text-muted-foreground">
           <span className="min-w-0 truncate">{meta}</span>
           {added > 0 && <span className="text-diff-added-foreground">+{added}</span>}
           {removed > 0 && <span className="text-error">−{removed}</span>}

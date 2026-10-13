@@ -321,7 +321,7 @@ export const CommsConversation = memo(function CommsConversation({
                 isDropTarget ? "opacity-100" : "opacity-0",
               )}
             >
-              <span className="rounded-full border border-primary/40 bg-card px-3 py-1 text-xs font-medium text-secondary-foreground shadow">
+              <span className="rounded-full border border-primary/40 bg-card px-3 py-1 text-2xs font-medium text-secondary-foreground shadow">
                 Drop files to attach
               </span>
             </div>
@@ -336,14 +336,16 @@ export const CommsConversation = memo(function CommsConversation({
                   <TranscriptSkeleton />
                 ) : messages.length === 0 && loadError ? (
                   <div className="flex flex-col items-center justify-center gap-2 px-6 py-16 text-center">
-                    <span className="text-sm font-medium text-foreground">
+                    <span className="text-xs font-medium text-foreground">
                       Couldn’t load this conversation
                     </span>
-                    <span className="max-w-[260px] text-xs text-muted-foreground">{loadError}</span>
+                    <span className="max-w-[260px] text-2xs text-muted-foreground">
+                      {loadError}
+                    </span>
                     <button
                       type="button"
                       onClick={() => actions.retryConversation(conv.id)}
-                      className="mt-1 flex h-control-md items-center gap-1.5 rounded-md border border-border bg-element-hover px-3 text-xs font-medium text-foreground transition-colors hover:bg-element-active cursor-pointer"
+                      className="mt-1 flex h-control-md items-center gap-1.5 rounded-md border border-border bg-element-hover px-3 text-2xs font-medium text-foreground transition-colors hover:bg-element-active cursor-pointer"
                     >
                       <RefreshCw size={11} />
                       Try again
@@ -417,7 +419,7 @@ export const CommsConversation = memo(function CommsConversation({
                   className={cn(
                     "atlas-pill-in pointer-events-auto inline-flex items-center gap-1.5 rounded-full px-3 py-1.5",
                     "border border-border bg-card",
-                    "text-xs font-medium leading-none text-secondary-foreground",
+                    "text-2xs font-medium leading-none text-secondary-foreground",
                     "shadow-md transition-colors cursor-pointer",
                     "hover:bg-element-hover hover:text-foreground",
                   )}
@@ -482,7 +484,7 @@ function SubTabStrip({
           type="button"
           onClick={() => onSelect(id)}
           className={cn(
-            "relative flex h-full items-center gap-1.5 px-2.5 text-sm font-medium transition-colors cursor-pointer",
+            "relative flex h-full items-center gap-1.5 px-2.5 text-xs font-medium transition-colors cursor-pointer",
             active === id
               ? "text-foreground"
               : "text-muted-foreground hover:text-secondary-foreground",
@@ -501,7 +503,7 @@ function SubTabStrip({
         type="button"
         onClick={openSpace}
         title="Open this conversation's Space"
-        className="ml-auto flex h-control-sm shrink-0 cursor-pointer items-center gap-1.5 rounded-full border border-border bg-element-selected px-3 text-xs font-medium text-muted-foreground transition-colors hover:bg-element-active hover:text-foreground"
+        className="ml-auto flex h-control-sm shrink-0 cursor-pointer items-center gap-1.5 rounded-full border border-border bg-element-selected px-3 text-2xs font-medium text-muted-foreground transition-colors hover:bg-element-active hover:text-foreground"
       >
         <Frame size={11} />
         Spaces
@@ -580,7 +582,7 @@ function ConversationHeader({
               title="Rename channel"
               className="group/title flex min-w-0 items-center gap-1 text-left cursor-pointer"
             >
-              <span className="min-w-0 truncate text-base font-medium text-foreground">
+              <span className="min-w-0 truncate type-reading font-medium text-foreground">
                 {conv.name}
               </span>
               <Pencil
@@ -590,16 +592,16 @@ function ConversationHeader({
             </button>
           </RenameChannelMenu>
         ) : (
-          <span className="min-w-0 truncate text-base font-medium text-foreground">{title}</span>
+          <span className="min-w-0 truncate type-reading font-medium text-foreground">{title}</span>
         )}
 
         {isGroup && (
-          <span className="shrink-0 text-2xs text-disabled">
+          <span className="shrink-0 text-3xs text-disabled">
             {others.length + 1} · membership frozen
           </span>
         )}
         {isChannel && conv.workspace_ref_ids.length > 0 && (
-          <span className="shrink-0 rounded bg-element-hover px-1 py-px text-3xs text-muted-foreground">
+          <span className="shrink-0 rounded bg-element-hover px-1 py-px text-4xs text-muted-foreground">
             {conv.workspace_ref_ids.length} project
           </span>
         )}
@@ -664,10 +666,10 @@ function ConversationIntro({
 }) {
   return (
     <div className="px-4 pb-3 pt-4">
-      <div className="text-base font-semibold text-foreground">
+      <div className="type-reading font-semibold text-foreground">
         {isChannel ? `#${conv.name}` : title}
       </div>
-      <p className="mt-0.5 text-xs leading-relaxed text-disabled">
+      <p className="mt-0.5 text-2xs leading-relaxed text-disabled">
         {isChannel
           ? "This is the beginning of the channel. Anyone in the organization can be invited, and an invitee sees the full history."
           : conv.kind === "group_dm"
@@ -682,7 +684,7 @@ function DayDivider({ at }: { at: number }) {
   return (
     <div className="flex items-center gap-2 px-3 py-3">
       <span className="h-px flex-1 bg-hairline" />
-      <span className="text-2xs font-medium uppercase tracking-wide text-disabled">
+      <span className="text-3xs font-medium uppercase tracking-wide text-disabled">
         {formatDayDivider(at)}
       </span>
       <span className="h-px flex-1 bg-hairline" />
@@ -699,7 +701,7 @@ function TypingHint({ names }: { names: string[] }) {
         ? `${names[0]} and ${names[1]} are typing`
         : `${names.length} people are typing`;
   return (
-    <div className="flex items-center gap-1.5 px-3 py-1.5 text-xs text-disabled">
+    <div className="flex items-center gap-1.5 px-3 py-1.5 text-2xs text-disabled">
       <span className="flex gap-[3px]">
         {[0, 1, 2].map((i) => (
           <span

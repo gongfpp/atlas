@@ -193,7 +193,7 @@ function Swatch({
 function UtilityCheck() {
   return (
     <div className="mt-4 border-t border-border pt-3">
-      <div className="eyebrow mb-2">Tailwind utilities</div>
+      <div className="micro mb-2">Tailwind utilities</div>
       <div className="flex gap-1">
         <div className="h-control-sm flex-1 rounded bg-chart-1" title="bg-chart-1" />
         <div className="h-control-sm flex-1 rounded bg-chart-2" title="bg-chart-2" />
@@ -672,7 +672,7 @@ function StateSection() {
         <Input size="sm" placeholder="Focusable field" className="w-48" />
         <button
           type="button"
-          className="focus-ring-none rounded border border-border px-2 py-1 text-xs text-secondary-foreground"
+          className="focus-ring-none rounded border border-border px-2 py-1 text-2xs text-secondary-foreground"
         >
           focus-ring-none (opts out)
         </button>
@@ -1199,7 +1199,7 @@ function Header() {
       <label className="label flex items-center gap-2">
         Theme
         <select
-          className="h-control-md rounded border border-border bg-panel-input px-2 text-xs text-foreground"
+          className="h-control-md rounded border border-border bg-panel-input px-2 text-2xs text-foreground"
           value={themeId}
           onChange={(e) => apply(e.target.value, mode)}
         >
@@ -1214,7 +1214,7 @@ function Header() {
       <label className="label flex items-center gap-2">
         Mode
         <select
-          className="h-control-md rounded border border-border bg-panel-input px-2 text-xs text-foreground"
+          className="h-control-md rounded border border-border bg-panel-input px-2 text-2xs text-foreground"
           value={mode}
           onChange={(e) => apply(themeId, e.target.value as ThemeMode)}
         >

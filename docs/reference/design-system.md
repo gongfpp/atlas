@@ -35,57 +35,67 @@ after any change to this page.
 
 ## Type
 
-Nine steps (decision 24). Half-pixel sizes — the audit found ~130 of them —
-round **up** to the next step.
+Atlas Standards' scale, in rem on a **16px root** — so `--spacing` (0.25rem) is
+4px and every step lands on a whole pixel. The interface scale is native WebView
+zoom on top. Half-pixel sizes round **up** to the next step. The face is
+**Geist** (sans) and **Geist Mono**, bundled through `@fontsource-variable` and
+set as the `atlas` theme's `font-sans` / `font-mono`; a third-party theme can
+name its own.
 
 | utility | px | line-height | typical use |
 |---|---|---|---|
-| `text-3xs` | 9 | 12 | a badge on a dense row |
-| `text-2xs` | 10 | 14 | eyebrows, captions, keycaps |
-| `text-xs` | 11 | 15 | control text; the most common size in Atlas |
-| `text-sm` | 12 | 16 | list rows, secondary chrome |
-| `text-base` | 13 | 18 | body text, chat messages |
-| `text-md` | 14 | 20 | panel and dialog titles |
-| `text-lg` | 16 | 22 | page headings |
+| `text-4xs` | 9 | 12 | a badge on a dense row |
+| `text-3xs` | 10 | 14 | `micro` labels, keycaps, tags |
+| `text-2xs` | 11 | 16 | captions, dense secondary text |
+| `text-xs` | 12 | 16 | **the body default** — control text, rows |
+| `type-reading` | 13 | 20 | an agent's prose, a session's entries |
+| `text-sm` | 14 | 20 | running prose, panel and dialog titles |
+| `text-md` | 16 | 22 | page headings |
+| `text-lg` | 18 | 24 | a session masthead |
 | `text-xl` | 20 | 26 | empty-state headlines |
-| `text-2xl` | 24 | 30 | the largest thing in the app |
+| `text-2xl` | 28 | 28 | the largest thing in the app; a `figure` |
 
-**Two weights only**: `font-medium` (500) and `font-semibold` (600). Nothing
-lighter, nothing heavier — the app is a dense monochrome UI and 400 disappears
-against it.
+`type-reading` is not a `text-*` step on purpose: a `text-` class tailwind-merge
+did not know as a size would be merged away as a colour. `cn()` registers it as
+a font size (`src/lib/utils.ts`).
+
+The body is 12px at **weight 500** with `tabular-nums` on. Weights are 500
+(`font-medium`) and 600 (`font-semibold`); 300 is reserved for `figure`.
 
 ### Named text styles
 
-Six `@utility` classes. Reach for one of these *before* reaching for a size plus
-a weight plus a colour — that combination is how the 1,335 arbitrary sizes got
-there.
+Reach for one of these *before* a size plus a weight plus a colour.
 
 | utility | what it is |
 |---|---|
-| `eyebrow` | the section header above a group of rows — 10px, 600, uppercase, tracked |
-| `label` | the text on and beside a control — 11px, 500 |
-| `body` | running prose: a description, a message — 13px, 500 |
-| `caption` | the dimmed second line under something — 10px, 500, muted |
+| `micro` | the small-caps group label — 10px, 500, uppercase, 0.07em, muted |
+| `label` | the text on and beside a control — 12px, 500 |
+| `body` | running prose: a description, a message — 14px, 500 |
+| `caption` | the dimmed second line under something — 11px, 500, muted |
 | `code` | any monospace run: a path, a hash, a command — 12px, 500 |
 | `heading` | a panel or dialog title — 14px, 600 |
+| `figure` | an oversized hero number — weight 300, tight tracking |
 
 ## Control heights
 
-Four steps (decision 25). The heights the audit found at 22, 28 and 30 snap to
-the nearest step.
+Atlas Standards' ladder, in rem.
 
 | utility | px | use |
 |---|---|---|
 | `h-control-xs` | 20 | inline chip, keycap |
 | `h-control-sm` | 24 | dense toolbar control |
-| `h-control-md` | 26 | **the default control** |
+| `h-control-md` | 28 | **the default control** |
 | `h-control-lg` | 32 | primary action, search field |
+| `h-control-xl` | 36 | a hero action |
 
-`size-control-xs … size-control-lg` give the same value on both axes, for an
-icon-only control.
+`size-control-*` give the same value on both axes, for an icon-only control;
+`min-w-control-*` and `min-h-control-md` exist for pills that grow.
 
-Two named layout constants, which are **not** controls and are not on the scale:
-`h-titlebar` (30px) and `h-tab-strip` (36px, the centre tab strip).
+Layout constants, so a screen never writes a width: `w-sidebar` (14rem),
+`w-sidebar-collapsed`, `w-dock` (23.75rem), `w-list-pane` (20rem),
+`w-properties`, `h-row` (2rem), `w-settings-nav`, `max-w-settings`, and the
+desktop's own `h-titlebar` (30px — it aligns with the native traffic lights, so
+it stays px) and `h-tab-strip`.
 
 ## Radius
 
@@ -113,8 +123,8 @@ Rendered today: **4 / 6 / 8 / 12**. Before Foundations it was 2 / 4 / 6 with no
   layer, after the generated rules. It therefore beats `.rounded` and still
   loses to `.rounded-lg` on an element carrying both.
 - **The scale reads `--radius-base`, which is now plain `var(--radius)`.** It
-  briefly carried a `max(…, 8px)` floor: Atlas sets its root font-size to 13px
-  (`globals.css`, `@layer base`), so a `rem` here is 13px, and every built-in
+  briefly carried a `max(…, 8px)` floor: Atlas's root font-size was then 13px,
+  so a `rem` was 13px, and every built-in
   theme file shipped `radius = "0.375rem"` — 4.875px, with `r − 4px` collapsing
   to 0.875px, i.e. square everywhere whatever the theme asked for. The theme
   files now ship `radius = "8px"`, the floor is gone, and a theme that wants to
@@ -317,8 +327,10 @@ import { Icon } from "@/ui/icon";
 <Icon icon={Search} size="sm" />;
 ```
 
-Five sizes — `xs` 10, `sm` 12, `md` 14 (the default), `lg` 16, `xl` 20 — and one
-stroke width, **1.75**. Lucide's own default of 2 reads heavy at these sizes.
+Five sizes, Atlas Standards' — `xs` 12, `sm` 14, `md` 16 (the default), `lg` 18,
+`xl` 22 — applied as rem classes (`size-3` … `size-5.5`) so they follow the type
+scale, and one stroke width, **1.75**. Lucide's own default of 2 reads heavy at
+these sizes. They were 10 / 12 / 14 / 16 / 20 before the design-language sync.
 
 **Not done yet, and deliberately.** ~960 `size={n}` call sites remain, 443 of
 them off the scale (`11` × 308, `13` × 110, `9` × 23, `15` × 22, `18` × 17,
@@ -329,12 +341,11 @@ scattered half-migration would be invisible to everything but a reader. When it
 is done, it is one pass with this mapping:
 
 ```
-8 → 10 (xs)   9 → 10 (xs)   10 → 10 (xs)   11 → 12 (sm)   12 → 12 (sm)
-13 → 14 (md)  14 → 14 (md)  15 → 16 (lg)   16 → 16 (lg)   18 → 20 (xl)   20 → 20 (xl)
+8–12 → xs (12)   13–14 → sm (14)   15–16 → md (16)   17–18 → lg (18)   20+ → xl (22)
 ```
 
-Note that `11 → 12` moves the single most common icon size in the app, in dense
-chrome sized around it, so it wants the before/after check on
+Most raw sites are 10–12px today, so the pass grows the commonest icon by a
+pixel or two in chrome sized around it — it wants the before/after check on
 `?scenario=design-system` that decision 23 asks for. Foundations shipped the
 wrapper and uses it in the `src/ui` primitives only.
 

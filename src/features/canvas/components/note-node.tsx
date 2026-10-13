@@ -38,16 +38,16 @@ export const NoteNode = memo(function NoteNode({ data, selected }: NodeProps) {
       <div className="relative flex items-center gap-2 border-b border-hairline px-3 py-2">
         <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-element-hover shrink-0">
           {d.icon ? (
-            <span className="text-lg leading-none">{d.icon}</span>
+            <span className="text-md leading-none">{d.icon}</span>
           ) : (
             <StickyNote size={13} className="text-secondary-foreground" />
           )}
         </div>
         <div className="flex-1 min-w-0">
-          <div className="text-base font-semibold text-foreground truncate">
+          <div className="type-reading font-semibold text-foreground truncate">
             {d.title || "Untitled"}
           </div>
-          <div className="text-2xs text-muted-foreground">
+          <div className="text-3xs text-muted-foreground">
             {timeAgo(d.updatedAt, { suffix: true })}
           </div>
         </div>
@@ -56,9 +56,9 @@ export const NoteNode = memo(function NoteNode({ data, selected }: NodeProps) {
       {/* Body preview */}
       <div className="relative px-3 py-2.5 max-h-[180px] overflow-hidden rounded-b-2xl">
         {isEmpty ? (
-          <div className="text-xs text-muted-foreground italic">Empty note — open to edit.</div>
+          <div className="text-2xs text-muted-foreground italic">Empty note — open to edit.</div>
         ) : (
-          <div className="text-sm leading-relaxed text-secondary-foreground [&_*]:!my-1 [&_p]:!my-0">
+          <div className="text-xs leading-relaxed text-secondary-foreground [&_*]:!my-1 [&_p]:!my-0">
             <Markdown>{d.body}</Markdown>
           </div>
         )}

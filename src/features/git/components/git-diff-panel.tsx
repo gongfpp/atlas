@@ -181,7 +181,7 @@ function SideCell({
   const bg = sideBg(side, isLeft);
   return (
     <div className="flex min-w-0">
-      <span className="w-8 shrink-0 select-none border-r border-hairline pr-[3px] pl-[3px] text-right font-mono text-2xs leading-[18px] text-muted-foreground">
+      <span className="w-8 shrink-0 select-none border-r border-hairline pr-[3px] pl-[3px] text-right font-mono text-3xs leading-[18px] text-muted-foreground">
         {side?.lineNo ?? ""}
       </span>
       <code
@@ -231,7 +231,7 @@ function CenterMarker({ row }: { row: DiffRow }) {
   }
   return (
     <div
-      className="flex items-center justify-center border-x border-hairline font-mono text-xs leading-[18px] select-none"
+      className="flex items-center justify-center border-x border-hairline font-mono text-2xs leading-[18px] select-none"
       style={{ color }}
     >
       {char}
@@ -495,23 +495,23 @@ export function GitDiffPanel({
                 </button>
               </HintItem>
               <FileCode2 size={12} className="shrink-0 text-muted-foreground" />
-              <span className="truncate font-mono text-xs text-secondary-foreground">
+              <span className="truncate font-mono text-2xs text-secondary-foreground">
                 {file || "Git Diff"}
               </span>
               {staged && (
-                <span className="shrink-0 rounded bg-card px-1.5 py-px text-3xs uppercase tracking-wide text-muted-foreground">
+                <span className="shrink-0 rounded bg-card px-1.5 py-px text-4xs uppercase tracking-wide text-muted-foreground">
                   staged
                 </span>
               )}
               {stats && (
-                <span className="shrink-0 font-mono text-2xs">
+                <span className="shrink-0 font-mono text-3xs">
                   <span className="text-success">+{stats.additions}</span>{" "}
                   <span className="text-error">-{stats.deletions}</span>
                 </span>
               )}
               {!!file && (
                 <div className="ml-auto flex items-center gap-0.5">
-                  <span className="mr-1 font-mono text-2xs text-muted-foreground tabular-nums">
+                  <span className="mr-1 font-mono text-3xs text-muted-foreground tabular-nums">
                     {diffCount} diff{diffCount !== 1 ? "s" : ""}
                   </span>
                   <HintItem label="Previous change">
@@ -558,17 +558,19 @@ export function GitDiffPanel({
 
           {/* Body */}
           {!file ? (
-            <div className="flex flex-1 items-center justify-center px-3 text-center text-xs text-muted-foreground">
+            <div className="flex flex-1 items-center justify-center px-3 text-center text-2xs text-muted-foreground">
               Pick a file from the left to view its diff.
             </div>
           ) : isLoading ? (
-            <div className="px-3 py-8 text-center text-xs text-muted-foreground">Loading diff…</div>
+            <div className="px-3 py-8 text-center text-2xs text-muted-foreground">
+              Loading diff…
+            </div>
           ) : data?.isBinary ? (
-            <div className="px-3 py-8 text-center text-xs text-muted-foreground">
+            <div className="px-3 py-8 text-center text-2xs text-muted-foreground">
               Binary file — no text diff to show.
             </div>
           ) : rows.length === 0 ? (
-            <div className="px-3 py-8 text-center text-xs text-muted-foreground">No changes.</div>
+            <div className="px-3 py-8 text-center text-2xs text-muted-foreground">No changes.</div>
           ) : (
             <div className="flex min-h-0 flex-1">
               <div ref={scrollRef} className="min-h-0 flex-1 overflow-auto hide-scrollbar">

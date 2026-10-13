@@ -77,12 +77,12 @@ export function ImportProfileDialog({
           spellCheck={false}
           placeholder={'{\n  "atlasKeybindings": 1,\n  "name": "…",\n  "bindings": {}\n}'}
           className={cn(
-            "h-48 w-full resize-none rounded-md border bg-background p-2 font-mono text-xs",
+            "h-48 w-full resize-none rounded-md border bg-background p-2 font-mono text-2xs",
             "text-foreground outline-none placeholder:text-muted-foreground",
             error ? "border-error" : "border-border",
           )}
         />
-        {error && <p className="text-xs text-error">Can't import: {error}</p>}
+        {error && <p className="text-2xs text-error">Can't import: {error}</p>}
         <DialogFooter>
           <Button variant="ghost" size="sm" onClick={() => close(false)}>
             Cancel

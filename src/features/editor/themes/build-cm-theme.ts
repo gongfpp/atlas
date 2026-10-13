@@ -24,7 +24,7 @@ const KEY_DEFAULTS = Object.fromEntries(
 ) as Record<ThemeKey, string>;
 
 /**
- * The editor's type metrics. `13px` is the `--text-base` step of the Atlas
+ * The editor's type metrics. `13px` is the `--text-reading` step of the Atlas
  * scale and matches the other CodeMirror surface in the app (the chat
  * composer); the editor used to sit a step above at `14px`, which read as
  * oversized next to every panel around it. `20px` of leading (~1.54) is the
@@ -39,9 +39,9 @@ const KEY_DEFAULTS = Object.fromEntries(
  */
 const EDITOR_FONT_SIZE = "13px";
 const EDITOR_LINE_HEIGHT = "20px";
-// The fold-gutter label sits a step down from the editor body — text-sm (12px)
+// The fold-gutter label sits a step down from the editor body — text-xs (12px)
 // is the exact step the previous literal `12px` already rendered at.
-const FOLD_GUTTER_FONT_SIZE = "var(--text-sm)";
+const FOLD_GUTTER_FONT_SIZE = "var(--text-xs)";
 
 /**
  * Build the CodeMirror chrome theme from a color theme. Mirrors the structure of

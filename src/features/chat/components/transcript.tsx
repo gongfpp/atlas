@@ -238,7 +238,7 @@ function StallNotice({
   onCopyDiagnostics?: () => void;
 }) {
   return (
-    <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5 pl-[17px] text-xs leading-[16px] text-muted-foreground">
+    <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5 pl-[17px] text-2xs leading-[16px] text-muted-foreground">
       <span className="select-text">Still starting… this can take a few minutes on first run.</span>
       {onRestart && (
         <button
@@ -955,7 +955,7 @@ export const Transcript = forwardRef<TranscriptHandle, TranscriptProps>(function
           }}
         >
           {rows.length === 0 && !isStreaming && (
-            <div className="flex h-full items-center justify-center text-xs text-muted-foreground">
+            <div className="flex h-full items-center justify-center text-2xs text-muted-foreground">
               No messages yet.
             </div>
           )}

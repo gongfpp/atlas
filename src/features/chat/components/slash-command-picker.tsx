@@ -223,7 +223,7 @@ export const SlashCommandPicker = forwardRef<SlashCommandPickerHandle, SlashComm
       >
         <div className="flex-1 overflow-y-auto py-1">
           {rows.length === 0 ? (
-            <div className="px-3 py-6 text-center text-xs text-muted-foreground leading-snug">
+            <div className="px-3 py-6 text-center text-2xs text-muted-foreground leading-snug">
               {loading ? "Loading commands…" : `No commands match "/${query}".`}
             </div>
           ) : (
@@ -239,7 +239,7 @@ export const SlashCommandPicker = forwardRef<SlashCommandPickerHandle, SlashComm
                     onSelectRef.current(cmd);
                   }}
                   className={cn(
-                    "w-full text-left px-3 h-[26px] flex items-center gap-2 text-sm",
+                    "w-full text-left px-3 h-[26px] flex items-center gap-2 text-xs",
                     isActive
                       ? "bg-element-selected text-foreground"
                       : "text-secondary-foreground hover:bg-element-hover",
@@ -249,12 +249,12 @@ export const SlashCommandPicker = forwardRef<SlashCommandPickerHandle, SlashComm
                   <span className="font-mono text-foreground shrink-0 min-w-[80px]">
                     /{highlightMatches(cmd.name, query)}
                   </span>
-                  <span className="truncate text-xs text-muted-foreground min-w-0 flex-1">
+                  <span className="truncate text-2xs text-muted-foreground min-w-0 flex-1">
                     {highlightMatches(cmd.description, query)}
                   </span>
                   {needsArgs && (
                     <span
-                      className="shrink-0 text-3xs uppercase tracking-wider text-muted-foreground border border-border rounded-full px-1.5 py-px"
+                      className="shrink-0 text-4xs uppercase tracking-wider text-muted-foreground border border-border rounded-full px-1.5 py-px"
                       title="This command takes arguments — type them after the command, then press Enter."
                     >
                       {argsHint(cmd)}
@@ -270,13 +270,13 @@ export const SlashCommandPicker = forwardRef<SlashCommandPickerHandle, SlashComm
               advertised its commands yet, read as loading rather than as a
               list with just one entry. */}
           {loading && rows.length > 0 && (
-            <div className="px-3 h-[24px] flex items-center gap-1.5 text-2xs text-muted-foreground">
+            <div className="px-3 h-[24px] flex items-center gap-1.5 text-3xs text-muted-foreground">
               <Loader2 size={10} className="animate-spin shrink-0" />
               Loading agent commands…
             </div>
           )}
         </div>
-        <div className="border-t border-border px-3 h-[24px] flex items-center justify-between text-3xs text-muted-foreground uppercase tracking-wider shrink-0">
+        <div className="border-t border-border px-3 h-[24px] flex items-center justify-between text-4xs text-muted-foreground uppercase tracking-wider shrink-0">
           <span>{footerLabel ?? "Commands"}</span>
           <KbdLegend
             className="normal-case tracking-normal"

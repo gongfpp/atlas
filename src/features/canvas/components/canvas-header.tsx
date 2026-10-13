@@ -48,10 +48,10 @@ export function CanvasHeader({
           </button>
         </HintItem>
         <div className="mx-0.5 h-4 w-px bg-hairline" />
-        <span className="flex h-4 w-4 shrink-0 items-center justify-center text-sm leading-none">
+        <span className="flex h-4 w-4 shrink-0 items-center justify-center text-xs leading-none">
           {pageIcon || DEFAULT_PAGE_ICON}
         </span>
-        <span className="max-w-[180px] truncate text-sm font-semibold text-foreground">
+        <span className="max-w-[180px] truncate text-xs font-semibold text-foreground">
           {pageName || "Spaces"}
         </span>
         <div className="mx-0.5 h-4 w-px bg-hairline" />

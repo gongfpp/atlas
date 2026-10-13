@@ -282,55 +282,81 @@
 
    NOT `inline`: these are literals, and emitting them as real custom
    properties is what lets the named text styles below — and any hand-written
-   CSS — say `var(--text-2xs)` instead of repeating a number.
+   CSS — say `var(--text-3xs)` instead of repeating a number.
 
-   9 / 10 / 11 / 12 / 13 / 14 / 16 / 20 / 24. Half-pixel sizes round UP to the
-   next step: the audit found ~130 of them (9.5, 10.5, 11.5, 12.5) and they are
-   the reason `text-[…]` outnumbers the scale 20 to 1. Only two weights are
-   allowed anywhere: 500 (`font-medium`) and 600 (`font-semibold`).
+   Atlas Standards' scale, in rem on the 16px root: 4xs 9 · 3xs 10 · 2xs 11 ·
+   xs 12 · sm 14 · md 16 · lg 18 · xl 20 · 2xl 28, plus `type-reading` (13)
+   between xs and sm. 10, 11 and 12 carry ~90% of the UI; the body default is
+   `text-xs`. Half-pixel sizes round UP to the next step. Weights are 500
+   (`font-medium`, the default) and 600 (`font-semibold`), with 300 reserved
+   for an oversized hero figure.
    ────────────────────────────────────────────────────────────────────────── */
 @theme {
-  --text-3xs: 9px;
-  --text-3xs--line-height: 12px;
-  --text-2xs: 10px;
-  --text-2xs--line-height: 14px;
-  --text-xs: 11px;
-  --text-xs--line-height: 15px;
-  --text-sm: 12px;
-  --text-sm--line-height: 16px;
-  --text-base: 13px;
-  --text-base--line-height: 18px;
-  --text-md: 14px;
-  --text-md--line-height: 20px;
-  --text-lg: 16px;
-  --text-lg--line-height: 22px;
-  --text-xl: 20px;
-  --text-xl--line-height: 26px;
-  --text-2xl: 24px;
-  --text-2xl--line-height: 30px;
+  --text-4xs: 0.5625rem;
+  --text-4xs--line-height: 0.75rem;
+  --text-3xs: 0.625rem;
+  --text-3xs--line-height: 0.875rem;
+  --text-2xs: 0.6875rem;
+  --text-2xs--line-height: 1rem;
+  --text-xs: 0.75rem;
+  --text-xs--line-height: 1rem;
+  --text-sm: 0.875rem;
+  --text-sm--line-height: 1.25rem;
+  --text-md: 1rem;
+  --text-md--line-height: 1.375rem;
+  --text-lg: 1.125rem;
+  --text-lg--line-height: 1.5rem;
+  --text-xl: 1.25rem;
+  --text-xl--line-height: 1.625rem;
+  --text-2xl: 1.75rem;
+  --text-2xl--line-height: 1;
 
   /* One glass blur. `backdrop-blur-glass` replaces the 81 assorted
      `backdrop-blur-xl` / `-2xl` sites during the sweep. */
   --blur-glass: 24px;
 }
 
+/* The reading size, between `xs` and `sm`: an agent's prose, a session's entry
+   labels. Not a `--text-*` step, so there is no `text-reading` class — a
+   `text-` utility `cn()` did not know as a size would be merged away as a
+   colour. It is reached through `type-reading` (below), which `src/lib/utils.ts`
+   registers with tailwind-merge as a font size. */
+:root {
+  --text-reading: calc((var(--text-xs) + var(--text-sm)) / 2);
+  --text-reading--line-height: 1.25rem;
+}
+@utility type-reading {
+  font-size: var(--text-reading);
+  line-height: var(--text-reading--line-height);
+}
+
 /* ──────────────────────────────────────────────────────────────────────────
    Named text styles (decision 24).
 
    Six, and they cover the panel chrome. Reach for one of these before reaching
-   for a size plus a weight plus a colour: `eyebrow` is the section header,
-   `label` the text on and beside a control, `body` running prose, `caption`
-   the dimmed line under something, `code` any monospace run, `heading` a panel
-   or dialog title.
+   for a size plus a weight plus a colour: `micro` is the section header,
+   `label` the text on and beside a control (12), `body` running prose (14),
+   `caption` the dimmed line under something (11), `code` any monospace run,
+   `heading` a panel or dialog title, `figure` a hero number. Atlas Standards'
+   set, at its sizes.
    ────────────────────────────────────────────────────────────────────────── */
-@utility eyebrow {
+/* `micro` is the small-caps group label — the one place uppercase and tracking
+   are allowed (Atlas Standards; it was `eyebrow`). `figure` is an oversized
+   hero number: LIGHT, never bold, and the only use of weight 300. */
+@utility micro {
   font-family: var(--font-sans);
-  font-size: var(--text-2xs);
-  line-height: var(--text-2xs--line-height);
-  font-weight: 600;
-  letter-spacing: 0.05em;
+  font-size: var(--text-3xs);
+  line-height: 1;
+  font-weight: 500;
+  letter-spacing: 0.07em;
   text-transform: uppercase;
   color: var(--muted-foreground);
+}
+
+@utility figure {
+  font-weight: 300;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
 }
 
 @utility label {
@@ -343,8 +369,8 @@
 
 @utility body {
   font-family: var(--font-sans);
-  font-size: var(--text-base);
-  line-height: var(--text-base--line-height);
+  font-size: var(--text-sm);
+  line-height: var(--text-sm--line-height);
   font-weight: 500;
   color: var(--foreground);
 }
@@ -359,16 +385,16 @@
 
 @utility code {
   font-family: var(--font-mono);
-  font-size: var(--text-sm);
-  line-height: var(--text-sm--line-height);
+  font-size: var(--text-xs);
+  line-height: var(--text-xs--line-height);
   font-weight: 500;
   font-feature-settings: "zero", "ss02";
 }
 
 @utility heading {
   font-family: var(--font-sans);
-  font-size: var(--text-md);
-  line-height: var(--text-md--line-height);
+  font-size: var(--text-sm);
+  line-height: var(--text-sm--line-height);
   font-weight: 600;
   color: var(--foreground);
 }
@@ -390,6 +416,21 @@
 @utility h-control-lg {
   height: var(--control-lg);
 }
+@utility h-control-xl {
+  height: var(--control-xl);
+}
+@utility min-h-control-md {
+  min-height: var(--control-md);
+}
+@utility min-w-control-xs {
+  min-width: var(--control-xs);
+}
+@utility min-w-control-sm {
+  min-width: var(--control-sm);
+}
+@utility min-w-control-md {
+  min-width: var(--control-md);
+}
 /* The square an icon-only control occupies — one control height on both axes. */
 @utility size-control-xs {
   width: var(--control-xs);
@@ -407,12 +448,47 @@
   width: var(--control-lg);
   height: var(--control-lg);
 }
+@utility size-control-xl {
+  width: var(--control-xl);
+  height: var(--control-xl);
+}
 
 @utility h-titlebar {
   height: var(--titlebar-height);
 }
 @utility h-tab-strip {
   height: var(--tab-strip-height);
+}
+/* Atlas Standards' layout constants. */
+@utility w-sidebar {
+  width: var(--sidebar-width);
+}
+@utility w-sidebar-collapsed {
+  width: var(--sidebar-width-collapsed);
+}
+@utility w-dock {
+  width: var(--dock-width);
+}
+@utility min-w-dock {
+  min-width: var(--dock-width);
+}
+@utility w-list-pane {
+  width: var(--list-pane-width);
+}
+@utility w-properties {
+  width: var(--properties-width);
+}
+@utility h-row {
+  height: var(--row-height);
+}
+@utility min-h-row {
+  min-height: var(--row-height);
+}
+@utility w-settings-nav {
+  width: var(--settings-nav-width);
+}
+@utility max-w-settings {
+  max-width: var(--settings-content-max);
 }
 
 /* ──────────────────────────────────────────────────────────────────────────
@@ -554,7 +630,7 @@ html[data-theme-appearance="light"],
   border: 1px solid color-mix(in oklch, var(--tag) var(--tag-border-mix), transparent);
   background: color-mix(in oklch, var(--tag) var(--tag-bg-mix), transparent);
   color: var(--tag);
-  font-size: var(--text-3xs);
+  font-size: var(--text-4xs);
   font-weight: 500;
   line-height: 1;
   white-space: nowrap;
@@ -971,15 +1047,25 @@ html[data-theme-appearance="light"],
     box-sizing: border-box;
   }
 
+  /* The root is 16px, and only the root: every rem in the app is a multiple
+     of it, so `--spacing` (0.25rem) is 4px and the type scale lands on whole
+     pixels. It used to be 13px, which made a spacing step 3.25px. It must stay
+     its own rule — a rem in the root's OWN font-size resolves against the
+     browser default, so sharing the body's `var(--text-xs)` would shrink every
+     rem to 12px. The interface scale is native WebView zoom on top. */
+  html {
+    font-size: 16px;
+  }
+
+  /* The density decision, made visible (Atlas Standards): the document
+     default is 12px at weight 500, and figures never reflow as they tick. */
   html,
   body,
   #root {
     height: 100%;
     width: 100%;
     overflow: hidden;
-    font-family: -apple-system, "SF Pro Text", system-ui, sans-serif;
-    font-size: 13px;
-    line-height: 1.45;
+    font-family: var(--font-sans);
     color: var(--foreground);
     /* Opaque base black. The window is no longer transparent (the
        NSVisualEffectView vibrancy was removed because its live backdrop
@@ -990,8 +1076,15 @@ html[data-theme-appearance="light"],
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     letter-spacing: -0.01em;
+    font-variant-numeric: tabular-nums;
     user-select: none;
     -webkit-user-select: none;
+  }
+  body,
+  #root {
+    font-size: var(--text-xs);
+    line-height: var(--text-xs--line-height);
+    font-weight: 500;
   }
 
   /* Re-enable text selection in content areas */
@@ -1798,8 +1891,8 @@ html[data-theme-appearance="light"],
   gap: 6px !important;
   padding: 4px 10px !important;
   background: var(--card) !important;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
-  font-size: 12px !important;
+  font-family: var(--font-sans) !important;
+  font-size: var(--text-xs) !important;
   color: var(--secondary-foreground) !important;
   position: relative !important;
 }

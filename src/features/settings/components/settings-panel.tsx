@@ -132,7 +132,7 @@ export function SettingsPanel({ initialSection }: { initialSection?: string } = 
                 key={s.id}
                 onClick={() => setActiveSection(s.id)}
                 className={cn(
-                  "w-full flex items-center h-[32px] whitespace-nowrap text-xs font-medium transition-colors border-l-2 cursor-pointer",
+                  "w-full flex items-center h-[32px] whitespace-nowrap text-2xs font-medium transition-colors border-l-2 cursor-pointer",
                   navCollapsed ? "justify-center px-0" : "gap-2 px-4",
                   activeSection === s.id
                     ? "text-foreground bg-element-selected border-l-primary"
@@ -147,7 +147,7 @@ export function SettingsPanel({ initialSection }: { initialSection?: string } = 
                 </span>
                 {!navCollapsed && s.label}
                 {!navCollapsed && badge > 0 && (
-                  <span className="ml-auto min-w-4 h-4 px-1 rounded-full bg-primary text-primary-foreground text-3xs leading-4 text-center tabular-nums">
+                  <span className="ml-auto min-w-4 h-4 px-1 rounded-full bg-primary text-primary-foreground text-4xs leading-4 text-center tabular-nums">
                     {badge}
                   </span>
                 )}
@@ -170,7 +170,7 @@ export function SettingsPanel({ initialSection }: { initialSection?: string } = 
           <button
             onClick={toggleNav}
             className={cn(
-              "mt-1 flex items-center h-[30px] whitespace-nowrap border-t border-border text-xs font-medium text-muted-foreground hover:bg-element-hover hover:text-foreground transition-colors cursor-pointer",
+              "mt-1 flex items-center h-[30px] whitespace-nowrap border-t border-border text-2xs font-medium text-muted-foreground hover:bg-element-hover hover:text-foreground transition-colors cursor-pointer",
               navCollapsed ? "justify-center px-0" : "gap-2 px-4",
             )}
           >
@@ -343,16 +343,16 @@ function GeneralSettings() {
       <SectionTitle title="General" subtitle="Application preferences" />
       {configError && (
         <div className="rounded-md border border-warning/40 bg-warning-muted p-3 space-y-2">
-          <p className="text-sm font-medium text-foreground">
+          <p className="text-xs font-medium text-foreground">
             Atlas is using the last valid settings — config.toml has a problem
           </p>
-          <p className="text-xs text-secondary-foreground font-mono break-all">{configError}</p>
+          <p className="text-2xs text-secondary-foreground font-mono break-all">{configError}</p>
           <div className="flex gap-2">
             <button
               type="button"
               onClick={() => void openConfigFile()}
               className={cn(
-                "h-7 rounded-md px-2.5 text-xs font-medium border border-border bg-card",
+                "h-7 rounded-md px-2.5 text-2xs font-medium border border-border bg-card",
                 "text-foreground hover:bg-element-hover transition-colors",
               )}
             >
@@ -363,7 +363,7 @@ function GeneralSettings() {
               onClick={() => void recreateConfigDefaults()}
               disabled={resettingConfig}
               className={cn(
-                "h-7 rounded-md px-2.5 text-xs font-medium border border-border bg-card",
+                "h-7 rounded-md px-2.5 text-2xs font-medium border border-border bg-card",
                 "text-foreground hover:bg-element-hover transition-colors",
                 "disabled:opacity-50 disabled:cursor-not-allowed",
               )}
@@ -373,7 +373,7 @@ function GeneralSettings() {
             <button
               type="button"
               onClick={clearConfigError}
-              className="h-7 rounded-md px-2.5 text-xs font-medium text-secondary-foreground hover:text-foreground transition-colors"
+              className="h-7 rounded-md px-2.5 text-2xs font-medium text-secondary-foreground hover:text-foreground transition-colors"
             >
               Dismiss
             </button>
@@ -394,7 +394,7 @@ function GeneralSettings() {
           <select
             value={settings.appIcon}
             onChange={(e) => updateSettings({ appIcon: e.target.value })}
-            className="h-7 rounded-md border border-border bg-card px-2 text-xs text-foreground outline-none"
+            className="h-7 rounded-md border border-border bg-card px-2 text-2xs text-foreground outline-none"
           >
             {APP_ICONS.map((icon) => (
               <option key={icon.id} value={icon.id}>
@@ -521,7 +521,7 @@ function GeneralSettings() {
           type="button"
           onClick={() => useFeedbackStore.getState().actions.openPanel("settings")}
           className={cn(
-            "h-7 rounded-md px-2.5 text-xs font-medium border border-border bg-card",
+            "h-7 rounded-md px-2.5 text-2xs font-medium border border-border bg-card",
             "text-foreground hover:bg-element-hover transition-colors",
           )}
         >
@@ -548,7 +548,7 @@ function GeneralSettings() {
               agentSwitchBehavior: e.target.value as AppSettings["agentSwitchBehavior"],
             })
           }
-          className="h-7 rounded-md border border-border bg-card px-2 text-xs text-foreground outline-none"
+          className="h-7 rounded-md border border-border bg-card px-2 text-2xs text-foreground outline-none"
         >
           <option value="reset">Start over</option>
           <option value="new-tab">New tab</option>
@@ -628,7 +628,7 @@ function GeneralSettings() {
             onClick={() => void openMemoryMirror()}
             disabled={!settings.memoryRepoMirror || !projectPath}
             className={cn(
-              "h-7 rounded-md px-2.5 text-xs font-medium border border-border bg-card",
+              "h-7 rounded-md px-2.5 text-2xs font-medium border border-border bg-card",
               "text-foreground hover:bg-element-hover transition-colors",
               "disabled:opacity-50 disabled:cursor-not-allowed",
             )}
@@ -650,7 +650,7 @@ function GeneralSettings() {
           onClick={() => void installCli()}
           disabled={installing}
           className={cn(
-            "h-7 rounded-md px-2.5 text-xs font-medium border border-border bg-card",
+            "h-7 rounded-md px-2.5 text-2xs font-medium border border-border bg-card",
             "text-foreground hover:bg-element-hover transition-colors",
             "disabled:opacity-50 disabled:cursor-not-allowed",
           )}
@@ -667,7 +667,7 @@ function GeneralSettings() {
           onClick={() => void updatePricing()}
           disabled={pricingLoading}
           className={cn(
-            "h-7 rounded-md px-2.5 text-xs font-medium border border-border bg-card",
+            "h-7 rounded-md px-2.5 text-2xs font-medium border border-border bg-card",
             "text-foreground hover:bg-element-hover transition-colors",
             "disabled:opacity-50 disabled:cursor-not-allowed",
           )}
@@ -710,7 +710,7 @@ function ZoomControl() {
         <button
           type="button"
           onClick={() => setScale(DEFAULT_SCALE)}
-          className="h-6 min-w-[44px] rounded-md px-1.5 text-xs font-medium tabular-nums text-secondary-foreground hover:bg-element-hover hover:text-foreground transition-colors cursor-pointer"
+          className="h-6 min-w-[44px] rounded-md px-1.5 text-2xs font-medium tabular-nums text-secondary-foreground hover:bg-element-hover hover:text-foreground transition-colors cursor-pointer"
         >
           {scalePct}%
         </button>
@@ -773,20 +773,20 @@ function UpdatesSettings() {
   // The "Check for updates" row swaps its control based on the live phase:
   // downloading → progress; ready → Restart button; else → Check now.
   const control = devProfile ? (
-    <span className="text-xs text-muted-foreground">Off in {productName}</span>
+    <span className="text-2xs text-muted-foreground">Off in {productName}</span>
   ) : ready ? (
     <button
       type="button"
       onClick={restart}
       className={cn(
-        "h-7 rounded-md px-2.5 text-xs font-medium",
+        "h-7 rounded-md px-2.5 text-2xs font-medium",
         "bg-foreground text-background hover:opacity-90 transition-opacity",
       )}
     >
       Restart to update
     </button>
   ) : downloading ? (
-    <span className="text-xs text-muted-foreground tabular-nums">
+    <span className="text-2xs text-muted-foreground tabular-nums">
       {progress != null ? `Downloading ${Math.round(progress * 100)}%` : "Preparing…"}
     </span>
   ) : (
@@ -795,7 +795,7 @@ function UpdatesSettings() {
       onClick={() => void checkNow()}
       disabled={checking}
       className={cn(
-        "h-7 rounded-md px-2.5 text-xs font-medium border border-border bg-card",
+        "h-7 rounded-md px-2.5 text-2xs font-medium border border-border bg-card",
         "text-foreground hover:bg-element-hover transition-colors",
         "disabled:opacity-50 disabled:cursor-not-allowed",
       )}
@@ -868,13 +868,13 @@ function AboutSettings() {
         <div className="flex items-center gap-2">
           <AtlasIcon size={40} className="rounded-xl" />
           <div>
-            <p className="text-sm font-semibold text-foreground">Atlas</p>
-            <p className="text-2xs text-muted-foreground">
+            <p className="text-xs font-semibold text-foreground">Atlas</p>
+            <p className="text-3xs text-muted-foreground">
               {version ? `v${version} — ` : ""}Multiplayer AI development
             </p>
           </div>
         </div>
-        <p className="text-xs text-secondary-foreground leading-relaxed pt-2">
+        <p className="text-2xs text-secondary-foreground leading-relaxed pt-2">
           Built with Tauri, React, and Rust. Atlas records the work your team's coding agents do,
           links it to the commits it produced, and shares it with the whole team.
         </p>

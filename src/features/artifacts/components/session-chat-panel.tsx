@@ -222,7 +222,7 @@ export function SessionChatPanel({
       </div>
 
       {error && (
-        <p className="shrink-0 border-t border-error/25 bg-error-muted px-3 py-2 text-sm leading-[1.5] text-error">
+        <p className="shrink-0 border-t border-error/25 bg-error-muted px-3 py-2 text-xs leading-[1.5] text-error">
           {error}
         </p>
       )}
@@ -287,7 +287,7 @@ function ThreadPicker({
         render={
           <button
             type="button"
-            className="flex min-w-0 cursor-pointer items-center gap-1.5 rounded-md px-1.5 py-1 text-sm text-foreground transition-colors hover:bg-element-hover"
+            className="flex min-w-0 cursor-pointer items-center gap-1.5 rounded-md px-1.5 py-1 text-xs text-foreground transition-colors hover:bg-element-hover"
           >
             <span className="truncate">{title}</span>
             <ChevronDown size={12} className="shrink-0 text-muted-foreground" />
@@ -305,13 +305,13 @@ function ThreadPicker({
                 placeholder="Find a chat…"
                 spellCheck={false}
                 autoFocus
-                className="min-w-0 flex-1 border-0 bg-transparent p-0 text-sm text-foreground outline-none placeholder:text-muted-foreground"
+                className="min-w-0 flex-1 border-0 bg-transparent p-0 text-xs text-foreground outline-none placeholder:text-muted-foreground"
               />
             </div>
 
             <div className="hide-scrollbar min-h-0 flex-1 overflow-y-auto p-1">
               {filtered.length === 0 ? (
-                <p className="px-2 py-3 text-center text-sm text-muted-foreground">
+                <p className="px-2 py-3 text-center text-xs text-muted-foreground">
                   {metas.length === 0 ? "No chats yet." : "No match."}
                 </p>
               ) : (
@@ -335,10 +335,10 @@ function ThreadPicker({
                           meta.id === activeId ? "text-foreground" : "opacity-0",
                         )}
                       />
-                      <span className="min-w-0 flex-1 truncate text-sm text-secondary-foreground">
+                      <span className="min-w-0 flex-1 truncate text-xs text-secondary-foreground">
                         {meta.title}
                       </span>
-                      <span className="shrink-0 font-mono text-2xs text-disabled">
+                      <span className="shrink-0 font-mono text-3xs text-disabled">
                         {timeAgo(meta.updatedAt)}
                       </span>
                     </button>
@@ -362,7 +362,7 @@ function ThreadPicker({
                 onNew();
                 setOpen(false);
               }}
-              className="flex h-8 shrink-0 cursor-pointer items-center gap-2 border-t border-border px-2.5 text-sm text-secondary-foreground transition-colors hover:bg-element-hover hover:text-foreground"
+              className="flex h-8 shrink-0 cursor-pointer items-center gap-2 border-t border-border px-2.5 text-xs text-secondary-foreground transition-colors hover:bg-element-hover hover:text-foreground"
             >
               <Plus size={12} />
               New chat
@@ -396,17 +396,17 @@ function NeedsKey({ loaded }: { loaded: boolean }) {
   if (!loaded) return null;
   return (
     <div className="flex flex-1 flex-col items-center justify-center gap-3 px-6 text-center">
-      <p className="text-base leading-[1.6] text-secondary-foreground">
+      <p className="type-reading leading-[1.6] text-secondary-foreground">
         Chatting with a session needs an API key.
       </p>
-      <p className="text-sm leading-[1.6] text-muted-foreground">
+      <p className="text-xs leading-[1.6] text-muted-foreground">
         Everything else runs locally — the session is read from your own store and the question is
         answered by the provider you choose.
       </p>
       <button
         type="button"
         onClick={openProviderSettings}
-        className="mt-1 flex h-7 cursor-pointer items-center rounded-full border border-border bg-card px-3 text-sm text-secondary-foreground transition-colors hover:border-border-strong hover:text-foreground"
+        className="mt-1 flex h-7 cursor-pointer items-center rounded-full border border-border bg-card px-3 text-xs text-secondary-foreground transition-colors hover:border-border-strong hover:text-foreground"
       >
         Add a key in Settings
       </button>
@@ -447,7 +447,7 @@ function Starters({ disabled, onPick }: { disabled: boolean; onPick: (question: 
           Ask this session
         </h2>
         <p
-          className="atlas-fade-in mt-1.5 text-sm leading-[1.5] text-muted-foreground"
+          className="atlas-fade-in mt-1.5 text-xs leading-[1.5] text-muted-foreground"
           style={{ animationDelay: "80ms" }}
         >
           Grounded in what this session actually recorded.
@@ -477,7 +477,7 @@ function Starters({ disabled, onPick }: { disabled: boolean; onPick: (question: 
                   className="-translate-x-1 text-disabled opacity-0 transition-all group-hover:translate-x-0 group-hover:text-secondary-foreground group-hover:opacity-100"
                 />
               </div>
-              <span className="text-sm font-medium leading-snug text-secondary-foreground transition-colors group-hover:text-foreground">
+              <span className="text-xs font-medium leading-snug text-secondary-foreground transition-colors group-hover:text-foreground">
                 {text}
               </span>
             </button>

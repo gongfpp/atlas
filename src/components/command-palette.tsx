@@ -414,13 +414,13 @@ export function CommandPalette({
               onChange={(e) => setQuery(e.target.value)}
               onKeyDown={handleKeyDown}
               placeholder="Type a command..."
-              className="flex-1 bg-transparent border-none outline-none text-sm text-foreground placeholder:text-muted-foreground"
+              className="flex-1 bg-transparent border-none outline-none text-xs text-foreground placeholder:text-muted-foreground"
             />
           </div>
 
           <div ref={listRef} className="overflow-y-auto flex-1 py-1">
             {filtered.length === 0 && (
-              <div className="px-4 py-6 text-center text-xs text-muted-foreground">
+              <div className="px-4 py-6 text-center text-2xs text-muted-foreground">
                 No commands found
               </div>
             )}
@@ -432,7 +432,7 @@ export function CommandPalette({
               return (
                 <Fragment key={cmd.id}>
                   {showHeader && (
-                    <div className="px-4 pt-2.5 pb-1 text-2xs font-medium uppercase tracking-wider text-muted-foreground select-none">
+                    <div className="px-4 pt-2.5 pb-1 text-3xs font-medium uppercase tracking-wider text-muted-foreground select-none">
                       {cmd.category}
                     </div>
                   )}
@@ -441,7 +441,7 @@ export function CommandPalette({
                     onClick={() => runCommand(cmd)}
                     onMouseEnter={() => setSelectedIndex(i)}
                     className={cn(
-                      "w-full flex items-center gap-3 px-4 h-[36px] text-left text-sm transition-colors",
+                      "w-full flex items-center gap-3 px-4 h-[36px] text-left text-xs transition-colors",
                       i === selectedIndex
                         ? "bg-element-hover text-foreground"
                         : "text-secondary-foreground",

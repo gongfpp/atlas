@@ -61,7 +61,7 @@ export function PageProperties({
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
-        className="text-sm"
+        className="text-xs"
         style={{
           display: "flex",
           alignItems: "center",
@@ -86,14 +86,14 @@ export function PageProperties({
           }}
         />
         <span
-          className="text-2xs font-semibold uppercase tracking-wider"
+          className="text-3xs font-semibold uppercase tracking-wider"
           style={{ color: "var(--muted-foreground)" }}
         >
           Properties
         </span>
         {!open && (
           <span
-            className="text-sm"
+            className="text-xs"
             style={{
               color: "var(--muted-foreground)",
               overflow: "hidden",
@@ -138,7 +138,7 @@ export function PageProperties({
             </span>
           </Row>
           <Row icon={LinkIcon} label="References">
-            <span className="mono text-sm" style={{ color: "var(--secondary-foreground)" }}>
+            <span className="mono text-xs" style={{ color: "var(--secondary-foreground)" }}>
               {referencesLabel}
             </span>
           </Row>
@@ -167,7 +167,7 @@ function Row({
       }}
     >
       <span
-        className="text-sm"
+        className="text-xs"
         style={{
           display: "flex",
           alignItems: "center",
@@ -179,7 +179,7 @@ function Row({
         <span>{label}</span>
       </span>
       <span
-        className="text-base"
+        className="type-reading"
         style={{
           display: "flex",
           alignItems: "center",
@@ -209,7 +209,7 @@ function StatusEditor({
       <button
         type="button"
         onClick={() => setOpen((o) => !o)}
-        className="pill text-xs"
+        className="pill text-2xs"
         style={{
           height: 22,
           color: value ? "var(--foreground)" : "var(--muted-foreground)",
@@ -252,7 +252,7 @@ function StatusEditor({
               }
             }}
             placeholder="Status…"
-            className="bg-panel-input text-foreground text-sm"
+            className="bg-panel-input text-foreground text-xs"
             style={{
               width: "100%",
               height: 26,
@@ -271,7 +271,7 @@ function StatusEditor({
                   onChange(p);
                   setOpen(false);
                 }}
-                className="pill pill-bare text-xs"
+                className="pill pill-bare text-2xs"
                 style={{
                   height: 20,
                   cursor: "pointer",
@@ -288,7 +288,7 @@ function StatusEditor({
                   onChange(null);
                   setOpen(false);
                 }}
-                className="text-xs"
+                className="text-2xs"
                 style={{
                   color: "var(--muted-foreground)",
                   cursor: "pointer",
@@ -336,7 +336,7 @@ function TextEditor({
             setEditing(false);
           }
         }}
-        className="text-base"
+        className="type-reading"
         style={{
           background: "transparent",
           border: 0,
@@ -353,7 +353,7 @@ function TextEditor({
       type="button"
       onClick={() => setEditing(true)}
       className={cn(
-        "text-base",
+        "type-reading",
         value ? "text-secondary-foreground" : "text-muted-foreground italic",
       )}
       style={{
@@ -390,7 +390,7 @@ function TagsEditor({ tags, onChange }: { tags: string[]; onChange: (tags: strin
       {tags.map((t) => (
         <span
           key={t}
-          className="pill pill-bare text-xs"
+          className="pill pill-bare text-2xs"
           style={{
             height: 20,
             borderColor: "var(--atlas-border-subtle)",
@@ -436,7 +436,7 @@ function TagsEditor({ tags, onChange }: { tags: string[]; onChange: (tags: strin
             }
           }}
           placeholder="tag…"
-          className="text-xs"
+          className="text-2xs"
           style={{
             background: "transparent",
             border: "1px dashed var(--atlas-border-subtle)",
@@ -452,7 +452,7 @@ function TagsEditor({ tags, onChange }: { tags: string[]; onChange: (tags: strin
         <button
           type="button"
           onClick={() => setAdding(true)}
-          className="text-sm"
+          className="text-xs"
           style={{
             color: "var(--muted-foreground)",
             padding: "0 6px",

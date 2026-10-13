@@ -208,7 +208,7 @@ export function MembersModal({
 
           {/* Header — mirrors the git-graph fullscreen bar. */}
           <div className="flex items-center justify-between px-3 h-[32px] shrink-0 border-b border-hairline">
-            <span className="text-2xs font-semibold text-muted-foreground uppercase tracking-wide">
+            <span className="text-3xs font-semibold text-muted-foreground uppercase tracking-wide">
               {org.name} · {members.length} {members.length === 1 ? "member" : "members"}
             </span>
             <HintGroup>
@@ -249,14 +249,14 @@ export function MembersModal({
                 key={id}
                 onClick={() => setTab(id)}
                 className={cn(
-                  "flex items-center gap-1.5 px-2.5 h-[40px] text-xs font-medium transition-colors border-b-2 -mb-px cursor-pointer",
+                  "flex items-center gap-1.5 px-2.5 h-[40px] text-2xs font-medium transition-colors border-b-2 -mb-px cursor-pointer",
                   tab === id
                     ? "text-foreground border-b-primary"
                     : "text-secondary-foreground hover:text-foreground border-b-transparent",
                 )}
               >
                 {label}
-                <span className="text-3xs text-muted-foreground tabular-nums">{count}</span>
+                <span className="text-4xs text-muted-foreground tabular-nums">{count}</span>
               </button>
             ))}
             <div className="flex-1" />
@@ -266,7 +266,7 @@ export function MembersModal({
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="Search people…"
-                className="flex-1 min-w-0 bg-transparent outline-none text-xs text-foreground placeholder:text-muted-foreground"
+                className="flex-1 min-w-0 bg-transparent outline-none text-2xs text-foreground placeholder:text-muted-foreground"
               />
             </div>
           </div>
@@ -286,7 +286,7 @@ export function MembersModal({
                 role={inviteRole}
                 onSelect={setInviteRole}
                 trigger={
-                  <button className="flex items-center gap-1 h-7 rounded-md border border-border bg-card px-2 text-xs text-secondary-foreground hover:text-foreground transition-colors cursor-pointer shrink-0">
+                  <button className="flex items-center gap-1 h-7 rounded-md border border-border bg-card px-2 text-2xs text-secondary-foreground hover:text-foreground transition-colors cursor-pointer shrink-0">
                     {ROLE_LABELS[inviteRole]}
                   </button>
                 }
@@ -299,7 +299,7 @@ export function MembersModal({
                     : undefined
                 }
                 onClick={() => void submitInvite()}
-                className="inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-3 py-1.5 text-xs font-medium leading-none text-foreground cursor-pointer transition-colors hover:bg-element-hover disabled:cursor-not-allowed disabled:opacity-40 shrink-0"
+                className="inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-3 py-1.5 text-2xs font-medium leading-none text-foreground cursor-pointer transition-colors hover:bg-element-hover disabled:cursor-not-allowed disabled:opacity-40 shrink-0"
               >
                 {inviting ? <Loader2 size={11} className="animate-spin" /> : <UserPlus size={11} />}
                 Invite
@@ -312,7 +312,7 @@ export function MembersModal({
           <div className="flex-1 min-h-0 relative">
             <div className="absolute inset-0 overflow-auto hide-scrollbar">
               <div style={{ minWidth: TABLE_MIN_W }}>
-                <div className="sticky top-0 z-10 flex items-center h-[28px] border-b border-border bg-background px-3 text-2xs uppercase tracking-wider text-muted-foreground">
+                <div className="sticky top-0 z-10 flex items-center h-[28px] border-b border-border bg-background px-3 text-3xs uppercase tracking-wider text-muted-foreground">
                   <span className={COL.person}>{tab === "members" ? "Person" : "Email"}</span>
                   <span className={COL.role}>Role</span>
                   <span className={COL.joined}>{tab === "members" ? "Joined" : "Status"}</span>
@@ -320,20 +320,20 @@ export function MembersModal({
                 </div>
 
                 {!signedIn ? (
-                  <div className="grid place-items-center h-[160px] text-xs text-muted-foreground px-6 text-center">
+                  <div className="grid place-items-center h-[160px] text-2xs text-muted-foreground px-6 text-center">
                     Sign in to manage this organization's members.
                   </div>
                 ) : firstLoad ? (
-                  <div className="grid place-items-center h-[160px] text-xs text-muted-foreground">
+                  <div className="grid place-items-center h-[160px] text-2xs text-muted-foreground">
                     <Loader2 size={14} className="animate-spin" />
                   </div>
                 ) : roster?.error && members.length === 0 ? (
-                  <div className="grid place-items-center h-[160px] text-xs text-muted-foreground px-6 text-center">
+                  <div className="grid place-items-center h-[160px] text-2xs text-muted-foreground px-6 text-center">
                     {roster.error}
                   </div>
                 ) : tab === "members" ? (
                   filteredMembers.length === 0 ? (
-                    <div className="grid place-items-center h-[160px] text-xs text-muted-foreground">
+                    <div className="grid place-items-center h-[160px] text-2xs text-muted-foreground">
                       {query ? "No people match." : "No members yet."}
                     </div>
                   ) : (
@@ -351,7 +351,7 @@ export function MembersModal({
                     ))
                   )
                 ) : filteredInvites.length === 0 ? (
-                  <div className="grid place-items-center h-[160px] text-xs text-muted-foreground">
+                  <div className="grid place-items-center h-[160px] text-2xs text-muted-foreground">
                     {query ? "No invites match." : "No pending invitations."}
                   </div>
                 ) : (
@@ -415,10 +415,10 @@ function LeaveOrgDialog({
             "bg-card p-5 shadow-lg animate-scale-in",
           )}
         >
-          <Dialog.Title className="text-md font-medium text-foreground">
+          <Dialog.Title className="text-sm font-medium text-foreground">
             Leave “{orgName}”?
           </Dialog.Title>
-          <Dialog.Description className="mt-2 text-sm leading-relaxed text-secondary-foreground">
+          <Dialog.Description className="mt-2 text-xs leading-relaxed text-secondary-foreground">
             You lose access to its chat, projects and shared sessions at once. Coming back takes a
             new invitation.{" "}
             {onlyOrg
@@ -430,14 +430,14 @@ function LeaveOrgDialog({
             <button
               onClick={onCancel}
               disabled={leaving}
-              className="px-3 h-8 rounded-md text-sm text-secondary-foreground hover:bg-element-active hover:text-foreground transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+              className="px-3 h-8 rounded-md text-xs text-secondary-foreground hover:bg-element-active hover:text-foreground transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
             >
               Cancel
             </button>
             <button
               onClick={onConfirm}
               disabled={leaving}
-              className="px-3 h-8 rounded-md text-sm font-medium bg-error text-destructive-foreground hover:opacity-90 transition-opacity cursor-pointer inline-flex items-center gap-1.5 disabled:opacity-70 disabled:cursor-not-allowed"
+              className="px-3 h-8 rounded-md text-xs font-medium bg-error text-destructive-foreground hover:opacity-90 transition-opacity cursor-pointer inline-flex items-center gap-1.5 disabled:opacity-70 disabled:cursor-not-allowed"
             >
               {leaving && <Loader2 size={12} className="animate-spin" />}
               {leaving ? "Leaving…" : "Leave organization"}
@@ -487,16 +487,16 @@ function MemberRow({
             size={20}
           />
           <span className="min-w-0">
-            <span className="block truncate text-sm text-foreground">
+            <span className="block truncate text-xs text-foreground">
               {member.name || member.email}
-              {isSelf && <span className="ml-1.5 text-2xs text-muted-foreground">You</span>}
+              {isSelf && <span className="ml-1.5 text-3xs text-muted-foreground">You</span>}
             </span>
             {member.name && (
-              <span className="block truncate text-2xs text-muted-foreground">{member.email}</span>
+              <span className="block truncate text-3xs text-muted-foreground">{member.email}</span>
             )}
           </span>
         </span>
-        <span className={cn(COL.role, "text-xs text-secondary-foreground")}>
+        <span className={cn(COL.role, "text-2xs text-secondary-foreground")}>
           {/* Owner isn't a role, so a demoted Owner shows both. */}
           {member.isOwner
             ? member.role === "admin" || !roleLabel
@@ -504,7 +504,7 @@ function MemberRow({
               : `Owner · ${roleLabel}`
             : (roleLabel ?? "—")}
         </span>
-        <span className={cn(COL.joined, "text-2xs text-muted-foreground")}>
+        <span className={cn(COL.joined, "text-3xs text-muted-foreground")}>
           {timeAgo(member.createdAt, { suffix: true }) || "—"}
         </span>
         <span className={cn(COL.actions, "flex items-center justify-end")}>
@@ -525,10 +525,10 @@ function MemberRow({
               </Hint>
               <DropdownMenu.Portal>
                 <DropdownMenu.Positioner className="z-popover" align="end" sideOffset={4}>
-                  <DropdownMenu.Popup className="min-w-[168px] rounded-md border border-border bg-popover py-0.5 shadow-md text-xs text-secondary-foreground">
+                  <DropdownMenu.Popup className="min-w-[168px] rounded-md border border-border bg-popover py-0.5 shadow-md text-2xs text-secondary-foreground">
                     {access.roles && (
                       <>
-                        <div className="px-2.5 py-1 text-3xs uppercase tracking-wider text-muted-foreground">
+                        <div className="px-2.5 py-1 text-4xs uppercase tracking-wider text-muted-foreground">
                           Role
                         </div>
                         {ROLES.map((r) => (
@@ -584,13 +584,13 @@ function InviteRow({
   return (
     <div className="border-b border-hairline">
       <div className="w-full flex items-center h-[40px] px-3 text-left transition-colors hover:bg-element-hover">
-        <span className={cn(COL.person, "min-w-0 truncate text-sm text-foreground")}>
+        <span className={cn(COL.person, "min-w-0 truncate text-xs text-foreground")}>
           {invite.email}
         </span>
-        <span className={cn(COL.role, "text-xs text-secondary-foreground")}>
+        <span className={cn(COL.role, "text-2xs text-secondary-foreground")}>
           {invite.role ? ROLE_LABELS[invite.role] : "—"}
         </span>
-        <span className={cn(COL.joined, "text-2xs text-muted-foreground capitalize")}>
+        <span className={cn(COL.joined, "text-3xs text-muted-foreground capitalize")}>
           {invite.status}
         </span>
         <HintGroup>
@@ -694,7 +694,7 @@ function EmailChipsInput({
             key={email}
             className={cn(
               // h-5 + a 14px avatar keeps the chip inside the 28px field.
-              "inline-flex shrink-0 items-center gap-1 rounded-full border pl-0.5 pr-1 h-5 text-xs max-w-[220px]",
+              "inline-flex shrink-0 items-center gap-1 rounded-full border pl-0.5 pr-1 h-5 text-2xs max-w-[220px]",
               valid ? "border-border bg-background text-foreground" : "border-error text-error",
             )}
           >
@@ -750,7 +750,7 @@ function EmailChipsInput({
         }}
         onBlur={() => draft.trim() && commit(draft)}
         placeholder={emails.length === 0 ? "teammate@company.com, …" : ""}
-        className="flex-1 shrink-0 min-w-[120px] h-full bg-transparent text-xs text-foreground placeholder:text-muted-foreground outline-none"
+        className="flex-1 shrink-0 min-w-[120px] h-full bg-transparent text-2xs text-foreground placeholder:text-muted-foreground outline-none"
       />
     </div>
   );
@@ -771,7 +771,7 @@ function RolePicker({
       <DropdownMenu.Trigger render={trigger} />
       <DropdownMenu.Portal>
         <DropdownMenu.Positioner className="z-popover" align="end" sideOffset={4}>
-          <DropdownMenu.Popup className="min-w-[150px] rounded-md border border-border bg-popover py-0.5 shadow-md text-xs text-secondary-foreground">
+          <DropdownMenu.Popup className="min-w-[150px] rounded-md border border-border bg-popover py-0.5 shadow-md text-2xs text-secondary-foreground">
             {ROLES.map((r) => (
               <DropdownMenu.Item
                 key={r}

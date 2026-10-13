@@ -7,7 +7,7 @@ import { useRemoveAgentConfirmStore } from "../lib/remove-agent-confirm";
 
 /** The app's pill-button language (matches the stop-agents dialog). */
 const pillButton =
-  "inline-flex items-center gap-1.5 rounded-full border border-border px-3 py-1.5 text-xs font-medium leading-none cursor-pointer transition-colors";
+  "inline-flex items-center gap-1.5 rounded-full border border-border px-3 py-1.5 text-2xs font-medium leading-none cursor-pointer transition-colors";
 
 /**
  * The destructive button, split out so its hover state cannot outlive the
@@ -65,11 +65,11 @@ export function RemoveAgentDialog() {
           )}
         >
           <div className="px-4 pt-3.5 pb-4">
-            <Dialog.Title className="flex items-center gap-2 text-base font-semibold tracking-[-0.01em] text-foreground">
+            <Dialog.Title className="flex items-center gap-2 type-reading font-semibold tracking-[-0.01em] text-foreground">
               <Trash2 size={13} className="text-error" />
               Remove {pending.name}?
             </Dialog.Title>
-            <p className="mt-2 text-sm leading-relaxed text-secondary-foreground">
+            <p className="mt-2 text-xs leading-relaxed text-secondary-foreground">
               Chats with this agent stay in history. Any chat currently using it will be asked to
               switch agents. You can install it again at any time.
             </p>

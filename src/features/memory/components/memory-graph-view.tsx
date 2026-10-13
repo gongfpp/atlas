@@ -65,8 +65,8 @@ export function MemoryGraphView() {
             <Sparkles size={22} className="text-secondary-foreground" />
           </div>
           <div className="space-y-1">
-            <h3 className="text-base font-medium text-foreground">Enable semantic memory</h3>
-            <p className="text-xs leading-relaxed text-muted-foreground">
+            <h3 className="type-reading font-medium text-foreground">Enable semantic memory</h3>
+            <p className="text-2xs leading-relaxed text-muted-foreground">
               Download a small on-device embedding model to index your Claude & Codex memory, map
               how it relates, and query it in natural language. Runs entirely locally — nothing
               leaves your machine.
@@ -74,12 +74,12 @@ export function MemoryGraphView() {
           </div>
           <button
             onClick={() => void download()}
-            className="inline-flex items-center gap-1.5 h-8 px-3.5 rounded-md bg-primary text-background text-xs font-medium hover:opacity-90 transition-opacity cursor-pointer"
+            className="inline-flex items-center gap-1.5 h-8 px-3.5 rounded-md bg-primary text-background text-2xs font-medium hover:opacity-90 transition-opacity cursor-pointer"
           >
             <Download size={13} />
             Download model
           </button>
-          <p className="text-2xs text-disabled font-mono">{MODEL_LABEL}</p>
+          <p className="text-3xs text-disabled font-mono">{MODEL_LABEL}</p>
         </div>
       </Centered>
     );
@@ -98,14 +98,14 @@ export function MemoryGraphView() {
         <div className="text-center max-w-[360px] px-6 w-full space-y-3">
           <Loader2 size={20} className="animate-spin text-secondary-foreground mx-auto" />
           <div className="space-y-1.5">
-            <p className="text-sm text-foreground">Downloading model…</p>
+            <p className="text-xs text-foreground">Downloading model…</p>
             <div className="h-1.5 rounded-full bg-card overflow-hidden">
               <div
                 className="h-full bg-primary transition-[width] duration-200"
                 style={{ width: `${pct}%` }}
               />
             </div>
-            <p className="text-2xs text-muted-foreground font-mono">
+            <p className="text-3xs text-muted-foreground font-mono">
               {progress
                 ? `${progress.file}  ·  ${fmtMB(progress.received)} / ${fmtMB(progress.total)}  ·  ${pct}%`
                 : "starting…"}
@@ -121,13 +121,13 @@ export function MemoryGraphView() {
       <Centered>
         <div className="text-center max-w-[340px] px-6 space-y-3">
           <AlertTriangle size={20} className="text-error mx-auto" />
-          <p className="text-sm text-secondary-foreground">
+          <p className="text-xs text-secondary-foreground">
             {phase === "download-failed" ? "Model download failed" : "Something went wrong"}
           </p>
-          {error && <p className="text-2xs text-muted-foreground font-mono break-words">{error}</p>}
+          {error && <p className="text-3xs text-muted-foreground font-mono break-words">{error}</p>}
           <button
             onClick={() => (phase === "download-failed" ? void download() : void init(projectPath))}
-            className="inline-flex items-center gap-1.5 h-7 px-3 rounded-md border border-border text-xs text-secondary-foreground hover:bg-element-hover hover:text-foreground transition-colors cursor-pointer"
+            className="inline-flex items-center gap-1.5 h-7 px-3 rounded-md border border-border text-2xs text-secondary-foreground hover:bg-element-hover hover:text-foreground transition-colors cursor-pointer"
           >
             <RotateCw size={12} />
             Retry
@@ -142,7 +142,7 @@ export function MemoryGraphView() {
       <Centered>
         <div className="text-center space-y-2">
           <Loader2 size={18} className="animate-spin text-secondary-foreground mx-auto" />
-          <p className="text-xs text-muted-foreground">Indexing memory…</p>
+          <p className="text-2xs text-muted-foreground">Indexing memory…</p>
         </div>
       </Centered>
     );
@@ -152,7 +152,7 @@ export function MemoryGraphView() {
   if (!graph || graph.nodes.length === 0) {
     return (
       <Centered>
-        <p className="text-sm text-muted-foreground">No memory to graph yet.</p>
+        <p className="text-xs text-muted-foreground">No memory to graph yet.</p>
       </Centered>
     );
   }
@@ -290,7 +290,7 @@ function GraphReady({
             onClick={() => setView("tree")}
             title="Decision tree"
             className={cn(
-              "flex items-center gap-1 px-1.5 h-5 rounded-sm text-2xs font-medium transition-colors cursor-pointer",
+              "flex items-center gap-1 px-1.5 h-5 rounded-sm text-3xs font-medium transition-colors cursor-pointer",
               viewMode === "tree"
                 ? "bg-element-selected text-foreground"
                 : "text-muted-foreground hover:text-foreground",
@@ -302,7 +302,7 @@ function GraphReady({
             onClick={() => setView("graph")}
             title="Force graph"
             className={cn(
-              "flex items-center gap-1 px-1.5 h-5 rounded-sm text-2xs font-medium transition-colors cursor-pointer",
+              "flex items-center gap-1 px-1.5 h-5 rounded-sm text-3xs font-medium transition-colors cursor-pointer",
               viewMode === "graph"
                 ? "bg-element-selected text-foreground"
                 : "text-muted-foreground hover:text-foreground",
@@ -322,7 +322,7 @@ function GraphReady({
             }}
             placeholder="Ask your memory… (Enter to search)"
             spellCheck={false}
-            className="flex-1 min-w-0 bg-transparent outline-none text-xs text-foreground placeholder:text-muted-foreground"
+            className="flex-1 min-w-0 bg-transparent outline-none text-2xs text-foreground placeholder:text-muted-foreground"
           />
           {querying && <Loader2 size={11} className="animate-spin text-muted-foreground" />}
           {query && !querying && (
@@ -337,7 +337,7 @@ function GraphReady({
           )}
         </div>
         <div className="flex-1" />
-        <span className="text-2xs text-muted-foreground tabular-nums">
+        <span className="text-3xs text-muted-foreground tabular-nums">
           {docCount} memories · {graph.edges.length} links
         </span>
         <Hint label="Re-index memory">
@@ -400,7 +400,7 @@ function GraphReady({
                 }}
                 className="w-[220px] h-1 accent-primary cursor-pointer"
               />
-              <span className="text-2xs tabular-nums text-muted-foreground w-[78px] text-right">
+              <span className="text-3xs tabular-nums text-muted-foreground w-[78px] text-right">
                 {cutoff ? fmtDate(cutoff) : "All time"}
               </span>
             </div>
@@ -408,7 +408,7 @@ function GraphReady({
 
           {/* Impact-mode legend (graph only, while a node is selected). */}
           {selected && viewMode === "graph" && (
-            <div className="absolute right-3 top-[26px] flex items-center gap-3 rounded-md border border-border bg-card/90 backdrop-blur-sm px-2.5 h-7 text-2xs text-muted-foreground">
+            <div className="absolute right-3 top-[26px] flex items-center gap-3 rounded-md border border-border bg-card/90 backdrop-blur-sm px-2.5 h-7 text-3xs text-muted-foreground">
               <span className="flex items-center gap-1">
                 <span className="w-2 h-2 rounded-full bg-foreground" /> impacted
               </span>
@@ -423,14 +423,14 @@ function GraphReady({
             <div className="absolute left-[26px] bottom-3 max-w-[340px] text-left rounded-lg border border-border bg-card/90 backdrop-blur-sm shadow-md p-3">
               <div className="flex items-center gap-1.5 mb-1">
                 <SourceDot source={selected.source} />
-                <span className="text-xs font-medium text-foreground truncate">
+                <span className="text-2xs font-medium text-foreground truncate">
                   {selected.summary || selected.title}
                 </span>
               </div>
-              <p className="text-2xs text-muted-foreground line-clamp-4 leading-relaxed">
+              <p className="text-3xs text-muted-foreground line-clamp-4 leading-relaxed">
                 {selected.snippet || "—"}
               </p>
-              <p className="text-3xs text-disabled mt-1.5 uppercase tracking-wide">
+              <p className="text-4xs text-disabled mt-1.5 uppercase tracking-wide">
                 {selected.source} · {selected.kind}
                 {selected.timestampMs > 0 && ` · ${fmtDate(selected.timestampMs)}`}
               </p>
@@ -440,7 +440,7 @@ function GraphReady({
 
         {results.length > 0 && (
           <aside className="w-[280px] shrink-0 border-l border-border overflow-y-auto hide-scrollbar bg-sidebar">
-            <div className="px-3 h-[28px] flex items-center text-3xs font-semibold uppercase tracking-wider text-muted-foreground border-b border-hairline sticky top-0 bg-sidebar">
+            <div className="px-3 h-[28px] flex items-center text-4xs font-semibold uppercase tracking-wider text-muted-foreground border-b border-hairline sticky top-0 bg-sidebar">
               Results
             </div>
             {results.map((hit) => {
@@ -458,12 +458,12 @@ function GraphReady({
                 >
                   <div className="flex items-center gap-1.5 min-w-0">
                     <SourceDot source={node.source} />
-                    <span className="text-xs text-foreground truncate flex-1">{node.title}</span>
-                    <span className="text-3xs text-muted-foreground tabular-nums">
+                    <span className="text-2xs text-foreground truncate flex-1">{node.title}</span>
+                    <span className="text-4xs text-muted-foreground tabular-nums">
                       {Math.round(hit.score * 100)}%
                     </span>
                   </div>
-                  <span className="text-2xs text-muted-foreground line-clamp-2 leading-snug">
+                  <span className="text-3xs text-muted-foreground line-clamp-2 leading-snug">
                     {node.snippet}
                   </span>
                 </button>
@@ -485,7 +485,7 @@ function SourceDot({ source }: { source: string }) {
 
 function Centered({ children }: { children: React.ReactNode }) {
   return (
-    <div className="h-full flex items-center justify-center text-muted-foreground text-sm">
+    <div className="h-full flex items-center justify-center text-muted-foreground text-xs">
       {children}
     </div>
   );

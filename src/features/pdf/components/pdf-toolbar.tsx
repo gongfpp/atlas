@@ -93,7 +93,7 @@ export function PdfToolbar({ fileName, zoom, dirty, onZoomIn, onZoomOut }: PdfTo
       </HintGroup>
 
       <div
-        className="mx-1 flex flex-1 items-center justify-center gap-1.5 truncate text-xs font-mono text-muted-foreground"
+        className="mx-1 flex flex-1 items-center justify-center gap-1.5 truncate text-2xs font-mono text-muted-foreground"
         title={fileName}
       >
         {/* Unsaved-changes dot. Annotations are saved beside the PDF, in the
@@ -133,7 +133,7 @@ export function PdfToolbar({ fileName, zoom, dirty, onZoomIn, onZoomOut }: PdfTo
               <ZoomOut size={13} />
             </button>
           </HintItem>
-          <span className="w-9 text-center text-2xs font-mono text-muted-foreground">
+          <span className="w-9 text-center text-3xs font-mono text-muted-foreground">
             {Math.round(zoom * 100)}%
           </span>
           <HintItem label="Zoom in">

@@ -88,13 +88,13 @@ export function ChatSearchPalette({
               onChange={(e) => setQuery(e.target.value)}
               onKeyDown={onKeyDown}
               placeholder="Find a question you asked…"
-              className="flex-1 bg-transparent outline-none text-base text-foreground placeholder:text-muted-foreground"
+              className="flex-1 bg-transparent outline-none type-reading text-foreground placeholder:text-muted-foreground"
             />
-            <span className="text-2xs text-muted-foreground font-mono">{filtered.length}</span>
+            <span className="text-3xs text-muted-foreground font-mono">{filtered.length}</span>
           </div>
           <div className="flex-1 overflow-y-auto hide-scrollbar py-1">
             {filtered.length === 0 ? (
-              <div className="px-4 py-6 text-center text-xs text-muted-foreground">
+              <div className="px-4 py-6 text-center text-2xs text-muted-foreground">
                 {userMessages.length === 0 ? "No user messages yet." : "No matches."}
               </div>
             ) : (
@@ -127,19 +127,19 @@ export function ChatSearchPalette({
                     </span>
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2">
-                        <span className="text-xs font-semibold text-secondary-foreground uppercase tracking-wide">
+                        <span className="text-2xs font-semibold text-secondary-foreground uppercase tracking-wide">
                           You
                         </span>
-                        <span className="text-2xs font-mono text-muted-foreground">{ts}</span>
+                        <span className="text-3xs font-mono text-muted-foreground">{ts}</span>
                       </div>
-                      <div className="text-sm text-foreground truncate mt-0.5">{preview}</div>
+                      <div className="text-xs text-foreground truncate mt-0.5">{preview}</div>
                     </div>
                   </button>
                 );
               })
             )}
           </div>
-          <div className="flex items-center gap-3 px-4 h-[28px] border-t border-border text-2xs text-muted-foreground shrink-0">
+          <div className="flex items-center gap-3 px-4 h-[28px] border-t border-border text-3xs text-muted-foreground shrink-0">
             <KbdGroup>
               <Kbd>↑</Kbd>
               <Kbd>↓</Kbd>

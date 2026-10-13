@@ -99,15 +99,17 @@ export function ThreadHistoryView({
           )}
         >
           <div className="flex items-center gap-3 border-b border-border px-4 py-2.5">
-            <Dialog.Title className="text-base font-semibold text-foreground">History</Dialog.Title>
-            <span className="text-xs font-mono text-muted-foreground">
+            <Dialog.Title className="type-reading font-semibold text-foreground">
+              History
+            </Dialog.Title>
+            <span className="text-2xs font-mono text-muted-foreground">
               {threads.length} {threads.length === 1 ? "thread" : "threads"}
             </span>
             <button
               type="button"
               onClick={() => setArchivedOnly((on) => !on)}
               className={cn(
-                "ml-auto flex items-center gap-1 rounded px-2 py-1 text-2xs transition-colors cursor-pointer",
+                "ml-auto flex items-center gap-1 rounded px-2 py-1 text-3xs transition-colors cursor-pointer",
                 archivedOnly
                   ? "bg-element-selected text-foreground"
                   : "text-muted-foreground hover:bg-element-hover hover:text-foreground",
@@ -119,7 +121,7 @@ export function ThreadHistoryView({
             <button
               type="button"
               onClick={() => setImportOpen(true)}
-              className="flex items-center gap-1 rounded px-2 py-1 text-2xs text-muted-foreground hover:bg-element-hover hover:text-foreground transition-colors cursor-pointer"
+              className="flex items-center gap-1 rounded px-2 py-1 text-3xs text-muted-foreground hover:bg-element-hover hover:text-foreground transition-colors cursor-pointer"
             >
               <Download size={10} />
               Import
@@ -139,26 +141,26 @@ export function ThreadHistoryView({
               onChange={(e) => setSearch(e.target.value)}
               aria-label="Search history"
               placeholder="Search…"
-              className="min-w-0 flex-1 bg-transparent text-xs text-foreground outline-none placeholder:text-muted-foreground"
+              className="min-w-0 flex-1 bg-transparent text-2xs text-foreground outline-none placeholder:text-muted-foreground"
             />
           </div>
 
           <div className="flex-1 overflow-auto hide-scrollbar">
             {isError ? (
               // An error is not an empty history: say what failed.
-              <div role="alert" className="px-3 py-6 text-center text-xs text-error">
+              <div role="alert" className="px-3 py-6 text-center text-2xs text-error">
                 Couldn't load history: {error instanceof Error ? error.message : String(error)}
               </div>
             ) : isLoading ? (
-              <div className="px-3 py-6 text-center text-xs text-muted-foreground">Loading…</div>
+              <div className="px-3 py-6 text-center text-2xs text-muted-foreground">Loading…</div>
             ) : buckets.length === 0 ? (
-              <div className="px-3 py-6 text-center text-xs text-muted-foreground">
+              <div className="px-3 py-6 text-center text-2xs text-muted-foreground">
                 {search.trim() ? "Nothing matches your search." : "No threads yet."}
               </div>
             ) : (
               buckets.map(([label, rows]) => (
                 <div key={label}>
-                  <div className="px-3 pt-2.5 pb-1 text-3xs uppercase tracking-wider text-muted-foreground">
+                  <div className="px-3 pt-2.5 pb-1 text-4xs uppercase tracking-wider text-muted-foreground">
                     {label}
                   </div>
                   {rows.map((thread) => (
@@ -171,10 +173,10 @@ export function ThreadHistoryView({
                       className="group flex cursor-pointer select-none items-center gap-2 border-b border-hairline px-3 py-2 transition-colors last:border-b-0 hover:bg-element-hover"
                     >
                       <span className="min-w-0 flex-1">
-                        <span className="block truncate text-xs text-foreground">
+                        <span className="block truncate text-2xs text-foreground">
                           {thread.title}
                         </span>
-                        <span className="block truncate text-3xs text-muted-foreground">
+                        <span className="block truncate text-4xs text-muted-foreground">
                           {thread.projectName} · {agentMeta(thread.agentId).label} ·{" "}
                           {timeAgo(thread.updatedAt, { suffix: true })}
                         </span>

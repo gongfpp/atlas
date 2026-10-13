@@ -26,10 +26,10 @@ const inputVariants = cva(
   {
     variants: {
       size: {
-        xs: "h-control-xs px-1.5 text-2xs",
-        sm: "h-control-sm px-2 text-xs",
-        md: "h-control-md px-2 text-xs",
-        lg: "h-control-lg px-2.5 text-sm",
+        xs: "h-control-xs px-1.5 text-3xs",
+        sm: "h-control-sm px-2 text-2xs",
+        md: "h-control-md px-2 text-2xs",
+        lg: "h-control-lg px-2.5 text-xs",
       },
     },
     defaultVariants: { size: "md" },

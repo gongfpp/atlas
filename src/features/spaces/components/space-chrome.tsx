@@ -127,7 +127,7 @@ export function SpaceHeaderPill({
               className="flex h-6 cursor-pointer items-center gap-1.5 rounded-md px-1 transition-colors hover:bg-element-hover"
             >
               <SyncDot sync={sync} />
-              <span className="max-w-[180px] truncate text-sm font-semibold text-foreground">
+              <span className="max-w-[180px] truncate text-xs font-semibold text-foreground">
                 {active?.name || "Space"}
               </span>
               <ChevronDown size={11} className="shrink-0 text-muted-foreground" />
@@ -147,7 +147,7 @@ export function SpaceHeaderPill({
                       setOpen(false);
                     }}
                     className={cn(
-                      "flex cursor-pointer items-center gap-2 px-3 py-1.5 text-left text-xs transition-colors hover:bg-element-hover",
+                      "flex cursor-pointer items-center gap-2 px-3 py-1.5 text-left text-2xs transition-colors hover:bg-element-hover",
                       p.id === activePageId ? "text-foreground" : "text-secondary-foreground",
                     )}
                   >
@@ -158,7 +158,7 @@ export function SpaceHeaderPill({
                   </button>
                 ))}
                 {selectable.length === 0 && (
-                  <div className="px-3 py-2 text-2xs text-muted-foreground">No pages yet.</div>
+                  <div className="px-3 py-2 text-3xs text-muted-foreground">No pages yet.</div>
                 )}
               </div>
             </Popover.Popup>
@@ -205,7 +205,7 @@ function ZoomReadout() {
             <button
               type="button"
               onClick={() => void rf.zoomTo(1, { duration: 200 })}
-              className="flex h-6 min-w-[38px] cursor-pointer items-center justify-center rounded-md px-1 text-xs tabular-nums text-secondary-foreground transition-colors hover:bg-element-hover hover:text-foreground"
+              className="flex h-6 min-w-[38px] cursor-pointer items-center justify-center rounded-md px-1 text-2xs tabular-nums text-secondary-foreground transition-colors hover:bg-element-hover hover:text-foreground"
             >
               {pct}%
             </button>
@@ -374,13 +374,13 @@ export function SpaceActionPill({
           </Tooltip>
         </div>
         {peers.length > 4 && (
-          <span className="pl-1.5 text-2xs text-muted-foreground">+{peers.length - 4}</span>
+          <span className="pl-1.5 text-3xs text-muted-foreground">+{peers.length - 4}</span>
         )}
         {followers.length > 0 && (
           <Tooltip>
             <TooltipTrigger
               render={
-                <span className="ml-1.5 flex h-[18px] items-center gap-1 rounded-full bg-primary/15 px-1.5 text-2xs font-medium text-primary">
+                <span className="ml-1.5 flex h-[18px] items-center gap-1 rounded-full bg-primary/15 px-1.5 text-3xs font-medium text-primary">
                   <Eye size={10} />
                   {followers.length}
                 </span>
@@ -432,7 +432,7 @@ export function SpaceActionPill({
                     key={f.format}
                     type="button"
                     onClick={() => void run(f.format)}
-                    className="flex w-full cursor-pointer items-center gap-2 px-3 py-1.5 text-left text-xs text-secondary-foreground transition-colors hover:bg-element-hover hover:text-foreground"
+                    className="flex w-full cursor-pointer items-center gap-2 px-3 py-1.5 text-left text-2xs text-secondary-foreground transition-colors hover:bg-element-hover hover:text-foreground"
                   >
                     <f.icon size={12} className="shrink-0 text-muted-foreground" />
                     {f.label}

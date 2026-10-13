@@ -1538,7 +1538,7 @@ export function App() {
             background: "var(--card)",
             border: "1px solid var(--border)",
             color: "var(--foreground)",
-            fontSize: "var(--text-sm)",
+            fontSize: "var(--text-xs)",
           },
           // A notification's second action rides sonner's `cancel` slot, whose
           // stock colours are light-theme only (near-black text on a dark card).

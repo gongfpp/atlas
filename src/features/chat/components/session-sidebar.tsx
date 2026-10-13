@@ -708,7 +708,7 @@ export const SessionSidebar = memo(function SessionSidebar({
           onChange={(e) => setSearch(e.target.value)}
           aria-label="Search sessions"
           placeholder="Search…"
-          className="flex-1 bg-transparent outline-none text-xs text-foreground placeholder:text-muted-foreground min-w-0"
+          className="flex-1 bg-transparent outline-none text-2xs text-foreground placeholder:text-muted-foreground min-w-0"
         />
         {/* Everything ever, archived included — and where import lives. */}
         {!asDropdown && (
@@ -736,14 +736,14 @@ export const SessionSidebar = memo(function SessionSidebar({
         className="flex flex-1 flex-col gap-1.5 overflow-y-auto p-2 hide-scrollbar"
         {...frozenListProps}
       >
-        {isLoading && <div className="px-1 py-1 text-xs text-muted-foreground">Loading…</div>}
+        {isLoading && <div className="px-1 py-1 text-2xs text-muted-foreground">Loading…</div>}
         {showError && (
-          <div role="alert" className="px-1 py-1 text-xs leading-relaxed text-error">
+          <div role="alert" className="px-1 py-1 text-2xs leading-relaxed text-error">
             Couldn't load chats: {errorMessage(historyError)}
           </div>
         )}
         {showEmpty && (
-          <div className="px-1 py-1 text-xs leading-relaxed text-muted-foreground">
+          <div className="px-1 py-1 text-2xs leading-relaxed text-muted-foreground">
             {/* Names the scope: the list is this project's, so an empty one
                 means "nothing here yet", not "no chats anywhere". Other
                 projects' chats are behind the History button in the header. */}
@@ -780,7 +780,7 @@ export const SessionSidebar = memo(function SessionSidebar({
                 role="heading"
                 aria-level={3}
                 className={cn(
-                  "-mx-2 truncate px-3 pt-1.5 pb-0.5 text-3xs font-medium uppercase tracking-wider text-muted-foreground",
+                  "-mx-2 truncate px-3 pt-1.5 pb-0.5 text-4xs font-medium uppercase tracking-wider text-muted-foreground",
                   // Sticky in the sidebar, where the list sits on the opaque
                   // sidebar fill; the dropdown's panel is translucent and
                   // blurred, and a sticky fill there would punch through it.

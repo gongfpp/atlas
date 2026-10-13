@@ -44,10 +44,10 @@ export function CommsNotConnected({ org }: { org: Organisation | null }) {
           the only content on the panel, so `--atlas-text-disabled` — the dim rung for
           decoration and disabled state — left the one explanation unreadable
           against the near-black surface. */}
-      <div className="relative text-sm font-medium text-foreground">
+      <div className="relative text-xs font-medium text-foreground">
         {org ? `${org.name} isn't connected` : "No organization selected"}
       </div>
-      <p className="relative max-w-[220px] text-xs leading-relaxed text-secondary-foreground">
+      <p className="relative max-w-[220px] text-2xs leading-relaxed text-secondary-foreground">
         {org
           ? "Team chat needs this organization synced to your Atlas account."
           : "Select an organization to use team chat."}
@@ -62,7 +62,7 @@ export function CommsNotConnected({ org }: { org: Organisation | null }) {
           // one element — the vibrant-panel rule bans transform ANIMATION near
           // blur, not a still frosted control (the drop overlay already blurs
           // inside this panel).
-          className="relative mt-1 flex h-control-lg items-center gap-1.5 rounded-full border border-border-strong bg-element-active px-4 text-sm font-medium text-foreground inset-highlight backdrop-blur-md transition-colors hover:bg-element-emphasis disabled:cursor-not-allowed disabled:opacity-60 cursor-pointer"
+          className="relative mt-1 flex h-control-lg items-center gap-1.5 rounded-full border border-border-strong bg-element-active px-4 text-xs font-medium text-foreground inset-highlight backdrop-blur-md transition-colors hover:bg-element-emphasis disabled:cursor-not-allowed disabled:opacity-60 cursor-pointer"
         >
           {syncing ? (
             <Loader2 size={12} className="shrink-0 animate-spin" />

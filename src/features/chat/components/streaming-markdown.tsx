@@ -168,7 +168,7 @@ const MarkdownBlock = memo(function MarkdownBlock({
     return (
       <pre
         className={cn(
-          "whitespace-pre-wrap break-words font-mono text-base leading-relaxed text-foreground select-text",
+          "whitespace-pre-wrap break-words font-mono type-reading leading-relaxed text-foreground select-text",
           className,
         )}
       >

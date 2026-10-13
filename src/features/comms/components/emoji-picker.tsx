@@ -65,7 +65,7 @@ export function EmojiPicker({ onPick }: { onPick: (emoji: string) => void }) {
                   value={query}
                   onChange={(ev) => setQuery(ev.target.value)}
                   placeholder="Search emoji…"
-                  className="min-w-0 flex-1 bg-transparent text-sm text-foreground outline-none placeholder:text-disabled"
+                  className="min-w-0 flex-1 bg-transparent text-xs text-foreground outline-none placeholder:text-disabled"
                 />
               </div>
             </div>
@@ -75,14 +75,14 @@ export function EmojiPicker({ onPick }: { onPick: (emoji: string) => void }) {
                 results.length ? (
                   <Grid entries={results.map((r) => r.char)} onPick={pick} />
                 ) : (
-                  <div className="px-1 py-6 text-center text-xs text-muted-foreground">
+                  <div className="px-1 py-6 text-center text-2xs text-muted-foreground">
                     No emoji matches “{query.trim()}”.
                   </div>
                 )
               ) : (
                 EMOJI_CATEGORIES.map((cat) => (
                   <div key={cat.name} className="mb-1.5 last:mb-0">
-                    <div className="px-1 pb-1 pt-0.5 text-2xs font-semibold uppercase tracking-[0.06em] text-muted-foreground">
+                    <div className="px-1 pb-1 pt-0.5 text-3xs font-semibold uppercase tracking-[0.06em] text-muted-foreground">
                       {cat.name}
                     </div>
                     <Grid entries={cat.emoji.map((x) => x.char)} onPick={pick} />
@@ -106,7 +106,7 @@ function Grid({ entries, onPick }: { entries: string[]; onPick: (c: string) => v
           type="button"
           onMouseDown={(e) => e.preventDefault()}
           onClick={() => onPick(char)}
-          className="flex h-control-lg items-center justify-center rounded text-lg leading-none transition-colors hover:bg-element-hover cursor-pointer"
+          className="flex h-control-lg items-center justify-center rounded text-md leading-none transition-colors hover:bg-element-hover cursor-pointer"
         >
           {char}
         </button>

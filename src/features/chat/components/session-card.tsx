@@ -231,7 +231,7 @@ function StatusLabel({
   const startedAt = useTurnStartedAt(status === "running" ? tabId : null);
   if (status === "running") {
     return (
-      <span className="flex items-center gap-1 text-2xs font-medium text-info">
+      <span className="flex items-center gap-1 text-3xs font-medium text-info">
         <WorkingRing />
         Working {startedAt !== null && <WorkingDuration startedAt={startedAt} />}
       </span>
@@ -239,14 +239,14 @@ function StatusLabel({
   }
   if (status === "waiting") {
     return (
-      <span className="flex items-center gap-1 text-2xs font-medium text-warning">
+      <span className="flex items-center gap-1 text-3xs font-medium text-warning">
         <span className="size-1.5 rounded-full bg-current" />
         Needs input
       </span>
     );
   }
   return (
-    <span className="text-2xs tabular-nums text-muted-foreground">{timeAgo(lastUpdated)}</span>
+    <span className="text-3xs tabular-nums text-muted-foreground">{timeAgo(lastUpdated)}</span>
   );
 }
 
@@ -289,7 +289,7 @@ function PullRequestChip({
       aria-label={`${label} — open on GitHub`}
       title={label}
       className={cn(
-        "relative flex shrink-0 cursor-pointer items-center gap-0.5 rounded-sm text-2xs tabular-nums hover:underline",
+        "relative flex shrink-0 cursor-pointer items-center gap-0.5 rounded-sm text-3xs tabular-nums hover:underline",
         state?.className ?? "text-muted-foreground",
       )}
     >
@@ -418,10 +418,10 @@ export const SessionCard = memo(function SessionCard({
 
       {showProject && (
         <div aria-hidden className="pointer-events-none flex min-w-0 items-center gap-1.5">
-          <span className="grid h-4 min-w-4 shrink-0 place-items-center rounded-sm bg-element-selected px-0.5 text-3xs font-semibold leading-none text-secondary-foreground">
+          <span className="grid h-4 min-w-4 shrink-0 place-items-center rounded-sm bg-element-selected px-0.5 text-4xs font-semibold leading-none text-secondary-foreground">
             {projectMonogram(projectName)}
           </span>
-          <span className="min-w-0 flex-1 truncate text-xs text-muted-foreground">
+          <span className="min-w-0 flex-1 truncate text-2xs text-muted-foreground">
             {projectName}
           </span>
           {statusSlot}
@@ -431,7 +431,7 @@ export const SessionCard = memo(function SessionCard({
       <div aria-hidden className="pointer-events-none flex min-w-0 items-start gap-2">
         <span
           className={cn(
-            "line-clamp-2 min-w-0 flex-1 text-sm leading-snug",
+            "line-clamp-2 min-w-0 flex-1 text-xs leading-snug",
             active ? "text-foreground" : "text-secondary-foreground group-hover:text-foreground",
           )}
         >
@@ -443,7 +443,7 @@ export const SessionCard = memo(function SessionCard({
       <div className="pointer-events-none flex min-w-0 items-center gap-2">
         <span
           aria-hidden
-          className="min-w-0 flex-1 truncate font-mono text-2xs text-muted-foreground"
+          className="min-w-0 flex-1 truncate font-mono text-3xs text-muted-foreground"
         >
           {branch ?? ""}
         </span>

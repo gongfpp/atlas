@@ -135,16 +135,16 @@ function PanelBody({
       <div className="flex-1 overflow-auto hide-scrollbar">
         {tc && Object.keys(tc.arguments ?? {}).length > 0 && (
           <div className="border-b border-hairline px-3 py-2">
-            <div className="pb-1 text-3xs uppercase tracking-wider text-muted-foreground">
+            <div className="pb-1 text-4xs uppercase tracking-wider text-muted-foreground">
               Arguments
             </div>
-            <pre className="whitespace-pre-wrap break-words font-mono text-xs leading-snug text-secondary-foreground select-text">
+            <pre className="whitespace-pre-wrap break-words font-mono text-2xs leading-snug text-secondary-foreground select-text">
               {JSON.stringify(tc.arguments, null, 2)}
             </pre>
           </div>
         )}
         {output ? (
-          <pre className="whitespace-pre-wrap break-words px-3 py-2 font-mono text-xs leading-snug text-secondary-foreground select-text">
+          <pre className="whitespace-pre-wrap break-words px-3 py-2 font-mono text-2xs leading-snug text-secondary-foreground select-text">
             {output}
           </pre>
         ) : (
@@ -174,9 +174,9 @@ function Header({
     <div className="flex h-[32px] shrink-0 items-center justify-between border-b border-border px-3">
       <div className="flex min-w-0 items-center gap-1.5">
         {icon}
-        <span className="truncate text-xs font-medium text-secondary-foreground">{title}</span>
+        <span className="truncate text-2xs font-medium text-secondary-foreground">{title}</span>
         {count !== undefined && (
-          <span className="shrink-0 text-2xs text-muted-foreground">· {count}</span>
+          <span className="shrink-0 text-3xs text-muted-foreground">· {count}</span>
         )}
       </div>
       <HintGroup>
@@ -198,5 +198,5 @@ function Header({
 }
 
 function Empty({ children }: { children: React.ReactNode }) {
-  return <div className="px-3 py-3 text-xs leading-relaxed text-muted-foreground">{children}</div>;
+  return <div className="px-3 py-3 text-2xs leading-relaxed text-muted-foreground">{children}</div>;
 }

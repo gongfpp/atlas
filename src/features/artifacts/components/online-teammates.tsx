@@ -88,7 +88,7 @@ export const OnlineTeammates = memo(function OnlineTeammates({
             </span>
           ))}
         </span>
-        {extra > 0 && <span className="text-2xs tabular-nums text-muted-foreground">+{extra}</span>}
+        {extra > 0 && <span className="text-3xs tabular-nums text-muted-foreground">+{extra}</span>}
       </span>
     </Hint>
   );

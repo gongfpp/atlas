@@ -130,7 +130,7 @@ function ImageViewer({
           )}
         >
           <div className="flex h-[34px] shrink-0 items-center gap-2 border-b border-border px-3">
-            <Dialog.Title className="min-w-0 flex-1 truncate text-sm text-secondary-foreground">
+            <Dialog.Title className="min-w-0 flex-1 truncate text-xs text-secondary-foreground">
               {count > 1 ? `Image ${i + 1} of ${count}` : "Image"}
             </Dialog.Title>
             <HintGroup>

@@ -41,7 +41,7 @@ export function CaptureControl() {
           data: {},
         })
       }
-      className="group/nav flex h-7 w-full cursor-pointer items-center gap-2.5 rounded-md px-2 text-left text-sm leading-none text-secondary-foreground outline-none transition-colors hover:bg-element-hover hover:text-foreground focus-visible:ring-1 focus-visible:ring-border-strong"
+      className="group/nav flex h-7 w-full cursor-pointer items-center gap-2.5 rounded-md px-2 text-left text-xs leading-none text-secondary-foreground outline-none transition-colors hover:bg-element-hover hover:text-foreground focus-visible:ring-1 focus-visible:ring-border-strong"
       title="Sessions recorded across this Organization"
     >
       <AtlasIcon size={14} className="shrink-0 rounded-sm opacity-70 group-hover/nav:opacity-100" />

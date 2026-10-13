@@ -59,7 +59,7 @@ export function AddProjectMenu() {
           <DropdownMenu.Popup className="w-[280px] max-h-[360px] rounded-lg border border-border bg-popover shadow-md text-secondary-foreground flex flex-col overflow-hidden">
             <DropdownMenu.Item
               onClick={() => void pickAndAddProject()}
-              className="w-full flex items-center gap-2 px-3 h-[28px] text-xs outline-none hover:bg-element-hover hover:text-foreground cursor-default shrink-0"
+              className="w-full flex items-center gap-2 px-3 h-[28px] text-2xs outline-none hover:bg-element-hover hover:text-foreground cursor-default shrink-0"
             >
               <FolderOpen size={13} className="text-muted-foreground shrink-0" />
               <span className="flex-1 text-left">Open Folder…</span>
@@ -80,15 +80,15 @@ export function AddProjectMenu() {
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
                     placeholder="Search projects…"
-                    className="flex-1 bg-transparent outline-none text-2xs text-foreground placeholder:text-muted-foreground"
+                    className="flex-1 bg-transparent outline-none text-3xs text-foreground placeholder:text-muted-foreground"
                   />
                 </div>
-                <div className="px-3 pt-1.5 pb-0.5 text-3xs uppercase tracking-wide text-muted-foreground shrink-0">
+                <div className="px-3 pt-1.5 pb-0.5 text-4xs uppercase tracking-wide text-muted-foreground shrink-0">
                   Recent
                 </div>
                 <div className="overflow-y-auto py-1 hide-scrollbar">
                   {filtered.length === 0 ? (
-                    <div className="px-3 py-2 text-2xs text-muted-foreground text-center">
+                    <div className="px-3 py-2 text-3xs text-muted-foreground text-center">
                       No matches
                     </div>
                   ) : (
@@ -96,7 +96,7 @@ export function AddProjectMenu() {
                       <DropdownMenu.Item
                         key={p.path}
                         onClick={() => void addProject(p.path)}
-                        className="w-full flex items-center gap-2 px-3 h-control-md text-xs outline-none hover:bg-element-hover hover:text-foreground cursor-default"
+                        className="w-full flex items-center gap-2 px-3 h-control-md text-2xs outline-none hover:bg-element-hover hover:text-foreground cursor-default"
                       >
                         <Folder size={12} className="text-muted-foreground shrink-0" />
                         <span className="truncate font-mono text-left flex-1">{p.name}</span>
@@ -106,7 +106,7 @@ export function AddProjectMenu() {
                 </div>
                 <DropdownMenu.Item
                   onClick={() => clearRecents()}
-                  className="w-full flex items-center gap-2 px-3 h-[28px] text-xs outline-none border-t border-border text-muted-foreground hover:bg-element-hover hover:text-error cursor-pointer shrink-0"
+                  className="w-full flex items-center gap-2 px-3 h-[28px] text-2xs outline-none border-t border-border text-muted-foreground hover:bg-element-hover hover:text-error cursor-pointer shrink-0"
                 >
                   <Trash2 size={12} className="shrink-0" />
                   <span className="flex-1 text-left">Clear recent projects</span>

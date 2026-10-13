@@ -150,7 +150,7 @@ function ChatHeaderImpl({
                     "flex min-w-0 max-w-[46%] items-center gap-1.5 rounded-full px-3",
                     CONTROL_H,
                     OUTLINE,
-                    "text-sm font-medium leading-none text-foreground",
+                    "text-xs font-medium leading-none text-foreground",
                     "cursor-pointer outline-none",
                   )}
                   title="Switch session"
@@ -217,7 +217,7 @@ function ChatHeaderImpl({
             >
               <MessageSquare size={13} />
               {commentCount > 0 && (
-                <span className="absolute -right-1 -top-1 flex h-[14px] min-w-[14px] items-center justify-center rounded-full bg-primary px-1 font-mono text-3xs leading-none text-primary-foreground tabular-nums">
+                <span className="absolute -right-1 -top-1 flex h-[14px] min-w-[14px] items-center justify-center rounded-full bg-primary px-1 font-mono text-4xs leading-none text-primary-foreground tabular-nums">
                   {commentCount > 9 ? "9+" : commentCount}
                 </span>
               )}
@@ -248,7 +248,7 @@ function ChatHeaderImpl({
                       key={f}
                       onClick={() => onRoleFilterChange(f)}
                       className={cn(
-                        "flex h-[26px] cursor-default items-center gap-2 px-3 text-xs capitalize outline-none",
+                        "flex h-[26px] cursor-default items-center gap-2 px-3 text-2xs capitalize outline-none",
                         roleFilter === f
                           ? "bg-element-selected text-foreground"
                           : "text-secondary-foreground hover:bg-element-hover hover:text-foreground",
@@ -270,7 +270,7 @@ function ChatHeaderImpl({
 
                   <DropdownMenu.Item
                     onClick={onToggleBash}
-                    className="flex h-[26px] cursor-default items-center gap-2 px-3 text-xs text-secondary-foreground outline-none hover:bg-element-hover hover:text-foreground"
+                    className="flex h-[26px] cursor-default items-center gap-2 px-3 text-2xs text-secondary-foreground outline-none hover:bg-element-hover hover:text-foreground"
                   >
                     <TerminalSquare size={11} />
                     <span className="flex-1">Bash calls</span>
@@ -278,7 +278,7 @@ function ChatHeaderImpl({
                   </DropdownMenu.Item>
                   <DropdownMenu.Item
                     onClick={onTogglePlans}
-                    className="flex h-[26px] cursor-default items-center gap-2 px-3 text-xs text-secondary-foreground outline-none hover:bg-element-hover hover:text-foreground"
+                    className="flex h-[26px] cursor-default items-center gap-2 px-3 text-2xs text-secondary-foreground outline-none hover:bg-element-hover hover:text-foreground"
                   >
                     <ClipboardList size={11} />
                     <span className="flex-1">Plans</span>
@@ -289,7 +289,7 @@ function ChatHeaderImpl({
                       <DropdownMenu.Separator className="my-1 h-px bg-hairline" />
                       <DropdownMenu.Item
                         onClick={onForkSession}
-                        className="flex h-[26px] cursor-default items-center gap-2 px-3 text-xs text-secondary-foreground outline-none hover:bg-element-hover hover:text-foreground"
+                        className="flex h-[26px] cursor-default items-center gap-2 px-3 text-2xs text-secondary-foreground outline-none hover:bg-element-hover hover:text-foreground"
                       >
                         <GitBranch size={11} />
                         <span className="flex-1">Branch from here</span>
@@ -356,7 +356,7 @@ const HeaderCircleButton = forwardRef<
 
 function MenuLabel({ children }: { children: React.ReactNode }) {
   return (
-    <div className="px-3 pb-1 pt-1.5 text-3xs uppercase tracking-wider text-muted-foreground">
+    <div className="px-3 pb-1 pt-1.5 text-4xs uppercase tracking-wider text-muted-foreground">
       {children}
     </div>
   );

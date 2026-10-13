@@ -17,7 +17,7 @@ interface Props {
  */
 export const ReadmeView = memo(function ReadmeView({ source }: Props) {
   return (
-    <div className="atlas-readme text-md leading-relaxed text-foreground break-words select-text">
+    <div className="atlas-readme text-sm leading-relaxed text-foreground break-words select-text">
       <ReactMarkdown
         remarkPlugins={[remarkGfm]}
         rehypePlugins={[rehypeRaw, rehypeHighlight]}
@@ -32,8 +32,8 @@ export const ReadmeView = memo(function ReadmeView({ source }: Props) {
               {p.children}
             </h2>
           ),
-          h3: (p) => <h3 className="text-lg font-semibold mt-6 mb-2">{p.children}</h3>,
-          h4: (p) => <h4 className="text-md font-semibold mt-4 mb-1.5">{p.children}</h4>,
+          h3: (p) => <h3 className="text-md font-semibold mt-6 mb-2">{p.children}</h3>,
+          h4: (p) => <h4 className="text-sm font-semibold mt-4 mb-1.5">{p.children}</h4>,
           p: (p) => <p className="my-3">{p.children}</p>,
           a: (p) => (
             <a
@@ -59,7 +59,7 @@ export const ReadmeView = memo(function ReadmeView({ source }: Props) {
             if (isInline) {
               return (
                 <code
-                  className="px-1.5 py-0.5 rounded bg-card text-foreground text-base font-mono"
+                  className="px-1.5 py-0.5 rounded bg-card text-foreground type-reading font-mono"
                   {...rest}
                 >
                   {children}
@@ -74,7 +74,7 @@ export const ReadmeView = memo(function ReadmeView({ source }: Props) {
           },
           pre: (p) => (
             <pre
-              className="rounded-md border border-border bg-card p-4 text-base my-4 overflow-x-auto"
+              className="rounded-md border border-border bg-card p-4 type-reading my-4 overflow-x-auto"
               style={{ whiteSpace: "pre", wordBreak: "normal" }}
             >
               {p.children}
@@ -88,18 +88,18 @@ export const ReadmeView = memo(function ReadmeView({ source }: Props) {
           hr: () => <hr className="my-6 border-hairline" />,
           table: (p) => (
             <div className="my-4 rounded-md border border-border overflow-x-auto">
-              <table className="w-full text-base border-collapse">{p.children}</table>
+              <table className="w-full type-reading border-collapse">{p.children}</table>
             </div>
           ),
           thead: (p) => <thead className="bg-card">{p.children}</thead>,
           th: (p) => (
-            <th className="px-3 py-2 text-left text-sm font-semibold text-secondary-foreground border-b border-border border-r last:border-r-0">
+            <th className="px-3 py-2 text-left text-xs font-semibold text-secondary-foreground border-b border-border border-r last:border-r-0">
               {p.children}
             </th>
           ),
           tr: (p) => <tr className="border-b border-hairline last:border-b-0">{p.children}</tr>,
           td: (p) => (
-            <td className="px-3 py-2 align-top text-base text-foreground border-r border-hairline last:border-r-0 break-words">
+            <td className="px-3 py-2 align-top type-reading text-foreground border-r border-hairline last:border-r-0 break-words">
               {p.children}
             </td>
           ),

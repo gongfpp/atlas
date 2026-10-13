@@ -40,19 +40,19 @@ export const BASE_COLOR_TOKENS = [
 ] as const;
 
 export const TYPE_SCALE = [
-  { name: "3xs", utility: "text-3xs", px: 9 },
-  { name: "2xs", utility: "text-2xs", px: 10 },
-  { name: "xs", utility: "text-xs", px: 11 },
-  { name: "sm", utility: "text-sm", px: 12 },
-  { name: "base", utility: "text-base", px: 13 },
-  { name: "md", utility: "text-md", px: 14 },
-  { name: "lg", utility: "text-lg", px: 16 },
+  { name: "3xs", utility: "text-4xs", px: 9 },
+  { name: "2xs", utility: "text-3xs", px: 10 },
+  { name: "xs", utility: "text-2xs", px: 11 },
+  { name: "sm", utility: "text-xs", px: 12 },
+  { name: "base", utility: "type-reading", px: 13 },
+  { name: "md", utility: "text-sm", px: 14 },
+  { name: "lg", utility: "text-md", px: 16 },
   { name: "xl", utility: "text-xl", px: 20 },
   { name: "2xl", utility: "text-2xl", px: 24 },
 ] as const;
 
 export const TEXT_STYLES = [
-  { utility: "eyebrow", use: "Section header above a group of rows." },
+  { utility: "micro", use: "Section header above a group of rows." },
   { utility: "label", use: "The text on and beside a control." },
   { utility: "body", use: "Running prose — a description, a message." },
   { utility: "caption", use: "The dimmed second line under something." },

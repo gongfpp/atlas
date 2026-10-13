@@ -139,14 +139,14 @@ export function CodeBlock({
     <div className={cn("overflow-hidden rounded-lg border border-hairline bg-card", className)}>
       <div className="group/head flex items-center gap-2 border-b border-hairline bg-card px-3 py-1.5">
         <FileCode2 size={12} className="shrink-0 text-muted-foreground" />
-        <span className="min-w-0 flex-1 truncate font-mono text-xs text-secondary-foreground">
+        <span className="min-w-0 flex-1 truncate font-mono text-2xs text-secondary-foreground">
           {path ?? label ?? "Payload"}
         </span>
         {added > 0 && (
-          <span className="shrink-0 font-mono text-xs text-diff-added-foreground">+{added}</span>
+          <span className="shrink-0 font-mono text-2xs text-diff-added-foreground">+{added}</span>
         )}
         {removed > 0 && (
-          <span className="shrink-0 font-mono text-xs text-diff-removed-foreground">
+          <span className="shrink-0 font-mono text-2xs text-diff-removed-foreground">
             −{removed}
           </span>
         )}
@@ -162,7 +162,7 @@ export function CodeBlock({
           <div
             key={i}
             className={cn(
-              "relative flex min-w-max font-mono text-sm leading-[1.6]",
+              "relative flex min-w-max font-mono text-xs leading-[1.6]",
               line.sign === "add" && "bg-diff-added-foreground/[0.07]",
               line.sign === "del" && "bg-diff-removed-foreground/[0.07]",
             )}
@@ -194,7 +194,7 @@ export function CodeBlock({
           <button
             type="button"
             onClick={() => setShowAll(true)}
-            className="flex h-8 w-full cursor-pointer items-center justify-center font-mono text-xs text-muted-foreground transition-colors hover:bg-element-hover hover:text-foreground"
+            className="flex h-8 w-full cursor-pointer items-center justify-center font-mono text-2xs text-muted-foreground transition-colors hover:bg-element-hover hover:text-foreground"
           >
             Show remaining {capped.toLocaleString()} lines
           </button>

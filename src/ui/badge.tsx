@@ -31,8 +31,8 @@ const badgeVariants = cva(
         info: "border-transparent bg-info-muted text-info",
       },
       size: {
-        sm: "text-3xs",
-        md: "text-2xs",
+        sm: "text-4xs",
+        md: "text-3xs",
       },
     },
     defaultVariants: { variant: "secondary", size: "md" },

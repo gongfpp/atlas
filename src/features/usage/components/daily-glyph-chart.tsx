@@ -60,13 +60,13 @@ export function DailyGlyphChart({
           {metric === "tokens" ? "Tokens" : metric === "cost" ? "Est. cost" : "Messages"} · by{" "}
           {bucket} · per {GROUP_LABEL[groupBy]}
         </div>
-        <div className="text-3xs text-muted-foreground">{attribution}</div>
+        <div className="text-4xs text-muted-foreground">{attribution}</div>
       </div>
 
       <div className="mt-2 flex gap-2">
         {/* y axis */}
         <div
-          className="flex w-[40px] shrink-0 flex-col justify-between text-right text-3xs tabular-nums text-muted-foreground"
+          className="flex w-[40px] shrink-0 flex-col justify-between text-right text-4xs tabular-nums text-muted-foreground"
           style={{ height: H }}
         >
           {ticks.map((t, i) => (
@@ -131,7 +131,7 @@ export function DailyGlyphChart({
           {active && (
             <div
               className={cn(
-                "pointer-events-none absolute top-0 z-10 min-w-[170px] rounded-md border border-border bg-card px-2.5 py-2 text-xs shadow-md",
+                "pointer-events-none absolute top-0 z-10 min-w-[170px] rounded-md border border-border bg-card px-2.5 py-2 text-2xs shadow-md",
                 hover !== null && hover > n / 2 ? "right-[calc(100%_-_var(--x))]" : "left-(--x)",
               )}
               style={
@@ -140,7 +140,7 @@ export function DailyGlyphChart({
                 } as React.CSSProperties
               }
             >
-              <div className="text-2xs text-muted-foreground">
+              <div className="text-3xs text-muted-foreground">
                 {bucket === "week"
                   ? `${fmtDay(active.date)} – ${fmtDay(addDays(active.date, 6))}`
                   : fmtDay(active.date)}
@@ -160,7 +160,7 @@ export function DailyGlyphChart({
                 ) : null,
               )}
               <div className="mt-1.5 flex items-center justify-between border-t border-element-selected pt-1.5">
-                <span className="text-2xs uppercase tracking-wider text-muted-foreground">
+                <span className="text-3xs uppercase tracking-wider text-muted-foreground">
                   Total
                 </span>
                 <span className="tabular-nums text-foreground">{fmt(active.total)}</span>
@@ -171,7 +171,7 @@ export function DailyGlyphChart({
       </div>
 
       {/* x axis */}
-      <div className="ml-[48px] mt-1 flex gap-px text-3xs tabular-nums text-muted-foreground">
+      <div className="ml-[48px] mt-1 flex gap-px text-4xs tabular-nums text-muted-foreground">
         {/* Each label hangs off its column rather than fitting inside it: at
             30 columns a day is ~20px and "Sep 10" truncated to "S…". */}
         {columns.map((c, i) => (
@@ -196,7 +196,7 @@ export function DailyGlyphChart({
           {keys.map((k) => (
             <span
               key={k.key}
-              className="flex items-center gap-1 text-2xs text-secondary-foreground"
+              className="flex items-center gap-1 text-3xs text-secondary-foreground"
             >
               <span className="text-disabled">[</span>
               <span className="h-1.5 w-1.5 rounded-full" style={{ background: k.color }} />
@@ -207,7 +207,7 @@ export function DailyGlyphChart({
         </div>
       )}
       {max === 0 && (
-        <div className="absolute inset-x-0 top-1/2 text-center text-2xs text-muted-foreground">
+        <div className="absolute inset-x-0 top-1/2 text-center text-3xs text-muted-foreground">
           Nothing in this range
         </div>
       )}

@@ -118,8 +118,8 @@ export function BashHistoryPanel({ messages, onJump, onClose }: BashHistoryPanel
         <div className="flex items-center justify-between px-3 h-[32px] border-b border-border shrink-0">
           <div className="flex items-center gap-1.5">
             <TerminalSquare size={11} className="text-muted-foreground" />
-            <span className="text-xs font-medium text-secondary-foreground">Bash calls</span>
-            <span className="text-2xs text-muted-foreground">· {entries.length}</span>
+            <span className="text-2xs font-medium text-secondary-foreground">Bash calls</span>
+            <span className="text-3xs text-muted-foreground">· {entries.length}</span>
           </div>
           <Hint label="Hide bash history">
             <button
@@ -134,7 +134,7 @@ export function BashHistoryPanel({ messages, onJump, onClose }: BashHistoryPanel
         {/* Virtualized list */}
         <div ref={parentRef} className="flex-1 overflow-y-auto hide-scrollbar">
           {entries.length === 0 ? (
-            <div className="px-3 py-3 text-xs text-muted-foreground leading-relaxed">
+            <div className="px-3 py-3 text-2xs text-muted-foreground leading-relaxed">
               No bash commands in this chat yet.
             </div>
           ) : (
@@ -170,18 +170,18 @@ export function BashHistoryPanel({ messages, onJump, onClose }: BashHistoryPanel
                       )}
                       title={e.command}
                     >
-                      <div className="text-xs font-mono break-all line-clamp-2 whitespace-pre-wrap">
+                      <div className="text-2xs font-mono break-all line-clamp-2 whitespace-pre-wrap">
                         {e.command}
                       </div>
                       <div className="flex items-center justify-between gap-2">
                         {e.description ? (
-                          <span className="text-3xs text-muted-foreground truncate flex-1">
+                          <span className="text-4xs text-muted-foreground truncate flex-1">
                             {e.description}
                           </span>
                         ) : (
                           <span className="flex-1" />
                         )}
-                        <span className="text-3xs text-muted-foreground shrink-0">
+                        <span className="text-4xs text-muted-foreground shrink-0">
                           {timeAgo(e.timestamp)}
                         </span>
                       </div>

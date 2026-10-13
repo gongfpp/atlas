@@ -576,7 +576,7 @@ function SpaceSurface({
         onPointerLeave={onPointerLeave}
       >
         {!ready && (
-          <div className="absolute inset-0 z-30 flex items-center justify-center text-xs text-muted-foreground">
+          <div className="absolute inset-0 z-30 flex items-center justify-center text-2xs text-muted-foreground">
             Loading…
           </div>
         )}
@@ -641,7 +641,7 @@ function SpaceSurface({
         )}
 
         {uploading && (
-          <div className="absolute bottom-3 left-1/2 z-40 -translate-x-1/2 rounded-full border border-hairline bg-card/80 px-3 py-1 text-xs text-secondary-foreground backdrop-blur-xl">
+          <div className="absolute bottom-3 left-1/2 z-40 -translate-x-1/2 rounded-full border border-hairline bg-card/80 px-3 py-1 text-2xs text-secondary-foreground backdrop-blur-xl">
             Uploading media…
           </div>
         )}
@@ -654,7 +654,7 @@ function SpaceSurface({
             isDropTarget ? "opacity-100" : "opacity-0"
           }`}
         >
-          <span className="rounded-full border border-primary/40 bg-card px-3 py-1 text-xs font-medium text-secondary-foreground shadow">
+          <span className="rounded-full border border-primary/40 bg-card px-3 py-1 text-2xs font-medium text-secondary-foreground shadow">
             Drop images or video to add them
           </span>
         </div>

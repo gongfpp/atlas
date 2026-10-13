@@ -220,7 +220,7 @@ function ImportView({
         {error && (
           <div className="flex items-start gap-2 rounded-md border border-destructive bg-error-muted p-2">
             <Icon icon={AlertTriangle} size="sm" className="mt-px text-error" />
-            <p className="text-xs break-words text-foreground">{error}</p>
+            <p className="text-2xs break-words text-foreground">{error}</p>
           </div>
         )}
 
@@ -314,7 +314,7 @@ function CandidateCard({
         </p>
       ))}
       {candidate.report.warnings.map((line) => (
-        <p key={line} className="flex items-start gap-1.5 text-xs text-warning">
+        <p key={line} className="flex items-start gap-1.5 text-2xs text-warning">
           <Icon icon={AlertTriangle} size="sm" className="mt-px" />
           <span>{line}</span>
         </p>
@@ -348,7 +348,7 @@ function Field({
 }) {
   return (
     <label className={cn("flex flex-col gap-1", className)}>
-      <span className="eyebrow text-muted-foreground">{label}</span>
+      <span className="micro text-muted-foreground">{label}</span>
       <Input value={value} onChange={(event) => onChange(event.target.value)} spellCheck={false} />
     </label>
   );
@@ -375,8 +375,8 @@ function Counts({ report }: { report: ThemeImportReport }) {
     <div className="grid grid-cols-3 gap-2">
       {items.map((item) => (
         <div key={item.label} className="rounded border border-hairline bg-card px-2 py-1.5">
-          <div className="text-md font-semibold tabular-nums text-foreground">{item.value}</div>
-          <div className="eyebrow text-muted-foreground">{item.label}</div>
+          <div className="text-sm font-semibold tabular-nums text-foreground">{item.value}</div>
+          <div className="micro text-muted-foreground">{item.label}</div>
           <div className="caption">{item.hint}</div>
         </div>
       ))}
@@ -394,10 +394,10 @@ function IgnoredByCategory({ report }: { report: ThemeImportReport }) {
           const reason = report.ignored.find((entry) => entry.category === category)?.reason ?? "";
           return (
             <li key={category} className="flex items-baseline gap-2">
-              <span className="w-8 shrink-0 text-right text-xs tabular-nums text-foreground">
+              <span className="w-8 shrink-0 text-right text-2xs tabular-nums text-foreground">
                 {count}
               </span>
-              <span className="text-xs text-secondary-foreground">{category}</span>
+              <span className="text-2xs text-secondary-foreground">{category}</span>
               <span className="caption truncate">{reason}</span>
             </li>
           );
@@ -514,7 +514,7 @@ function ExportView({ themes }: { themes: ThemeSummary[] }) {
           ))}
         </div>
 
-        {error && <p className="text-xs text-error">{error}</p>}
+        {error && <p className="text-2xs text-error">{error}</p>}
 
         {result && (
           <section className="flex flex-col gap-2 rounded-md border border-border bg-card p-3">

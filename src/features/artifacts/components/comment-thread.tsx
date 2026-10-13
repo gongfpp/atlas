@@ -195,9 +195,9 @@ export const CommentButton = memo(function CommentButton({
         {showLabel ? (
           <>
             <MessageSquare size={11} strokeWidth={1.7} />
-            <span className="text-xs">{label}</span>
+            <span className="text-2xs">{label}</span>
             {count > 0 && (
-              <span className="text-2xs tabular-nums">
+              <span className="text-3xs tabular-nums">
                 {count > MAX_COUNT ? `${MAX_COUNT}+` : count}
               </span>
             )}
@@ -215,7 +215,7 @@ export const CommentButton = memo(function CommentButton({
                 ))}
               </span>
             )}
-            <span className="text-2xs tabular-nums">
+            <span className="text-3xs tabular-nums">
               {count > MAX_COUNT ? `${MAX_COUNT}+` : count}
             </span>
           </>
@@ -310,7 +310,7 @@ function Thread({
       <div className="min-h-0 flex-1 overflow-y-auto">
         {threads.length === 0 ? (
           <p
-            className="text-xs text-muted-foreground"
+            className="text-2xs text-muted-foreground"
             style={{ padding: `${BLOCK_PAD_Y}px ${BLOCK_PAD_X}px` }}
           >
             No comments on this {anchorKind === "session" ? "Session" : "step"} yet.
@@ -480,7 +480,7 @@ const CommentRow = memo(function CommentRow({
     // The row survives so replies keep their places, and saying so is more
     // honest than a gap where a comment used to be.
     return (
-      <p className="text-2xs italic text-disabled" style={{ paddingLeft: REPLY_INDENT }}>
+      <p className="text-3xs italic text-disabled" style={{ paddingLeft: REPLY_INDENT }}>
         Comment deleted
       </p>
     );
@@ -507,12 +507,12 @@ const CommentRow = memo(function CommentRow({
 
         <div className="min-w-0 flex-1">
           <div className="flex items-baseline gap-1.5">
-            <span className="min-w-0 truncate text-xs font-medium text-foreground">{name}</span>
-            {comment.guestName && <span className="shrink-0 text-3xs text-disabled">guest</span>}
-            <span className="shrink-0 font-mono text-3xs text-disabled">
+            <span className="min-w-0 truncate text-2xs font-medium text-foreground">{name}</span>
+            {comment.guestName && <span className="shrink-0 text-4xs text-disabled">guest</span>}
+            <span className="shrink-0 font-mono text-4xs text-disabled">
               {time(comment.createdAt)}
             </span>
-            {comment.editedAt && <span className="shrink-0 text-3xs text-disabled">edited</span>}
+            {comment.editedAt && <span className="shrink-0 text-4xs text-disabled">edited</span>}
             <span className="flex-1" />
             {busy && <Loader2 size={10} className="animate-spin text-muted-foreground" />}
             {/* Link first, then delete. Every comment can be linked — it
@@ -624,7 +624,7 @@ function Action({
       type="button"
       disabled={disabled}
       onClick={onClick}
-      className="flex cursor-pointer items-center gap-1 rounded px-1 py-px text-2xs text-muted-foreground transition-colors hover:bg-element-hover hover:text-foreground disabled:cursor-not-allowed disabled:opacity-40"
+      className="flex cursor-pointer items-center gap-1 rounded px-1 py-px text-3xs text-muted-foreground transition-colors hover:bg-element-hover hover:text-foreground disabled:cursor-not-allowed disabled:opacity-40"
     >
       {children}
     </button>
@@ -644,7 +644,7 @@ const MENTION = /<@([A-Za-z0-9_.:-]{1,128})>/g;
 function SelectionExcerpt({ text }: { text: string }) {
   return (
     <blockquote
-      className="mb-2 max-h-24 overflow-auto whitespace-pre-wrap break-words border-l-2 border-border pl-2 text-xs leading-snug text-muted-foreground"
+      className="mb-2 max-h-24 overflow-auto whitespace-pre-wrap break-words border-l-2 border-border pl-2 text-2xs leading-snug text-muted-foreground"
       aria-label="Selected passage"
     >
       {text}
@@ -655,7 +655,7 @@ function SelectionExcerpt({ text }: { text: string }) {
 export function CommentBody({ text, directory }: { text: string; directory: OrgDirectory }) {
   const excerpt = splitSelectionComment(text);
   return (
-    <div className="mt-0.5 whitespace-pre-wrap break-words text-xs leading-snug text-secondary-foreground">
+    <div className="mt-0.5 whitespace-pre-wrap break-words text-2xs leading-snug text-secondary-foreground">
       {excerpt && <SelectionExcerpt text={excerpt.selection} />}
       <Body text={excerpt?.body ?? text} directory={directory} />
     </div>
@@ -804,7 +804,7 @@ function Composer({
             // scrollbar otherwise renders as a strip under a one-row field on
             // any sub-pixel overflow. Vertical scrolling for Shift+Enter text
             // still works, just without a visible bar.
-            className="hide-scrollbar min-w-0 w-full resize-none overflow-x-hidden break-words rounded-lg border border-border bg-panel-input py-1.5 pl-2 pr-8 text-xs text-foreground outline-none transition-colors placeholder:text-muted-foreground focus:border-border-strong"
+            className="hide-scrollbar min-w-0 w-full resize-none overflow-x-hidden break-words rounded-lg border border-border bg-panel-input py-1.5 pl-2 pr-8 text-2xs text-foreground outline-none transition-colors placeholder:text-muted-foreground focus:border-border-strong"
           />
           {/* The agent composer's squircle send, at this surface's scale, and
            *  pinned so it does not ride down as the field grows. It carries the
@@ -832,12 +832,12 @@ function Composer({
         </div>
       </div>
       {over && (
-        <p className="mt-1 text-3xs text-error">
+        <p className="mt-1 text-4xs text-error">
           {totalLength.toLocaleString()} / {COMMENT_BODY_MAX.toLocaleString()} characters
           {bodyPrefixLength > 0 ? " (including the selected passage)" : ""}
         </p>
       )}
-      {error && <p className="mt-1 text-3xs text-error">{error}</p>}
+      {error && <p className="mt-1 text-4xs text-error">{error}</p>}
     </div>
   );
 }

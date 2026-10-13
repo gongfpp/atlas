@@ -101,13 +101,13 @@ export function NewDmMenu() {
                   onChange={(e) => setQuery(e.target.value)}
                   placeholder="Search people…"
                   aria-label="Search people"
-                  className="min-w-0 flex-1 bg-transparent text-xs text-foreground outline-none placeholder:text-muted-foreground"
+                  className="min-w-0 flex-1 bg-transparent text-2xs text-foreground outline-none placeholder:text-muted-foreground"
                 />
               </div>
 
               <div className="hide-scrollbar min-h-0 flex-1 overflow-y-auto py-1">
                 {candidates.length === 0 && (
-                  <div className="py-5 text-center text-xs text-disabled">
+                  <div className="py-5 text-center text-2xs text-disabled">
                     {memberList.length <= 1 ? "Nobody else is here yet." : "Nobody matches."}
                   </div>
                 )}
@@ -122,8 +122,8 @@ export function NewDmMenu() {
                     >
                       <CommsAvatar member={m} size={20} />
                       <span className="min-w-0 flex-1">
-                        <span className="block truncate text-xs text-foreground">{m.name}</span>
-                        <span className="block truncate text-2xs text-disabled">{m.email}</span>
+                        <span className="block truncate text-2xs text-foreground">{m.name}</span>
+                        <span className="block truncate text-3xs text-disabled">{m.email}</span>
                       </span>
                       <Check
                         size={12}
@@ -142,7 +142,7 @@ export function NewDmMenu() {
                   type="button"
                   disabled={picked.size === 0 || pending}
                   onClick={() => void start()}
-                  className="flex h-[26px] w-full items-center justify-center gap-1.5 rounded-md bg-element-active text-xs font-medium text-foreground transition-colors hover:bg-element-emphasis disabled:cursor-not-allowed disabled:opacity-45 cursor-pointer"
+                  className="flex h-[26px] w-full items-center justify-center gap-1.5 rounded-md bg-element-active text-2xs font-medium text-foreground transition-colors hover:bg-element-emphasis disabled:cursor-not-allowed disabled:opacity-45 cursor-pointer"
                 >
                   {pending && <Loader2 size={11} className="animate-spin" />}
                   Message

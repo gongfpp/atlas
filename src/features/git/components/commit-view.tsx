@@ -160,7 +160,7 @@ export function CommitView({ repoPath, sha }: { repoPath: string; sha: string })
 
   if (isLoading || !detail) {
     return (
-      <div className="px-3 py-8 text-center text-xs text-muted-foreground">
+      <div className="px-3 py-8 text-center text-2xs text-muted-foreground">
         {isLoading
           ? "Loading commit…"
           : `Couldn't load this commit${error ? `: ${isGitError(error) ? error.message : String(error)}` : "."}`}
@@ -210,7 +210,7 @@ export function CommitView({ repoPath, sha }: { repoPath: string; sha: string })
             </button>
           </HintItem>
           <div className="ml-auto flex items-center gap-0.5">
-            <span className="mr-1.5 font-mono text-2xs">
+            <span className="mr-1.5 font-mono text-3xs">
               <span className="text-success">+{totalAdd}</span>{" "}
               <span className="text-error">−{totalDel}</span>
             </span>
@@ -223,7 +223,7 @@ export function CommitView({ repoPath, sha }: { repoPath: string; sha: string })
 
       {/* Files */}
       {files.length === 0 ? (
-        <div className="px-3 py-8 text-center text-xs text-muted-foreground">No file changes</div>
+        <div className="px-3 py-8 text-center text-2xs text-muted-foreground">No file changes</div>
       ) : (
         <div
           ref={scrollRef}
@@ -263,7 +263,7 @@ export function CommitView({ repoPath, sha }: { repoPath: string; sha: string })
                             !isCollapsed && "rotate-90",
                           )}
                         />
-                        <span className="min-w-0 flex-1 truncate font-mono text-xs select-text">
+                        <span className="min-w-0 flex-1 truncate font-mono text-2xs select-text">
                           <span className="text-foreground">{name}</span>
                           {dir && <span className="ml-2 text-muted-foreground">{dir}</span>}
                           {file.oldPath && (
@@ -283,7 +283,7 @@ export function CommitView({ repoPath, sha }: { repoPath: string; sha: string })
                             <GitCompare size={11} />
                           </button>
                         </HintItem>
-                        <span className="shrink-0 font-mono text-2xs">
+                        <span className="shrink-0 font-mono text-3xs">
                           <span className="text-success">+{file.additions}</span>{" "}
                           <span className="text-error">−{file.deletions}</span>
                         </span>
@@ -299,7 +299,7 @@ export function CommitView({ repoPath, sha }: { repoPath: string; sha: string })
                     key={vr.key}
                     {...measured}
                     style={{ ...base, backgroundColor: "var(--atlas-diff-context-background)" }}
-                    className="flex h-6 items-center border-x border-border px-2 font-mono text-2xs"
+                    className="flex h-6 items-center border-x border-border px-2 font-mono text-3xs"
                   >
                     <span className="truncate text-info/70 select-text">{row.header}</span>
                   </div>
@@ -312,7 +312,7 @@ export function CommitView({ repoPath, sha }: { repoPath: string; sha: string })
                     key={vr.key}
                     {...measured}
                     style={{ ...base, backgroundColor: "var(--atlas-diff-context-background)" }}
-                    className="flex h-6 items-center border-x border-border px-3 text-2xs text-muted-foreground"
+                    className="flex h-6 items-center border-x border-border px-3 text-3xs text-muted-foreground"
                   >
                     {row.text}
                   </div>
@@ -337,7 +337,7 @@ export function CommitView({ repoPath, sha }: { repoPath: string; sha: string })
                     key={vr.key}
                     {...measured}
                     style={{ ...base, backgroundColor: lineBg(line.type) }}
-                    className="flex overflow-hidden border-x border-border font-mono text-xs leading-[20px] select-text"
+                    className="flex overflow-hidden border-x border-border font-mono text-2xs leading-[20px] select-text"
                   >
                     <ChangeBar type={line.type} />
                     <LineNo n={line.oldLine} />
@@ -353,7 +353,7 @@ export function CommitView({ repoPath, sha }: { repoPath: string; sha: string })
                   key={vr.key}
                   {...measured}
                   style={base}
-                  className="grid grid-cols-2 border-x border-border font-mono text-xs leading-[20px] select-text"
+                  className="grid grid-cols-2 border-x border-border font-mono text-2xs leading-[20px] select-text"
                 >
                   <SplitSide line={left} n={left?.oldLine} language={row.language} />
                   <SplitSide
@@ -386,7 +386,7 @@ function ChangeBar({ type }: { type: DiffLine["type"] | undefined }) {
 
 function LineNo({ n }: { n: number | undefined }) {
   return (
-    <span className="w-[44px] shrink-0 select-none pr-2 text-right text-2xs text-muted-foreground">
+    <span className="w-[44px] shrink-0 select-none pr-2 text-right text-3xs text-muted-foreground">
       {n ?? ""}
     </span>
   );
@@ -439,14 +439,14 @@ function CommitHeader({ detail, repoPath }: { detail: CommitDetail; repoPath: st
       <div className="flex items-start gap-3">
         <CommitAvatar email={detail.email} repoPath={repoPath} size={36} className="mt-0.5" />
         <div className="min-w-0 flex-1">
-          <div className="text-sm font-medium text-foreground">{detail.author}</div>
-          <div className="text-2xs text-muted-foreground">
+          <div className="text-xs font-medium text-foreground">{detail.author}</div>
+          <div className="text-3xs text-muted-foreground">
             {formatCommitDate(detail.date)}
             {detail.email && ` · ${detail.email}`}
           </div>
-          <div className="mt-1.5 text-sm text-foreground select-text">{detail.subject}</div>
+          <div className="mt-1.5 text-xs text-foreground select-text">{detail.subject}</div>
           {detail.body && (
-            <pre className="mt-1 max-h-32 overflow-y-auto hide-scrollbar whitespace-pre-wrap break-words font-sans text-xs text-muted-foreground select-text">
+            <pre className="mt-1 max-h-32 overflow-y-auto hide-scrollbar whitespace-pre-wrap break-words font-sans text-2xs text-muted-foreground select-text">
               {detail.body}
             </pre>
           )}
@@ -459,7 +459,7 @@ function CommitHeader({ detail, repoPath }: { detail: CommitDetail; repoPath: st
             setTimeout(() => setCopied(false), 1200);
           }}
           title={detail.hash}
-          className="flex shrink-0 items-center gap-1.5 rounded border border-border px-2 h-6 text-2xs text-secondary-foreground hover:bg-element-hover hover:text-foreground"
+          className="flex shrink-0 items-center gap-1.5 rounded border border-border px-2 h-6 text-3xs text-secondary-foreground hover:bg-element-hover hover:text-foreground"
         >
           <CopyGlyph copied={copied} size="sm" className={copied ? "text-success" : undefined} />
           Commit SHA
@@ -538,7 +538,7 @@ function CommitActions({ repoPath, sha }: { repoPath: string; sha: string }) {
                 onChange={(e) => setTagName(e.target.value)}
                 autoFocus
                 placeholder="tag name → Enter"
-                className="h-7 w-full rounded border border-border bg-panel-input px-2 font-mono text-xs text-foreground outline-none focus:border-border-strong"
+                className="h-7 w-full rounded border border-border bg-panel-input px-2 font-mono text-2xs text-foreground outline-none focus:border-border-strong"
                 onKeyDown={(e) => {
                   if (e.key === "Enter" && tagName.trim()) {
                     void run(() => actions.createTag(tagName.trim(), sha));
@@ -565,8 +565,8 @@ function ResetMenu({ onReset }: { onReset: (mode: "soft" | "mixed" | "hard") => 
       }}
       className="w-full text-left px-3 py-1.5 hover:bg-element-hover"
     >
-      <div className="text-xs text-foreground">{label}</div>
-      <div className="text-3xs text-muted-foreground">{desc}</div>
+      <div className="text-2xs text-foreground">{label}</div>
+      <div className="text-4xs text-muted-foreground">{desc}</div>
     </button>
   );
   return (
@@ -588,7 +588,7 @@ function ResetMenu({ onReset }: { onReset: (mode: "soft" | "mixed" | "hard") => 
       <Popover.Portal>
         <Popover.Positioner className="z-popover" side="bottom" align="end" sideOffset={4}>
           <Popover.Popup className="w-[200px] rounded-lg border border-border bg-card shadow-md py-1">
-            <div className="px-3 py-1 text-3xs uppercase tracking-wider text-muted-foreground">
+            <div className="px-3 py-1 text-4xs uppercase tracking-wider text-muted-foreground">
               Reset to here
             </div>
             {item("soft", "Soft", "keep changes staged")}
@@ -663,7 +663,7 @@ function CommitSessions({ repoPath, sha }: { repoPath: string; sha: string }) {
 
   return (
     <div className="mt-2 max-w-xl border-t border-hairline pt-2">
-      <div className="text-3xs uppercase tracking-wider text-muted-foreground">
+      <div className="text-4xs uppercase tracking-wider text-muted-foreground">
         Produced by {sessions.length} session{sessions.length === 1 ? "" : "s"}
       </div>
       {sessions.map((s) => (
@@ -675,11 +675,11 @@ function CommitSessions({ repoPath, sha }: { repoPath: string; sha: string }) {
         >
           <div className="flex items-start gap-1.5">
             <Sparkles size={11} className="mt-0.5 shrink-0 text-muted-foreground" />
-            <span className="text-xs text-secondary-foreground group-hover:text-foreground line-clamp-2">
+            <span className="text-2xs text-secondary-foreground group-hover:text-foreground line-clamp-2">
               {s.title ?? "Untitled session"}
             </span>
           </div>
-          <div className="mt-0.5 pl-[18px] text-3xs text-muted-foreground truncate">
+          <div className="mt-0.5 pl-[18px] text-4xs text-muted-foreground truncate">
             {s.messageCount} message{s.messageCount === 1 ? "" : "s"} · {s.toolCallCount} tool call
             {s.toolCallCount === 1 ? "" : "s"}
             {s.files.length > 0 && ` · ${s.files.join(", ")}`}

@@ -160,8 +160,8 @@ export const LoadingState = memo(function LoadingState({
           />
         ))}
       </span>
-      <span className="atlas-thinking-shimmer text-xs leading-[16px] font-medium">{label}</span>
-      <span ref={elapsed} className="font-mono text-2xs tabular-nums text-muted-foreground" />
+      <span className="atlas-thinking-shimmer text-2xs leading-[16px] font-medium">{label}</span>
+      <span ref={elapsed} className="font-mono text-3xs tabular-nums text-muted-foreground" />
     </div>
   );
   if (!stalledContent || !stalled) return indicator;

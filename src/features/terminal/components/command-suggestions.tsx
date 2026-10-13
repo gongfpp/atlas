@@ -94,7 +94,7 @@ export function CommandSuggestions({
                 onSelect(s);
               }}
               className={cn(
-                "w-full text-left px-2.5 h-control-sm flex items-center gap-2 text-sm font-mono",
+                "w-full text-left px-2.5 h-control-sm flex items-center gap-2 text-xs font-mono",
                 isActive
                   ? "bg-element-selected text-foreground"
                   : "text-secondary-foreground hover:bg-element-hover",
@@ -115,7 +115,7 @@ export function CommandSuggestions({
           );
         })}
       </div>
-      <div className="border-t border-border px-2.5 h-control-sm flex items-center justify-end gap-2 text-3xs uppercase tracking-wider text-muted-foreground shrink-0">
+      <div className="border-t border-border px-2.5 h-control-sm flex items-center justify-end gap-2 text-4xs uppercase tracking-wider text-muted-foreground shrink-0">
         <KbdLegend
           className="normal-case tracking-normal"
           items={[

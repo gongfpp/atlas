@@ -142,7 +142,7 @@ function BranchPicker({
           <button
             type="button"
             disabled={busy}
-            className="flex items-center gap-1 text-2xs text-muted-foreground hover:text-foreground cursor-pointer disabled:cursor-default"
+            className="flex items-center gap-1 text-3xs text-muted-foreground hover:text-foreground cursor-pointer disabled:cursor-default"
             title="Switch to another remote branch"
           >
             <GitBranch size={9} />
@@ -169,21 +169,21 @@ function BranchPicker({
                   if (e.key === "Enter" && shown[0]) onSwitch(shown[0]);
                 }}
                 placeholder="Filter branches"
-                className="flex-1 bg-transparent outline-none text-xs text-foreground placeholder:text-muted-foreground"
+                className="flex-1 bg-transparent outline-none text-2xs text-foreground placeholder:text-muted-foreground"
               />
               {branches ? (
-                <span className="text-3xs tabular-nums text-muted-foreground">{shown.length}</span>
+                <span className="text-4xs tabular-nums text-muted-foreground">{shown.length}</span>
               ) : null}
             </div>
             <div className="max-h-[260px] overflow-y-auto hide-scrollbar py-1">
               {error ? (
-                <div className="px-3 py-1.5 text-2xs text-error">{error}</div>
+                <div className="px-3 py-1.5 text-3xs text-error">{error}</div>
               ) : !branches ? (
-                <div className="flex items-center gap-2 px-3 py-1.5 text-2xs text-muted-foreground">
+                <div className="flex items-center gap-2 px-3 py-1.5 text-3xs text-muted-foreground">
                   <Loader2 size={10} className="animate-spin" /> Fetching branches
                 </div>
               ) : shown.length === 0 ? (
-                <div className="px-3 py-1.5 text-2xs text-muted-foreground">
+                <div className="px-3 py-1.5 text-3xs text-muted-foreground">
                   {filter ? "No branch matches" : "No branches"}
                 </div>
               ) : (
@@ -200,7 +200,7 @@ function BranchPicker({
                         if (!current) onSwitch(b);
                       }}
                       className={cn(
-                        "flex w-full items-center gap-2 px-3 h-control-md text-xs text-left cursor-pointer outline-none",
+                        "flex w-full items-center gap-2 px-3 h-control-md text-2xs text-left cursor-pointer outline-none",
                         current
                           ? "text-foreground"
                           : "text-secondary-foreground hover:bg-element-hover hover:text-foreground focus-visible:bg-element-hover",
@@ -300,15 +300,15 @@ function ClonedRow({
     >
       <div className="flex items-start justify-between gap-2">
         <div className="min-w-0 flex-1">
-          <div className="text-2xs font-medium text-foreground truncate">{repo.display_name}</div>
+          <div className="text-3xs font-medium text-foreground truncate">{repo.display_name}</div>
           {meta?.description ? (
-            <p className="text-2xs leading-snug text-muted-foreground mt-1 line-clamp-2">
+            <p className="text-3xs leading-snug text-muted-foreground mt-1 line-clamp-2">
               {meta.description}
             </p>
           ) : null}
           <div className="flex items-center gap-3 mt-2">
             {busy === "switch" ? (
-              <span className="flex items-center gap-1 text-2xs text-muted-foreground">
+              <span className="flex items-center gap-1 text-3xs text-muted-foreground">
                 <Loader2 size={9} className="animate-spin" /> Switching…
               </span>
             ) : (
@@ -320,14 +320,14 @@ function ClonedRow({
               />
             )}
             {meta?.language ? (
-              <span className="text-3xs text-muted-foreground">{meta.language}</span>
+              <span className="text-4xs text-muted-foreground">{meta.language}</span>
             ) : null}
             {meta ? (
               <>
-                <span className="flex items-center gap-0.5 text-3xs text-muted-foreground">
+                <span className="flex items-center gap-0.5 text-4xs text-muted-foreground">
                   <Star size={8} /> {meta.stars.toLocaleString()}
                 </span>
-                <span className="flex items-center gap-0.5 text-3xs text-muted-foreground">
+                <span className="flex items-center gap-0.5 text-4xs text-muted-foreground">
                   <GitFork size={8} /> {meta.forks.toLocaleString()}
                 </span>
               </>
@@ -518,7 +518,7 @@ export function GithubPanel() {
             if (e.key === "Enter") handleSearch();
           }}
           placeholder="Search GitHub repositories..."
-          className="flex-1 bg-transparent outline-none text-xs text-foreground placeholder:text-muted-foreground"
+          className="flex-1 bg-transparent outline-none text-2xs text-foreground placeholder:text-muted-foreground"
         />
       </div>
 
@@ -546,10 +546,10 @@ export function GithubPanel() {
 
           {error && (
             <div className="px-3 py-6 text-center">
-              <p className="text-xs text-error">{error}</p>
+              <p className="text-2xs text-error">{error}</p>
               <button
                 onClick={handleSearch}
-                className="mt-1 text-2xs text-primary hover:underline cursor-pointer"
+                className="mt-1 text-3xs text-primary hover:underline cursor-pointer"
               >
                 Retry
               </button>
@@ -559,12 +559,12 @@ export function GithubPanel() {
           {!loading && !error && results.length === 0 && !searching && repos.length === 0 && (
             <div className="px-3 py-8 text-center">
               <GithubIcon size={16} className="text-muted-foreground mx-auto mb-2" />
-              <p className="text-xs text-muted-foreground">Search for repositories</p>
+              <p className="text-2xs text-muted-foreground">Search for repositories</p>
             </div>
           )}
 
           {!loading && !error && results.length === 0 && searching && (
-            <div className="px-3 py-6 text-center text-xs text-muted-foreground">
+            <div className="px-3 py-6 text-center text-2xs text-muted-foreground">
               No repositories found
             </div>
           )}
@@ -580,23 +580,23 @@ export function GithubPanel() {
                 <div className="flex items-start justify-between gap-2">
                   <div className="min-w-0 flex-1">
                     <div className="flex items-center gap-1.5">
-                      <span className="text-xs font-medium text-primary truncate">
+                      <span className="text-2xs font-medium text-primary truncate">
                         {repo.full_name}
                       </span>
                     </div>
                     {repo.description && (
-                      <p className="text-2xs text-muted-foreground mt-0.5 line-clamp-2">
+                      <p className="text-3xs text-muted-foreground mt-0.5 line-clamp-2">
                         {repo.description}
                       </p>
                     )}
                     <div className="flex items-center gap-3 mt-1">
                       {repo.language && (
-                        <span className="text-3xs text-muted-foreground">{repo.language}</span>
+                        <span className="text-4xs text-muted-foreground">{repo.language}</span>
                       )}
-                      <span className="flex items-center gap-0.5 text-3xs text-muted-foreground">
+                      <span className="flex items-center gap-0.5 text-4xs text-muted-foreground">
                         <Star size={8} /> {repo.stars.toLocaleString()}
                       </span>
-                      <span className="flex items-center gap-0.5 text-3xs text-muted-foreground">
+                      <span className="flex items-center gap-0.5 text-4xs text-muted-foreground">
                         <GitFork size={8} /> {repo.forks.toLocaleString()}
                       </span>
                     </div>

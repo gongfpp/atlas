@@ -149,7 +149,7 @@ function MonthGrid({
         >
           <ChevronLeft size={12} />
         </button>
-        <span className="text-xs font-medium text-foreground">{monthLabel}</span>
+        <span className="text-2xs font-medium text-foreground">{monthLabel}</span>
         <button
           type="button"
           aria-label="Next month"
@@ -164,7 +164,7 @@ function MonthGrid({
         {WEEKDAY.map((w, i) => (
           <span
             key={i}
-            className="flex h-5 items-center justify-center text-3xs font-medium uppercase tracking-wider text-muted-foreground"
+            className="flex h-5 items-center justify-center text-4xs font-medium uppercase tracking-wider text-muted-foreground"
           >
             {w}
           </span>
@@ -183,7 +183,7 @@ function MonthGrid({
               onMouseEnter={() => anchor && setHover(day)}
               onClick={() => pick(day)}
               className={cn(
-                "flex h-6 items-center justify-center text-xs tabular-nums transition-colors",
+                "flex h-6 items-center justify-center text-2xs tabular-nums transition-colors",
                 edge
                   ? "rounded-md bg-foreground text-primary-foreground"
                   : inSel
@@ -207,7 +207,7 @@ function MonthGrid({
           );
         })}
       </div>
-      <div className="mt-1.5 flex items-center justify-between px-0.5 text-2xs text-muted-foreground">
+      <div className="mt-1.5 flex items-center justify-between px-0.5 text-3xs text-muted-foreground">
         <span>{anchor ? "Pick the end day" : "Pick two days"}</span>
         <button
           type="button"

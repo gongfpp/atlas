@@ -57,7 +57,7 @@ const RESIDUAL_SESSION =
 // header is a `Label` and keeps the arrow, so the cursor distinguishes what you
 // can act on from what is only being reported.
 const ITEM_CLASS =
-  "flex items-center gap-2 px-3 h-[26px] text-xs cursor-pointer outline-none " +
+  "flex items-center gap-2 px-3 h-[26px] text-2xs cursor-pointer outline-none " +
   "text-secondary-foreground data-[highlighted]:bg-element-hover " +
   "data-[highlighted]:text-foreground";
 
@@ -178,9 +178,9 @@ function Header({ user }: { user: AccountUser }) {
           {/* `flex-1 min-w-0` against the content's max width is what makes a
             long address truncate rather than stretch the whole menu. */}
           <div className="flex-1 min-w-0">
-            <div className="truncate text-sm font-medium text-foreground">{primary}</div>
+            <div className="truncate text-xs font-medium text-foreground">{primary}</div>
             {email && email !== primary && (
-              <div className="truncate text-xs text-muted-foreground">{email}</div>
+              <div className="truncate text-2xs text-muted-foreground">{email}</div>
             )}
           </div>
         </DropdownMenu.GroupLabel>

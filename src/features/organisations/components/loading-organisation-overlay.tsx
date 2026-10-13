@@ -26,7 +26,7 @@ export function LoadingOrganisationOverlay() {
       aria-live="polite"
     >
       <AtlasLoader size={22} className="text-secondary-foreground" />
-      <div className="text-base text-muted-foreground">
+      <div className="type-reading text-muted-foreground">
         {name ? `Loading ${name}…` : "Loading organization…"}
       </div>
     </div>

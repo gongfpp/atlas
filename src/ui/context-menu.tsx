@@ -82,7 +82,7 @@ function ContextMenuItem({
       data-variant={variant}
       className={cn(
         "group/context-menu-item relative flex items-center gap-2 rounded px-2 py-1",
-        "text-xs cursor-pointer select-none outline-none",
+        "text-2xs cursor-pointer select-none outline-none",
         "text-secondary-foreground",
         "focus:bg-element-hover focus:text-foreground",
         "data-[inset]:pl-6",
@@ -112,7 +112,7 @@ function ContextMenuSubTrigger({
       data-slot="context-menu-sub-trigger"
       data-inset={inset ? "" : undefined}
       className={cn(
-        "flex items-center gap-2 rounded px-2 py-1 text-xs",
+        "flex items-center gap-2 rounded px-2 py-1 text-2xs",
         "cursor-pointer select-none outline-none",
         "text-secondary-foreground",
         "focus:bg-element-hover focus:text-foreground",
@@ -170,7 +170,7 @@ function ContextMenuCheckboxItem({
       data-slot="context-menu-checkbox-item"
       data-inset={inset ? "" : undefined}
       className={cn(
-        "relative flex items-center gap-2 rounded-md py-1.5 pr-8 pl-7 text-sm",
+        "relative flex items-center gap-2 rounded-md py-1.5 pr-8 pl-7 text-xs",
         "cursor-default select-none outline-none",
         "text-secondary-foreground",
         "focus:bg-element-hover focus:text-foreground",
@@ -201,7 +201,7 @@ function ContextMenuLabel({
     <ContextMenuPrimitive.GroupLabel
       data-slot="context-menu-label"
       data-inset={inset ? "" : undefined}
-      className={cn("eyebrow px-2 py-1 text-muted-foreground", "data-[inset]:pl-7", className)}
+      className={cn("micro px-2 py-1 text-muted-foreground", "data-[inset]:pl-7", className)}
       {...props}
     />
   );
@@ -227,7 +227,7 @@ function ContextMenuShortcut({ className, children, ...props }: React.ComponentP
     <span
       data-slot="context-menu-shortcut"
       className={cn(
-        "ml-auto inline-flex pl-3 text-3xs text-disabled",
+        "ml-auto inline-flex pl-3 text-4xs text-disabled",
         "group-focus/context-menu-item:text-secondary-foreground",
         className,
       )}

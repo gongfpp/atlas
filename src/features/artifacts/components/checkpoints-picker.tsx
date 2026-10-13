@@ -111,14 +111,14 @@ export function CheckpointsPicker({
         <Popover.Positioner className="z-popover" align="end" sideOffset={4}>
           <Popover.Popup className="flex max-h-[380px] w-[320px] origin-(--transform-origin) flex-col overflow-hidden rounded-lg border border-border bg-popover shadow-md data-closed:animate-scale-out data-open:animate-scale-in">
             <div className="flex h-[30px] shrink-0 items-center gap-2 border-b border-border px-3">
-              <span className="text-3xs font-semibold uppercase tracking-[0.12em] text-muted-foreground">
+              <span className="text-4xs font-semibold uppercase tracking-[0.12em] text-muted-foreground">
                 Checkpoints
               </span>
               <div className="flex-1" />
               {rows === null ? (
                 <Loader2 size={10} className="animate-spin text-muted-foreground" />
               ) : (
-                <span className="text-3xs tabular-nums text-disabled">{filtered.length}</span>
+                <span className="text-4xs tabular-nums text-disabled">{filtered.length}</span>
               )}
             </div>
 
@@ -127,16 +127,16 @@ export function CheckpointsPicker({
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Search commits…"
-              className="h-[28px] shrink-0 border-b border-border bg-transparent px-3 text-xs text-foreground outline-none placeholder:text-muted-foreground"
+              className="h-[28px] shrink-0 border-b border-border bg-transparent px-3 text-2xs text-foreground outline-none placeholder:text-muted-foreground"
             />
 
             <div className="hide-scrollbar min-h-0 flex-1 overflow-y-auto">
               {rows === null ? (
-                <p className="px-3 py-4 text-center text-xs text-muted-foreground">
+                <p className="px-3 py-4 text-center text-2xs text-muted-foreground">
                   Reading checkpoints…
                 </p>
               ) : filtered.length === 0 ? (
-                <p className="px-3 py-4 text-center text-xs text-muted-foreground">
+                <p className="px-3 py-4 text-center text-2xs text-muted-foreground">
                   {rows.length === 0
                     ? "No commits have been linked to a session yet."
                     : `Nothing matches “${query.trim()}”.`}
@@ -165,18 +165,18 @@ export function CheckpointsPicker({
                         </span>
                         <span className="min-w-0 flex-1">
                           <span className="flex items-baseline gap-1.5">
-                            <span className="min-w-0 flex-1 truncate text-xs leading-tight text-foreground">
+                            <span className="min-w-0 flex-1 truncate text-2xs leading-tight text-foreground">
                               {row.commitSubject ?? (
                                 <span className="text-muted-foreground">
                                   {row.sessionTitle ?? "Checkpoint"}
                                 </span>
                               )}
                             </span>
-                            <span className="shrink-0 text-3xs tabular-nums text-disabled">
+                            <span className="shrink-0 text-4xs tabular-nums text-disabled">
                               {timeAgo(row.at)}
                             </span>
                           </span>
-                          <span className="mt-0.5 flex items-center gap-1.5 text-3xs leading-tight text-muted-foreground">
+                          <span className="mt-0.5 flex items-center gap-1.5 text-4xs leading-tight text-muted-foreground">
                             <span className="shrink-0 font-mono">{row.commitSha.slice(0, 7)}</span>
                             {shared.has(row.commitSha) && row.sessionTitle ? (
                               <span className="min-w-0 truncate">{row.sessionTitle}</span>
@@ -212,7 +212,7 @@ export function CheckpointsPicker({
             {/* The project is on its own line only when the list spans more than
                 one — inside a filtered board it is the same value on every row. */}
             {rows !== null && filtered.length > 0 && (
-              <p className="shrink-0 border-t border-border px-3 py-1 text-3xs text-disabled">
+              <p className="shrink-0 border-t border-border px-3 py-1 text-4xs text-disabled">
                 {new Set(filtered.map((r) => r.projectPath)).size > 1
                   ? `Across ${new Set(filtered.map((r) => r.projectPath)).size} projects`
                   : filtered[0].projectName}

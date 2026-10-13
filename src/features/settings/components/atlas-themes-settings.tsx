@@ -87,7 +87,7 @@ function ModeSwitch({
             tabIndex={active ? 0 : -1}
             onClick={() => onChange(mode)}
             className={cn(
-              "relative z-10 flex h-control-xs cursor-pointer items-center justify-center gap-1 rounded-full px-2.5 text-2xs font-medium outline-none transition-colors focus-visible:ring-1 focus-visible:ring-ring",
+              "relative z-10 flex h-control-xs cursor-pointer items-center justify-center gap-1 rounded-full px-2.5 text-3xs font-medium outline-none transition-colors focus-visible:ring-1 focus-visible:ring-ring",
               active ? "text-foreground" : "text-muted-foreground hover:text-secondary-foreground",
             )}
           >
@@ -195,7 +195,7 @@ export function AtlasThemesSettings() {
           onChange={(event) => setQuery(event.target.value)}
           placeholder="Search themes…"
           spellCheck={false}
-          className="min-w-20 flex-1 bg-transparent text-xs text-foreground outline-none placeholder:text-muted-foreground"
+          className="min-w-20 flex-1 bg-transparent text-2xs text-foreground outline-none placeholder:text-muted-foreground"
         />
         {query && (
           <Hint label="Clear search">
@@ -230,7 +230,7 @@ export function AtlasThemesSettings() {
           <div className="mb-2 rounded-lg border border-warning/40 bg-warning-muted p-2.5">
             <div className="flex items-center gap-1.5">
               <AlertTriangle size={11} className="shrink-0 text-warning" />
-              <span className="text-xs font-medium text-foreground">
+              <span className="text-2xs font-medium text-foreground">
                 {skipped.length === 1
                   ? "1 theme file was skipped"
                   : `${skipped.length} theme files were skipped`}
@@ -238,7 +238,7 @@ export function AtlasThemesSettings() {
             </div>
             <ul className="mt-1.5 space-y-1">
               {skipped.map((warning) => (
-                <li key={warning.key} className="text-2xs leading-snug text-muted-foreground">
+                <li key={warning.key} className="text-3xs leading-snug text-muted-foreground">
                   <span className="font-medium text-secondary-foreground">{warning.key}</span> —{" "}
                   {warning.message}
                 </li>
@@ -261,10 +261,10 @@ export function AtlasThemesSettings() {
           ))}
         </div>
 
-        {loading && <div className="py-6 text-center text-xs text-muted-foreground">Loading…</div>}
-        {error && <div className="py-6 text-center text-xs text-error">{error}</div>}
+        {loading && <div className="py-6 text-center text-2xs text-muted-foreground">Loading…</div>}
+        {error && <div className="py-6 text-center text-2xs text-error">{error}</div>}
         {!loading && !error && filtered.length === 0 && (
-          <div className="py-6 text-center text-xs text-muted-foreground">
+          <div className="py-6 text-center text-2xs text-muted-foreground">
             No themes match “{query}”.
           </div>
         )}
@@ -329,13 +329,13 @@ const ThemeCard = memo(function ThemeCard({
       <div className="flex w-full items-start gap-1.5 border-t border-hairline p-2.5">
         <div className="min-w-0 flex-1">
           <div className="flex items-center gap-1.5">
-            <span className="truncate text-sm font-medium text-foreground">{summary.name}</span>
+            <span className="truncate text-xs font-medium text-foreground">{summary.name}</span>
             {selected && <span className="h-2 w-2 shrink-0 rounded-full bg-primary" />}
           </div>
-          <p className="mt-1 flex items-center gap-1.5 text-xs text-muted-foreground">
+          <p className="mt-1 flex items-center gap-1.5 text-2xs text-muted-foreground">
             <span className="truncate">{summary.author}</span>
             {!summary.builtIn && (
-              <span className="shrink-0 text-3xs uppercase tracking-wide text-disabled">Local</span>
+              <span className="shrink-0 text-4xs uppercase tracking-wide text-disabled">Local</span>
             )}
             {/* A theme that loaded but carries keys Atlas does not know. Those
                 keys are preserved, not applied, so the author sees the name
@@ -442,7 +442,7 @@ function AppearanceSwatch({
         }}
         className={cn(
           "flex h-4 cursor-pointer items-center gap-0.5 rounded-sm border px-1",
-          "text-3xs font-medium uppercase tracking-wide transition-opacity",
+          "text-4xs font-medium uppercase tracking-wide transition-opacity",
           active ? "opacity-100" : "opacity-60 hover:opacity-100",
         )}
       >

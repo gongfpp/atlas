@@ -25,7 +25,7 @@ export function HistoryView() {
   return (
     <div className="h-full overflow-y-auto hide-scrollbar">
       {log.length === 0 ? (
-        <div className="px-3 py-8 text-center text-xs text-muted-foreground">No history</div>
+        <div className="px-3 py-8 text-center text-2xs text-muted-foreground">No history</div>
       ) : (
         <HintGroup>
           {log.map((c, i) => (
@@ -41,10 +41,10 @@ export function HistoryView() {
                   onClick={() => repoPath && openCommit(repoPath, c.hash, c.message)}
                   className="w-full text-left flex flex-col gap-1 px-3 py-1.5 hover:bg-element-hover"
                 >
-                  <span className="text-xs text-secondary-foreground group-hover:text-foreground truncate pr-12">
+                  <span className="text-2xs text-secondary-foreground group-hover:text-foreground truncate pr-12">
                     {c.message}
                   </span>
-                  <span className="flex min-w-0 items-center gap-1.5 text-2xs text-muted-foreground">
+                  <span className="flex min-w-0 items-center gap-1.5 text-3xs text-muted-foreground">
                     <CommitAvatar email={c.email} size={14} />
                     <span className="truncate">{c.author}</span>
                     <span className="shrink-0">·</span>
@@ -60,7 +60,7 @@ export function HistoryView() {
                     e.stopPropagation();
                     void run(() => actions.undoCommit());
                   }}
-                  className="absolute right-2 top-1.5 opacity-0 group-hover:opacity-100 px-1.5 h-[16px] rounded border border-border text-3xs text-secondary-foreground hover:text-foreground hover:bg-element-hover"
+                  className="absolute right-2 top-1.5 opacity-0 group-hover:opacity-100 px-1.5 h-[16px] rounded border border-border text-4xs text-secondary-foreground hover:text-foreground hover:bg-element-hover"
                   title="Undo this commit — changes return to the staged area (blocked once pushed)"
                 >
                   Undo

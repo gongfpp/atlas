@@ -67,11 +67,11 @@ function ExportItem({ label, ext, onClick }: { label: string; ext: string; onCli
     <button
       type="button"
       onClick={onClick}
-      className="flex w-full cursor-pointer items-center gap-2 rounded-md px-2 py-1.5 text-left text-sm text-secondary-foreground transition-colors hover:bg-element-hover hover:text-foreground"
+      className="flex w-full cursor-pointer items-center gap-2 rounded-md px-2 py-1.5 text-left text-xs text-secondary-foreground transition-colors hover:bg-element-hover hover:text-foreground"
     >
       {label}
       <span className="flex-1" />
-      <span className="font-mono text-2xs text-disabled">{ext}</span>
+      <span className="font-mono text-3xs text-disabled">{ext}</span>
     </button>
   );
 }

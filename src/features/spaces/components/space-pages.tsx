@@ -174,7 +174,7 @@ export function SpacePages({
     >
       {/* Quiet header — no divider, the local panel's recipe. */}
       <div className="flex h-8 shrink-0 items-center gap-1 px-2 pl-3">
-        <span className="flex-1 text-2xs font-semibold uppercase leading-none tracking-wider text-muted-foreground">
+        <span className="flex-1 text-3xs font-semibold uppercase leading-none tracking-wider text-muted-foreground">
           Pages
         </span>
         <HintGroup>
@@ -219,7 +219,7 @@ export function SpacePages({
               )}
               <div
                 className={cn(
-                  "group/row flex cursor-pointer items-center gap-2 rounded py-2 pr-2 text-xs",
+                  "group/row flex cursor-pointer items-center gap-2 rounded py-2 pr-2 text-2xs",
                   active
                     ? "bg-element-selected text-foreground"
                     : "text-secondary-foreground hover:bg-element-hover",
@@ -271,12 +271,12 @@ export function SpacePages({
                         if (e.key === "Enter") (e.currentTarget as HTMLInputElement).blur();
                         else if (e.key === "Escape") setRenamingId(null);
                       }}
-                      className="w-full min-w-0 rounded bg-panel-input px-1 text-xs text-foreground outline-none"
+                      className="w-full min-w-0 rounded bg-panel-input px-1 text-2xs text-foreground outline-none"
                     />
                   ) : (
                     <>
                       <span
-                        className="block truncate text-sm font-medium leading-[1.35]"
+                        className="block truncate text-xs font-medium leading-[1.35]"
                         onDoubleClick={(e) => {
                           if (!editable) return;
                           e.stopPropagation();
@@ -285,7 +285,7 @@ export function SpacePages({
                       >
                         {page.name || "Untitled"}
                       </span>
-                      <span className="block truncate text-2xs leading-[1.35] text-muted-foreground">
+                      <span className="block truncate text-3xs leading-[1.35] text-muted-foreground">
                         Updated {timeAgo(new Date(page.updated_at).toISOString(), { suffix: true })}
                       </span>
                     </>
@@ -299,7 +299,7 @@ export function SpacePages({
                       render={
                         <span className="flex min-w-0 shrink-0 items-center gap-1">
                           <CommsAvatar member={author} size={16} />
-                          <span className="max-w-[64px] truncate text-2xs text-muted-foreground">
+                          <span className="max-w-[64px] truncate text-3xs text-muted-foreground">
                             {firstName(author.name)}
                           </span>
                         </span>
@@ -358,7 +358,7 @@ export function SpacePages({
           );
         })}
         {rows.length === 0 && (
-          <div className="px-2 py-3 text-2xs text-muted-foreground">No pages yet.</div>
+          <div className="px-2 py-3 text-3xs text-muted-foreground">No pages yet.</div>
         )}
       </div>
     </div>

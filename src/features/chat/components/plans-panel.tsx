@@ -109,8 +109,8 @@ export function PlansPanel({ onClose }: PlansPanelProps) {
         <div className="flex items-center justify-between px-3 h-[32px] border-b border-border shrink-0">
           <div className="flex items-center gap-1.5">
             <ClipboardList size={11} className="text-muted-foreground" />
-            <span className="text-xs font-medium text-secondary-foreground">Plans</span>
-            <span className="text-2xs text-muted-foreground">· {plans.length}</span>
+            <span className="text-2xs font-medium text-secondary-foreground">Plans</span>
+            <span className="text-3xs text-muted-foreground">· {plans.length}</span>
           </div>
           <Hint label="Hide plans">
             <button
@@ -125,7 +125,7 @@ export function PlansPanel({ onClose }: PlansPanelProps) {
         {/* List */}
         <div className="flex-1 overflow-y-auto hide-scrollbar">
           {plans.length === 0 ? (
-            <div className="px-3 py-3 text-xs text-muted-foreground leading-relaxed">
+            <div className="px-3 py-3 text-2xs text-muted-foreground leading-relaxed">
               No plans yet. When Claude Code proposes a plan, it’s saved here with the message that
               triggered it.
             </div>
@@ -151,7 +151,7 @@ export function PlansPanel({ onClose }: PlansPanelProps) {
                     )}
                     <span
                       className={cn(
-                        "text-sm leading-snug text-secondary-foreground group-hover:text-foreground transition-colors",
+                        "text-xs leading-snug text-secondary-foreground group-hover:text-foreground transition-colors",
                         !isOpen && "line-clamp-2",
                       )}
                     >
@@ -160,7 +160,7 @@ export function PlansPanel({ onClose }: PlansPanelProps) {
                   </button>
 
                   {/* Meta: human timestamp + relative age + session */}
-                  <div className="flex items-center gap-2 pl-[18px] mt-1 text-2xs text-muted-foreground">
+                  <div className="flex items-center gap-2 pl-[18px] mt-1 text-3xs text-muted-foreground">
                     <span title={p.timestamp}>{formatPlanTimestamp(p.timestamp)}</span>
                     <span>·</span>
                     <span>{planTimeAgo(p.timestamp)}</span>
@@ -175,7 +175,7 @@ export function PlansPanel({ onClose }: PlansPanelProps) {
                   {/* Expanded plan markdown */}
                   {isOpen && (
                     <div className="pl-[18px] mt-2 rounded-md border border-hairline bg-background px-3 py-2 max-h-[420px] overflow-auto">
-                      <Markdown className="text-sm">{p.plan}</Markdown>
+                      <Markdown className="text-xs">{p.plan}</Markdown>
                     </div>
                   )}
                 </div>

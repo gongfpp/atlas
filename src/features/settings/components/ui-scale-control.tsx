@@ -17,7 +17,7 @@ import {
 
 /** The preview glyph per preset, on the type scale rather than an inline
  *  `fontSize`, so the column shows real steps the interface moves through. */
-const PREVIEW_CLASS = ["text-xs", "text-sm", "text-md", "text-lg"] as const;
+const PREVIEW_CLASS = ["text-2xs", "text-xs", "text-sm", "text-md"] as const;
 
 /**
  * The interface-scale popover — the rail footer's quick way to the same
@@ -68,7 +68,7 @@ export function UiScaleControl() {
               onClick={() => setScale(uiScale - SCALE_STEP)}
             />
           </Hint>
-          <span className="flex-1 text-center text-xs font-medium tabular-nums text-foreground">
+          <span className="flex-1 text-center text-2xs font-medium tabular-nums text-foreground">
             {pct}%
           </span>
           <Hint label="Larger" shortcut={zoomInKeys}>
@@ -93,7 +93,7 @@ export function UiScaleControl() {
                 type="button"
                 onClick={() => setScale(preset.value)}
                 className={cn(
-                  "flex h-7 items-center gap-2 rounded-md px-2 text-left text-xs cursor-pointer",
+                  "flex h-7 items-center gap-2 rounded-md px-2 text-left text-2xs cursor-pointer",
                   "transition-colors duration-fast ease-out-strong",
                   active
                     ? "bg-accent text-foreground"
@@ -106,7 +106,7 @@ export function UiScaleControl() {
                   A
                 </span>
                 <span className="flex-1">{preset.label}</span>
-                <span className="text-2xs tabular-nums text-muted-foreground">
+                <span className="text-3xs tabular-nums text-muted-foreground">
                   {Math.round(preset.value * 100)}%
                 </span>
               </button>
