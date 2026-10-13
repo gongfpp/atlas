@@ -173,13 +173,12 @@ export function TreeRow({
         isSelected
           ? "bg-element-selected text-foreground"
           : isActive
-            ? "bg-[var(--card)] text-foreground"
+            ? "bg-card text-foreground"
             : "text-secondary-foreground hover:bg-element-hover hover:text-foreground",
         // Drop-target highlight — kept deliberately subtle to match
         // Atlas's monochromatic surfaces: a muted accent fill with a
         // hairline inset accent ring, not a heavy outline.
-        isDropTarget &&
-          "bg-[var(--atlas-primary-muted)] ring-1 ring-inset ring-primary/40 text-foreground",
+        isDropTarget && "bg-primary-muted ring-1 ring-inset ring-primary/40 text-foreground",
         // Source row dimmed while drag is in flight.
         isDragging && "opacity-40",
         isCut && "opacity-50",

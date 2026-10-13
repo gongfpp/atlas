@@ -18,7 +18,7 @@ import {
   X,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { Kbd } from "@/ui/kbd";
+import { KbdLegend } from "@/ui/kbd";
 import { HintGroup, HintItem } from "@/ui/hint-group";
 import { Hint } from "@/ui/tooltip";
 import { open as openFileDialog } from "@tauri-apps/plugin-dialog";
@@ -340,9 +340,7 @@ export function CommsComposer({
                   onClick={() => insertMention(m)}
                   className={cn(
                     "flex h-control-md w-full items-center gap-1.5 px-2 text-left transition-colors cursor-pointer",
-                    i === highlighted
-                      ? "bg-[var(--atlas-element-selected)]"
-                      : "hover:bg-[var(--atlas-element-hover)]",
+                    i === highlighted ? "bg-element-selected" : "hover:bg-element-hover",
                   )}
                 >
                   <CommsAvatar member={m} size={16} />
@@ -351,16 +349,17 @@ export function CommsComposer({
               ))}
             </div>
             <div className="flex h-control-md shrink-0 items-center justify-between border-t border-border px-2">
-              <span className="flex items-center gap-1.5 text-3xs text-muted-foreground">
-                <Kbd>↑↓</Kbd>
-                <span>navigate</span>
-                <Kbd>↵</Kbd>
-                <span>select</span>
-              </span>
-              <span className="flex items-center gap-1.5 text-3xs text-muted-foreground">
-                <Kbd>esc</Kbd>
-                <span>close</span>
-              </span>
+              <KbdLegend
+                className="text-3xs text-muted-foreground"
+                items={[
+                  { keys: ["↑", "↓"], label: "navigate" },
+                  { keys: ["↵"], label: "select" },
+                ]}
+              />
+              <KbdLegend
+                className="text-3xs text-muted-foreground"
+                items={[{ keys: ["esc"], label: "close" }]}
+              />
             </div>
           </div>
         )}
@@ -374,7 +373,7 @@ export function CommsComposer({
           `atlas-pill-in` is the same 200ms rise the grant bar animates in with,
           and it is already disabled under prefers-reduced-motion. */}
       {(replyTo || editing) && (
-        <div className="atlas-pill-in relative z-0 mx-2 -mb-4 flex items-center gap-1.5 rounded-t-2xl bg-[var(--popover)] px-3 pb-5 pt-1.5">
+        <div className="atlas-pill-in relative z-0 mx-2 -mb-4 flex items-center gap-1.5 rounded-t-2xl bg-popover px-3 pb-5 pt-1.5">
           {editing ? (
             <Pencil size={11} className="shrink-0 text-muted-foreground" />
           ) : (
@@ -415,16 +414,16 @@ export function CommsComposer({
           className={cn(
             // `z-10` so the shell paints over — and visually tucks — the reply
             // strip's lower half.
-            "relative z-10 rounded-2xl border bg-[var(--card)] shadow-sm transition-colors",
+            "relative z-10 rounded-2xl border bg-card transition-colors",
             isDropTarget
-              ? "border-[var(--primary)] ring-2 ring-[var(--primary)]/40"
+              ? "border-primary ring-2 ring-primary/40"
               : overLimit
                 ? "border-error"
                 : "border-border",
           )}
         >
           {isDropTarget && (
-            <div className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center rounded-2xl bg-[var(--primary)]/8 backdrop-blur-[1px]">
+            <div className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center rounded-2xl bg-primary/8 backdrop-blur-[1px]">
               <span className="rounded-full bg-card px-3 py-1 text-xs font-medium text-secondary-foreground shadow">
                 Drop files to attach
               </span>
@@ -442,7 +441,7 @@ export function CommsComposer({
           {/* Inner input surface. The disabled dimming, when it exists, belongs
             HERE and not on the shell — on the shell it fades the toolbar and
             every popover anchored to it. */}
-          <div className="relative m-1 rounded-xl border border-border bg-background transition-[border-color,box-shadow] duration-150 focus-within:border-[color-mix(in_srgb,var(--atlas-border-strong)_50%,var(--border))] focus-within:ring-1 focus-within:ring-[var(--primary)]/10">
+          <div className="relative m-1 rounded-xl border border-border bg-background transition-[border-color,box-shadow] duration-150 focus-within:border-[color-mix(in_srgb,var(--atlas-border-strong)_50%,var(--border))] focus-within:ring-1 focus-within:ring-primary/10">
             {/* EVERY vertical value here is literal px, and that is the whole
               point. Atlas's UI-scale shrinks the root font-size, so a rem-based
               `py-2` renders ~6px rather than 8px while `min-h-[34px]` stays a
@@ -550,12 +549,14 @@ export function CommsComposer({
                 </span>
               )}
               <FormatButton
-                title="Bold  ⌘B"
+                title="Bold"
+                shortcut="⌘B"
                 icon={Bold}
                 onApply={() => applyEdit(wrap(selection(), "**"))}
               />
               <FormatButton
-                title="Italic  ⌘I"
+                title="Italic"
+                shortcut="⌘I"
                 icon={Italic}
                 onApply={() => applyEdit(wrap(selection(), "*"))}
               />
@@ -570,7 +571,8 @@ export function CommsComposer({
                 onApply={() => applyEdit(wrap(selection(), "`"))}
               />
               <FormatButton
-                title="Link  ⌘K"
+                title="Link"
+                shortcut="⌘K"
                 icon={Link2}
                 onApply={() => applyEdit(insertLink(selection()))}
               />
@@ -611,15 +613,17 @@ function Divider() {
  */
 function FormatButton({
   title,
+  shortcut,
   icon: Icon,
   onApply,
 }: {
   title: string;
+  shortcut?: string;
   icon: typeof Bold;
   onApply: () => void;
 }) {
   return (
-    <HintItem label={title}>
+    <HintItem label={title} shortcut={shortcut}>
       <button
         type="button"
         onMouseDown={(e) => e.preventDefault()}
@@ -657,7 +661,7 @@ function AttachmentChip({
       {attachment.state === "uploading" && (
         <span
           aria-hidden
-          className="absolute inset-y-0 left-0 bg-[var(--atlas-status-success-foreground)]/20 transition-[width] duration-200"
+          className="absolute inset-y-0 left-0 bg-success/20 transition-[width] duration-200"
           style={{ width: `${pct}%` }}
         />
       )}

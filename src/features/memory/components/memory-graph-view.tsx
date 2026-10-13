@@ -52,7 +52,7 @@ export function MemoryGraphView() {
   if (phase === "checking") {
     return (
       <Centered>
-        <Loader2 size={18} className="animate-spin text-[var(--muted-foreground)]" />
+        <Loader2 size={18} className="animate-spin text-muted-foreground" />
       </Centered>
     );
   }
@@ -61,14 +61,12 @@ export function MemoryGraphView() {
     return (
       <Centered>
         <div className="text-center max-w-[360px] px-6 space-y-3">
-          <div className="w-12 h-12 mx-auto rounded-xl bg-[var(--card)] border border-[var(--border)] flex items-center justify-center">
-            <Sparkles size={22} className="text-[var(--secondary-foreground)]" />
+          <div className="w-12 h-12 mx-auto rounded-xl bg-card border border-border flex items-center justify-center">
+            <Sparkles size={22} className="text-secondary-foreground" />
           </div>
           <div className="space-y-1">
-            <h3 className="text-base font-medium text-[var(--foreground)]">
-              Enable semantic memory
-            </h3>
-            <p className="text-xs leading-relaxed text-[var(--muted-foreground)]">
+            <h3 className="text-base font-medium text-foreground">Enable semantic memory</h3>
+            <p className="text-xs leading-relaxed text-muted-foreground">
               Download a small on-device embedding model to index your Claude & Codex memory, map
               how it relates, and query it in natural language. Runs entirely locally — nothing
               leaves your machine.
@@ -76,12 +74,12 @@ export function MemoryGraphView() {
           </div>
           <button
             onClick={() => void download()}
-            className="inline-flex items-center gap-1.5 h-8 px-3.5 rounded-md bg-[var(--primary)] text-[var(--background)] text-xs font-medium hover:opacity-90 transition-opacity cursor-pointer"
+            className="inline-flex items-center gap-1.5 h-8 px-3.5 rounded-md bg-primary text-background text-xs font-medium hover:opacity-90 transition-opacity cursor-pointer"
           >
             <Download size={13} />
             Download model
           </button>
-          <p className="text-2xs text-[var(--atlas-text-disabled)] font-mono">{MODEL_LABEL}</p>
+          <p className="text-2xs text-disabled font-mono">{MODEL_LABEL}</p>
         </div>
       </Centered>
     );
@@ -98,16 +96,16 @@ export function MemoryGraphView() {
     return (
       <Centered>
         <div className="text-center max-w-[360px] px-6 w-full space-y-3">
-          <Loader2 size={20} className="animate-spin text-[var(--secondary-foreground)] mx-auto" />
+          <Loader2 size={20} className="animate-spin text-secondary-foreground mx-auto" />
           <div className="space-y-1.5">
-            <p className="text-sm text-[var(--foreground)]">Downloading model…</p>
-            <div className="h-1.5 rounded-full bg-[var(--card)] overflow-hidden">
+            <p className="text-sm text-foreground">Downloading model…</p>
+            <div className="h-1.5 rounded-full bg-card overflow-hidden">
               <div
-                className="h-full bg-[var(--primary)] transition-[width] duration-200"
+                className="h-full bg-primary transition-[width] duration-200"
                 style={{ width: `${pct}%` }}
               />
             </div>
-            <p className="text-2xs text-[var(--muted-foreground)] font-mono">
+            <p className="text-2xs text-muted-foreground font-mono">
               {progress
                 ? `${progress.file}  ·  ${fmtMB(progress.received)} / ${fmtMB(progress.total)}  ·  ${pct}%`
                 : "starting…"}
@@ -122,19 +120,14 @@ export function MemoryGraphView() {
     return (
       <Centered>
         <div className="text-center max-w-[340px] px-6 space-y-3">
-          <AlertTriangle
-            size={20}
-            className="text-[var(--atlas-status-error-foreground)] mx-auto"
-          />
-          <p className="text-sm text-[var(--secondary-foreground)]">
+          <AlertTriangle size={20} className="text-error mx-auto" />
+          <p className="text-sm text-secondary-foreground">
             {phase === "download-failed" ? "Model download failed" : "Something went wrong"}
           </p>
-          {error && (
-            <p className="text-2xs text-[var(--muted-foreground)] font-mono break-words">{error}</p>
-          )}
+          {error && <p className="text-2xs text-muted-foreground font-mono break-words">{error}</p>}
           <button
             onClick={() => (phase === "download-failed" ? void download() : void init(projectPath))}
-            className="inline-flex items-center gap-1.5 h-7 px-3 rounded-md border border-[var(--border)] text-xs text-[var(--secondary-foreground)] hover:bg-[var(--atlas-element-hover)] hover:text-[var(--foreground)] transition-colors cursor-pointer"
+            className="inline-flex items-center gap-1.5 h-7 px-3 rounded-md border border-border text-xs text-secondary-foreground hover:bg-element-hover hover:text-foreground transition-colors cursor-pointer"
           >
             <RotateCw size={12} />
             Retry
@@ -148,8 +141,8 @@ export function MemoryGraphView() {
     return (
       <Centered>
         <div className="text-center space-y-2">
-          <Loader2 size={18} className="animate-spin text-[var(--secondary-foreground)] mx-auto" />
-          <p className="text-xs text-[var(--muted-foreground)]">Indexing memory…</p>
+          <Loader2 size={18} className="animate-spin text-secondary-foreground mx-auto" />
+          <p className="text-xs text-muted-foreground">Indexing memory…</p>
         </div>
       </Centered>
     );
@@ -159,7 +152,7 @@ export function MemoryGraphView() {
   if (!graph || graph.nodes.length === 0) {
     return (
       <Centered>
-        <p className="text-sm text-[var(--muted-foreground)]">No memory to graph yet.</p>
+        <p className="text-sm text-muted-foreground">No memory to graph yet.</p>
       </Centered>
     );
   }
@@ -287,20 +280,20 @@ function GraphReady({
   }, [playing, hasTime, minTs, maxTs]);
 
   return (
-    <div className="h-full flex flex-col bg-[var(--background)]">
+    <div className="h-full flex flex-col bg-background">
       {/* Query bar */}
-      <div className="flex items-center gap-2 px-3 h-[32px] shrink-0 border-b border-[var(--border)]">
+      <div className="flex items-center gap-2 px-3 h-[32px] shrink-0 border-b border-border">
         {/* Tree / Graph toggle — top-left. Tree (the decision tree) is the
             primary view, so it sits first. */}
-        <div className="flex items-center gap-0.5 h-6 rounded-md border border-[var(--border)] bg-[var(--card)] p-0.5 shrink-0">
+        <div className="flex items-center gap-0.5 h-6 rounded-md border border-border bg-card p-0.5 shrink-0">
           <button
             onClick={() => setView("tree")}
             title="Decision tree"
             className={cn(
               "flex items-center gap-1 px-1.5 h-5 rounded-sm text-2xs font-medium transition-colors cursor-pointer",
               viewMode === "tree"
-                ? "bg-[var(--atlas-element-selected)] text-[var(--foreground)]"
-                : "text-[var(--muted-foreground)] hover:text-[var(--foreground)]",
+                ? "bg-element-selected text-foreground"
+                : "text-muted-foreground hover:text-foreground",
             )}
           >
             <ListTree size={11} /> Tree
@@ -311,15 +304,15 @@ function GraphReady({
             className={cn(
               "flex items-center gap-1 px-1.5 h-5 rounded-sm text-2xs font-medium transition-colors cursor-pointer",
               viewMode === "graph"
-                ? "bg-[var(--atlas-element-selected)] text-[var(--foreground)]"
-                : "text-[var(--muted-foreground)] hover:text-[var(--foreground)]",
+                ? "bg-element-selected text-foreground"
+                : "text-muted-foreground hover:text-foreground",
             )}
           >
             <Network size={11} /> Graph
           </button>
         </div>
-        <div className="flex items-center gap-1.5 h-6 flex-1 max-w-[440px] rounded-md border border-[var(--border)] bg-[var(--card)] px-2 focus-within:border-[var(--atlas-border-strong)]">
-          <Search size={12} className="text-[var(--muted-foreground)] shrink-0" />
+        <div className="flex items-center gap-1.5 h-6 flex-1 max-w-[440px] rounded-md border border-border bg-card px-2 focus-within:border-border-strong">
+          <Search size={12} className="text-muted-foreground shrink-0" />
           <input
             value={query}
             onChange={(e) => onQueryChange(e.target.value)}
@@ -329,16 +322,14 @@ function GraphReady({
             }}
             placeholder="Ask your memory… (Enter to search)"
             spellCheck={false}
-            className="flex-1 min-w-0 bg-transparent outline-none text-xs text-[var(--foreground)] placeholder:text-[var(--muted-foreground)]"
+            className="flex-1 min-w-0 bg-transparent outline-none text-xs text-foreground placeholder:text-muted-foreground"
           />
-          {querying && (
-            <Loader2 size={11} className="animate-spin text-[var(--muted-foreground)]" />
-          )}
+          {querying && <Loader2 size={11} className="animate-spin text-muted-foreground" />}
           {query && !querying && (
             <Hint label="Clear search">
               <button
                 onClick={onClearQuery}
-                className="text-[var(--muted-foreground)] hover:text-[var(--foreground)]"
+                className="text-muted-foreground hover:text-foreground"
               >
                 <X size={12} />
               </button>
@@ -346,13 +337,13 @@ function GraphReady({
           )}
         </div>
         <div className="flex-1" />
-        <span className="text-2xs text-[var(--muted-foreground)] tabular-nums">
+        <span className="text-2xs text-muted-foreground tabular-nums">
           {docCount} memories · {graph.edges.length} links
         </span>
         <Hint label="Re-index memory">
           <button
             onClick={onReindex}
-            className="flex items-center justify-center w-6 h-6 rounded text-[var(--muted-foreground)] hover:text-[var(--foreground)] hover:bg-[var(--atlas-element-hover)] transition-colors cursor-pointer"
+            className="flex items-center justify-center w-6 h-6 rounded text-muted-foreground hover:text-foreground hover:bg-element-hover transition-colors cursor-pointer"
           >
             <RotateCw size={12} />
           </button>
@@ -386,16 +377,16 @@ function GraphReady({
 
           {/* Time scrubber — watch memory accrue; drag to a moment in time. */}
           {hasTime && (
-            <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex items-center gap-2 rounded-full border border-[var(--border)] bg-[var(--card)]/90 backdrop-blur-sm px-2.5 h-9 shadow-md">
+            <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex items-center gap-2 rounded-full border border-border bg-card/90 backdrop-blur-sm px-2.5 h-9 shadow-md">
               <Hint label={playing ? "Pause" : "Play timeline"} side="top">
                 <button
                   onClick={() => setPlaying((p) => !p)}
-                  className="flex items-center justify-center w-6 h-6 rounded-full text-[var(--secondary-foreground)] hover:text-[var(--foreground)] hover:bg-[var(--atlas-element-hover)] transition-colors cursor-pointer"
+                  className="flex items-center justify-center w-6 h-6 rounded-full text-secondary-foreground hover:text-foreground hover:bg-element-hover transition-colors cursor-pointer"
                 >
                   {playing ? <Pause size={13} /> : <Play size={13} />}
                 </button>
               </Hint>
-              <Clock size={11} className="text-[var(--muted-foreground)]" />
+              <Clock size={11} className="text-muted-foreground" />
               <input
                 type="range"
                 min={minTs}
@@ -407,9 +398,9 @@ function GraphReady({
                   const v = Number(e.target.value);
                   setCutoff(v >= maxTs ? null : v);
                 }}
-                className="w-[220px] h-1 accent-[var(--primary)] cursor-pointer"
+                className="w-[220px] h-1 accent-primary cursor-pointer"
               />
-              <span className="text-2xs tabular-nums text-[var(--muted-foreground)] w-[78px] text-right">
+              <span className="text-2xs tabular-nums text-muted-foreground w-[78px] text-right">
                 {cutoff ? fmtDate(cutoff) : "All time"}
               </span>
             </div>
@@ -417,7 +408,7 @@ function GraphReady({
 
           {/* Impact-mode legend (graph only, while a node is selected). */}
           {selected && viewMode === "graph" && (
-            <div className="absolute right-3 top-[26px] flex items-center gap-3 rounded-md border border-[var(--border)] bg-[var(--card)]/90 backdrop-blur-sm px-2.5 h-7 text-2xs text-[var(--muted-foreground)]">
+            <div className="absolute right-3 top-[26px] flex items-center gap-3 rounded-md border border-border bg-card/90 backdrop-blur-sm px-2.5 h-7 text-2xs text-muted-foreground">
               <span className="flex items-center gap-1">
                 <span className="w-2 h-2 rounded-full bg-foreground" /> impacted
               </span>
@@ -429,17 +420,17 @@ function GraphReady({
           {/* Selected node detail card. Read-only: the per-agent memory views it
               used to open were removed with the agent dropdown. */}
           {selected && (
-            <div className="absolute left-[26px] bottom-3 max-w-[340px] text-left rounded-lg border border-[var(--border)] bg-[var(--card)]/90 backdrop-blur-sm shadow-md p-3">
+            <div className="absolute left-[26px] bottom-3 max-w-[340px] text-left rounded-lg border border-border bg-card/90 backdrop-blur-sm shadow-md p-3">
               <div className="flex items-center gap-1.5 mb-1">
                 <SourceDot source={selected.source} />
-                <span className="text-xs font-medium text-[var(--foreground)] truncate">
+                <span className="text-xs font-medium text-foreground truncate">
                   {selected.summary || selected.title}
                 </span>
               </div>
-              <p className="text-2xs text-[var(--muted-foreground)] line-clamp-4 leading-relaxed">
+              <p className="text-2xs text-muted-foreground line-clamp-4 leading-relaxed">
                 {selected.snippet || "—"}
               </p>
-              <p className="text-3xs text-[var(--atlas-text-disabled)] mt-1.5 uppercase tracking-wide">
+              <p className="text-3xs text-disabled mt-1.5 uppercase tracking-wide">
                 {selected.source} · {selected.kind}
                 {selected.timestampMs > 0 && ` · ${fmtDate(selected.timestampMs)}`}
               </p>
@@ -448,8 +439,8 @@ function GraphReady({
         </div>
 
         {results.length > 0 && (
-          <aside className="w-[280px] shrink-0 border-l border-[var(--border)] overflow-y-auto hide-scrollbar bg-[var(--sidebar)]">
-            <div className="px-3 h-[28px] flex items-center text-3xs font-semibold uppercase tracking-wider text-[var(--muted-foreground)] border-b border-[var(--atlas-border-subtle)] sticky top-0 bg-[var(--sidebar)]">
+          <aside className="w-[280px] shrink-0 border-l border-border overflow-y-auto hide-scrollbar bg-sidebar">
+            <div className="px-3 h-[28px] flex items-center text-3xs font-semibold uppercase tracking-wider text-muted-foreground border-b border-hairline sticky top-0 bg-sidebar">
               Results
             </div>
             {results.map((hit) => {
@@ -461,22 +452,18 @@ function GraphReady({
                   key={hit.id}
                   onClick={() => onSelect(active ? null : hit.id)}
                   className={cn(
-                    "w-full text-left px-3 py-2 border-b border-[var(--atlas-border-subtle)] transition-colors flex flex-col gap-0.5",
-                    active
-                      ? "bg-[var(--atlas-element-selected)]"
-                      : "hover:bg-[var(--atlas-element-hover)]",
+                    "w-full text-left px-3 py-2 border-b border-hairline transition-colors flex flex-col gap-0.5",
+                    active ? "bg-element-selected" : "hover:bg-element-hover",
                   )}
                 >
                   <div className="flex items-center gap-1.5 min-w-0">
                     <SourceDot source={node.source} />
-                    <span className="text-xs text-[var(--foreground)] truncate flex-1">
-                      {node.title}
-                    </span>
-                    <span className="text-3xs text-[var(--muted-foreground)] tabular-nums">
+                    <span className="text-xs text-foreground truncate flex-1">{node.title}</span>
+                    <span className="text-3xs text-muted-foreground tabular-nums">
                       {Math.round(hit.score * 100)}%
                     </span>
                   </div>
-                  <span className="text-2xs text-[var(--muted-foreground)] line-clamp-2 leading-snug">
+                  <span className="text-2xs text-muted-foreground line-clamp-2 leading-snug">
                     {node.snippet}
                   </span>
                 </button>
@@ -498,7 +485,7 @@ function SourceDot({ source }: { source: string }) {
 
 function Centered({ children }: { children: React.ReactNode }) {
   return (
-    <div className="h-full flex items-center justify-center text-[var(--muted-foreground)] text-sm">
+    <div className="h-full flex items-center justify-center text-muted-foreground text-sm">
       {children}
     </div>
   );

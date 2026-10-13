@@ -40,7 +40,7 @@ export function StashesView() {
           stashes.map((s) => (
             <div
               key={s.index}
-              className="group flex flex-col gap-1 px-3 py-2 border-b border-border-subtle"
+              className="group flex flex-col gap-1 px-3 py-2 border-b border-hairline"
             >
               <span className="text-xs text-secondary-foreground truncate">{s.message}</span>
               <div className="flex items-center gap-2">
@@ -61,7 +61,7 @@ export function StashesView() {
                 </button>
                 <button
                   onClick={() => run(() => actions.stashDrop(s.index))}
-                  className="text-2xs text-muted-foreground hover:text-[var(--atlas-status-error-foreground)]"
+                  className="text-2xs text-muted-foreground hover:text-error"
                 >
                   Drop
                 </button>

@@ -105,7 +105,7 @@ export function ThemeMiniature({
       className={cn("flex h-28 w-full flex-col overflow-hidden bg-background", className)}
     >
       {/* Chrome. */}
-      <div className="flex h-5 shrink-0 items-center gap-1 border-b border-border-subtle bg-sidebar px-1.5">
+      <div className="flex h-5 shrink-0 items-center gap-1 border-b border-hairline bg-sidebar px-1.5">
         <span className="size-1.5 shrink-0 rounded-full bg-error" />
         <span className="size-1.5 shrink-0 rounded-full bg-warning" />
         <span className="size-1.5 shrink-0 rounded-full bg-success" />
@@ -117,7 +117,7 @@ export function ThemeMiniature({
 
       <div className="flex min-h-0 flex-1">
         {/* File rail. */}
-        <div className="flex w-8 shrink-0 flex-col gap-1 border-r border-border-subtle bg-sidebar p-1">
+        <div className="flex w-8 shrink-0 flex-col gap-1 border-r border-hairline bg-sidebar p-1">
           <RailRow width="w-4" selected />
           <RailRow width="w-3" />
           <RailRow width="w-3.5" />
@@ -180,7 +180,7 @@ export function ThemeMiniature({
 
       {/* Terminal. */}
       <div
-        className="flex h-5 shrink-0 items-center gap-1 border-t border-border-subtle px-1.5 font-mono text-3xs"
+        className="flex h-5 shrink-0 items-center gap-1 border-t border-hairline px-1.5 font-mono text-3xs"
         style={{
           backgroundColor: "var(--atlas-terminal-background)",
           color: "var(--atlas-terminal-foreground)",

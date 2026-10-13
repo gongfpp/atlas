@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { RailGlyph } from "@/ui/animated-icon";
 import { Popover } from "@base-ui/react/popover";
+import { motion, useReducedMotion } from "motion/react";
 import { invoke } from "@tauri-apps/api/core";
 import { listen } from "@tauri-apps/api/event";
 import { Check, Filter, RefreshCw, Search, X } from "lucide-react";
@@ -15,6 +16,7 @@ import { useOrgStore } from "@/features/organisations/stores/org-store";
 import { useActiveOrgProjects } from "@/features/projects/lib/org-scope";
 import { BranchLine, GitDot, NumStatPill } from "@/features/projects/components/git-summary";
 import { useProjectGitStore } from "@/features/projects/stores/project-git-store";
+import { SPRING_DOCK } from "@/lib/motion";
 import { cn } from "@/lib/utils";
 import { Hint } from "@/ui/tooltip";
 import { HintGroup, HintItem } from "@/ui/hint-group";
@@ -130,7 +132,7 @@ function PeriodPill({
   onChange: (next: GroupPeriod) => void;
 }) {
   return (
-    <div className="flex h-7 shrink-0 items-center rounded-full border border-[var(--border)] p-0.5">
+    <div className="flex h-7 shrink-0 items-center rounded-full border border-border p-0.5">
       {PERIODS.map((p) => (
         <button
           key={p.value}
@@ -140,8 +142,8 @@ function PeriodPill({
           className={cn(
             "flex h-full cursor-pointer items-center rounded-full px-2 text-xs leading-none outline-none transition-colors",
             period === p.value
-              ? "bg-[var(--atlas-element-active)] font-medium text-[var(--foreground)]"
-              : "text-[var(--muted-foreground)] hover:text-[var(--secondary-foreground)]",
+              ? "bg-element-active font-medium text-foreground"
+              : "text-muted-foreground hover:text-secondary-foreground",
           )}
         >
           {p.label}
@@ -379,6 +381,8 @@ export function ArtifactsPanel() {
   const lastPanelWidth = useRef(CHAT_WIDTH);
   if (sidePanel) lastPanelWidth.current = sidePanel === "chat" ? CHAT_WIDTH : COMMENTS_WIDTH;
   const panelWidth = lastPanelWidth.current;
+  /** `MotionConfig` only stills transforms; this is a width, so it is asked. */
+  const reduceMotion = useReducedMotion();
 
   /** True while the divider is being dragged — keeps it lit past the pointer. */
   const [resizing, setResizing] = useState(false);
@@ -692,12 +696,8 @@ export function ArtifactsPanel() {
     // the whole reason for the colour step and the rounded tops — a header that
     // shares its background with the list under it needs a rule to separate
     // them, and a curve says it better than a line.
-    <div className="flex h-full min-h-0 flex-col bg-[var(--card)]">
-      {error && (
-        <p className="shrink-0 bg-[var(--atlas-status-error-background)] px-4 py-1.5 text-xs text-[var(--atlas-status-error-foreground)]">
-          {error}
-        </p>
-      )}
+    <div className="flex h-full min-h-0 flex-col bg-card">
+      {error && <p className="shrink-0 bg-error-muted px-4 py-1.5 text-xs text-error">{error}</p>}
 
       {/* Chrome, then one card.
        *
@@ -735,7 +735,7 @@ export function ArtifactsPanel() {
             className={cn(
               "absolute top-0 z-40 w-px cursor-col-resize transition-colors",
               "after:absolute after:inset-y-0 after:-left-[3px] after:-right-[3px] after:content-['']",
-              resizing && "bg-[var(--primary)]",
+              resizing && "bg-primary",
             )}
             style={{
               bottom: CARD_INSET,
@@ -756,7 +756,7 @@ export function ArtifactsPanel() {
                 className="flex h-full shrink-0 items-center gap-2 px-1.5"
                 style={{ width: sidebarWidth }}
               >
-                <span className="min-w-0 truncate text-sm font-semibold text-[var(--foreground)]">
+                <span className="min-w-0 truncate text-sm font-semibold text-foreground">
                   Timeline
                 </span>
                 <OnlineTeammates members={teammatesOnline} />
@@ -876,14 +876,14 @@ export function ArtifactsPanel() {
               {/* Say what is being left out. A nav that silently stops at the
                *  newest few hundred reads as "this is everything". */}
               {capped && (
-                <p className="shrink-0 border-t border-[var(--atlas-border-subtle)] px-3 py-1.5 text-xs leading-snug text-[var(--muted-foreground)]">
+                <p className="shrink-0 border-t border-hairline px-3 py-1.5 text-xs leading-snug text-muted-foreground">
                   Showing the newest {BOARD_LIMIT} sessions — filter by project for a full history.
                 </p>
               )}
             </aside>
           )}
 
-          <main className="min-w-0 flex-1 bg-[var(--background)]">
+          <main className="min-w-0 flex-1 bg-background">
             {open ? (
               detail === undefined ? (
                 <DetailSkeleton />
@@ -920,9 +920,14 @@ export function ArtifactsPanel() {
                       }
                     />
                   </div>
-                  <aside
-                    className="atlas-split shrink-0 overflow-hidden border-l border-[var(--border)]"
-                    style={{ width: sidePanel ? panelWidth : 0 }}
+                  {/* Width rather than transform: the detail must actually give
+                   *  up the space, so its own layout reflows into what is left.
+                   *  It opens on the dock spring, as a dock does. */}
+                  <motion.aside
+                    className="shrink-0 overflow-hidden border-l border-border"
+                    initial={false}
+                    animate={{ width: sidePanel ? panelWidth : 0 }}
+                    transition={reduceMotion ? { duration: 0 } : SPRING_DOCK}
                     aria-hidden={sidePanel === null}
                   >
                     {/* Fixed inner width so the content does not reflow through
@@ -946,7 +951,7 @@ export function ArtifactsPanel() {
                         />
                       )}
                     </div>
-                  </aside>
+                  </motion.aside>
                 </div>
               )
             ) : !loaded || cloudPending ? (
@@ -991,12 +996,8 @@ export function ArtifactsPanel() {
  */
 function BoardSearch({ query, onQuery }: { query: string; onQuery: (q: string) => void }) {
   return (
-    <div className="flex h-7 w-[220px] min-w-0 shrink items-center gap-2 rounded-full border border-[var(--border)] bg-[var(--background)] px-3 transition-colors focus-within:border-[var(--atlas-border-strong)]">
-      <Search
-        size={13}
-        strokeWidth={1.6}
-        className="block shrink-0 text-[var(--muted-foreground)]"
-      />
+    <div className="flex h-7 w-[220px] min-w-0 shrink items-center gap-2 rounded-full border border-border bg-background px-3 transition-colors focus-within:border-border-strong">
+      <Search size={13} strokeWidth={1.6} className="block shrink-0 text-muted-foreground" />
       <input
         value={query}
         onChange={(e) => onQuery(e.target.value)}
@@ -1006,14 +1007,14 @@ function BoardSearch({ query, onQuery }: { query: string; onQuery: (q: string) =
         placeholder="Search sessions…"
         spellCheck={false}
         aria-label="Search sessions"
-        className="min-w-0 flex-1 border-0 bg-transparent p-0 text-sm leading-none text-[var(--foreground)] outline-none placeholder:text-[var(--muted-foreground)]"
+        className="min-w-0 flex-1 border-0 bg-transparent p-0 text-sm leading-none text-foreground outline-none placeholder:text-muted-foreground"
       />
       {query && (
         <Hint label="Clear search">
           <button
             type="button"
             onClick={() => onQuery("")}
-            className="flex size-4 shrink-0 cursor-pointer items-center justify-center rounded-full text-[var(--muted-foreground)] transition-colors hover:text-[var(--foreground)]"
+            className="flex size-4 shrink-0 cursor-pointer items-center justify-center rounded-full text-muted-foreground transition-colors hover:text-foreground"
           >
             <X size={11} />
           </button>
@@ -1067,16 +1068,16 @@ function Breadcrumb({
   return (
     <span
       title={projectPath}
-      className="flex min-w-0 items-center gap-1 text-sm text-[var(--muted-foreground)]"
+      className="flex min-w-0 items-center gap-1 text-sm text-muted-foreground"
     >
       <button
         type="button"
         onClick={onBack}
-        className="cursor-pointer rounded px-1 py-0.5 transition-colors hover:bg-[var(--atlas-element-hover)] hover:text-[var(--foreground)]"
+        className="cursor-pointer rounded px-1 py-0.5 transition-colors hover:bg-element-hover hover:text-foreground"
       >
         Sessions
       </button>
-      <span aria-hidden className="text-[var(--atlas-text-disabled)]">
+      <span aria-hidden className="text-disabled">
         /
       </span>
       <button
@@ -1100,7 +1101,7 @@ function Breadcrumb({
           flash.current = setTimeout(() => setCopied(false), 1200);
         }}
         title={remoteProjectId ? "Copy a link to this Session" : `Copy ${sessionId}`}
-        className="min-w-0 cursor-pointer truncate rounded px-1 py-0.5 text-[var(--secondary-foreground)] transition-colors hover:bg-[var(--atlas-element-hover)] hover:text-[var(--foreground)]"
+        className="min-w-0 cursor-pointer truncate rounded px-1 py-0.5 text-secondary-foreground transition-colors hover:bg-element-hover hover:text-foreground"
       >
         {copied ? "copied" : label}
       </button>
@@ -1176,7 +1177,7 @@ function BoardFilter({
                 values are inside the menu, and a funnel that looks identical
                 either way hides an empty board behind a control nobody checks. */}
               {active > 0 && (
-                <span className="absolute -right-1 -top-1 flex h-[13px] min-w-[13px] items-center justify-center rounded-full bg-[var(--foreground)] px-[3px] font-mono text-3xs font-medium text-[var(--primary-foreground)]">
+                <span className="absolute -right-1 -top-1 flex h-[13px] min-w-[13px] items-center justify-center rounded-full bg-foreground px-[3px] font-mono text-3xs font-medium text-primary-foreground">
                   {active}
                 </span>
               )}
@@ -1186,18 +1187,16 @@ function BoardFilter({
       </HintItem>
       <Popover.Portal>
         <Popover.Positioner className="z-popover" side="bottom" align="end" sideOffset={4}>
-          <Popover.Popup className="flex max-h-[420px] w-[262px] origin-[var(--transform-origin)] flex-col overflow-hidden rounded-lg border border-[var(--border)] bg-popover shadow-xl data-closed:animate-scale-out data-open:animate-scale-in">
+          <Popover.Popup className="flex max-h-[420px] w-[262px] origin-(--transform-origin) flex-col overflow-hidden rounded-lg border border-border bg-popover shadow-md data-closed:animate-scale-out data-open:animate-scale-in">
             {active > 0 && (
-              <div className="flex h-[28px] shrink-0 items-center justify-between border-b border-[var(--border)] px-3">
-                <span className="font-mono text-2xs text-[var(--muted-foreground)]">
-                  {active} active
-                </span>
+              <div className="flex h-[28px] shrink-0 items-center justify-between border-b border-border px-3">
+                <span className="font-mono text-2xs text-muted-foreground">{active} active</span>
                 <Popover.Close
                   render={
                     <button
                       type="button"
                       onClick={onClear}
-                      className="cursor-pointer font-mono text-2xs uppercase tracking-[0.06em] text-[var(--secondary-foreground)] underline underline-offset-2 transition-colors hover:no-underline hover:text-[var(--foreground)]"
+                      className="cursor-pointer font-mono text-2xs uppercase tracking-[0.06em] text-secondary-foreground underline underline-offset-2 transition-colors hover:no-underline hover:text-foreground"
                     >
                       Clear all
                     </button>
@@ -1211,7 +1210,7 @@ function BoardFilter({
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Search projects…"
-              className="h-[28px] shrink-0 border-b border-[var(--border)] bg-transparent px-3 text-xs text-[var(--foreground)] outline-none placeholder:text-[var(--muted-foreground)]"
+              className="h-[28px] shrink-0 border-b border-border bg-transparent px-3 text-xs text-foreground outline-none placeholder:text-muted-foreground"
             />
 
             <div className="hide-scrollbar min-h-0 flex-1 overflow-y-auto p-1">
@@ -1235,7 +1234,7 @@ function BoardFilter({
                 />
               ))}
               {shownProjects.length === 0 && (
-                <p className="px-2 py-2 text-center text-xs text-[var(--muted-foreground)]">
+                <p className="px-2 py-2 text-center text-xs text-muted-foreground">
                   No project matches “{query.trim()}”.
                 </p>
               )}
@@ -1264,7 +1263,7 @@ function BoardFilter({
 
 function GroupLabel({ children }: { children: React.ReactNode }) {
   return (
-    <p className="px-2 pb-1 pt-2 text-2xs font-semibold uppercase tracking-[0.08em] text-[var(--muted-foreground)]">
+    <p className="px-2 pb-1 pt-2 text-2xs font-semibold uppercase tracking-[0.08em] text-muted-foreground">
       {children}
     </p>
   );
@@ -1295,8 +1294,8 @@ function Option({
       title={title}
       onClick={onSelect}
       className={cn(
-        "flex w-full cursor-pointer items-center gap-2 rounded px-2 py-1.5 text-left transition-colors hover:bg-[var(--atlas-element-hover)]",
-        selected && "bg-[var(--atlas-element-selected)]",
+        "flex w-full cursor-pointer items-center gap-2 rounded px-2 py-1.5 text-left transition-colors hover:bg-element-hover",
+        selected && "bg-element-selected",
       )}
     >
       {lead}
@@ -1304,9 +1303,7 @@ function Option({
         <span
           className={cn(
             "block truncate text-xs leading-tight",
-            selected
-              ? "font-medium text-[var(--foreground)]"
-              : "text-[var(--secondary-foreground)]",
+            selected ? "font-medium text-foreground" : "text-secondary-foreground",
           )}
         >
           {label}
@@ -1314,11 +1311,11 @@ function Option({
         {sub}
       </span>
       {selected ? (
-        <Check size={11} className="shrink-0 text-[var(--foreground)]" />
+        <Check size={11} className="shrink-0 text-foreground" />
       ) : (
         (trail ??
         (count !== undefined ? (
-          <span className="shrink-0 font-mono text-2xs tabular-nums text-[var(--muted-foreground)]">
+          <span className="shrink-0 font-mono text-2xs tabular-nums text-muted-foreground">
             {count}
           </span>
         ) : null))
@@ -1337,8 +1334,8 @@ function Option({
 function NotEnabled() {
   return (
     <div className="flex h-full flex-col items-center justify-center px-8 text-center">
-      <h2 className="text-md font-medium text-[var(--foreground)]">Nothing captured yet</h2>
-      <p className="mt-1.5 max-w-[420px] text-sm leading-relaxed text-[var(--muted-foreground)]">
+      <h2 className="text-md font-medium text-foreground">Nothing captured yet</h2>
+      <p className="mt-1.5 max-w-[420px] text-sm leading-relaxed text-muted-foreground">
         Turn capture on for a project and Atlas records what you asked, what the agent did, and
         which commits came out of it — stored on this machine, with secrets scrubbed before anything
         is written.
@@ -1346,7 +1343,7 @@ function NotEnabled() {
       {/* The control is deliberately not repeated here. Capture is per project
        *  and this board spans all of them, so the honest place to switch it on
        *  is the project pill in the titlebar, which names the one it applies to. */}
-      <p className="mt-3 max-w-[420px] text-xs text-[var(--atlas-text-disabled)]">
+      <p className="mt-3 max-w-[420px] text-xs text-disabled">
         Click the project name in the titlebar to turn it on.
       </p>
     </div>
@@ -1365,13 +1362,13 @@ function NotEnabled() {
 function NotFound({ reason, onBack }: { reason: string | null; onBack: () => void }) {
   return (
     <div className="flex h-full flex-col items-center justify-center px-8 text-center">
-      <p className="text-base text-[var(--secondary-foreground)]">
+      <p className="text-base text-secondary-foreground">
         {reason ?? "This session no longer exists."}
       </p>
       <button
         type="button"
         onClick={onBack}
-        className="mt-3 cursor-pointer rounded-md border border-[var(--border)] px-3 py-1.5 text-sm text-[var(--secondary-foreground)] transition-colors hover:bg-[var(--atlas-element-hover)] hover:text-[var(--foreground)]"
+        className="mt-3 cursor-pointer rounded-md border border-border px-3 py-1.5 text-sm text-secondary-foreground transition-colors hover:bg-element-hover hover:text-foreground"
       >
         Back to sessions
       </button>

@@ -10,10 +10,13 @@ import { ICON_SIZES, ICON_STROKE_WIDTH, type IconSize } from "@/ui/icon";
  * tips, the send arrow that leaves. Those need per-path control, so they are
  * hand-written SVG here rather than Lucide components.
  *
- * Ported from Skiper UI's `skiper42` set, with framer-motion removed. Atlas has
- * no JS animation runtime and does not want one: every animation below is CSS,
- * so it runs on the compositor thread rather than competing with React and the
- * IPC channel on the main thread. Three changes came out of that port:
+ * Ported from Skiper UI's `skiper42` set as CSS. Atlas does use `motion` now
+ * (`src/lib/motion.ts`), but for springs, layout and enter/leave — and none of
+ * these is any of those. They are short state transitions and three one-shot
+ * keyframes, which is the half of the rule that stays CSS, and as CSS they run
+ * on the compositor thread rather than beside React and the IPC channel on the
+ * main thread. A glyph that wants a spring (Standards' mailbox flag, say) is
+ * written with `motion`. Three changes came out of the port:
  *
  *  - **`scaleX`, not `width`.** The original animates the width of the sidebar
  *    rail and the menu bars. Width is a layout property — it reflows the

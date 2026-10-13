@@ -136,13 +136,13 @@ export function ModelsManager() {
               return (
                 <div
                   key={m.id}
-                  className="flex items-center gap-3 px-4 py-2 border-b border-border-subtle hover:bg-element-hover"
+                  className="flex items-center gap-3 px-4 py-2 border-b border-hairline hover:bg-element-hover"
                 >
                   <div className={COL.name}>
                     <div className="flex items-center gap-1.5">
                       <span className="text-sm font-medium text-foreground">{m.name}</span>
                       {m.selected && (
-                        <span className="text-3xs uppercase tracking-wide text-[var(--background)] bg-primary rounded px-1 py-px">
+                        <span className="text-3xs uppercase tracking-wide text-background bg-primary rounded px-1 py-px">
                           In use
                         </span>
                       )}
@@ -213,7 +213,7 @@ export function ModelsManager() {
                           type="button"
                           disabled={busy}
                           onClick={() => void doRemove(m)}
-                          className="h-6 w-6 flex items-center justify-center rounded-md text-muted-foreground hover:text-[var(--atlas-status-error-foreground)] hover:bg-element-hover transition-colors disabled:opacity-50"
+                          className="h-6 w-6 flex items-center justify-center rounded-md text-muted-foreground hover:text-error hover:bg-element-hover transition-colors disabled:opacity-50"
                         >
                           <Trash2 size={12} />
                         </button>
@@ -277,14 +277,11 @@ function ConfirmReindex({
       onClick={onCancel}
     >
       <div
-        className="w-[380px] rounded-lg border border-border bg-background p-4 shadow-xl"
+        className="w-[380px] rounded-lg border border-border bg-background p-4 shadow-lg"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-start gap-2.5">
-          <AlertTriangle
-            size={16}
-            className="text-[var(--atlas-status-warning-foreground)] shrink-0 mt-0.5"
-          />
+          <AlertTriangle size={16} className="text-warning shrink-0 mt-0.5" />
           <div>
             <p className="text-base font-semibold text-foreground">Switch embedding model?</p>
             <p className="text-xs text-secondary-foreground mt-1 leading-relaxed">
@@ -305,7 +302,7 @@ function ConfirmReindex({
           <button
             type="button"
             onClick={onConfirm}
-            className="h-7 rounded-md px-3 text-xs font-medium bg-primary text-[var(--background)] hover:opacity-90 transition-opacity"
+            className="h-7 rounded-md px-3 text-xs font-medium bg-primary text-background hover:opacity-90 transition-opacity"
           >
             Switch & rebuild
           </button>

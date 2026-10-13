@@ -181,8 +181,8 @@ export const CommentButton = memo(function CommentButton({
       <Popover.Trigger
         aria-label={count > 0 ? `${label} (${count})` : label}
         className={cn(
-          "flex h-5 shrink-0 cursor-pointer items-center gap-1 rounded-full text-[var(--atlas-text-disabled)] transition-all duration-150 hover:bg-[var(--atlas-element-hover)] hover:text-[var(--foreground)] focus-visible:opacity-100",
-          count > 0 && "text-[var(--secondary-foreground)]",
+          "flex h-5 shrink-0 cursor-pointer items-center gap-1 rounded-full text-disabled transition-all duration-150 hover:bg-element-hover hover:text-foreground focus-visible:opacity-100",
+          count > 0 && "text-secondary-foreground",
           // Inside a cluster the surround belongs to the cluster, which also
           // owns when the whole group is visible.
           bare
@@ -209,7 +209,7 @@ export const CommentButton = memo(function CommentButton({
             {faces.length > 0 && (
               <span className="flex shrink-0 items-center -space-x-1.5">
                 {faces.map((user) => (
-                  <span key={user.id} className="rounded-full ring-1 ring-[var(--card)]">
+                  <span key={user.id} className="rounded-full ring-1 ring-card">
                     <AccountAvatar user={user} size={14} />
                   </span>
                 ))}
@@ -233,13 +233,13 @@ export const CommentButton = memo(function CommentButton({
         >
           <Popover.Popup
             className={cn(
-              "w-[360px] max-w-(--available-width) max-h-(--available-height) origin-[var(--transform-origin)] overflow-hidden rounded-xl shadow-md outline-none",
+              "w-[360px] max-w-(--available-width) max-h-(--available-height) origin-(--transform-origin) overflow-hidden rounded-xl shadow-md outline-none",
               // Border, translucent fill and blur all on THIS element — the
               // same one the animation transforms. Splitting them across a
               // wrapper isolates the compositing layer and flattens the blur to
               // flat transparency (the note beside the keyframes in
               // globals.css, and what `capture-popover` already does).
-              "border border-[var(--atlas-element-active)] bg-[var(--card)]/95 backdrop-blur-2xl",
+              "border border-element-active bg-card/95 backdrop-blur-2xl",
               // The lit-from-above sheen, as a utility rather than
               // `atlas-vibrant-panel` — that class isolates its layer and would
               // flatten the blur it sits on.
@@ -310,7 +310,7 @@ function Thread({
       <div className="min-h-0 flex-1 overflow-y-auto">
         {threads.length === 0 ? (
           <p
-            className="text-xs text-[var(--muted-foreground)]"
+            className="text-xs text-muted-foreground"
             style={{ padding: `${BLOCK_PAD_Y}px ${BLOCK_PAD_X}px` }}
           >
             No comments on this {anchorKind === "session" ? "Session" : "step"} yet.
@@ -480,10 +480,7 @@ const CommentRow = memo(function CommentRow({
     // The row survives so replies keep their places, and saying so is more
     // honest than a gap where a comment used to be.
     return (
-      <p
-        className="text-2xs italic text-[var(--atlas-text-disabled)]"
-        style={{ paddingLeft: REPLY_INDENT }}
-      >
+      <p className="text-2xs italic text-disabled" style={{ paddingLeft: REPLY_INDENT }}>
         Comment deleted
       </p>
     );
@@ -503,27 +500,21 @@ const CommentRow = memo(function CommentRow({
           </span>
         ) : (
           <span
-            className="mt-px shrink-0 rounded-full bg-[var(--atlas-element-selected)]"
+            className="mt-px shrink-0 rounded-full bg-element-selected"
             style={{ width: AVATAR_PX, height: AVATAR_PX }}
           />
         )}
 
         <div className="min-w-0 flex-1">
           <div className="flex items-baseline gap-1.5">
-            <span className="min-w-0 truncate text-xs font-medium text-[var(--foreground)]">
-              {name}
-            </span>
-            {comment.guestName && (
-              <span className="shrink-0 text-3xs text-[var(--atlas-text-disabled)]">guest</span>
-            )}
-            <span className="shrink-0 font-mono text-3xs text-[var(--atlas-text-disabled)]">
+            <span className="min-w-0 truncate text-xs font-medium text-foreground">{name}</span>
+            {comment.guestName && <span className="shrink-0 text-3xs text-disabled">guest</span>}
+            <span className="shrink-0 font-mono text-3xs text-disabled">
               {time(comment.createdAt)}
             </span>
-            {comment.editedAt && (
-              <span className="shrink-0 text-3xs text-[var(--atlas-text-disabled)]">edited</span>
-            )}
+            {comment.editedAt && <span className="shrink-0 text-3xs text-disabled">edited</span>}
             <span className="flex-1" />
-            {busy && <Loader2 size={10} className="animate-spin text-[var(--muted-foreground)]" />}
+            {busy && <Loader2 size={10} className="animate-spin text-muted-foreground" />}
             {/* Link first, then delete. Every comment can be linked — it
              *  tells the agent "attend to this one" — so it is not gated on
              *  authorship the way delete is. */}
@@ -533,7 +524,7 @@ const CommentRow = memo(function CommentRow({
                 aria-label="Reference comment in agent chat"
                 title="Reference in agent chat"
                 onClick={() => actions.link?.(comment)}
-                className="flex shrink-0 cursor-pointer items-center rounded p-0.5 text-[var(--muted-foreground)] opacity-0 transition-colors hover:text-[var(--foreground)] focus-visible:opacity-100 group-hover/comment:opacity-100"
+                className="flex shrink-0 cursor-pointer items-center rounded p-0.5 text-muted-foreground opacity-0 transition-colors hover:text-foreground focus-visible:opacity-100 group-hover/comment:opacity-100"
               >
                 <Link2 size={11} />
               </button>
@@ -548,7 +539,7 @@ const CommentRow = memo(function CommentRow({
                 aria-label="Edit comment"
                 title="Edit"
                 onClick={() => setEditing(true)}
-                className="flex shrink-0 cursor-pointer items-center rounded p-0.5 text-[var(--muted-foreground)] opacity-0 transition-colors hover:text-[var(--foreground)] focus-visible:opacity-100 group-hover/comment:opacity-100"
+                className="flex shrink-0 cursor-pointer items-center rounded p-0.5 text-muted-foreground opacity-0 transition-colors hover:text-foreground focus-visible:opacity-100 group-hover/comment:opacity-100"
               >
                 <Pencil size={11} />
               </button>
@@ -558,7 +549,7 @@ const CommentRow = memo(function CommentRow({
                 type="button"
                 aria-label="Delete comment"
                 onClick={() => run(() => actions.remove(comment.id))}
-                className="flex shrink-0 cursor-pointer items-center rounded p-0.5 text-[var(--muted-foreground)] opacity-0 transition-colors hover:text-[var(--atlas-status-error-foreground)] group-hover/comment:opacity-100"
+                className="flex shrink-0 cursor-pointer items-center rounded p-0.5 text-muted-foreground opacity-0 transition-colors hover:text-error group-hover/comment:opacity-100"
               >
                 <Trash2 size={11} />
               </button>
@@ -633,7 +624,7 @@ function Action({
       type="button"
       disabled={disabled}
       onClick={onClick}
-      className="flex cursor-pointer items-center gap-1 rounded px-1 py-px text-2xs text-[var(--muted-foreground)] transition-colors hover:bg-[var(--atlas-element-hover)] hover:text-[var(--foreground)] disabled:cursor-not-allowed disabled:opacity-40"
+      className="flex cursor-pointer items-center gap-1 rounded px-1 py-px text-2xs text-muted-foreground transition-colors hover:bg-element-hover hover:text-foreground disabled:cursor-not-allowed disabled:opacity-40"
     >
       {children}
     </button>
@@ -692,7 +683,7 @@ function Body({ text, directory }: { text: string; directory: OrgDirectory }) {
           <span
             // eslint-disable-next-line react/no-array-index-key
             key={i}
-            className="rounded bg-[var(--atlas-element-emphasis)] px-1 text-[var(--foreground)]"
+            className="rounded bg-element-emphasis px-1 text-foreground"
           >
             @{directory.byId.get(part.text)?.name ?? part.text}
           </span>
@@ -779,7 +770,7 @@ function Composer({
           </span>
         ) : (
           <span
-            className="shrink-0 rounded-full bg-[var(--atlas-element-selected)]"
+            className="shrink-0 rounded-full bg-element-selected"
             style={{ width: AVATAR_PX, height: AVATAR_PX }}
           />
         )}
@@ -813,7 +804,7 @@ function Composer({
             // scrollbar otherwise renders as a strip under a one-row field on
             // any sub-pixel overflow. Vertical scrolling for Shift+Enter text
             // still works, just without a visible bar.
-            className="hide-scrollbar min-w-0 w-full resize-none overflow-x-hidden break-words rounded-lg border border-border bg-panel-input py-1.5 pl-2 pr-8 text-xs text-[var(--foreground)] outline-none transition-colors placeholder:text-[var(--muted-foreground)] focus:border-border-strong"
+            className="hide-scrollbar min-w-0 w-full resize-none overflow-x-hidden break-words rounded-lg border border-border bg-panel-input py-1.5 pl-2 pr-8 text-xs text-foreground outline-none transition-colors placeholder:text-muted-foreground focus:border-border-strong"
           />
           {/* The agent composer's squircle send, at this surface's scale, and
            *  pinned so it does not ride down as the field grows. It carries the
@@ -828,8 +819,8 @@ function Composer({
             className={cn(
               "absolute right-[5px] top-[5px] flex size-5 items-center justify-center rounded-md border transition-colors",
               ready
-                ? "cursor-pointer border-transparent text-[var(--foreground)] hover:border-[var(--border)] hover:bg-[var(--atlas-element-hover)]"
-                : "cursor-not-allowed border-transparent text-[var(--atlas-text-disabled)]",
+                ? "cursor-pointer border-transparent text-foreground hover:border-border hover:bg-element-hover"
+                : "cursor-not-allowed border-transparent text-disabled",
             )}
           >
             {busy ? (
@@ -841,14 +832,12 @@ function Composer({
         </div>
       </div>
       {over && (
-        <p className="mt-1 text-3xs text-[var(--atlas-status-error-foreground)]">
+        <p className="mt-1 text-3xs text-error">
           {totalLength.toLocaleString()} / {COMMENT_BODY_MAX.toLocaleString()} characters
           {bodyPrefixLength > 0 ? " (including the selected passage)" : ""}
         </p>
       )}
-      {error && (
-        <p className="mt-1 text-3xs text-[var(--atlas-status-error-foreground)]">{error}</p>
-      )}
+      {error && <p className="mt-1 text-3xs text-error">{error}</p>}
     </div>
   );
 }

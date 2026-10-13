@@ -52,9 +52,12 @@ describe("CSS custom properties", () => {
     const references = new Set(
       [...text.matchAll(/var\((--[A-Za-z0-9_-]+)/g)].map((match) => match[1]),
     );
-    const declared = new Set(
-      [...text.matchAll(/(--[A-Za-z0-9_-]+)\s*:/g)].map((match) => match[1]),
-    );
+    const declared = new Set([
+      ...[...text.matchAll(/(--[A-Za-z0-9_-]+)\s*:/g)].map((match) => match[1]),
+      // A registered property is a definition too: `@property --fade-top`
+      // gives it a syntax and an initial value (ScrollFade's edges).
+      ...[...text.matchAll(/@property\s+(--[A-Za-z0-9_-]+)/g)].map((match) => match[1]),
+    ]);
     const produced = new Set<string>([
       ...Object.keys(resolveTheme(themes[0], "dark").cssVars),
       ...Object.keys(themes[0].dark!.base).map((key) => `--${key}`),

@@ -66,7 +66,7 @@ export function DateRangeControl({
               nothing at all. `--transform-origin` is Base UI's spelling of
               Radix's `--radix-popover-content-transform-origin`. */}
           <Popover.Positioner className="z-popover" align="end" sideOffset={6}>
-            <Popover.Popup className="origin-[var(--transform-origin)] rounded-lg border border-[var(--border)] bg-[var(--card)]/90 p-2 shadow-md outline-none backdrop-blur-2xl data-closed:animate-scale-out data-open:animate-scale-in">
+            <Popover.Popup className="origin-(--transform-origin) rounded-lg border border-border bg-card/90 p-2 shadow-md outline-none backdrop-blur-2xl data-closed:animate-scale-out data-open:animate-scale-in">
               <MonthGrid
                 from={isCustom ? (resolved.from ?? today) : null}
                 to={isCustom ? resolved.to : null}
@@ -144,16 +144,16 @@ function MonthGrid({
         <button
           type="button"
           aria-label="Previous month"
-          className="flex size-5 items-center justify-center rounded text-[var(--muted-foreground)] hover:bg-[var(--atlas-element-hover)] hover:text-[var(--foreground)]"
+          className="flex size-5 items-center justify-center rounded text-muted-foreground hover:bg-element-hover hover:text-foreground"
           onClick={() => setCursor(new Date(cursor.getFullYear(), cursor.getMonth() - 1, 1))}
         >
           <ChevronLeft size={12} />
         </button>
-        <span className="text-xs font-medium text-[var(--foreground)]">{monthLabel}</span>
+        <span className="text-xs font-medium text-foreground">{monthLabel}</span>
         <button
           type="button"
           aria-label="Next month"
-          className="flex size-5 items-center justify-center rounded text-[var(--muted-foreground)] hover:bg-[var(--atlas-element-hover)] hover:text-[var(--foreground)] disabled:cursor-not-allowed disabled:opacity-50"
+          className="flex size-5 items-center justify-center rounded text-muted-foreground hover:bg-element-hover hover:text-foreground disabled:cursor-not-allowed disabled:opacity-50"
           disabled={dayKey(new Date(cursor.getFullYear(), cursor.getMonth() + 1, 1)) > today}
           onClick={() => setCursor(new Date(cursor.getFullYear(), cursor.getMonth() + 1, 1))}
         >
@@ -164,7 +164,7 @@ function MonthGrid({
         {WEEKDAY.map((w, i) => (
           <span
             key={i}
-            className="flex h-5 items-center justify-center text-3xs font-medium uppercase tracking-wider text-[var(--muted-foreground)]"
+            className="flex h-5 items-center justify-center text-3xs font-medium uppercase tracking-wider text-muted-foreground"
           >
             {w}
           </span>
@@ -185,21 +185,21 @@ function MonthGrid({
               className={cn(
                 "flex h-6 items-center justify-center text-xs tabular-nums transition-colors",
                 edge
-                  ? "rounded-md bg-[var(--foreground)] text-[var(--primary-foreground)]"
+                  ? "rounded-md bg-foreground text-primary-foreground"
                   : inSel
-                    ? "bg-[var(--atlas-element-active)] text-[var(--foreground)]"
-                    : "rounded-md text-[var(--secondary-foreground)] hover:bg-[var(--atlas-element-hover)] hover:text-[var(--foreground)]",
+                    ? "bg-element-active text-foreground"
+                    : "rounded-md text-secondary-foreground hover:bg-element-hover hover:text-foreground",
                 // Future days have not happened — hard-disabled, drawn in the
                 // "unavailable" tone with no hover feedback at all. Before-data
                 // days are still pickable (click handling is unchanged), just
                 // unlikely to show anything, so they get the dimmer but still
                 // "live" muted tone the rest of the calendar uses, and keep
                 // their hover state.
-                future && "cursor-default text-[var(--atlas-text-disabled)] hover:bg-transparent",
-                before && !inSel && "text-[var(--muted-foreground)]",
+                future && "cursor-default text-disabled hover:bg-transparent",
+                before && !inSel && "text-muted-foreground",
                 day === today &&
                   !edge &&
-                  "underline decoration-[var(--muted-foreground)] underline-offset-2",
+                  "underline decoration-muted-foreground underline-offset-2",
               )}
             >
               {Number(day.slice(-2))}
@@ -207,11 +207,11 @@ function MonthGrid({
           );
         })}
       </div>
-      <div className="mt-1.5 flex items-center justify-between px-0.5 text-2xs text-[var(--muted-foreground)]">
+      <div className="mt-1.5 flex items-center justify-between px-0.5 text-2xs text-muted-foreground">
         <span>{anchor ? "Pick the end day" : "Pick two days"}</span>
         <button
           type="button"
-          className="hover:text-[var(--foreground)]"
+          className="hover:text-foreground"
           onClick={() => onPick(addDays(today, -6), today)}
         >
           This week

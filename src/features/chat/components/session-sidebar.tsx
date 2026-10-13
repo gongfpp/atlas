@@ -690,7 +690,7 @@ export const SessionSidebar = memo(function SessionSidebar({
         "relative flex flex-col",
         asDropdown
           ? "h-[min(420px,60vh)] w-[340px]"
-          : "shrink-0 h-full border-r border-[var(--border)] bg-[var(--sidebar)]",
+          : "shrink-0 h-full border-r border-border bg-sidebar",
       )}
     >
       {/* Search — full-width row matching the GitHub panel's search */}
@@ -699,9 +699,7 @@ export const SessionSidebar = memo(function SessionSidebar({
           "flex items-center gap-1.5 h-[32px] shrink-0 px-3",
           // The dropdown sits on a blurred, translucent panel — an opaque fill
           // here would punch a solid rectangle through the blur.
-          asDropdown
-            ? "border-b border-[var(--atlas-element-hover)]"
-            : "border-b border-border bg-background",
+          asDropdown ? "border-b border-element-hover" : "border-b border-border bg-background",
         )}
       >
         <Search size={11} className="text-muted-foreground shrink-0" />
@@ -786,7 +784,7 @@ export const SessionSidebar = memo(function SessionSidebar({
                   // Sticky in the sidebar, where the list sits on the opaque
                   // sidebar fill; the dropdown's panel is translucent and
                   // blurred, and a sticky fill there would punch through it.
-                  !asDropdown && "sticky top-0 z-panel bg-[var(--sidebar)]",
+                  !asDropdown && "sticky top-0 z-panel bg-sidebar",
                 )}
               >
                 {heading}
@@ -806,15 +804,13 @@ export const SessionSidebar = memo(function SessionSidebar({
             "flex items-center justify-between px-1.5 h-[29px]",
             // Same rule as the search row above: an opaque fill would punch a
             // solid strip through the picker's blurred panel.
-            asDropdown
-              ? "border-t border-[var(--atlas-element-hover)]"
-              : "border-t border-[var(--border)] bg-[var(--sidebar)]",
+            asDropdown ? "border-t border-element-hover" : "border-t border-border bg-sidebar",
           )}
         >
-          <HintItem label={sidebarHint ? `Hide sidebar (${sidebarHint})` : "Hide sidebar"}>
+          <HintItem label="Hide sidebar" shortcut={sidebarHint}>
             <button
               onClick={toggleChatSidebar}
-              className="flex items-center justify-center w-6 h-6 rounded text-[var(--muted-foreground)] hover:text-[var(--foreground)] hover:bg-[var(--atlas-element-hover)] transition-colors cursor-pointer"
+              className="flex items-center justify-center w-6 h-6 rounded text-muted-foreground hover:text-foreground hover:bg-element-hover transition-colors cursor-pointer"
             >
               <PanelLeft size={12} />
             </button>
@@ -822,7 +818,7 @@ export const SessionSidebar = memo(function SessionSidebar({
           <HintItem label="New chat">
             <button
               onClick={handleNewChat}
-              className="flex items-center justify-center w-6 h-6 rounded text-[var(--muted-foreground)] hover:text-[var(--foreground)] hover:bg-[var(--atlas-element-hover)] transition-colors cursor-pointer"
+              className="flex items-center justify-center w-6 h-6 rounded text-muted-foreground hover:text-foreground hover:bg-element-hover transition-colors cursor-pointer"
             >
               <Plus size={12} />
             </button>

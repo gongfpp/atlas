@@ -41,7 +41,7 @@ export function UiScaleControl() {
             <button
               type="button"
               aria-label={`Interface scale, ${pct}%`}
-              className="flex size-[22px] items-center justify-center rounded-full border border-border-subtle text-[var(--muted-foreground)] outline-none transition-colors hover:bg-[var(--atlas-element-hover)] hover:text-[var(--foreground)] data-[popup-open]:bg-[var(--atlas-element-hover)] data-[popup-open]:text-[var(--foreground)] cursor-pointer"
+              className="flex size-[22px] items-center justify-center rounded-full border border-hairline text-muted-foreground outline-none transition-colors hover:bg-element-hover hover:text-foreground data-[popup-open]:bg-element-hover data-[popup-open]:text-foreground cursor-pointer"
             >
               <Type size={12} />
             </button>

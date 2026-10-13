@@ -5,6 +5,7 @@ import { useLayoutStore } from "@/features/layout/stores/layout-store";
 import { useAppStore } from "@/features/app/stores/app-store";
 import { openNewAgentChat } from "@/features/chat/lib/open-agent-session";
 import { MessageSquare, Terminal, Globe, Settings, Copy, RefreshCw } from "lucide-react";
+import { KbdCombo } from "@/ui/kbd";
 
 /** `children` is the single element the menu is attached to — Base UI's
  * `render` clones it, the way Radix's `asChild` merged onto it. */
@@ -20,7 +21,7 @@ export function AppContextMenu({ children }: { children: React.ReactElement }) {
             static inside it — the z-index has to sit on the Positioner or it
             does nothing. */}
         <ContextMenu.Positioner className="z-popover">
-          <ContextMenu.Popup className="w-[180px] rounded-lg border border-border-subtle bg-popover shadow-xl py-1">
+          <ContextMenu.Popup className="w-[180px] rounded-lg border border-hairline bg-popover shadow-md py-1">
             {currentProject && (
               <>
                 <MenuItem
@@ -58,7 +59,7 @@ export function AppContextMenu({ children }: { children: React.ReactElement }) {
                     })
                   }
                 />
-                <ContextMenu.Separator className="h-px bg-border-subtle my-1" />
+                <ContextMenu.Separator className="h-px bg-hairline my-1" />
               </>
             )}
             <MenuItem
@@ -67,7 +68,7 @@ export function AppContextMenu({ children }: { children: React.ReactElement }) {
               shortcut="⌘C"
               onClick={() => document.execCommand("copy")}
             />
-            <ContextMenu.Separator className="h-px bg-border-subtle my-1" />
+            <ContextMenu.Separator className="h-px bg-hairline my-1" />
             <MenuItem
               icon={<RefreshCw size={12} />}
               label="Reload Window"
@@ -121,7 +122,7 @@ function MenuItem({
     >
       <span className="text-muted-foreground">{icon}</span>
       <span className="flex-1">{label}</span>
-      {hint && <span className="text-3xs text-muted-foreground font-mono">{hint}</span>}
+      {hint && <KbdCombo combo={hint} size="2xs" />}
     </ContextMenu.Item>
   );
 }

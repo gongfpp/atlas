@@ -56,13 +56,13 @@ export function NotebookViewer({ filePath }: NotebookViewerProps) {
   }, [filePath]);
 
   return (
-    <div className="h-full w-full flex flex-col bg-[var(--background)]">
-      <div className="flex items-center px-3 h-[32px] border-b border-[var(--border)] shrink-0 text-xs font-mono text-[var(--muted-foreground)] truncate">
+    <div className="h-full w-full flex flex-col bg-background">
+      <div className="flex items-center px-3 h-[32px] border-b border-border shrink-0 text-xs font-mono text-muted-foreground truncate">
         {filePath}
       </div>
       <div className="flex-1 min-h-0 overflow-y-auto">
         {state.status === "loading" ? (
-          <div className="h-full flex items-center justify-center text-[var(--muted-foreground)]">
+          <div className="h-full flex items-center justify-center text-muted-foreground">
             <Loader2 size={16} className="animate-spin" />
           </div>
         ) : state.status === "error" ? (
@@ -81,9 +81,7 @@ function NotebookBody({ notebook }: { notebook: NotebookFile }) {
   const language = useMemo(() => notebookLanguage(notebook), [notebook]);
 
   if (notebook.cells.length === 0) {
-    return (
-      <div className="text-sm text-[var(--muted-foreground)] text-center py-12">Empty notebook</div>
-    );
+    return <div className="text-sm text-muted-foreground text-center py-12">Empty notebook</div>;
   }
 
   return (
@@ -108,7 +106,7 @@ function NotebookCellView({ cell, language }: { cell: NotebookCell; language: st
 
   if (cell.cell_type === "raw") {
     return (
-      <pre className="rounded-md border border-[var(--border)] bg-[var(--card)] p-3 code whitespace-pre-wrap overflow-x-auto text-[var(--secondary-foreground)]">
+      <pre className="rounded-md border border-border bg-card p-3 code whitespace-pre-wrap overflow-x-auto text-secondary-foreground">
         {source}
       </pre>
     );
@@ -118,7 +116,7 @@ function NotebookCellView({ cell, language }: { cell: NotebookCell; language: st
   const count = cell.execution_count;
   return (
     <div className="flex gap-2">
-      <div className="w-10 shrink-0 pt-1.5 text-right text-xs font-mono text-[var(--muted-foreground)] select-none">
+      <div className="w-10 shrink-0 pt-1.5 text-right text-xs font-mono text-muted-foreground select-none">
         {count != null ? `[${count}]` : <Play size={10} className="inline opacity-40" />}
       </div>
       <div className="flex-1 min-w-0 space-y-1.5">
@@ -132,7 +130,7 @@ function NotebookCellView({ cell, language }: { cell: NotebookCell; language: st
 }
 
 const OUTPUT_PRE = "rounded-md border p-2.5 text-xs font-mono whitespace-pre-wrap overflow-x-auto";
-const OUTPUT_PLAIN = "border-[var(--border)] bg-[var(--card)] text-[var(--secondary-foreground)]";
+const OUTPUT_PLAIN = "border-border bg-card text-secondary-foreground";
 const OUTPUT_ERROR = "border-destructive/30 bg-destructive/5 text-destructive";
 
 function NotebookOutputView({ output }: { output: NotebookOutput }) {
@@ -164,7 +162,7 @@ function NotebookOutputView({ output }: { output: NotebookOutput }) {
       <img
         src={imageOutputSrc(mime, data[mime])}
         alt="Cell output"
-        className="max-w-full rounded-md border border-[var(--border)]"
+        className="max-w-full rounded-md border border-border"
       />
     );
   }
@@ -177,7 +175,7 @@ function NotebookOutputView({ output }: { output: NotebookOutput }) {
   const anyMime = Object.keys(data)[0];
   if (anyMime) {
     return (
-      <div className="rounded-md border border-[var(--border)] bg-[var(--card)] p-2.5 text-xs text-[var(--muted-foreground)]">
+      <div className="rounded-md border border-border bg-card p-2.5 text-xs text-muted-foreground">
         Output type <span className="font-mono">{anyMime}</span> isn't rendered in Atlas yet.
       </div>
     );

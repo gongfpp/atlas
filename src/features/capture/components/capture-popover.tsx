@@ -96,27 +96,26 @@ import type {
  * earn its keep. If a third appears, extract then.
  */
 const FIELD =
-  "h-8 w-full rounded-lg border border-border bg-panel-input px-2.5 text-sm text-[var(--foreground)] placeholder:text-[var(--muted-foreground)] outline-none transition-colors focus:border-border-strong";
+  "h-8 w-full rounded-lg border border-border bg-panel-input px-2.5 text-sm text-foreground placeholder:text-muted-foreground outline-none transition-colors focus:border-border-strong";
 
 /** Section heading above a group of controls. */
-const SECTION_LABEL = "text-xs font-medium text-[var(--secondary-foreground)]";
+const SECTION_LABEL = "text-xs font-medium text-secondary-foreground";
 
 /** Hint under a group — the sentence that explains what was just chosen. */
-const HINT = "mt-1 text-2xs text-[var(--muted-foreground)]";
+const HINT = "mt-1 text-2xs text-muted-foreground";
 
 /** A read-only group of facts (detection, disclosure lines). */
-const GROUP =
-  "rounded-lg border border-[var(--atlas-element-selected)] bg-[var(--atlas-element-hover)] px-2.5 py-2";
+const GROUP = "rounded-lg border border-element-selected bg-element-hover px-2.5 py-2";
 
 /** Selectable pill — the Type/Region language from the organisation modal. */
 function pillClass(state: "on" | "off" | "disabled") {
   return cn(
     "inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-xs leading-none transition-colors",
     state === "disabled"
-      ? "cursor-not-allowed border-border bg-panel-input text-[var(--muted-foreground)] opacity-40"
+      ? "cursor-not-allowed border-border bg-panel-input text-muted-foreground opacity-40"
       : state === "on"
-        ? "cursor-pointer border-border-strong bg-accent text-[var(--foreground)]"
-        : "cursor-pointer border-border bg-panel-input text-[var(--muted-foreground)] hover:text-[var(--secondary-foreground)]",
+        ? "cursor-pointer border-border-strong bg-accent text-foreground"
+        : "cursor-pointer border-border bg-panel-input text-muted-foreground hover:text-secondary-foreground",
   );
 }
 
@@ -337,7 +336,7 @@ export function CapturePopover({ projectPath, health, onChanged, onClose }: Prop
         // the enter animation transforms. Splitting them across a wrapper would
         // isolate the compositing layer and flatten the blur to flat
         // transparency (see the note beside the keyframes in globals.css).
-        "border border-[var(--atlas-element-active)] bg-[var(--card)]/95 backdrop-blur-2xl",
+        "border border-element-active bg-card/95 backdrop-blur-2xl",
         "atlas-panel-in-tl",
       )}
     >
@@ -549,9 +548,7 @@ export function CapturePopover({ projectPath, health, onChanged, onClose }: Prop
         )}
 
         {error && (
-          <p className="mt-2 rounded-lg bg-[var(--atlas-status-error-background)] px-2.5 py-1.5 text-xs text-[var(--atlas-status-error-foreground)]">
-            {error}
-          </p>
+          <p className="mt-2 rounded-lg bg-error-muted px-2.5 py-1.5 text-xs text-error">{error}</p>
         )}
       </div>
     </div>
@@ -600,15 +597,15 @@ function DisclosureStep({
 }) {
   return (
     <div className="atlas-fade-in space-y-2.5">
-      <p className="text-sm font-medium text-[var(--foreground)]">{title}</p>
+      <p className="text-sm font-medium text-foreground">{title}</p>
       <ul className={cn(GROUP, "space-y-1")}>
         {lines.map((line) => (
-          <li key={line} className="text-xs text-[var(--secondary-foreground)]">
+          <li key={line} className="text-xs text-secondary-foreground">
             {line}
           </li>
         ))}
       </ul>
-      <p className="text-2xs text-[var(--muted-foreground)]">
+      <p className="text-2xs text-muted-foreground">
         This makes the above visible to your Organization. Nothing is sent until you confirm.
       </p>
       <div className="flex justify-end gap-2 pt-0.5">
@@ -704,9 +701,7 @@ function HealthDetail({
             title={issue.nextStep || undefined}
             className={cn(
               "flex items-center gap-1.5 text-xs",
-              issue.state === "stopped"
-                ? "text-[var(--atlas-status-error-foreground)]"
-                : "text-[var(--atlas-status-warning-foreground)]",
+              issue.state === "stopped" ? "text-error" : "text-warning",
             )}
           >
             {index === 0 &&
@@ -789,7 +784,7 @@ function CaptureRadar({ live, health }: { live: boolean; health: CaptureHealth |
 
   return (
     <div
-      className="relative overflow-hidden border-b border-[var(--atlas-element-hover)] bg-background/40"
+      className="relative overflow-hidden border-b border-element-hover bg-background/40"
       style={{ height: RADAR_HEIGHT }}
     >
       {/* Range rings: true circles centred on the dish. `border-t` draws only
@@ -800,7 +795,7 @@ function CaptureRadar({ live, health }: { live: boolean; health: CaptureHealth |
         <span
           key={r}
           aria-hidden
-          className="absolute rounded-full border-t border-dashed border-[var(--atlas-element-selected)]"
+          className="absolute rounded-full border-t border-dashed border-element-selected"
           style={{
             width: r * 2,
             height: r * 2,
@@ -862,13 +857,13 @@ function CaptureRadar({ live, health }: { live: boolean; health: CaptureHealth |
           so the origin of every ring is visibly a thing rather than a corner. */}
       <span
         aria-hidden
-        className="absolute size-[92px] rounded-full border border-[var(--atlas-element-selected)] bg-[var(--card)]"
+        className="absolute size-[92px] rounded-full border border-element-selected bg-card"
         style={{ left: RADAR_ORIGIN_X - 46, top: RADAR_HEIGHT - 46 }}
       />
 
       <span className="absolute bottom-3 left-3.5 flex items-center gap-1.5">
         <CaptureDot live={live} tone={live ? "success" : "idle"} />
-        <span className="text-3xs font-semibold uppercase tracking-[0.14em] text-[var(--muted-foreground)]">
+        <span className="text-3xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">
           {live ? "Capturing" : "Paused"}
         </span>
       </span>
@@ -959,15 +954,15 @@ function BoundState({
       {/* A Cloud Project whose bulk import was never approved imports
        *  nothing, forever, on purpose. Say so where it can be resolved. */}
       {binding.mode === "cloud" && !binding.importApproved && (
-        <div className="flex items-center justify-between gap-2 rounded-lg border border-dashed border-[var(--atlas-element-active)] px-2.5 py-1.5">
-          <span className="text-xs text-[var(--secondary-foreground)]">
+        <div className="flex items-center justify-between gap-2 rounded-lg border border-dashed border-element-active px-2.5 py-1.5">
+          <span className="text-xs text-secondary-foreground">
             History import is waiting for your review.
           </span>
           <button
             type="button"
             disabled={busy || !importPreview}
             onClick={onReviewImport}
-            className="shrink-0 cursor-pointer rounded-full px-1.5 py-0.5 text-xs text-[var(--foreground)] underline underline-offset-2 transition-colors duration-150 hover:no-underline disabled:cursor-not-allowed disabled:opacity-40"
+            className="shrink-0 cursor-pointer rounded-full px-1.5 py-0.5 text-xs text-foreground underline underline-offset-2 transition-colors duration-150 hover:no-underline disabled:cursor-not-allowed disabled:opacity-40"
           >
             Review
           </button>
@@ -976,15 +971,15 @@ function BoundState({
 
       {/* Failed rows: the retry is a deliberate human action, never automatic. */}
       {failed > 0 && (
-        <div className="flex items-center justify-between gap-2 rounded-lg bg-[var(--atlas-status-warning-background)] px-2.5 py-1.5">
-          <span className="text-xs text-[var(--atlas-status-warning-foreground)]">
+        <div className="flex items-center justify-between gap-2 rounded-lg bg-warning-muted px-2.5 py-1.5">
+          <span className="text-xs text-warning">
             {failed} record{failed === 1 ? "" : "s"} could not be sent.
           </span>
           <button
             type="button"
             disabled={busy}
             onClick={() => void run(() => invoke("capture_retry_failed", { projectPath }))}
-            className="flex shrink-0 cursor-pointer items-center gap-1 rounded-full px-1.5 py-0.5 text-xs text-[var(--foreground)] underline underline-offset-2 transition-colors duration-150 hover:no-underline disabled:cursor-not-allowed disabled:opacity-40"
+            className="flex shrink-0 cursor-pointer items-center gap-1 rounded-full px-1.5 py-0.5 text-xs text-foreground underline underline-offset-2 transition-colors duration-150 hover:no-underline disabled:cursor-not-allowed disabled:opacity-40"
           >
             <RefreshCw size={10} />
             Retry
@@ -995,7 +990,7 @@ function BoundState({
       <div className="flex items-center gap-2 pt-1">
         {/* Where this Project's Sessions live. A label, not a control — the
          *  way to change it is the Sync button beside it. */}
-        <span className="mr-auto flex items-center gap-1.5 text-xs text-[var(--muted-foreground)]">
+        <span className="mr-auto flex items-center gap-1.5 text-xs text-muted-foreground">
           {binding.mode === "cloud" ? <Cloud size={11} /> : <Laptop size={11} />}
           {binding.mode === "cloud" ? "Cloud" : "Local"}
         </span>
@@ -1010,7 +1005,7 @@ function BoundState({
               type="button"
               disabled
               title={cloudReason}
-              className="inline-flex cursor-not-allowed items-center gap-1.5 rounded-full border border-[var(--atlas-element-selected)] bg-[var(--atlas-element-hover)] px-2.5 py-1 text-xs text-[var(--muted-foreground)] opacity-40"
+              className="inline-flex cursor-not-allowed items-center gap-1.5 rounded-full border border-element-selected bg-element-hover px-2.5 py-1 text-xs text-muted-foreground opacity-40"
             >
               <Cloud size={11} />
               Sync
@@ -1020,7 +1015,7 @@ function BoundState({
               type="button"
               disabled={busy}
               onClick={onPromote}
-              className="inline-flex cursor-pointer items-center gap-1.5 rounded-full border border-[var(--atlas-element-selected)] bg-[var(--atlas-element-hover)] px-2.5 py-1 text-xs text-[var(--secondary-foreground)] transition-colors hover:bg-[var(--atlas-element-selected)] hover:text-[var(--foreground)] disabled:cursor-not-allowed disabled:opacity-40"
+              className="inline-flex cursor-pointer items-center gap-1.5 rounded-full border border-element-selected bg-element-hover px-2.5 py-1 text-xs text-secondary-foreground transition-colors hover:bg-element-selected hover:text-foreground disabled:cursor-not-allowed disabled:opacity-40"
             >
               <ArrowUpRight size={11} />
               Sync
@@ -1036,7 +1031,7 @@ function BoundState({
               type="button"
               disabled
               title={cloudReason}
-              className="inline-flex cursor-not-allowed items-center gap-1.5 rounded-full border border-[var(--atlas-element-selected)] bg-[var(--atlas-element-hover)] px-2.5 py-1 text-xs text-[var(--muted-foreground)] opacity-40"
+              className="inline-flex cursor-not-allowed items-center gap-1.5 rounded-full border border-element-selected bg-element-hover px-2.5 py-1 text-xs text-muted-foreground opacity-40"
             >
               <ArrowLeftRight size={11} />
               Change
@@ -1047,7 +1042,7 @@ function BoundState({
               disabled={busy}
               onClick={onSwitch}
               title="Sync to a different Project"
-              className="inline-flex cursor-pointer items-center gap-1.5 rounded-full border border-[var(--atlas-element-selected)] bg-[var(--atlas-element-hover)] px-2.5 py-1 text-xs text-[var(--secondary-foreground)] transition-colors hover:bg-[var(--atlas-element-selected)] hover:text-[var(--foreground)] disabled:cursor-not-allowed disabled:opacity-40"
+              className="inline-flex cursor-pointer items-center gap-1.5 rounded-full border border-element-selected bg-element-hover px-2.5 py-1 text-xs text-secondary-foreground transition-colors hover:bg-element-selected hover:text-foreground disabled:cursor-not-allowed disabled:opacity-40"
             >
               <ArrowLeftRight size={11} />
               Change
@@ -1072,7 +1067,7 @@ function BoundState({
       </div>
 
       {!binding.enabled && (
-        <p className="text-xs text-[var(--muted-foreground)]">
+        <p className="text-xs text-muted-foreground">
           Paused. Nothing already recorded has been deleted.
         </p>
       )}
@@ -1241,14 +1236,12 @@ function UnboundState({
           {/* The preview read failed: Continue has nothing to disclose, so say
            *  so where it blocks, with the retry right there. */}
           {mode === "cloud" && importPreview === null && (
-            <div className="flex items-center justify-between gap-2 rounded-lg bg-[var(--atlas-status-warning-background)] px-2.5 py-1.5">
-              <span className="text-xs text-[var(--atlas-status-warning-foreground)]">
-                Couldn't read this Project's history.
-              </span>
+            <div className="flex items-center justify-between gap-2 rounded-lg bg-warning-muted px-2.5 py-1.5">
+              <span className="text-xs text-warning">Couldn't read this Project's history.</span>
               <button
                 type="button"
                 onClick={onRetryPreview}
-                className="flex shrink-0 cursor-pointer items-center gap-1 rounded-full px-1.5 py-0.5 text-xs text-[var(--foreground)] underline underline-offset-2 transition-colors duration-150 hover:no-underline"
+                className="flex shrink-0 cursor-pointer items-center gap-1 rounded-full px-1.5 py-0.5 text-xs text-foreground underline underline-offset-2 transition-colors duration-150 hover:no-underline"
               >
                 <RefreshCw size={10} />
                 Retry
@@ -1336,10 +1329,10 @@ function Tabs({
             className={cn(
               "h-6 rounded-full border px-2.5 text-xs transition-colors",
               disabled
-                ? "cursor-not-allowed border-[var(--atlas-element-hover)] bg-[var(--atlas-element-hover)] text-[var(--muted-foreground)] opacity-40"
+                ? "cursor-not-allowed border-element-hover bg-element-hover text-muted-foreground opacity-40"
                 : on
-                  ? "cursor-pointer border-[var(--atlas-element-active)] bg-[var(--atlas-element-active)] text-[var(--foreground)]"
-                  : "cursor-pointer border-[var(--atlas-element-selected)] bg-[var(--atlas-element-hover)] text-[var(--muted-foreground)] hover:bg-[var(--atlas-element-selected)] hover:text-[var(--secondary-foreground)]",
+                  ? "cursor-pointer border-element-active bg-element-active text-foreground"
+                  : "cursor-pointer border-element-selected bg-element-hover text-muted-foreground hover:bg-element-selected hover:text-secondary-foreground",
             )}
             onClick={() => onTabChange(id)}
           >
@@ -1432,16 +1425,14 @@ function CloudFields({
        *  tenant you are not looking at, and the mistake only shows up later in
        *  someone else's timeline. */}
       <div className="flex items-center gap-2">
-        <span className="w-[70px] shrink-0 text-xs text-[var(--muted-foreground)]">
-          Organization
-        </span>
-        <span className="truncate text-xs text-[var(--secondary-foreground)]">
+        <span className="w-[70px] shrink-0 text-xs text-muted-foreground">Organization</span>
+        <span className="truncate text-xs text-secondary-foreground">
           {cloudOrgs[0]?.name ?? "—"}
         </span>
       </div>
 
       <label className="flex items-center gap-2">
-        <span className="w-[70px] shrink-0 text-xs text-[var(--muted-foreground)]">Slug</span>
+        <span className="w-[70px] shrink-0 text-xs text-muted-foreground">Slug</span>
         <input
           value={slug}
           onChange={(e) => onSlugChange(e.target.value)}
@@ -1458,7 +1449,7 @@ function CloudFields({
        *  this Project from their own checkout's origin. Prefilled from the
        *  detected remote, and cleared on purpose is a real answer. */}
       <label className="flex items-center gap-2">
-        <span className="w-[70px] shrink-0 text-xs text-[var(--muted-foreground)]">Repository</span>
+        <span className="w-[70px] shrink-0 text-xs text-muted-foreground">Repository</span>
         <input
           value={gitUrl}
           onChange={(e) => onGitUrlChange(e.target.value)}
@@ -1474,13 +1465,11 @@ function CloudFields({
           type="checkbox"
           checked={restricted}
           onChange={(e) => onRestrictedChange(e.target.checked)}
-          className="mt-0.5 size-3 shrink-0 cursor-pointer accent-[var(--primary)]"
+          className="mt-0.5 size-3 shrink-0 cursor-pointer accent-primary"
         />
         <span className="min-w-0">
-          <span className="text-xs text-[var(--secondary-foreground)]">
-            Restrict to named members
-          </span>
-          <span className="block text-2xs text-[var(--muted-foreground)]">
+          <span className="text-xs text-secondary-foreground">Restrict to named members</span>
+          <span className="block text-2xs text-muted-foreground">
             Otherwise every member of the Organization can read it and push to it. You can change
             this later.
           </span>
@@ -1503,27 +1492,25 @@ function SlugStatus({
     <p className="flex items-center gap-1 pl-[78px] text-2xs">
       {state.kind === "checking" && (
         <>
-          <Loader2 size={10} className="animate-spin text-[var(--muted-foreground)]" />
-          <span className="text-[var(--muted-foreground)]">checking…</span>
+          <Loader2 size={10} className="animate-spin text-muted-foreground" />
+          <span className="text-muted-foreground">checking…</span>
         </>
       )}
       {state.kind === "available" && (
         <>
-          <Check size={10} className="text-[var(--secondary-foreground)]" />
-          <span className="text-[var(--secondary-foreground)]">available</span>
+          <Check size={10} className="text-secondary-foreground" />
+          <span className="text-secondary-foreground">available</span>
         </>
       )}
       {state.kind === "taken" && (
         <>
-          <X size={10} className="text-[var(--atlas-status-error-foreground)]" />
-          <span className="text-[var(--atlas-status-error-foreground)]">
-            taken in this Organization
-          </span>
+          <X size={10} className="text-error" />
+          <span className="text-error">taken in this Organization</span>
           {onConnectInstead && (
             <button
               type="button"
               onClick={onConnectInstead}
-              className="cursor-pointer text-[var(--secondary-foreground)] underline underline-offset-2 transition-colors duration-150 hover:text-[var(--foreground)]"
+              className="cursor-pointer text-secondary-foreground underline underline-offset-2 transition-colors duration-150 hover:text-foreground"
             >
               connect to it instead
             </button>
@@ -1532,11 +1519,11 @@ function SlugStatus({
       )}
       {state.kind === "unknown" && (
         <>
-          <span className="text-[var(--atlas-status-warning-foreground)]">couldn't check</span>
+          <span className="text-warning">couldn't check</span>
           <button
             type="button"
             onClick={state.retry}
-            className="cursor-pointer text-[var(--secondary-foreground)] underline underline-offset-2 transition-colors duration-150 hover:text-[var(--foreground)]"
+            className="cursor-pointer text-secondary-foreground underline underline-offset-2 transition-colors duration-150 hover:text-foreground"
           >
             retry
           </button>
@@ -1618,7 +1605,7 @@ function ConnectTab({
 
   if (cloudReason) {
     return (
-      <p className={cn(GROUP, "flex items-start gap-1.5 text-xs text-[var(--muted-foreground)]")}>
+      <p className={cn(GROUP, "flex items-start gap-1.5 text-xs text-muted-foreground")}>
         <Lock size={11} className="mt-px shrink-0" />
         {cloudReason}
       </p>
@@ -1631,18 +1618,18 @@ function ConnectTab({
   return (
     <div className="space-y-2">
       {options === undefined ? (
-        <p className="flex items-center gap-1.5 py-2 text-xs text-[var(--muted-foreground)]">
+        <p className="flex items-center gap-1.5 py-2 text-xs text-muted-foreground">
           <Loader2 size={11} className="animate-spin" />
           Fetching this Organization's Projects…
         </p>
       ) : options === null ? (
-        <p className="rounded-lg bg-[var(--atlas-status-warning-background)] px-2.5 py-1.5 text-xs text-[var(--atlas-status-warning-foreground)]">
+        <p className="rounded-lg bg-warning-muted px-2.5 py-1.5 text-xs text-warning">
           {listError
             ? `Could not list this Organization's Projects: ${listError}`
             : "Could not reach the server. Check the connection and reopen this tab."}
         </p>
       ) : workspaces.length === 0 ? (
-        <p className={cn(GROUP, "text-xs text-[var(--muted-foreground)]")}>
+        <p className={cn(GROUP, "text-xs text-muted-foreground")}>
           {excludeId
             ? "This Organization has no other Projects to sync to."
             : "This Organization has no Projects yet. Create one from the Create tab instead."}
@@ -1650,7 +1637,7 @@ function ConnectTab({
       ) : (
         <>
           {options.warning && (
-            <p className="rounded-lg bg-[var(--atlas-status-warning-background)] px-2.5 py-1.5 text-xs text-[var(--atlas-status-warning-foreground)]">
+            <p className="rounded-lg bg-warning-muted px-2.5 py-1.5 text-xs text-warning">
               {options.warning}
             </p>
           )}
@@ -1668,12 +1655,12 @@ function ConnectTab({
             >
               <span className="min-w-0 flex-1 truncate">
                 {project ? (
-                  <span className="font-mono text-xs text-[var(--foreground)]">{project.slug}</span>
+                  <span className="font-mono text-xs text-foreground">{project.slug}</span>
                 ) : (
-                  <span className="text-xs text-[var(--muted-foreground)]">Choose a Project…</span>
+                  <span className="text-xs text-muted-foreground">Choose a Project…</span>
                 )}
               </span>
-              <ChevronDown size={11} className="shrink-0 text-[var(--muted-foreground)]" />
+              <ChevronDown size={11} className="shrink-0 text-muted-foreground" />
             </DropdownMenuTrigger>
             <DropdownMenuContent className="max-h-[220px] w-(--anchor-width)">
               {workspaces.map((remote) => (
@@ -1692,7 +1679,7 @@ function ConnectTab({
                   <span className="min-w-0 flex-1">
                     <span className="block truncate font-mono text-xs">{remote.slug}</span>
                     {remote.gitUrl && (
-                      <span className="block truncate text-2xs text-[var(--muted-foreground)]">
+                      <span className="block truncate text-2xs text-muted-foreground">
                         {remote.gitUrl}
                       </span>
                     )}
@@ -1708,9 +1695,7 @@ function ConnectTab({
        *  this repository's root commit, or none does — so the pick is handed
        *  back rather than reported as a failure. */}
       {refused && (
-        <p className="rounded-lg bg-[var(--atlas-status-warning-background)] px-2.5 py-1.5 text-xs text-[var(--atlas-status-warning-foreground)]">
-          {refused}
-        </p>
+        <p className="rounded-lg bg-warning-muted px-2.5 py-1.5 text-xs text-warning">{refused}</p>
       )}
 
       <div className="flex justify-end gap-2 pt-1">
@@ -1772,10 +1757,10 @@ function SwitchForm({
 }) {
   return (
     <div className="space-y-2">
-      <p className="text-sm font-medium text-[var(--foreground)]">Change Project</p>
-      <p className="text-xs text-[var(--muted-foreground)]">
+      <p className="text-sm font-medium text-foreground">Change Project</p>
+      <p className="text-xs text-muted-foreground">
         Currently syncing to{" "}
-        <span className="font-mono text-[var(--secondary-foreground)]">{binding.slug ?? "—"}</span>.
+        <span className="font-mono text-secondary-foreground">{binding.slug ?? "—"}</span>.
         Everything captured here will be re-sent to the Project you pick.
       </p>
       <ConnectTab
@@ -1843,8 +1828,8 @@ function PromoteForm({
 
   return (
     <div className="space-y-2">
-      <p className="text-sm font-medium text-[var(--foreground)]">Promote to Cloud</p>
-      <p className="text-xs text-[var(--muted-foreground)]">
+      <p className="text-sm font-medium text-foreground">Promote to Cloud</p>
+      <p className="text-xs text-muted-foreground">
         {activeTab === "create"
           ? "Everything captured here joins your Organization's timeline. You'll see exactly what before anything is sent."
           : "Attach this Project's history to a Project your Organization already has. You'll see exactly what before anything is sent."}
@@ -1920,7 +1905,7 @@ function PrimaryButton({
       type="button"
       disabled={busy || disabled}
       onClick={onClick}
-      className="inline-flex cursor-pointer items-center gap-1.5 rounded-full border border-[var(--border)] bg-[var(--card)] px-3 py-1.5 text-xs font-medium leading-none text-[var(--foreground)] transition-colors hover:bg-[var(--atlas-element-hover)] disabled:cursor-not-allowed disabled:opacity-40"
+      className="inline-flex cursor-pointer items-center gap-1.5 rounded-full border border-border bg-card px-3 py-1.5 text-xs font-medium leading-none text-foreground transition-colors hover:bg-element-hover disabled:cursor-not-allowed disabled:opacity-40"
     >
       {busy && <Loader2 size={11} className="animate-spin" />}
       {label}
@@ -1942,7 +1927,7 @@ function GhostButton({
       type="button"
       disabled={disabled}
       onClick={onClick}
-      className="inline-flex cursor-pointer items-center gap-1.5 rounded-full border border-[var(--border)] bg-[var(--card)] px-3 py-1.5 text-xs font-medium leading-none text-[var(--secondary-foreground)] transition-colors hover:bg-[var(--atlas-element-hover)] hover:text-[var(--foreground)] disabled:cursor-not-allowed disabled:opacity-40"
+      className="inline-flex cursor-pointer items-center gap-1.5 rounded-full border border-border bg-card px-3 py-1.5 text-xs font-medium leading-none text-secondary-foreground transition-colors hover:bg-element-hover hover:text-foreground disabled:cursor-not-allowed disabled:opacity-40"
     >
       {label}
     </button>
@@ -1982,11 +1967,7 @@ function ModeOption({
       onClick={onSelect}
       className={pillClass(disabled ? "disabled" : selected ? "on" : "off")}
     >
-      {disabled ? (
-        <Lock size={10} />
-      ) : (
-        selected && <Check size={10} className="text-[var(--foreground)]" />
-      )}
+      {disabled ? <Lock size={10} /> : selected && <Check size={10} className="text-foreground" />}
       {label}
     </button>
   );
@@ -2020,7 +2001,7 @@ function Detected({
 
   return (
     <div className={cn(GROUP, "space-y-1.5")}>
-      <p className="text-3xs font-semibold uppercase tracking-[0.12em] text-[var(--muted-foreground)]">
+      <p className="text-3xs font-semibold uppercase tracking-[0.12em] text-muted-foreground">
         This project
       </p>
 
@@ -2092,23 +2073,18 @@ function StatusRow({
       <Icon
         size={11}
         strokeWidth={1.75}
-        className={cn(
-          "shrink-0",
-          ok ? "text-[var(--secondary-foreground)]" : "text-[var(--atlas-text-disabled)]",
-        )}
+        className={cn("shrink-0", ok ? "text-secondary-foreground" : "text-disabled")}
       />
       <span
         className={cn(
           "min-w-0 flex-1 truncate text-xs",
           mono && "font-mono",
-          ok ? "text-[var(--foreground)]" : "text-[var(--muted-foreground)]",
+          ok ? "text-foreground" : "text-muted-foreground",
         )}
       >
         {value}
       </span>
-      <span className="shrink-0 text-3xs uppercase tracking-[0.08em] text-[var(--atlas-text-disabled)]">
-        {caption}
-      </span>
+      <span className="shrink-0 text-3xs uppercase tracking-[0.08em] text-disabled">{caption}</span>
     </div>
   );
 }
@@ -2134,11 +2110,11 @@ function TimelinePreview() {
   return (
     <div className={cn(GROUP, "overflow-hidden")}>
       <div className="flex items-center gap-1.5">
-        <Layers size={10} className="text-[var(--muted-foreground)]" />
-        <span className="text-3xs font-semibold uppercase tracking-[0.12em] text-[var(--muted-foreground)]">
+        <Layers size={10} className="text-muted-foreground" />
+        <span className="text-3xs font-semibold uppercase tracking-[0.12em] text-muted-foreground">
           Timeline
         </span>
-        <span className="ml-auto text-3xs text-[var(--atlas-text-disabled)]">preview</span>
+        <span className="ml-auto text-3xs text-disabled">preview</span>
       </div>
 
       <div className="relative mt-2">
@@ -2147,9 +2123,9 @@ function TimelinePreview() {
             poking out past the first and last node. The nodes themselves are
             laid out in flow — hand-positioning them meant re-deriving a magic
             offset every time the row height changed. */}
-        <span className="absolute bottom-[7px] left-[3px] top-[7px] w-px bg-[var(--atlas-element-active)]" />
+        <span className="absolute bottom-[7px] left-[3px] top-[7px] w-px bg-element-active" />
         <span
-          className="atlas-timeline-beam absolute left-[2px] top-[3px] h-2.5 w-[3px] rounded-full bg-[var(--atlas-status-success-foreground)]"
+          className="atlas-timeline-beam absolute left-[2px] top-[3px] h-2.5 w-[3px] rounded-full bg-success"
           style={{ "--atlas-beam-travel": "42px" } as React.CSSProperties}
         />
 
@@ -2164,29 +2140,27 @@ function TimelinePreview() {
                 className={cn(
                   "relative size-[7px] shrink-0 rounded-full border",
                   row.dot === "commit"
-                    ? "border-[var(--atlas-status-success-foreground)] bg-[var(--atlas-status-success-foreground)]"
-                    : "border-border-strong bg-[var(--card)]",
+                    ? "border-success bg-success"
+                    : "border-border-strong bg-card",
                 )}
               />
               <span
                 className={cn(
                   "min-w-0 flex-1 truncate text-2xs",
                   row.dot === "commit"
-                    ? "font-mono text-[var(--secondary-foreground)]"
-                    : "text-[var(--secondary-foreground)]",
+                    ? "font-mono text-secondary-foreground"
+                    : "text-secondary-foreground",
                 )}
               >
                 {row.text}
               </span>
-              <span className="shrink-0 text-3xs text-[var(--atlas-text-disabled)]">
-                {row.meta}
-              </span>
+              <span className="shrink-0 text-3xs text-disabled">{row.meta}</span>
             </div>
           ))}
         </div>
       </div>
 
-      <p className="mt-2 text-2xs text-[var(--muted-foreground)]">
+      <p className="mt-2 text-2xs text-muted-foreground">
         Every prompt, tool call and commit, kept on one thread you can reopen months later.
       </p>
     </div>
@@ -2203,12 +2177,9 @@ function TimelinePreview() {
  */
 function GitMissingBanner() {
   return (
-    <div className="flex items-start gap-2 rounded-lg border border-dashed border-[var(--atlas-status-warning-foreground)]/40 px-2.5 py-2">
-      <GitBranch
-        size={12}
-        className="mt-0.5 shrink-0 text-[var(--atlas-status-warning-foreground)]"
-      />
-      <p className="min-w-0 text-xs text-[var(--secondary-foreground)]">
+    <div className="flex items-start gap-2 rounded-lg border border-dashed border-warning/40 px-2.5 py-2">
+      <GitBranch size={12} className="mt-0.5 shrink-0 text-warning" />
+      <p className="min-w-0 text-xs text-secondary-foreground">
         Git is not installed on this machine. Sessions are still recorded, but they cannot be linked
         to commits and cannot be shared with an Organization.
       </p>
@@ -2225,10 +2196,10 @@ function GitMissingBanner() {
  */
 function GitInitOffer({ busy, onGitInit }: { busy: boolean; onGitInit: () => void }) {
   return (
-    <div className="flex items-start gap-2 rounded-lg border border-dashed border-[var(--atlas-element-active)] px-2.5 py-2">
-      <GitBranch size={12} className="mt-0.5 shrink-0 text-[var(--muted-foreground)]" />
+    <div className="flex items-start gap-2 rounded-lg border border-dashed border-element-active px-2.5 py-2">
+      <GitBranch size={12} className="mt-0.5 shrink-0 text-muted-foreground" />
       <div className="min-w-0">
-        <p className="text-xs text-[var(--secondary-foreground)]">
+        <p className="text-xs text-secondary-foreground">
           Sessions are recorded here already. Initialize git to also link them to the commits they
           produce.
         </p>
@@ -2236,7 +2207,7 @@ function GitInitOffer({ busy, onGitInit }: { busy: boolean; onGitInit: () => voi
           type="button"
           disabled={busy}
           onClick={onGitInit}
-          className="mt-1 cursor-pointer text-xs text-[var(--foreground)] underline underline-offset-2 transition-colors duration-150 hover:no-underline disabled:cursor-not-allowed disabled:opacity-40"
+          className="mt-1 cursor-pointer text-xs text-foreground underline underline-offset-2 transition-colors duration-150 hover:no-underline disabled:cursor-not-allowed disabled:opacity-40"
         >
           Initialize git
         </button>

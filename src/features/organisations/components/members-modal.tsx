@@ -202,12 +202,12 @@ export function MembersModal({
         <Dialog.Backdrop className="fixed inset-0 z-overlay scrim" />
         <Dialog.Popup
           aria-describedby={undefined}
-          className="fixed top-8.5 left-4 right-4 bottom-6 z-modal rounded-xl border border-[var(--border)] bg-[var(--sidebar)] overflow-hidden flex flex-col shadow-lg focus:outline-none"
+          className="fixed top-8.5 left-4 right-4 bottom-6 z-modal rounded-xl border border-border bg-sidebar overflow-hidden flex flex-col shadow-lg focus:outline-none"
         >
           <Dialog.Title className="sr-only">Members of {org.name}</Dialog.Title>
 
           {/* Header — mirrors the git-graph fullscreen bar. */}
-          <div className="flex items-center justify-between px-3 h-[32px] shrink-0 border-b border-border-subtle">
+          <div className="flex items-center justify-between px-3 h-[32px] shrink-0 border-b border-hairline">
             <span className="text-2xs font-semibold text-muted-foreground uppercase tracking-wide">
               {org.name} · {members.length} {members.length === 1 ? "member" : "members"}
             </span>
@@ -251,7 +251,7 @@ export function MembersModal({
                 className={cn(
                   "flex items-center gap-1.5 px-2.5 h-[40px] text-xs font-medium transition-colors border-b-2 -mb-px cursor-pointer",
                   tab === id
-                    ? "text-foreground border-b-[var(--primary)]"
+                    ? "text-foreground border-b-primary"
                     : "text-secondary-foreground hover:text-foreground border-b-transparent",
                 )}
               >
@@ -260,7 +260,7 @@ export function MembersModal({
               </button>
             ))}
             <div className="flex-1" />
-            <div className="flex items-center gap-1.5 h-6 rounded-md border border-border bg-card px-2 min-w-[200px] focus-within:border-[var(--atlas-border-strong)]">
+            <div className="flex items-center gap-1.5 h-6 rounded-md border border-border bg-card px-2 min-w-[200px] focus-within:border-border-strong">
               <Search size={11} className="text-muted-foreground shrink-0" />
               <input
                 value={query}
@@ -299,7 +299,7 @@ export function MembersModal({
                     : undefined
                 }
                 onClick={() => void submitInvite()}
-                className="inline-flex items-center gap-1.5 rounded-full border border-[var(--border)] bg-[var(--card)] px-3 py-1.5 text-xs font-medium leading-none text-foreground cursor-pointer transition-colors hover:bg-[var(--atlas-element-hover)] disabled:cursor-not-allowed disabled:opacity-40 shrink-0"
+                className="inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-3 py-1.5 text-xs font-medium leading-none text-foreground cursor-pointer transition-colors hover:bg-element-hover disabled:cursor-not-allowed disabled:opacity-40 shrink-0"
               >
                 {inviting ? <Loader2 size={11} className="animate-spin" /> : <UserPlus size={11} />}
                 Invite
@@ -412,13 +412,13 @@ function LeaveOrgDialog({
           className={cn(
             "fixed left-1/2 top-1/2 z-modal -translate-x-1/2 -translate-y-1/2",
             "w-[400px] max-w-[92vw] rounded-lg border border-border",
-            "bg-[var(--card)] p-5 shadow-lg animate-scale-in",
+            "bg-card p-5 shadow-lg animate-scale-in",
           )}
         >
-          <Dialog.Title className="text-md font-medium text-[var(--foreground)]">
+          <Dialog.Title className="text-md font-medium text-foreground">
             Leave “{orgName}”?
           </Dialog.Title>
-          <Dialog.Description className="mt-2 text-sm leading-relaxed text-[var(--secondary-foreground)]">
+          <Dialog.Description className="mt-2 text-sm leading-relaxed text-secondary-foreground">
             You lose access to its chat, projects and shared sessions at once. Coming back takes a
             new invitation.{" "}
             {onlyOrg
@@ -430,7 +430,7 @@ function LeaveOrgDialog({
             <button
               onClick={onCancel}
               disabled={leaving}
-              className="px-3 h-8 rounded-md text-sm text-[var(--secondary-foreground)] hover:bg-[var(--atlas-element-active)] hover:text-[var(--foreground)] transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+              className="px-3 h-8 rounded-md text-sm text-secondary-foreground hover:bg-element-active hover:text-foreground transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
             >
               Cancel
             </button>
@@ -472,7 +472,7 @@ function MemberRow({
   const roleLabel = member.role ? ROLE_LABELS[member.role] : null;
 
   return (
-    <div className="border-b border-border-subtle">
+    <div className="border-b border-hairline">
       <div className="w-full flex items-center h-[40px] px-3 text-left transition-colors hover:bg-element-hover">
         <span className={cn(COL.person, "flex items-center gap-2 min-w-0")}>
           {/* A LOCAL cache path, resolved in Rust — the remote photo URL is
@@ -516,7 +516,7 @@ function MemberRow({
                     <button
                       type="button"
                       aria-label={`${access.roles ? "Manage" : "Options for"} ${member.name || member.email}`}
-                      className="p-1 rounded text-muted-foreground hover:bg-element-hover hover:text-foreground outline-none focus-visible:ring-1 focus-visible:ring-[var(--ring)] transition-colors cursor-pointer"
+                      className="p-1 rounded text-muted-foreground hover:bg-element-hover hover:text-foreground outline-none focus-visible:ring-1 focus-visible:ring-ring transition-colors cursor-pointer"
                     >
                       <MoreHorizontal size={12} />
                     </button>
@@ -525,7 +525,7 @@ function MemberRow({
               </Hint>
               <DropdownMenu.Portal>
                 <DropdownMenu.Positioner className="z-popover" align="end" sideOffset={4}>
-                  <DropdownMenu.Popup className="min-w-[168px] rounded-md border border-[var(--border)] bg-popover py-0.5 shadow-md text-xs text-[var(--secondary-foreground)]">
+                  <DropdownMenu.Popup className="min-w-[168px] rounded-md border border-border bg-popover py-0.5 shadow-md text-xs text-secondary-foreground">
                     {access.roles && (
                       <>
                         <div className="px-2.5 py-1 text-3xs uppercase tracking-wider text-muted-foreground">
@@ -535,13 +535,13 @@ function MemberRow({
                           <DropdownMenu.Item
                             key={r}
                             onClick={() => onRole(r)}
-                            className="px-2.5 h-6 flex items-center justify-between outline-none hover:bg-[var(--atlas-element-hover)] hover:text-[var(--foreground)] cursor-pointer"
+                            className="px-2.5 h-6 flex items-center justify-between outline-none hover:bg-element-hover hover:text-foreground cursor-pointer"
                           >
                             {ROLE_LABELS[r]}
                             {member.role === r && <Check size={11} />}
                           </DropdownMenu.Item>
                         ))}
-                        <DropdownMenu.Separator className="my-0.5 h-px bg-[var(--border)]" />
+                        <DropdownMenu.Separator className="my-0.5 h-px bg-border" />
                       </>
                     )}
                     {/* Leave on your own row, Remove on anyone else's — each
@@ -554,7 +554,7 @@ function MemberRow({
                       className={cn(
                         "px-2.5 h-6 flex items-center gap-1.5 outline-none",
                         access.actionAllowed
-                          ? "hover:bg-[var(--atlas-element-hover)] hover:text-error cursor-pointer"
+                          ? "hover:bg-element-hover hover:text-error cursor-pointer"
                           : "opacity-40 cursor-not-allowed",
                       )}
                     >
@@ -582,7 +582,7 @@ function InviteRow({
   onCancel: () => void;
 }) {
   return (
-    <div className="border-b border-border-subtle">
+    <div className="border-b border-hairline">
       <div className="w-full flex items-center h-[40px] px-3 text-left transition-colors hover:bg-element-hover">
         <span className={cn(COL.person, "min-w-0 truncate text-sm text-foreground")}>
           {invite.email}
@@ -680,7 +680,7 @@ function EmailChipsInput({
     <div
       // FIXED height, never `min-h` + wrap: the bar must not grow the moment a
       // chip appears. Overflowing chips scroll sideways instead.
-      className="flex-1 min-w-0 flex items-center gap-1 h-7 rounded-md border border-border bg-card px-1.5 overflow-x-auto hide-scrollbar focus-within:border-[var(--atlas-border-strong)] cursor-text"
+      className="flex-1 min-w-0 flex items-center gap-1 h-7 rounded-md border border-border bg-card px-1.5 overflow-x-auto hide-scrollbar focus-within:border-border-strong cursor-text"
       onClick={(e) => {
         // Clicking the padding should focus the field, like a real input.
         const input = e.currentTarget.querySelector("input");
@@ -771,12 +771,12 @@ function RolePicker({
       <DropdownMenu.Trigger render={trigger} />
       <DropdownMenu.Portal>
         <DropdownMenu.Positioner className="z-popover" align="end" sideOffset={4}>
-          <DropdownMenu.Popup className="min-w-[150px] rounded-md border border-[var(--border)] bg-popover py-0.5 shadow-md text-xs text-[var(--secondary-foreground)]">
+          <DropdownMenu.Popup className="min-w-[150px] rounded-md border border-border bg-popover py-0.5 shadow-md text-xs text-secondary-foreground">
             {ROLES.map((r) => (
               <DropdownMenu.Item
                 key={r}
                 onClick={() => onSelect(r)}
-                className="px-2.5 h-6 flex items-center justify-between outline-none hover:bg-[var(--atlas-element-hover)] hover:text-[var(--foreground)] cursor-pointer"
+                className="px-2.5 h-6 flex items-center justify-between outline-none hover:bg-element-hover hover:text-foreground cursor-pointer"
               >
                 {ROLE_LABELS[r]}
                 {role === r && <Check size={11} />}

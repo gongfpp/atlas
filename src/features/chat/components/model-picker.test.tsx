@@ -216,7 +216,10 @@ describe("ModelPicker", () => {
     it("shows each model row's jump chord", () => {
       renderPicker();
       const label = (n: number) => displayLabel(parseCombo(`cmd+${n}`)!);
-      const kbds = screen.getAllByRole("option").map((o) => o.querySelector("kbd")?.textContent);
+      // One cap per key, so the chord is the caps' group read as one string.
+      const kbds = screen
+        .getAllByRole("option")
+        .map((o) => o.querySelector("[data-slot='kbd-group']")?.textContent);
       // Legacy toggle has none: it is not a pick.
       expect(kbds).toEqual([label(1), label(2), undefined]);
     });

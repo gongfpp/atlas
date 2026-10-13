@@ -445,7 +445,7 @@ function ReactionRow({
           className={cn(
             "flex h-[21px] items-center gap-1 rounded-full border px-1.5 text-xs leading-none transition-colors cursor-pointer",
             c.mine
-              ? "border-[var(--atlas-status-success-foreground)]/60 bg-[var(--atlas-status-success-foreground)]/15 text-foreground"
+              ? "border-success/60 bg-success/15 text-foreground"
               : "border-border bg-card text-secondary-foreground hover:bg-element-hover",
           )}
         >
@@ -517,7 +517,7 @@ function AttachmentView({ attachment, convId }: { attachment: ChatAttachment; co
       return (
         <div
           style={box}
-          className="flex w-full max-w-[520px] items-center justify-center rounded-lg border border-border-subtle bg-card"
+          className="flex w-full max-w-[520px] items-center justify-center rounded-lg border border-hairline bg-card"
         >
           <Loader2 size={14} className="animate-spin text-disabled" />
         </div>
@@ -530,7 +530,7 @@ function AttachmentView({ attachment, convId }: { attachment: ChatAttachment; co
           controls
           preload="metadata"
           style={box}
-          className="w-full max-w-[520px] rounded-lg border border-border-subtle bg-popover"
+          className="w-full max-w-[520px] rounded-lg border border-hairline bg-popover"
         />
       );
     }
@@ -540,7 +540,7 @@ function AttachmentView({ attachment, convId }: { attachment: ChatAttachment; co
           type="button"
           onClick={() => openConversationMedia(convId, attachment.id)}
           style={box}
-          className="block w-full max-w-[520px] overflow-hidden rounded-lg border border-border-subtle bg-card cursor-zoom-in"
+          className="block w-full max-w-[520px] overflow-hidden rounded-lg border border-hairline bg-card cursor-zoom-in"
         >
           <img
             src={convertFileSrc(path)}
@@ -584,7 +584,7 @@ function AttachmentView({ attachment, convId }: { attachment: ChatAttachment; co
       className="group/file flex max-w-[420px] cursor-pointer items-center gap-2 rounded-lg border border-border bg-card px-2.5 py-2 transition-colors hover:border-border-strong hover:bg-element-hover"
     >
       {progress ? (
-        <span className="flex h-[15px] w-[15px] shrink-0 items-center justify-center text-[var(--atlas-status-success-foreground)]">
+        <span className="flex h-[15px] w-[15px] shrink-0 items-center justify-center text-success">
           <ArcProgress got={progress.got} total={progress.total} />
         </span>
       ) : (
@@ -722,7 +722,7 @@ function HoverActions({
           </HintItem>
           <Popover.Portal>
             <Popover.Positioner className="z-modal" side="top" align="end" sideOffset={6}>
-              <Popover.Popup className="w-[212px] rounded-lg border border-border bg-popover p-1.5 shadow-md origin-[var(--transform-origin)] animate-scale-in">
+              <Popover.Popup className="w-[212px] rounded-lg border border-border bg-popover p-1.5 shadow-md origin-(--transform-origin) animate-scale-in">
                 <div className="grid grid-cols-7 gap-0.5">
                   {/* Built FROM the allowlist, so no button here can be refused. */}
                   {CHAT_REACTION_EMOJI.map((e) => (
@@ -762,7 +762,7 @@ function HoverActions({
           </HintItem>
           <DropdownMenu.Portal>
             <DropdownMenu.Positioner className="z-modal" side="top" align="end" sideOffset={6}>
-              <DropdownMenu.Popup className="min-w-[168px] rounded-lg border border-border bg-popover p-1 shadow-md origin-[var(--transform-origin)] animate-scale-in">
+              <DropdownMenu.Popup className="min-w-[168px] rounded-lg border border-border bg-popover p-1 shadow-md origin-(--transform-origin) animate-scale-in">
                 <DropdownMenu.Item onClick={onCopy} className={menuItem}>
                   <Copy size={12} /> Copy text
                 </DropdownMenu.Item>

@@ -16,6 +16,8 @@ import {
 import { openFile } from "@/lib/open-file";
 import { classifyFile, type FileKind } from "@/lib/file-types";
 import { FileIcon, type FallbackIcon } from "@/features/icon-theme/components/file-icon";
+import { KbdLegend } from "@/ui/kbd";
+import { ActionKbd } from "@/features/keybindings/components/action-kbd";
 
 const DEBOUNCE_MS = 30;
 const RESULT_LIMIT = 200;
@@ -179,7 +181,7 @@ export function FilePicker({ open, onOpenChange }: FilePickerProps) {
         <Dialog.Popup
           className={cn(
             "fixed left-1/2 top-[18%] z-modal -translate-x-1/2",
-            "w-[640px] max-w-[92vw] rounded-md border border-[var(--border)] bg-[var(--card)] shadow-2xl",
+            "w-[640px] max-w-[92vw] rounded-md border border-border bg-card shadow-lg",
             "flex flex-col overflow-hidden",
           )}
         >
@@ -190,16 +192,21 @@ export function FilePicker({ open, onOpenChange }: FilePickerProps) {
             onChange={(e) => setQuery(e.target.value)}
             placeholder={project ? "Search files by name or path…" : "Open a project first"}
             disabled={!project}
-            className="px-4 h-11 bg-transparent border-b border-[var(--border)] text-sm text-[var(--foreground)] placeholder:text-[var(--muted-foreground)] outline-none"
+            className="px-4 h-11 bg-transparent border-b border-border text-sm text-foreground placeholder:text-muted-foreground outline-none"
           />
           <div ref={scrollRef} className="max-h-[420px] overflow-y-auto hide-scrollbar">
             {showEmpty ? (
-              <div className="px-4 py-3 text-xs text-[var(--muted-foreground)]">
-                {!project
-                  ? "Open a project to enable Cmd+P."
-                  : indexing
-                    ? "Indexing files… results will appear here."
-                    : "No matches."}
+              <div className="px-4 py-3 text-xs text-muted-foreground">
+                {!project ? (
+                  <>
+                    Open a project to enable{" "}
+                    <ActionKbd id="nav.filePicker" size="2xs" fallback="⌘P" />.
+                  </>
+                ) : indexing ? (
+                  "Indexing files… results will appear here."
+                ) : (
+                  "No matches."
+                )}
               </div>
             ) : (
               <div
@@ -232,8 +239,8 @@ export function FilePicker({ open, onOpenChange }: FilePickerProps) {
                       className={cn(
                         "flex items-center gap-2 px-3 text-left cursor-pointer transition-colors",
                         active
-                          ? "bg-[var(--atlas-element-selected)] text-[var(--foreground)]"
-                          : "text-[var(--secondary-foreground)] hover:bg-[var(--atlas-element-hover)]",
+                          ? "bg-element-selected text-foreground"
+                          : "text-secondary-foreground hover:bg-element-hover",
                       )}
                     >
                       <FileIcon path={m.path} size={12} fallback={kindIcon(classifyFile(m.path))} />
@@ -244,7 +251,7 @@ export function FilePicker({ open, onOpenChange }: FilePickerProps) {
               </div>
             )}
           </div>
-          <div className="flex items-center justify-between px-3 h-7 border-t border-[var(--border)] text-2xs text-[var(--muted-foreground)] font-mono">
+          <div className="flex items-center justify-between px-3 h-7 border-t border-border text-2xs text-muted-foreground font-mono">
             <div className="flex items-center gap-2">
               <button
                 onClick={handleReindex}
@@ -252,7 +259,7 @@ export function FilePicker({ open, onOpenChange }: FilePickerProps) {
                 title="Rebuild the file index"
                 className={cn(
                   "flex items-center gap-1 rounded px-1 -ml-1 transition-colors",
-                  "hover:text-[var(--secondary-foreground)] disabled:opacity-40 disabled:cursor-default cursor-pointer outline-none",
+                  "hover:text-secondary-foreground disabled:opacity-40 disabled:cursor-default cursor-pointer outline-none",
                 )}
               >
                 <RotateCw size={10} className={cn(reindexing && "animate-spin")} />
@@ -262,7 +269,13 @@ export function FilePicker({ open, onOpenChange }: FilePickerProps) {
                 {results.length} match{results.length === 1 ? "" : "es"}
               </span>
             </div>
-            <span>↑↓ navigate · ↵ open · esc close</span>
+            <KbdLegend
+              items={[
+                { keys: ["↑", "↓"], label: "navigate" },
+                { keys: ["↵"], label: "open" },
+                { keys: ["esc"], label: "close" },
+              ]}
+            />
           </div>
         </Dialog.Popup>
       </Dialog.Portal>

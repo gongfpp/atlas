@@ -5,7 +5,7 @@ import { useStopAgentsConfirmStore } from "../lib/stop-agents-confirm";
 
 /** The app's pill-button language (matches the create-org dialog footer). */
 const pillButton =
-  "inline-flex items-center gap-1.5 rounded-full border border-[var(--border)] px-3 py-1.5 text-xs font-medium leading-none cursor-pointer transition-colors";
+  "inline-flex items-center gap-1.5 rounded-full border border-border px-3 py-1.5 text-xs font-medium leading-none cursor-pointer transition-colors";
 
 /**
  * Global "this will stop running agents" confirmation, driven by
@@ -26,17 +26,17 @@ export function StopAgentsDialog() {
           aria-describedby={undefined}
           className={cn(
             "fixed left-1/2 top-1/2 z-modal -translate-x-1/2 -translate-y-1/2",
-            "w-[380px] max-w-[92vw] overflow-hidden rounded-xl border border-[var(--border)]",
-            "bg-[var(--card)]/60 backdrop-blur-2xl",
+            "w-[380px] max-w-[92vw] overflow-hidden rounded-xl border border-border",
+            "bg-card/60 backdrop-blur-2xl",
             "shadow-md animate-scale-in",
           )}
         >
           <div className="px-4 pt-3.5 pb-4">
-            <Dialog.Title className="flex items-center gap-2 text-base font-semibold tracking-[-0.01em] text-[var(--foreground)]">
+            <Dialog.Title className="flex items-center gap-2 text-base font-semibold tracking-[-0.01em] text-foreground">
               <OctagonX size={13} className="text-error" />
               {pending.count} running {pending.count === 1 ? "agent" : "agents"}
             </Dialog.Title>
-            <p className="mt-2 text-sm leading-relaxed text-[var(--secondary-foreground)]">
+            <p className="mt-2 text-sm leading-relaxed text-secondary-foreground">
               {pending.count} {plural} still working. {pending.actionLabel} will stop{" "}
               {pending.count === 1 ? "it" : "them"} — the conversation
               {pending.count === 1 ? " stays" : "s stay"} in history, but the in-flight work is
@@ -48,17 +48,14 @@ export function StopAgentsDialog() {
                 onClick={() => settle(false)}
                 className={cn(
                   pillButton,
-                  "bg-[var(--card)] text-[var(--secondary-foreground)] hover:bg-[var(--atlas-element-hover)] hover:text-[var(--foreground)]",
+                  "bg-card text-secondary-foreground hover:bg-element-hover hover:text-foreground",
                 )}
               >
                 Go back
               </button>
               <button
                 onClick={() => settle(true)}
-                className={cn(
-                  pillButton,
-                  "border-error/40 bg-[var(--card)] text-error hover:bg-error/10",
-                )}
+                className={cn(pillButton, "border-error/40 bg-card text-error hover:bg-error/10")}
               >
                 <OctagonX size={12} />
                 {pending.confirmLabel}

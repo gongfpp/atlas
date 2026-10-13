@@ -26,12 +26,11 @@ import { PresetIcon } from "./preset-icon";
 
 // Same recipe as the account menu so every Atlas dropdown reads alike.
 const CONTENT_CLASS =
-  "min-w-[200px] max-w-[280px] rounded-md border border-[var(--border)] " +
-  "bg-[var(--card)] shadow-md py-1";
+  "min-w-[200px] max-w-[280px] rounded-md border border-border " + "bg-card shadow-md py-1";
 const ITEM_CLASS =
   "flex items-center gap-2 px-3 h-[26px] text-xs cursor-pointer outline-none " +
-  "text-[var(--secondary-foreground)] data-[highlighted]:bg-[var(--atlas-element-hover)] " +
-  "data-[highlighted]:text-[var(--foreground)]";
+  "text-secondary-foreground data-[highlighted]:bg-element-hover " +
+  "data-[highlighted]:text-foreground";
 
 /** The three ways the inline name field is used. */
 type NamingMode = "create" | "duplicate" | "rename";
@@ -174,7 +173,7 @@ export function ProfileBar() {
                     )}
                   </DropdownMenu.Item>
                 ))}
-                <DropdownMenu.Separator className="my-1 h-px bg-[var(--border)]" />
+                <DropdownMenu.Separator className="my-1 h-px bg-border" />
                 <DropdownMenu.Item
                   onClick={() => {
                     openingInput.current = true;
@@ -199,7 +198,7 @@ export function ProfileBar() {
                   </span>
                   <span className="flex-1 truncate">Duplicate “{active.name}”…</span>
                 </DropdownMenu.Item>
-                <DropdownMenu.Separator className="my-1 h-px bg-[var(--border)]" />
+                <DropdownMenu.Separator className="my-1 h-px bg-border" />
                 <div className="px-3 pb-0.5 pt-1 text-2xs text-muted-foreground">
                   New from an editor's keys
                 </div>

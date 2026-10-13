@@ -60,7 +60,7 @@ function PopoverContent({
             "max-h-(--available-height) w-72 overflow-hidden rounded-lg p-2.5",
             "bg-popover border border-border text-foreground shadow-md",
             "text-sm outline-none",
-            "origin-[var(--transform-origin)] animate-scale-in",
+            "origin-(--transform-origin) animate-scale-in",
             className,
           )}
           {...props}

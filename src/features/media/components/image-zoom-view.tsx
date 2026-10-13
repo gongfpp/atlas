@@ -133,24 +133,24 @@ export function ImageZoomView({ src, alt, fill, checkerboard }: ImageZoomViewPro
 
       {/* Zoom controls — at the bottom of the view, so tooltips open upward. */}
       <HintGroup side="top">
-        <div className="absolute bottom-3 right-3 flex items-center gap-0.5 rounded-md border border-[var(--border)] bg-[var(--card)] px-1 py-0.5 shadow-md">
+        <div className="absolute bottom-3 right-3 flex items-center gap-0.5 rounded-md border border-border bg-card px-1 py-0.5 shadow-md">
           <HintItem label="Zoom out">
             <button
               type="button"
               onClick={zoomButton(1 / 1.3)}
-              className="flex h-6 w-6 items-center justify-center rounded text-[var(--muted-foreground)] hover:bg-[var(--atlas-element-hover)] hover:text-[var(--foreground)]"
+              className="flex h-6 w-6 items-center justify-center rounded text-muted-foreground hover:bg-element-hover hover:text-foreground"
             >
               <ZoomOut size={13} />
             </button>
           </HintItem>
-          <span className="w-9 text-center text-2xs font-mono text-[var(--muted-foreground)]">
+          <span className="w-9 text-center text-2xs font-mono text-muted-foreground">
             {Math.round(scale * 100)}%
           </span>
           <HintItem label="Zoom in">
             <button
               type="button"
               onClick={zoomButton(1.3)}
-              className="flex h-6 w-6 items-center justify-center rounded text-[var(--muted-foreground)] hover:bg-[var(--atlas-element-hover)] hover:text-[var(--foreground)]"
+              className="flex h-6 w-6 items-center justify-center rounded text-muted-foreground hover:bg-element-hover hover:text-foreground"
             >
               <ZoomIn size={13} />
             </button>
@@ -159,7 +159,7 @@ export function ImageZoomView({ src, alt, fill, checkerboard }: ImageZoomViewPro
             <button
               type="button"
               onClick={reset}
-              className="flex h-6 w-6 items-center justify-center rounded text-[var(--muted-foreground)] hover:bg-[var(--atlas-element-hover)] hover:text-[var(--foreground)]"
+              className="flex h-6 w-6 items-center justify-center rounded text-muted-foreground hover:bg-element-hover hover:text-foreground"
             >
               <Maximize size={12} />
             </button>

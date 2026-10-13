@@ -169,7 +169,7 @@ export function SpacePages({
 
   return (
     <div
-      className="flex h-full shrink-0 flex-col border-r border-border bg-[var(--card)]"
+      className="flex h-full shrink-0 flex-col border-r border-border bg-card"
       style={{ width: 260 }}
     >
       {/* Quiet header — no divider, the local panel's recipe. */}
@@ -212,7 +212,7 @@ export function SpacePages({
               {dropHere && drop.where !== "into" && (
                 <div
                   className={cn(
-                    "pointer-events-none absolute left-1 right-1 z-10 h-[2px] rounded bg-[var(--primary)]",
+                    "pointer-events-none absolute left-1 right-1 z-10 h-[2px] rounded bg-primary",
                     drop.where === "before" ? "top-0" : "bottom-0",
                   )}
                 />
@@ -346,7 +346,7 @@ export function SpacePages({
                           e.stopPropagation();
                           session.deletePage(page.id);
                         }}
-                        className="flex size-control-sm cursor-pointer items-center justify-center rounded-full border border-border text-muted-foreground transition-colors hover:bg-element-hover hover:text-[var(--atlas-status-error-foreground)] disabled:cursor-not-allowed disabled:opacity-30"
+                        className="flex size-control-sm cursor-pointer items-center justify-center rounded-full border border-border text-muted-foreground transition-colors hover:bg-element-hover hover:text-error disabled:cursor-not-allowed disabled:opacity-30"
                       >
                         <Trash2 size={10} />
                       </button>

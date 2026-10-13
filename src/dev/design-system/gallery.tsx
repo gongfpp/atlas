@@ -128,7 +128,7 @@ function Section({
   children: ReactNode;
 }) {
   return (
-    <section className="border-t border-border-subtle py-8">
+    <section className="border-t border-hairline py-8">
       <div className="mb-4 flex items-baseline gap-2">
         <h2 className="heading">{title}</h2>
         <span className="caption">{decision}</span>
@@ -587,7 +587,7 @@ function AnimatedIconSection() {
     <Section
       title="Animated icons"
       decision="decision 33"
-      note="Glyphs that carry a state change. CSS only — no JS animation runtime. Controlled: each takes its state from the caller. Click each one."
+      note="Glyphs that carry a state change. CSS state transitions — no springs, so no motion. Controlled: each takes its state from the caller. Click each one."
     >
       <div className="flex flex-wrap items-end gap-8">
         <div className={cell}>

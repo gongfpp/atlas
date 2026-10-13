@@ -126,7 +126,7 @@ export function GitGraphPanel() {
         <Dialog.Backdrop className="fixed inset-0 z-overlay scrim" />
         <Dialog.Popup
           aria-describedby={undefined}
-          className="fixed top-8.5 left-4 right-4 bottom-6 z-modal rounded-xl border border-[var(--border)] bg-[var(--sidebar)] overflow-hidden flex flex-col shadow-md focus:outline-none"
+          className="fixed top-8.5 left-4 right-4 bottom-6 z-modal rounded-xl border border-border bg-sidebar overflow-hidden flex flex-col shadow-md focus:outline-none"
         >
           <Dialog.Title className="sr-only">Git Graph</Dialog.Title>
           {inner}
@@ -204,7 +204,7 @@ function GraphView({
   return (
     <div className="h-full flex flex-col bg-sidebar">
       {/* Header */}
-      <div className="flex items-center justify-between px-3 h-control-lg shrink-0 border-b border-border-subtle">
+      <div className="flex items-center justify-between px-3 h-control-lg shrink-0 border-b border-hairline">
         <div className="flex items-center gap-1.5">
           {rows.length > 0 && (
             <span className="text-2xs font-semibold text-muted-foreground uppercase tracking-wide">
@@ -285,7 +285,7 @@ function GraphView({
             />
             <button
               onClick={onShowMore}
-              className="absolute bottom-3 left-1/2 -translate-x-1/2 z-20 flex items-center gap-1.5 px-3 h-7 rounded-full border border-[var(--border)] bg-[var(--card)] text-xs text-[var(--secondary-foreground)] hover:text-[var(--foreground)] hover:bg-[var(--card)] shadow-md transition-colors cursor-pointer"
+              className="absolute bottom-3 left-1/2 -translate-x-1/2 z-20 flex items-center gap-1.5 px-3 h-7 rounded-full border border-border bg-card text-xs text-secondary-foreground hover:text-foreground hover:bg-card shadow-md transition-colors cursor-pointer"
               style={{ backdropFilter: "blur(4px)" }}
               title={`Show ${DEFAULT_LIMIT} more commits`}
             >

@@ -72,8 +72,8 @@ export function MemorySharingControls({ projectPath }: { projectPath: string | n
         className={cn(
           "flex items-center gap-1 h-6 px-2 rounded-full border text-2xs font-medium transition-colors cursor-pointer outline-none",
           enabled
-            ? "border-[var(--border)] bg-[var(--atlas-element-hover)] text-[var(--foreground)]"
-            : "border-[var(--border)] text-[var(--muted-foreground)] hover:text-[var(--secondary-foreground)] hover:bg-[var(--atlas-element-hover)]",
+            ? "border-border bg-element-hover text-foreground"
+            : "border-border text-muted-foreground hover:text-secondary-foreground hover:bg-element-hover",
         )}
       >
         <Share2 size={11} />
@@ -87,7 +87,7 @@ export function MemorySharingControls({ projectPath }: { projectPath: string | n
             render={
               <button
                 type="button"
-                className="flex items-center justify-center h-6 w-6 rounded-full border border-[var(--border)] text-[var(--secondary-foreground)] hover:bg-[var(--atlas-element-hover)] hover:text-[var(--foreground)] outline-none transition-colors cursor-pointer"
+                className="flex items-center justify-center h-6 w-6 rounded-full border border-border text-secondary-foreground hover:bg-element-hover hover:text-foreground outline-none transition-colors cursor-pointer"
               >
                 <SlidersHorizontal size={12} />
               </button>
@@ -167,7 +167,7 @@ export function MemorySharingControls({ projectPath }: { projectPath: string | n
                     disabled={!enabled}
                     // The popover is card-coloured: the default off track
                     // would vanish into it, leaving a floating thumb.
-                    className={cn(!fromExternalSessions && "bg-[var(--atlas-element-hover)]")}
+                    className={cn(!fromExternalSessions && "bg-element-hover")}
                     onChange={(on) => void setFromExternalSessions(on)}
                   />
                 </div>
@@ -202,8 +202,8 @@ function ModeSeg({
       className={cn(
         "flex items-center gap-1 h-[22px] px-2 rounded-full text-2xs font-medium transition-colors",
         active
-          ? "bg-[var(--atlas-element-hover)] text-[var(--foreground)]"
-          : "text-[var(--muted-foreground)] hover:text-[var(--secondary-foreground)]",
+          ? "bg-element-hover text-foreground"
+          : "text-muted-foreground hover:text-secondary-foreground",
         !enabled && "opacity-40 cursor-not-allowed",
       )}
     >

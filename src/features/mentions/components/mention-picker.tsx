@@ -50,7 +50,7 @@ import {
 import { cn } from "@/lib/utils";
 import { shortPath } from "@/lib/paths";
 import { timeAgo } from "@/lib/time-ago";
-import { Kbd } from "@/ui/kbd";
+import { KbdLegend } from "@/ui/kbd";
 
 import {
   MENTION_CATEGORIES,
@@ -613,16 +613,17 @@ export const MentionPicker = forwardRef<MentionPickerHandle, MentionPickerProps>
           />
         )}
         <div className="border-t border-border px-3 h-[34px] flex items-center justify-between shrink-0">
-          <span className="flex items-center gap-1.5 text-3xs text-muted-foreground">
-            <Kbd>↑↓</Kbd>
-            <span>navigate</span>
-            <Kbd>↵</Kbd>
-            <span>select</span>
-          </span>
-          <span className="flex items-center gap-1.5 text-3xs text-muted-foreground">
-            <Kbd>esc</Kbd>
-            <span>close</span>
-          </span>
+          <KbdLegend
+            className="text-3xs text-muted-foreground"
+            items={[
+              { keys: ["↑", "↓"], label: "navigate" },
+              { keys: ["↵"], label: "select" },
+            ]}
+          />
+          <KbdLegend
+            className="text-3xs text-muted-foreground"
+            items={[{ keys: ["esc"], label: "close" }]}
+          />
         </div>
       </div>,
       document.body,
@@ -786,8 +787,8 @@ const PickerRow = memo(function PickerRow({
     className: cn(
       "text-left px-3 flex items-center gap-2 text-sm",
       isActive
-        ? "bg-[var(--atlas-element-selected)] text-[var(--foreground)]"
-        : "text-[var(--secondary-foreground)] hover:bg-[var(--atlas-element-hover)]",
+        ? "bg-element-selected text-foreground"
+        : "text-secondary-foreground hover:bg-element-hover",
     ),
   };
   if (row.type === "category") {

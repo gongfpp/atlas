@@ -51,6 +51,7 @@ import { SectionTitle, SettingRow, Toggle } from "./settings-controls";
 
 export { Toggle };
 import { useAgentRegistryStore } from "@/features/agents/stores/agent-registry-store";
+import { KbdCombo } from "@/ui/kbd";
 
 const SECTIONS: Array<{
   id: SettingsSection;
@@ -141,12 +142,12 @@ export function SettingsPanel({ initialSection }: { initialSection?: string } = 
                 <span className="relative shrink-0 flex">
                   <s.icon size={13} />
                   {navCollapsed && badge > 0 && (
-                    <span className="pointer-events-none absolute -right-1 -top-1 size-1.5 rounded-full bg-[var(--primary)]" />
+                    <span className="pointer-events-none absolute -right-1 -top-1 size-1.5 rounded-full bg-primary" />
                   )}
                 </span>
                 {!navCollapsed && s.label}
                 {!navCollapsed && badge > 0 && (
-                  <span className="ml-auto min-w-4 h-4 px-1 rounded-full bg-[var(--primary)] text-primary-foreground text-3xs leading-4 text-center tabular-nums">
+                  <span className="ml-auto min-w-4 h-4 px-1 rounded-full bg-primary text-primary-foreground text-3xs leading-4 text-center tabular-nums">
                     {badge}
                   </span>
                 )}
@@ -393,7 +394,7 @@ function GeneralSettings() {
           <select
             value={settings.appIcon}
             onChange={(e) => updateSettings({ appIcon: e.target.value })}
-            className="h-7 rounded-md border border-[var(--border)] bg-[var(--card)] px-2 text-xs text-[var(--foreground)] outline-none"
+            className="h-7 rounded-md border border-border bg-card px-2 text-xs text-foreground outline-none"
           >
             {APP_ICONS.map((icon) => (
               <option key={icon.id} value={icon.id}>
@@ -405,7 +406,15 @@ function GeneralSettings() {
       )}
       <SettingRow
         label="Enter to send"
-        description="Enter sends your message; Shift+Enter inserts a newline — the Slack/Discord/ChatGPT convention. Turn off to restore the old behavior, where only ⌘/Ctrl+Enter sends and Enter always inserts a newline. ⌘/Ctrl+Enter always sends either way."
+        description={
+          <>
+            <KbdCombo combo="↵" size="2xs" /> sends your message; <KbdCombo combo="⇧↵" size="2xs" />{" "}
+            inserts a newline — the Slack/Discord/ChatGPT convention. Turn off to restore the old
+            behavior, where only <KbdCombo combo={isMac ? "⌘↵" : "Ctrl+↵"} size="2xs" /> sends and{" "}
+            <KbdCombo combo="↵" size="2xs" /> always inserts a newline.{" "}
+            <KbdCombo combo={isMac ? "⌘↵" : "Ctrl+↵"} size="2xs" /> always sends either way.
+          </>
+        }
       >
         <Toggle
           checked={settings.enterToSend}
@@ -539,7 +548,7 @@ function GeneralSettings() {
               agentSwitchBehavior: e.target.value as AppSettings["agentSwitchBehavior"],
             })
           }
-          className="h-7 rounded-md border border-[var(--border)] bg-[var(--card)] px-2 text-xs text-[var(--foreground)] outline-none"
+          className="h-7 rounded-md border border-border bg-card px-2 text-xs text-foreground outline-none"
         >
           <option value="reset">Start over</option>
           <option value="new-tab">New tab</option>
@@ -771,7 +780,7 @@ function UpdatesSettings() {
       onClick={restart}
       className={cn(
         "h-7 rounded-md px-2.5 text-xs font-medium",
-        "bg-[var(--foreground)] text-[var(--background)] hover:opacity-90 transition-opacity",
+        "bg-foreground text-background hover:opacity-90 transition-opacity",
       )}
     >
       Restart to update

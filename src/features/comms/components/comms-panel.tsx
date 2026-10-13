@@ -132,7 +132,7 @@ export function CommsPanel() {
     // an empty 29px strip labelled "Team Chat" only repeats what the panel
     // already is. The placeholder gets the whole surface.
     return (
-      <div className="atlas-vibrant-panel flex h-full flex-col bg-[var(--sidebar)] pt-1.5">
+      <div className="atlas-vibrant-panel flex h-full flex-col bg-sidebar pt-1.5">
         <CommsSurface>
           <CommsNotConnected org={activeOrg} />
         </CommsSurface>
@@ -150,9 +150,9 @@ export function CommsPanel() {
   if (conversations.length === 0 && connection.state !== "open") {
     const terminal = connection.state === "unavailable";
     return (
-      <div className="atlas-vibrant-panel flex h-full flex-col bg-[var(--sidebar)]">
+      <div className="atlas-vibrant-panel flex h-full flex-col bg-sidebar">
         <div className="flex h-[38px] shrink-0 items-center pl-2">
-          <div className="flex h-[26px] items-center gap-1.5 rounded-lg bg-[var(--atlas-element-selected)] pl-2.5 pr-2.5 text-sm font-medium text-foreground select-none">
+          <div className="flex h-[26px] items-center gap-1.5 rounded-lg bg-element-selected pl-2.5 pr-2.5 text-sm font-medium text-foreground select-none">
             <MessagesSquare size={11} className="shrink-0 opacity-70" />
             Chats
           </div>
@@ -173,7 +173,7 @@ export function CommsPanel() {
   }
 
   return (
-    <div className="atlas-vibrant-panel flex h-full flex-col bg-[var(--sidebar)]">
+    <div className="atlas-vibrant-panel flex h-full flex-col bg-sidebar">
       {/* The header lives on the BACKDROP, not the card — that separation is
           the whole depth trick. Taller than the old 29px band so the tabs
           breathe like the reference. */}
@@ -210,7 +210,7 @@ export function CommsPanel() {
             <button
               type="button"
               onClick={() => actions.newTab()}
-              className="flex h-6 w-6 items-center justify-center rounded-full border border-[var(--border)] text-[var(--secondary-foreground)] transition-colors hover:bg-[var(--atlas-element-hover)] hover:text-[var(--foreground)] outline-none cursor-pointer"
+              className="flex h-6 w-6 items-center justify-center rounded-full border border-border text-secondary-foreground transition-colors hover:bg-element-hover hover:text-foreground outline-none cursor-pointer"
             >
               <Plus size={14} />
             </button>
@@ -256,7 +256,7 @@ function CommsSurface({ children }: { children: React.ReactNode }) {
       // Pure black on the panel's own near-black background leaves a drop
       // shadow almost nothing to darken, so the hairline ring carries the
       // edge; the shadow just softens it.
-      className="mx-1.5 mb-1.5 flex min-h-0 flex-1 flex-col overflow-hidden rounded-xl bg-[var(--background)] ring-1 ring-[var(--atlas-element-active)] shadow-sm"
+      className="mx-1.5 mb-1.5 flex min-h-0 flex-1 flex-col overflow-hidden rounded-xl bg-background ring-1 ring-element-active"
     >
       {children}
     </div>
@@ -322,17 +322,17 @@ function TabButton({
         "transition-[background-color,color] duration-150",
         "pr-6",
         active
-          ? "bg-[var(--atlas-element-selected)] text-foreground"
-          : "text-muted-foreground hover:bg-[var(--atlas-element-hover)] hover:text-secondary-foreground",
+          ? "bg-element-selected text-foreground"
+          : "text-muted-foreground hover:bg-element-hover hover:text-secondary-foreground",
       )}
     >
       {icon}
       <span className="max-w-[110px] truncate">{label}</span>
 
       {mentions > 0 ? (
-        <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--foreground)]" />
+        <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-foreground" />
       ) : unread > 0 ? (
-        <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--atlas-status-success-foreground)]" />
+        <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-success" />
       ) : null}
 
       <Hint label="Close tab">
@@ -346,7 +346,7 @@ function TabButton({
             "absolute right-1 top-1/2 -translate-y-1/2",
             "inline-flex h-4 w-4 items-center justify-center rounded-full",
             "text-muted-foreground opacity-0 scale-90 group-hover/tab:opacity-100 group-hover/tab:scale-100 focus-visible:opacity-100 focus-visible:scale-100",
-            "transition-[opacity,transform] duration-150 hover:bg-[var(--atlas-element-emphasis)] hover:text-foreground cursor-pointer",
+            "transition-[opacity,transform] duration-150 hover:bg-element-emphasis hover:text-foreground cursor-pointer",
           )}
         >
           <X size={10} strokeWidth={2.2} />

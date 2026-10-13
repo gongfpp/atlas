@@ -29,19 +29,19 @@ interface Props {
 }
 export const MarkdownFile = memo(function MarkdownFile({ children, trusted = false }: Props) {
   return (
-    <div className="atlas-markdown text-md leading-relaxed text-[var(--foreground)] break-words select-text">
+    <div className="atlas-markdown text-md leading-relaxed text-foreground break-words select-text">
       <ReactMarkdown
         remarkPlugins={[remarkGfm]}
         rehypePlugins={[...(trusted ? [rehypeRaw] : []), rehypeHighlight]}
         components={{
           h1: (p) => (
-            <h1 className="mt-8 mb-3 border-b border-[var(--border)] pb-2 text-2xl font-bold tracking-tight">
+            <h1 className="mt-8 mb-3 border-b border-border pb-2 text-2xl font-bold tracking-tight">
               {p.children}
             </h1>
           ),
 
           h2: (p) => (
-            <h2 className="mt-7 mb-3 border-b border-[var(--atlas-border-subtle)] pb-1.5 text-xl font-semibold tracking-tight">
+            <h2 className="mt-7 mb-3 border-b border-hairline pb-1.5 text-xl font-semibold tracking-tight">
               {p.children}
             </h2>
           ),
@@ -57,7 +57,7 @@ export const MarkdownFile = memo(function MarkdownFile({ children, trusted = fal
               {...p}
               target="_blank"
               rel="noreferrer"
-              className="text-[var(--primary)] underline hover:opacity-80"
+              className="text-primary underline hover:opacity-80"
             />
           ),
 
@@ -83,7 +83,7 @@ export const MarkdownFile = memo(function MarkdownFile({ children, trusted = fal
             if (isInline) {
               return (
                 <code
-                  className="rounded bg-[var(--card)] px-1.5 py-0.5 font-mono text-base text-[var(--foreground)]"
+                  className="rounded bg-card px-1.5 py-0.5 font-mono text-base text-foreground"
                   {...rest}
                 >
                   {children}
@@ -100,7 +100,7 @@ export const MarkdownFile = memo(function MarkdownFile({ children, trusted = fal
 
           pre: (p) => (
             <pre
-              className="my-4 overflow-x-auto rounded-md border border-[var(--border)] bg-[var(--card)] text-base"
+              className="my-4 overflow-x-auto rounded-md border border-border bg-card text-base"
               style={{
                 whiteSpace: "pre",
                 wordBreak: "normal",
@@ -112,51 +112,47 @@ export const MarkdownFile = memo(function MarkdownFile({ children, trusted = fal
           ),
 
           blockquote: (p) => (
-            <blockquote className="my-3 border-l-2 border-[var(--border)] pl-4 text-[var(--secondary-foreground)]">
+            <blockquote className="my-3 border-l-2 border-border pl-4 text-secondary-foreground">
               {p.children}
             </blockquote>
           ),
 
-          hr: () => <hr className="my-6 border-[var(--atlas-border-subtle)]" />,
+          hr: () => <hr className="my-6 border-hairline" />,
 
           table: (p) => (
             <div
-              className="my-4 overflow-x-auto rounded-md border border-[var(--border)]"
+              className="my-4 overflow-x-auto rounded-md border border-border"
               onWheel={handleWheel}
             >
               <table className="min-w-max text-base">{p.children}</table>
             </div>
           ),
 
-          thead: (p) => <thead className="bg-[var(--card)]">{p.children}</thead>,
+          thead: (p) => <thead className="bg-card">{p.children}</thead>,
 
-          tr: (p) => (
-            <tr className="border-b border-[var(--atlas-border-subtle)] last:border-b-0">
-              {p.children}
-            </tr>
-          ),
+          tr: (p) => <tr className="border-b border-hairline last:border-b-0">{p.children}</tr>,
 
           th: (p) => (
-            <th className="border-r border-[var(--border)] border-b border-[var(--border)] px-3 py-2 text-left text-sm font-semibold whitespace-nowrap text-[var(--secondary-foreground)] last:border-r-0">
+            <th className="border-r border-border border-b border-border px-3 py-2 text-left text-sm font-semibold whitespace-nowrap text-secondary-foreground last:border-r-0">
               {p.children}
             </th>
           ),
 
           td: (p) => (
-            <td className="border-r border-[var(--atlas-border-subtle)] px-3 py-2 align-top whitespace-nowrap text-base text-[var(--foreground)] last:border-r-0">
+            <td className="border-r border-hairline px-3 py-2 align-top whitespace-nowrap text-base text-foreground last:border-r-0">
               {p.children}
             </td>
           ),
 
           ...(trusted && {
             details: (p) => (
-              <details className="my-3 rounded-md border border-[var(--border)] bg-[var(--card)] px-3 py-2">
+              <details className="my-3 rounded-md border border-border bg-card px-3 py-2">
                 {p.children}
               </details>
             ),
 
             summary: (p) => (
-              <summary className="cursor-pointer py-1 font-medium text-[var(--foreground)]">
+              <summary className="cursor-pointer py-1 font-medium text-foreground">
                 {p.children}
               </summary>
             ),

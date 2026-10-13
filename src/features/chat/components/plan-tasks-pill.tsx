@@ -87,7 +87,7 @@ function StepIcon({ status, active }: { status: string; active: boolean }) {
         width={16}
         height={16}
         viewBox="0 0 16 16"
-        className={cn("shrink-0 text-[var(--foreground)]", active && "atlas-arc-spin")}
+        className={cn("shrink-0 text-foreground", active && "atlas-arc-spin")}
         aria-hidden
       >
         <circle
@@ -146,11 +146,11 @@ export const PlanTasksPill = memo(function PlanTasksPill({ tabId }: { tabId: str
       <ComposerDropup open={open} panelHeight={panelHeight} contentRef={contentRef} width={320}>
         <>
           <div className="flex h-9 items-center gap-2 px-3">
-            <ListTodo size={13} className="shrink-0 text-[var(--secondary-foreground)]" />
-            <span className="flex-1 truncate text-sm font-medium text-[var(--foreground)]">
+            <ListTodo size={13} className="shrink-0 text-secondary-foreground" />
+            <span className="flex-1 truncate text-sm font-medium text-foreground">
               Implementation plan
             </span>
-            <span className="font-mono text-2xs tabular-nums text-[var(--muted-foreground)]">
+            <span className="font-mono text-2xs tabular-nums text-muted-foreground">
               {completed}/{plan.length}
             </span>
           </div>
@@ -165,9 +165,9 @@ export const PlanTasksPill = memo(function PlanTasksPill({ tabId }: { tabId: str
                   className={cn(
                     "min-w-0 flex-1 truncate text-sm leading-5",
                     step.status === "completed" &&
-                      "text-[var(--muted-foreground)] line-through decoration-[var(--muted-foreground)]",
-                    step.status === "in_progress" && "text-[var(--foreground)]",
-                    step.status === "pending" && "text-[var(--secondary-foreground)] opacity-70",
+                      "text-muted-foreground line-through decoration-muted-foreground",
+                    step.status === "in_progress" && "text-foreground",
+                    step.status === "pending" && "text-secondary-foreground opacity-70",
                   )}
                 >
                   {step.description}
@@ -184,12 +184,12 @@ export const PlanTasksPill = memo(function PlanTasksPill({ tabId }: { tabId: str
         className={cn(
           "flex h-6.5 items-center gap-1.5 rounded-full border px-2 text-2xs font-medium leading-none transition-colors cursor-pointer",
           open
-            ? "border-[var(--atlas-border-strong)] bg-[var(--atlas-element-selected)] text-[var(--foreground)]"
-            : "border-[var(--border)] bg-[var(--card)] text-[var(--secondary-foreground)] hover:bg-[var(--atlas-element-hover)] hover:text-[var(--foreground)]",
+            ? "border-border-strong bg-element-selected text-foreground"
+            : "border-border bg-card text-secondary-foreground hover:bg-element-hover hover:text-foreground",
         )}
         title="Implementation plan"
       >
-        <span className="text-[var(--primary)]">
+        <span className="text-primary">
           <ArcRing frac={plan.length ? completed / plan.length : 0} />
         </span>
         <span className="tabular-nums">
@@ -198,7 +198,7 @@ export const PlanTasksPill = memo(function PlanTasksPill({ tabId }: { tabId: str
         <ChevronUp
           size={10}
           className={cn(
-            "shrink-0 text-[var(--muted-foreground)] transition-transform duration-200",
+            "shrink-0 text-muted-foreground transition-transform duration-200",
             open && "rotate-180",
           )}
         />

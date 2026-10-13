@@ -130,7 +130,7 @@ export function DraftEditor({ conv, draft }: { conv: ChatConversation; draft: Pr
         {/* Centre: the grouped action pill. */}
         <div className="flex min-w-0 flex-1 justify-center">
           <HintGroup>
-            <div className="flex items-center overflow-hidden rounded-full border border-border bg-[var(--atlas-element-selected)]">
+            <div className="flex items-center overflow-hidden rounded-full border border-border bg-element-selected">
               <PillButton label="Copy draft" onClick={() => void copyAll()}>
                 <Copy size={11} />
               </PillButton>
@@ -161,7 +161,7 @@ export function DraftEditor({ conv, draft }: { conv: ChatConversation; draft: Pr
                       <CommsAvatar
                         member={members.get(p.userId) ?? null}
                         size={16}
-                        className="ring-2 ring-[var(--background)] rounded-full"
+                        className="ring-2 ring-background rounded-full"
                       />
                     </span>
                   }
@@ -178,7 +178,7 @@ export function DraftEditor({ conv, draft }: { conv: ChatConversation; draft: Pr
                     <CommsAvatar
                       member={members.get(me) ?? null}
                       size={16}
-                      className="ring-2 ring-[var(--background)] rounded-full"
+                      className="ring-2 ring-background rounded-full"
                     />
                   </span>
                 }
@@ -195,7 +195,7 @@ export function DraftEditor({ conv, draft }: { conv: ChatConversation; draft: Pr
       </div>
 
       {sent && (
-        <div className="shrink-0 border-b border-border-subtle bg-[var(--atlas-element-hover)] px-3 py-1 text-2xs text-muted-foreground">
+        <div className="shrink-0 border-b border-hairline bg-element-hover px-3 py-1 text-2xs text-muted-foreground">
           Sent to an agent — this draft is read-only now.
         </div>
       )}
@@ -206,7 +206,7 @@ export function DraftEditor({ conv, draft }: { conv: ChatConversation; draft: Pr
             {[0, 1, 2].map((i) => (
               <div
                 key={i}
-                className="h-[10px] rounded bg-[var(--card)] opacity-50 atlas-marker-running"
+                className="h-[10px] rounded bg-card opacity-50 atlas-marker-running"
                 style={{ width: `${60 - i * 12}%` }}
               />
             ))}
@@ -239,7 +239,7 @@ function PillButton({
           "flex h-[22px] w-8 items-center justify-center text-secondary-foreground transition-colors",
           disabled
             ? "cursor-not-allowed text-disabled"
-            : "hover:bg-[var(--atlas-element-active)] hover:text-foreground cursor-pointer",
+            : "hover:bg-element-active hover:text-foreground cursor-pointer",
         )}
       >
         {children}

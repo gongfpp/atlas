@@ -1700,8 +1700,8 @@ function DisconnectedBanner({ tabId }: { tabId: string }) {
     !agentCatalogEntry(pluginId)?.installed;
   if (removed) return null;
   return (
-    <div className="max-w-[720px] mx-auto mb-2 flex items-center justify-between gap-3 px-3 py-2 rounded-lg border border-[var(--border)] bg-[var(--card)] text-sm">
-      <span className="select-text text-[var(--secondary-foreground)]">
+    <div className="max-w-[720px] mx-auto mb-2 flex items-center justify-between gap-3 px-3 py-2 rounded-lg border border-border bg-card text-sm">
+      <span className="select-text text-secondary-foreground">
         {bindError
           ? `The agent exited while starting (${bindError.slice(0, 160)}). Your message is back in the queue — restart to try again.`
           : updatedTo
@@ -1718,7 +1718,7 @@ function DisconnectedBanner({ tabId }: { tabId: string }) {
             setRestarting(false);
           }
         }}
-        className="shrink-0 px-2.5 h-6 rounded-md bg-[var(--foreground)] text-[var(--background)] text-xs font-medium hover:bg-[var(--secondary-foreground)] disabled:opacity-50 cursor-pointer"
+        className="shrink-0 px-2.5 h-6 rounded-md bg-foreground text-background text-xs font-medium hover:bg-secondary-foreground disabled:opacity-50 cursor-pointer"
       >
         {restarting ? "Restarting…" : "Restart agent"}
       </button>
@@ -1817,10 +1817,10 @@ const JumpToBottomPill = memo(function JumpToBottomPill({
         style={{ backdropFilter: "blur(4px)" }}
         className={cn(
           "pointer-events-auto atlas-pill-in inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full",
-          "border border-[var(--border)] bg-[var(--card)]",
-          "text-xs leading-none font-medium text-[var(--secondary-foreground)]",
-          "shadow-sm cursor-pointer transition-colors",
-          "hover:bg-[var(--atlas-element-hover)] hover:text-[var(--foreground)]",
+          "border border-border bg-card",
+          "text-xs leading-none font-medium text-secondary-foreground",
+          "shadow-md cursor-pointer transition-colors",
+          "hover:bg-element-hover hover:text-foreground",
         )}
       >
         <ChevronDown size={11} />
@@ -1878,14 +1878,14 @@ function WelcomeState() {
         <AtlasIcon
           size={60}
           // ratchet-allow: the radius tracks the artwork's own corner, and the halo is not an elevation
-          className="mb-5 rounded-[28%] ring-1 ring-[var(--atlas-element-active)] shadow-[0_12px_50px_-12px_rgba(0,0,0,0.85)]"
+          className="mb-5 rounded-[28%] ring-1 ring-element-active shadow-[0_12px_50px_-12px_rgba(0,0,0,0.85)]"
         />
 
         {/* ratchet-allow: the one-off welcome headline sits between text-xl (20px) and text-2xl (24px) */}
         <h2 className="bg-gradient-to-b from-foreground to-foreground/55 bg-clip-text text-[22px] font-semibold tracking-tight text-transparent">
           Atlas
         </h2>
-        <p className="mt-1.5 text-base text-[var(--muted-foreground)]">
+        <p className="mt-1.5 text-base text-muted-foreground">
           Code with Agents. Tools, plans, and edits all live.
         </p>
 
@@ -1900,18 +1900,18 @@ function WelcomeState() {
               // card, with a soft negatively-spread shadow under it. `shadow-md`
               // is the menu elevation and turned a 2px lift into a floating slab.
               // ratchet-allow: a hover lift halo, deliberately softer than any elevation step
-              className="group relative flex flex-col gap-2.5 rounded-xl border border-[var(--border)] bg-[var(--card)] p-3 text-left transition-all duration-150 hover:-translate-y-0.5 hover:border-[var(--atlas-border-strong)] hover:bg-[var(--muted)] hover:shadow-[0_8px_24px_-12px_rgba(0,0,0,0.7)] cursor-pointer"
+              className="group relative flex flex-col gap-2.5 rounded-xl border border-border bg-card p-3 text-left transition-all duration-150 hover:-translate-y-0.5 hover:border-border-strong hover:bg-muted hover:shadow-[0_8px_24px_-12px_rgba(0,0,0,0.7)] cursor-pointer"
             >
               <div className="flex items-center justify-between">
-                <span className="grid h-7 w-7 place-items-center rounded-lg border border-[var(--atlas-border-subtle)] bg-[var(--card)] text-[var(--muted-foreground)] transition-colors group-hover:text-[var(--foreground)]">
+                <span className="grid h-7 w-7 place-items-center rounded-lg border border-hairline bg-card text-muted-foreground transition-colors group-hover:text-foreground">
                   <Icon size={13} />
                 </span>
                 <ArrowRight
                   size={13}
-                  className="-translate-x-1 text-[var(--atlas-text-disabled)] opacity-0 transition-all group-hover:translate-x-0 group-hover:text-[var(--secondary-foreground)] group-hover:opacity-100"
+                  className="-translate-x-1 text-disabled opacity-0 transition-all group-hover:translate-x-0 group-hover:text-secondary-foreground group-hover:opacity-100"
                 />
               </div>
-              <span className="text-sm font-medium leading-snug text-[var(--secondary-foreground)] transition-colors group-hover:text-[var(--foreground)]">
+              <span className="text-sm font-medium leading-snug text-secondary-foreground transition-colors group-hover:text-foreground">
                 {text}
               </span>
             </button>

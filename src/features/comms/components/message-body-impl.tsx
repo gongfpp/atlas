@@ -159,7 +159,7 @@ const COMPONENTS: Components = {
     if (!className) {
       return (
         <code
-          className="rounded px-1 py-px font-mono text-xs bg-[var(--atlas-element-selected)] text-foreground"
+          className="rounded px-1 py-px font-mono text-xs bg-element-selected text-foreground"
           {...rest}
         >
           {children}
@@ -179,7 +179,7 @@ const COMPONENTS: Components = {
       <pre
         className={cn(
           "my-1.5 overflow-x-auto rounded-md px-2.5 py-2 font-mono text-xs leading-[1.55] hide-scrollbar",
-          "bg-card border border-border-subtle",
+          "bg-card border border-hairline",
         )}
       >
         {lang && (
@@ -236,7 +236,7 @@ const COMPONENTS: Components = {
         checked={!!props.checked}
         disabled
         readOnly
-        className="mr-1.5 align-[-1px] accent-[var(--primary)] pointer-events-none"
+        className="mr-1.5 align-[-1px] accent-primary pointer-events-none"
       />
     ) : null,
 
@@ -273,25 +273,23 @@ const COMPONENTS: Components = {
     </h6>
   ),
 
-  hr: () => <hr className="my-2 border-0 border-t border-border-subtle" />,
+  hr: () => <hr className="my-2 border-0 border-t border-hairline" />,
 
   // `w-max min-w-full` plus `whitespace-nowrap` cells is what makes a wide
   // table SCROLL in a ~390px panel. `w-full` would instead crush every column
   // to a word per line, which is how a table stops being a table.
   table: (props) => (
-    <div className="my-1.5 overflow-x-auto hide-scrollbar rounded-md border border-border-subtle">
+    <div className="my-1.5 overflow-x-auto hide-scrollbar rounded-md border border-hairline">
       <table className="w-max min-w-full border-collapse text-xs">{props.children}</table>
     </div>
   ),
-  thead: (props) => <thead className="bg-[var(--atlas-element-hover)]">{props.children}</thead>,
+  thead: (props) => <thead className="bg-element-hover">{props.children}</thead>,
   th: (props) => (
-    <th className="whitespace-nowrap border-b border-border-subtle px-2 py-1 text-left text-2xs font-semibold text-secondary-foreground">
+    <th className="whitespace-nowrap border-b border-hairline px-2 py-1 text-left text-2xs font-semibold text-secondary-foreground">
       {props.children}
     </th>
   ),
-  tr: (props) => (
-    <tr className="border-b border-border-subtle last:border-b-0">{props.children}</tr>
-  ),
+  tr: (props) => <tr className="border-b border-hairline last:border-b-0">{props.children}</tr>,
   td: (props) => (
     <td className="whitespace-nowrap px-2 py-1 align-top text-foreground">{props.children}</td>
   ),

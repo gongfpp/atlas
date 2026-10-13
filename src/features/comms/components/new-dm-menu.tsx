@@ -91,9 +91,9 @@ export function NewDmMenu() {
       </Hint>
       <Popover.Portal>
         <Popover.Positioner className="z-popover" align="end" sideOffset={6}>
-          <Popover.Popup className="overflow-hidden rounded-xl select-none border border-border bg-[var(--card)]/95 backdrop-blur-2xl atlas-panel-in-tl shadow-lg inset-highlight">
+          <Popover.Popup className="overflow-hidden rounded-xl select-none border border-border bg-card/95 backdrop-blur-2xl atlas-panel-in-tl shadow-lg inset-highlight">
             <div className="flex max-h-[min(380px,55vh)] w-[260px] flex-col">
-              <div className="flex h-[32px] shrink-0 items-center gap-1.5 border-b border-border-subtle px-3">
+              <div className="flex h-[32px] shrink-0 items-center gap-1.5 border-b border-hairline px-3">
                 <Search size={11} className="shrink-0 text-muted-foreground" />
                 <input
                   autoFocus
@@ -118,7 +118,7 @@ export function NewDmMenu() {
                       key={m.id}
                       type="button"
                       onClick={() => toggle(m.id)}
-                      className="flex w-full items-center gap-2 px-3 py-[5px] text-left transition-colors hover:bg-[var(--atlas-element-hover)] cursor-pointer"
+                      className="flex w-full items-center gap-2 px-3 py-[5px] text-left transition-colors hover:bg-element-hover cursor-pointer"
                     >
                       <CommsAvatar member={m} size={20} />
                       <span className="min-w-0 flex-1">
@@ -137,12 +137,12 @@ export function NewDmMenu() {
                 })}
               </div>
 
-              <div className="shrink-0 border-t border-border-subtle p-2">
+              <div className="shrink-0 border-t border-hairline p-2">
                 <button
                   type="button"
                   disabled={picked.size === 0 || pending}
                   onClick={() => void start()}
-                  className="flex h-[26px] w-full items-center justify-center gap-1.5 rounded-md bg-[var(--atlas-element-active)] text-xs font-medium text-foreground transition-colors hover:bg-[var(--atlas-element-emphasis)] disabled:cursor-not-allowed disabled:opacity-45 cursor-pointer"
+                  className="flex h-[26px] w-full items-center justify-center gap-1.5 rounded-md bg-element-active text-xs font-medium text-foreground transition-colors hover:bg-element-emphasis disabled:cursor-not-allowed disabled:opacity-45 cursor-pointer"
                 >
                   {pending && <Loader2 size={11} className="animate-spin" />}
                   Message

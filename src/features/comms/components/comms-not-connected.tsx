@@ -62,7 +62,7 @@ export function CommsNotConnected({ org }: { org: Organisation | null }) {
           // one element — the vibrant-panel rule bans transform ANIMATION near
           // blur, not a still frosted control (the drop overlay already blurs
           // inside this panel).
-          className="relative mt-1 flex h-control-lg items-center gap-1.5 rounded-full border border-border-strong bg-[var(--atlas-element-active)] px-4 text-sm font-medium text-foreground inset-highlight backdrop-blur-md transition-colors hover:bg-[var(--atlas-element-emphasis)] disabled:cursor-not-allowed disabled:opacity-60 cursor-pointer"
+          className="relative mt-1 flex h-control-lg items-center gap-1.5 rounded-full border border-border-strong bg-element-active px-4 text-sm font-medium text-foreground inset-highlight backdrop-blur-md transition-colors hover:bg-element-emphasis disabled:cursor-not-allowed disabled:opacity-60 cursor-pointer"
         >
           {syncing ? (
             <Loader2 size={12} className="shrink-0 animate-spin" />

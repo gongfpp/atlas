@@ -32,7 +32,7 @@ export function OnlineDot({ px, className }: { px: number; className?: string })
       aria-hidden
       style={{ width: px, height: px }}
       className={cn(
-        "absolute -bottom-px -right-px rounded-full bg-[var(--atlas-status-success-foreground)] ring-1 ring-[var(--background)]",
+        "absolute -bottom-px -right-px rounded-full bg-success ring-1 ring-background",
         className,
       )}
     />
@@ -75,7 +75,7 @@ export const OnlineTeammates = memo(function OnlineTeammates({
         role="img"
         aria-label={label}
         tabIndex={0}
-        className="flex shrink-0 items-center gap-1 rounded-full outline-none focus-visible:ring-1 focus-visible:ring-[var(--ring)]"
+        className="flex shrink-0 items-center gap-1 rounded-full outline-none focus-visible:ring-1 focus-visible:ring-ring"
       >
         {/* Side by side, not overlapped: every face carries its dot in the
          *  bottom-right corner, and an overlapping stack would bury each dot
@@ -88,9 +88,7 @@ export const OnlineTeammates = memo(function OnlineTeammates({
             </span>
           ))}
         </span>
-        {extra > 0 && (
-          <span className="text-2xs tabular-nums text-[var(--muted-foreground)]">+{extra}</span>
-        )}
+        {extra > 0 && <span className="text-2xs tabular-nums text-muted-foreground">+{extra}</span>}
       </span>
     </Hint>
   );

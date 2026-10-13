@@ -41,14 +41,14 @@ export function UpdateAvailableModal() {
             "fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-modal",
             "w-[300px] rounded-2xl overflow-hidden",
             // macOS-style vibrancy: translucent panel over a blurred backdrop.
-            "bg-[var(--card)]/70 backdrop-blur-2xl border border-border",
+            "bg-card/70 backdrop-blur-2xl border border-border",
             "shadow-md",
             "px-5 pt-6 pb-5 flex flex-col items-center text-center",
           )}
         >
           {isError ? (
             <div className="w-[52px] h-[52px] rounded-2xl bg-element-active border border-border grid place-items-center">
-              <AlertTriangle size={24} className="text-[var(--atlas-status-error-foreground)]" />
+              <AlertTriangle size={24} className="text-error" />
             </div>
           ) : (
             <AtlasIcon size={52} className="rounded-2xl" />
@@ -76,7 +76,7 @@ export function UpdateAvailableModal() {
             <button
               type="button"
               onClick={dismissModal}
-              className="mt-4 w-full h-9 rounded-lg text-sm font-medium bg-[var(--foreground)] text-[var(--background)] hover:opacity-90 transition-opacity"
+              className="mt-4 w-full h-9 rounded-lg text-sm font-medium bg-foreground text-background hover:opacity-90 transition-opacity"
             >
               Close
             </button>
@@ -86,14 +86,14 @@ export function UpdateAvailableModal() {
                 type="button"
                 autoFocus
                 onClick={restartNow}
-                className="w-full h-9 rounded-lg text-sm font-medium bg-[var(--foreground)] text-[var(--background)] hover:opacity-90 transition-opacity"
+                className="w-full h-9 rounded-lg text-sm font-medium bg-foreground text-background hover:opacity-90 transition-opacity"
               >
                 Restart now
               </button>
               <button
                 type="button"
                 onClick={dismissModal}
-                className="w-full h-9 rounded-lg text-sm font-medium bg-element-active text-foreground border border-border hover:bg-[var(--atlas-element-emphasis)] transition-colors"
+                className="w-full h-9 rounded-lg text-sm font-medium bg-element-active text-foreground border border-border hover:bg-element-emphasis transition-colors"
               >
                 Later
               </button>

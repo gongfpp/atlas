@@ -79,8 +79,8 @@ export function UsageTables({
     models: ranked.models.length,
   };
   return (
-    <div className="flex flex-col rounded-lg border border-[var(--atlas-element-selected)] bg-[var(--card)]">
-      <div className="flex h-[36px] shrink-0 items-center gap-1 border-b border-[var(--atlas-element-selected)] px-2">
+    <div className="flex flex-col rounded-lg border border-element-selected bg-card">
+      <div className="flex h-[36px] shrink-0 items-center gap-1 border-b border-element-selected px-2">
         {TABS.map((t) => (
           <button
             key={t.id}
@@ -91,8 +91,8 @@ export function UsageTables({
             className={cn(
               "-mb-px flex h-[36px] items-center gap-1.5 border-b-2 px-2.5 text-xs font-medium transition-colors",
               tab === t.id
-                ? "border-b-[var(--primary)] text-[var(--foreground)]"
-                : "border-b-transparent text-[var(--secondary-foreground)] hover:text-[var(--foreground)]",
+                ? "border-b-primary text-foreground"
+                : "border-b-transparent text-secondary-foreground hover:text-foreground",
             )}
           >
             {t.label}
@@ -103,8 +103,8 @@ export function UsageTables({
               className={cn(
                 "rounded-full px-1.5 py-px text-3xs tabular-nums transition-colors",
                 tab === t.id
-                  ? "bg-[var(--atlas-element-active)] text-[var(--secondary-foreground)]"
-                  : "bg-[var(--atlas-element-hover)] text-[var(--muted-foreground)]",
+                  ? "bg-element-active text-secondary-foreground"
+                  : "bg-element-hover text-muted-foreground",
               )}
             >
               {fmtNum(counts[t.id])}
@@ -112,13 +112,13 @@ export function UsageTables({
           </button>
         ))}
         <div className="flex-1" />
-        <div className="flex h-control-md w-[200px] items-center gap-1.5 rounded-md border border-[var(--border)] bg-[var(--background)] px-2 focus-within:border-[var(--atlas-border-strong)]">
-          <Search size={11} className="shrink-0 text-[var(--muted-foreground)]" />
+        <div className="flex h-control-md w-[200px] items-center gap-1.5 rounded-md border border-border bg-background px-2 focus-within:border-border-strong">
+          <Search size={11} className="shrink-0 text-muted-foreground" />
           <input
             value={search}
             onChange={(e) => onSearch(e.target.value)}
             placeholder={tab === "sessions" ? "Search sessions" : "Filter rows"}
-            className="w-full bg-transparent text-xs text-[var(--foreground)] outline-none placeholder:text-[var(--muted-foreground)]"
+            className="w-full bg-transparent text-xs text-foreground outline-none placeholder:text-muted-foreground"
           />
         </div>
         <DropdownMenu.Root>
@@ -126,10 +126,10 @@ export function UsageTables({
             render={
               <button
                 type="button"
-                className="flex h-control-md items-center gap-1.5 rounded-md border border-[var(--border)] px-2 text-xs text-[var(--secondary-foreground)] outline-none hover:bg-[var(--atlas-element-hover)] hover:text-[var(--foreground)]"
+                className="flex h-control-md items-center gap-1.5 rounded-md border border-border px-2 text-xs text-secondary-foreground outline-none hover:bg-element-hover hover:text-foreground"
                 title="Sort"
               >
-                <ArrowDownWideNarrow size={12} className="text-[var(--muted-foreground)]" />
+                <ArrowDownWideNarrow size={12} className="text-muted-foreground" />
                 {SORT_LABEL[sort]}
               </button>
             }
@@ -138,7 +138,7 @@ export function UsageTables({
             {/* z-index on the Positioner, not the Popup — the Popup is
                 statically positioned inside it. */}
             <DropdownMenu.Positioner className="z-popover" align="end" sideOffset={4}>
-              <DropdownMenu.Popup className="min-w-[160px] rounded-lg border border-[var(--border)] bg-popover py-1 text-xs text-[var(--secondary-foreground)] shadow-md">
+              <DropdownMenu.Popup className="min-w-[160px] rounded-lg border border-border bg-popover py-1 text-xs text-secondary-foreground shadow-md">
                 <DropdownMenu.RadioGroup value={sort} onValueChange={(v) => setSort(v as SortKey)}>
                   {(Object.keys(SORT_LABEL) as SortKey[]).map((k) => (
                     <DropdownMenu.RadioItem
@@ -148,7 +148,7 @@ export function UsageTables({
                       // `RadioItem` closed it, and picking one sort order is a
                       // one-shot choice, so the old behaviour is restored.
                       closeOnClick
-                      className="flex h-control-md cursor-default items-center px-3 outline-none hover:bg-[var(--atlas-element-hover)] hover:text-[var(--foreground)] data-checked:text-[var(--foreground)]"
+                      className="flex h-control-md cursor-default items-center px-3 outline-none hover:bg-element-hover hover:text-foreground data-checked:text-foreground"
                     >
                       {SORT_LABEL[k]}
                     </DropdownMenu.RadioItem>
@@ -222,7 +222,7 @@ function SessionsTable({
   const capped = data.sessions.length < sessionsTotal;
   return (
     <>
-      <div className="flex h-control-md shrink-0 items-center border-b border-[var(--atlas-element-selected)] px-3 text-3xs font-semibold uppercase tracking-wider text-[var(--muted-foreground)]">
+      <div className="flex h-control-md shrink-0 items-center border-b border-element-selected px-3 text-3xs font-semibold uppercase tracking-wider text-muted-foreground">
         <span className={COL.title}>Session</span>
         <span className={COL.project}>Project</span>
         <span className={COL.agent}>Agent</span>
@@ -236,7 +236,7 @@ function SessionsTable({
       </div>
       <div ref={parentRef} className="hide-scrollbar h-[420px] overflow-y-auto">
         {sorted.length === 0 ? (
-          <div className="p-4 text-xs text-[var(--muted-foreground)]">No sessions match.</div>
+          <div className="p-4 text-xs text-muted-foreground">No sessions match.</div>
         ) : (
           <div className="relative w-full" style={{ height: v.getTotalSize() }}>
             {v.getVirtualItems().map((item) => {
@@ -244,33 +244,26 @@ function SessionsTable({
               return (
                 <div
                   key={item.key}
-                  className="absolute left-0 top-0 flex w-full items-center border-b border-[var(--atlas-border-subtle)] px-3 text-xs hover:bg-[var(--atlas-element-hover)]"
+                  className="absolute left-0 top-0 flex w-full items-center border-b border-hairline px-3 text-xs hover:bg-element-hover"
                   style={{ height: ROW_H, transform: `translateY(${item.start}px)` }}
                 >
                   <span className={cn(COL.title, "flex min-w-0 items-center gap-2 pr-3")}>
                     <span
                       className={cn(
                         "h-1.5 w-1.5 shrink-0 rounded-full",
-                        s.ledgered
-                          ? "bg-[var(--atlas-status-success-foreground)]"
-                          : "bg-[var(--atlas-text-disabled)]",
+                        s.ledgered ? "bg-success" : "bg-disabled",
                       )}
                       title={s.ledgered ? "Dated per turn" : "Dated to its last-active day"}
                     />
-                    <span
-                      className="truncate text-[var(--foreground)]"
-                      title={s.title || s.sessionId}
-                    >
+                    <span className="truncate text-foreground" title={s.title || s.sessionId}>
                       {s.title || (
-                        <span className="text-[var(--muted-foreground)]">
+                        <span className="text-muted-foreground">
                           Untitled · {s.sessionId.slice(0, 8)}
                         </span>
                       )}
                     </span>
                   </span>
-                  <span
-                    className={cn(COL.project, "truncate pr-2 text-[var(--secondary-foreground)]")}
-                  >
+                  <span className={cn(COL.project, "truncate pr-2 text-secondary-foreground")}>
                     {projectLabel(s.projectPath, data)}
                   </span>
                   <span className={cn(COL.agent, "pr-2")}>
@@ -279,22 +272,20 @@ function SessionsTable({
                   <span className={cn(COL.model, "pr-2")}>
                     <ModelChip model={s.model} />
                   </span>
-                  <span className={cn(COL.tokens, "tabular-nums text-[var(--foreground)]")}>
+                  <span className={cn(COL.tokens, "tabular-nums text-foreground")}>
                     {fmtTokens(tokensOf(s))}
                   </span>
-                  <span
-                    className={cn(COL.cache, "tabular-nums text-[var(--secondary-foreground)]")}
-                  >
+                  <span className={cn(COL.cache, "tabular-nums text-secondary-foreground")}>
                     {fmtTokens(s.cacheRead + s.cacheWrite)}
                   </span>
-                  <span className={cn(COL.cost, "tabular-nums text-[var(--foreground)]")}>
+                  <span className={cn(COL.cost, "tabular-nums text-foreground")}>
                     {s.cost > 0 ? (
                       fmtCost(s.cost)
                     ) : (
-                      <span className="text-[var(--muted-foreground)]">—</span>
+                      <span className="text-muted-foreground">—</span>
                     )}
                   </span>
-                  <span className={cn(COL.when, "tabular-nums text-[var(--muted-foreground)]")}>
+                  <span className={cn(COL.when, "tabular-nums text-muted-foreground")}>
                     {timeAgo(new Date(s.lastActivityMs ?? s.startedMs).toISOString())}
                   </span>
                 </div>
@@ -304,7 +295,7 @@ function SessionsTable({
         )}
       </div>
       {capped && (
-        <div className="flex h-control-md shrink-0 items-center border-t border-[var(--atlas-element-selected)] px-3 text-2xs text-[var(--muted-foreground)]">
+        <div className="flex h-control-md shrink-0 items-center border-t border-element-selected px-3 text-2xs text-muted-foreground">
           Showing the {fmtNum(data.sessions.length)} most recent of {fmtNum(sessionsTotal)}{" "}
           sessions.
         </div>
@@ -356,7 +347,7 @@ function RollupTable({
   const top = list.reduce((m, r) => Math.max(m, tokensOf(r.metrics)), 0);
   return (
     <>
-      <div className="flex h-control-md shrink-0 items-center border-b border-[var(--atlas-element-selected)] px-3 text-3xs font-semibold uppercase tracking-wider text-[var(--muted-foreground)]">
+      <div className="flex h-control-md shrink-0 items-center border-b border-element-selected px-3 text-3xs font-semibold uppercase tracking-wider text-muted-foreground">
         <span className="min-w-[160px] flex-1">{axis}</span>
         <span className="w-[160px] shrink-0">Share</span>
         <span className="w-[72px] shrink-0 text-right">Tokens</span>
@@ -369,18 +360,18 @@ function RollupTable({
       </div>
       <div className="hide-scrollbar max-h-[420px] overflow-y-auto">
         {list.length === 0 && (
-          <div className="p-4 text-xs text-[var(--muted-foreground)]">Nothing matches.</div>
+          <div className="p-4 text-xs text-muted-foreground">Nothing matches.</div>
         )}
         {list.map((r, i) => (
           <div
             key={r.key}
-            className="flex h-[30px] items-center border-b border-[var(--atlas-border-subtle)] px-3 text-xs hover:bg-[var(--atlas-element-hover)]"
+            className="flex h-[30px] items-center border-b border-hairline px-3 text-xs hover:bg-element-hover"
           >
             <span className="flex min-w-[160px] flex-1 items-center gap-2 truncate pr-3">
               {axis === "agent" ? (
                 <AgentChip agent={r.key} />
               ) : (
-                <span className="truncate text-[var(--foreground)]" title={r.label}>
+                <span className="truncate text-foreground" title={r.label}>
                   {r.label}
                 </span>
               )}
@@ -393,23 +384,23 @@ function RollupTable({
                   color={seriesColor(i)}
                 />
               </span>
-              <span className="w-[34px] text-right text-2xs tabular-nums text-[var(--muted-foreground)]">
+              <span className="w-[34px] text-right text-2xs tabular-nums text-muted-foreground">
                 {fmtPct(r.share)}
               </span>
             </span>
-            <span className="w-[72px] shrink-0 text-right tabular-nums text-[var(--foreground)]">
+            <span className="w-[72px] shrink-0 text-right tabular-nums text-foreground">
               {fmtTokens(tokensOf(r.metrics))}
             </span>
-            <span className="w-[72px] shrink-0 text-right tabular-nums text-[var(--secondary-foreground)]">
+            <span className="w-[72px] shrink-0 text-right tabular-nums text-secondary-foreground">
               {fmtTokens(r.metrics.cacheRead + r.metrics.cacheWrite)}
             </span>
-            <span className="w-[72px] shrink-0 text-right tabular-nums text-[var(--secondary-foreground)]">
+            <span className="w-[72px] shrink-0 text-right tabular-nums text-secondary-foreground">
               {fmtNum(r.metrics.messages)}
             </span>
-            <span className="w-[72px] shrink-0 text-right tabular-nums text-[var(--secondary-foreground)]">
+            <span className="w-[72px] shrink-0 text-right tabular-nums text-secondary-foreground">
               {fmtNum(sessionsByKey.get(r.key) ?? 0)}
             </span>
-            <span className="w-[80px] shrink-0 text-right tabular-nums text-[var(--foreground)]">
+            <span className="w-[80px] shrink-0 text-right tabular-nums text-foreground">
               {r.metrics.cost > 0 ? fmtCost(r.metrics.cost) : "—"}
             </span>
           </div>
@@ -437,9 +428,9 @@ function RollupTable({
 export function AgentChip({ agent }: { agent: string }) {
   const { agentTint } = useIdentityTints();
   if (agent === BYOK_AGENT || agent === UNKNOWN)
-    return <span className="truncate text-[var(--muted-foreground)]">{agentDisplay(agent)}</span>;
+    return <span className="truncate text-muted-foreground">{agentDisplay(agent)}</span>;
   return (
-    <span className="inline-flex max-w-full items-center gap-1.5 text-[var(--foreground)]">
+    <span className="inline-flex max-w-full items-center gap-1.5 text-foreground">
       <span className="flex shrink-0 items-center" style={{ color: agentTint(agent).fg }}>
         <AgentGlyph agentType={agent} />
       </span>
@@ -459,8 +450,7 @@ export function AgentChip({ agent }: { agent: string }) {
 function ModelChip({ model }: { model: string }) {
   const { modelTint } = useIdentityTints();
   const label = modelDisplay(model);
-  if (model === UNKNOWN)
-    return <span className="truncate text-[var(--muted-foreground)]">{label}</span>;
+  if (model === UNKNOWN) return <span className="truncate text-muted-foreground">{label}</span>;
   // The vendor tint, on the text itself. No pill: the agent cell beside it is
   // already a bare glyph and name, and a box around one of the two made the
   // MODEL column read as the interactive one in a table where nothing is.

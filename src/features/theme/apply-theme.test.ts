@@ -4,7 +4,13 @@ import { readFileSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import builtinThemes from "@/dev/mock-backend/fixtures/builtin-themes.json";
-import { applyTheme, appearanceForMode, resolvedThemeCss } from "./apply-theme";
+import {
+  applyTheme,
+  appearanceForMode,
+  appearanceScopesCss,
+  resolvedThemeCss,
+} from "./apply-theme";
+import { resolveTheme } from "./resolve-theme";
 import type { Theme } from "./lib/theme-api";
 
 /** Pretend the OS is asking for a light appearance. */
@@ -185,5 +191,38 @@ describe("the launch replay in index.html", () => {
     localStorage.removeItem("atlas:launch-theme");
     coldStart();
     expect(document.getElementById("atlas-resolved-theme")).toBeNull();
+  });
+});
+
+/**
+ * Atlas Standards draws some panels in the OTHER appearance from the page —
+ * the share and comments panels, a bottom sheet. Setting `data-appearance` on
+ * an element is how; these pin what that attribute is given to work with.
+ */
+describe("appearance scopes", () => {
+  const atlas = (builtinThemes as unknown as Theme[]).find((t) => t.id === "atlas")!;
+
+  it("writes both variants whichever one the page is in", () => {
+    applyTheme(atlas, "dark");
+    const css = document.getElementById("atlas-appearance-scopes")?.textContent ?? "";
+    const light = resolveTheme(atlas, "light").cssVars["--background"];
+    const dark = resolveTheme(atlas, "dark").cssVars["--background"];
+    expect(css).toContain(`[data-appearance="light"]{color-scheme:light;`);
+    expect(css).toContain(`--background:${light}`);
+    expect(css).toContain(`--background:${dark}`);
+  });
+
+  it("re-inks text inside a flipped subtree", () => {
+    // Inherited `color` arrives already resolved, so the scope sets its own.
+    expect(appearanceScopesCss(atlas)).toContain("color:var(--foreground)");
+  });
+
+  it("is a second element, so the launch replay's block stays byte-identical", () => {
+    const resolved = applyTheme(atlas, "light");
+    expect(document.getElementById("atlas-resolved-theme")?.textContent).toBe(
+      resolvedThemeCss(resolved.cssVars),
+    );
+    applyTheme(atlas, "dark");
+    expect(document.querySelectorAll("#atlas-appearance-scopes")).toHaveLength(1);
   });
 });

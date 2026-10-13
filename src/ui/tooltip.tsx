@@ -2,6 +2,7 @@ import { Tooltip as TooltipPrimitive } from "@base-ui/react/tooltip";
 import * as React from "react";
 
 import { cn } from "@/lib/utils";
+import { KbdCombo } from "@/ui/kbd";
 import {
   isTooltipWarm,
   markTooltipClosed,
@@ -237,9 +238,9 @@ function TooltipContent({
           }
           className={cn(
             "group w-fit text-balance rounded-md px-2.5 py-1 text-xs",
-            "bg-[var(--popover)] text-foreground",
-            "outline outline-1 outline-[var(--border)]",
-            "animate-scale-in origin-[var(--transform-origin)]",
+            "bg-popover text-foreground",
+            "outline outline-1 outline-border",
+            "animate-scale-in origin-(--transform-origin)",
             instant && "animate-none",
             className,
           )}
@@ -311,7 +312,9 @@ function Hint({
   children,
 }: {
   label: React.ReactNode;
-  /** Keys shown dimmed after the label, e.g. "⌘K". */
+  /** The shortcut, drawn as keycaps after the label. A combo string ("⌘K",
+   *  "Ctrl+Shift+B" — what `useActionShortcut(...)?.label` gives) is split one
+   *  cap per key; a node is shown as given. */
   shortcut?: React.ReactNode;
   side?: Side;
   align?: Align;
@@ -341,7 +344,12 @@ function Hint({
       />
       <TooltipContent side={side} align={align} sideOffset={sideOffset}>
         {label}
-        {shortcut != null && <span className="ml-1.5 text-muted-foreground">{shortcut}</span>}
+        {typeof shortcut === "string" ? (
+          <KbdCombo combo={shortcut} size="2xs" className="ml-2" />
+        ) : (
+          // keycap-allow: the caller's own element — already keycaps, or a node.
+          shortcut != null && <span className="ml-2 inline-flex">{shortcut}</span>
+        )}
       </TooltipContent>
     </Tooltip>
   );

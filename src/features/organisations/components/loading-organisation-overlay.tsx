@@ -25,8 +25,8 @@ export function LoadingOrganisationOverlay() {
       style={{ paddingTop: 30 }}
       aria-live="polite"
     >
-      <AtlasLoader size={22} className="text-[var(--secondary-foreground)]" />
-      <div className="text-base text-[var(--muted-foreground)]">
+      <AtlasLoader size={22} className="text-secondary-foreground" />
+      <div className="text-base text-muted-foreground">
         {name ? `Loading ${name}…` : "Loading organization…"}
       </div>
     </div>

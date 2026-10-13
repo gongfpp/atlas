@@ -5,12 +5,15 @@
 // TOOLTIP_WARM_WINDOW has passed with nothing open. The warm state is shared
 // module state, so moving from one kind of tooltip to another stays instant.
 
+import type { Transition } from "motion/react";
+import { SPRING_INDICATOR } from "@/lib/motion";
+
 export const TOOLTIP_OPEN_DELAY = 300;
 export const TOOLTIP_WARM_WINDOW = 300;
 
-/** Strong ease-out: starts moving at once, settles without overshoot. */
-export const TOOLTIP_EASE = "cubic-bezier(0.23, 1, 0.32, 1)";
-export const TOOLTIP_SLIDE_MS = 180;
+/** Strong ease-out: starts moving at once, settles without overshoot. The
+ *  CSS `--ease-out-strong`, in the array form `motion` takes. */
+export const TOOLTIP_EASE = [0.23, 1, 0.32, 1] as const;
 export const TOOLTIP_FADE_IN_MS = 125;
 export const TOOLTIP_FADE_OUT_MS = 80;
 
@@ -40,20 +43,29 @@ export function prefersReducedMotion() {
   );
 }
 
-/** The sliding strip's transition: opacity always, travel only when asked. */
-export function slideTransition({ visible, travel }: { visible: boolean; travel: boolean }) {
-  const parts = [
-    visible
-      ? `opacity ${TOOLTIP_FADE_IN_MS}ms ${TOOLTIP_EASE}`
-      : `opacity ${TOOLTIP_FADE_OUT_MS}ms ease-out`,
-  ];
-  if (travel && !prefersReducedMotion()) {
-    parts.push(
-      `transform ${TOOLTIP_SLIDE_MS}ms ${TOOLTIP_EASE}`,
-      `clip-path ${TOOLTIP_SLIDE_MS}ms ${TOOLTIP_EASE}`,
-    );
-  }
-  return parts.join(", ");
+/**
+ * The sliding strip's `motion` transition. Opacity always eases; position and
+ * clip only travel when asked — the first reveal must appear in place rather
+ * than fly in from wherever the last hover left the strip — and travel rides
+ * the same spring as every other indicator that slides between options.
+ *
+ * Reduced motion keeps the fade and drops the travel. `MotionConfig` already
+ * stops `x` from animating under it, but `clipPath` is not a transform and
+ * would still sweep, so the check stays here.
+ */
+export function slideTransition({ visible, travel }: { visible: boolean; travel: boolean }): {
+  opacity: Transition;
+  x: Transition;
+  clipPath: Transition;
+} {
+  const move = travel && !prefersReducedMotion() ? SPRING_INDICATOR : { duration: 0 };
+  return {
+    opacity: visible
+      ? { duration: TOOLTIP_FADE_IN_MS / 1000, ease: TOOLTIP_EASE }
+      : { duration: TOOLTIP_FADE_OUT_MS / 1000, ease: "easeOut" },
+    x: move,
+    clipPath: move,
+  };
 }
 
 /** Test hook: forget any open/warm state between tests. */

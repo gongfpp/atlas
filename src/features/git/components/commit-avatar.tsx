@@ -77,7 +77,7 @@ export function CommitAvatar({ email, repoPath, size = 16, className }: CommitAv
 
   return (
     <span
-      className={`relative inline-flex items-center justify-center rounded-full overflow-hidden shrink-0 bg-[var(--card)] border border-[var(--border)] ${
+      className={`relative inline-flex items-center justify-center rounded-full overflow-hidden shrink-0 bg-card border border-border ${
         className ?? ""
       }`}
       style={{ width: size, height: size }}
@@ -95,10 +95,7 @@ export function CommitAvatar({ email, repoPath, size = 16, className }: CommitAv
           className="w-full h-full object-cover"
         />
       ) : (
-        <User
-          size={Math.max(8, Math.floor(size * 0.55))}
-          className="text-[var(--muted-foreground)]"
-        />
+        <User size={Math.max(8, Math.floor(size * 0.55))} className="text-muted-foreground" />
       )}
     </span>
   );

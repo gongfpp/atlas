@@ -146,4 +146,12 @@ describe("display", () => {
     expect(splitGlyphCombo("⌥Space")).toEqual(["⌥", "Space"]);
     expect(splitGlyphCombo("↵")).toEqual(["↵"]);
   });
+
+  it("splits a Windows/Linux label into one cap per key", () => {
+    expect(splitGlyphCombo("Ctrl+Shift+B")).toEqual(["Ctrl", "Shift", "B"]);
+    expect(splitGlyphCombo("Ctrl++")).toEqual(["Ctrl", "+"]);
+    expect(splitGlyphCombo("Alt+Space")).toEqual(["Alt", "Space"]);
+    // A key that merely contains "+" is not a label.
+    expect(splitGlyphCombo("+")).toEqual(["+"]);
+  });
 });

@@ -30,7 +30,7 @@ export function CanvasHeader({
       <div
         className={cn(
           "absolute left-3 top-3 z-panel flex items-center gap-1.5 pl-1 pr-1 py-1",
-          "rounded-xl border border-border-subtle bg-[var(--card)]/70 backdrop-blur-2xl shadow-md",
+          "rounded-xl border border-hairline bg-card/70 backdrop-blur-2xl shadow-md",
         )}
       >
         <HintItem label={pagesOpen ? "Hide pages" : "Show pages"}>
@@ -47,14 +47,14 @@ export function CanvasHeader({
             <RailGlyph open={pagesOpen} size="md" />
           </button>
         </HintItem>
-        <div className="mx-0.5 h-4 w-px bg-border-subtle" />
+        <div className="mx-0.5 h-4 w-px bg-hairline" />
         <span className="flex h-4 w-4 shrink-0 items-center justify-center text-sm leading-none">
           {pageIcon || DEFAULT_PAGE_ICON}
         </span>
         <span className="max-w-[180px] truncate text-sm font-semibold text-foreground">
           {pageName || "Spaces"}
         </span>
-        <div className="mx-0.5 h-4 w-px bg-border-subtle" />
+        <div className="mx-0.5 h-4 w-px bg-hairline" />
         <HintItem label="Fit to view">
           <button
             type="button"

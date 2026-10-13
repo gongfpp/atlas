@@ -37,8 +37,7 @@ const ITEMS: Array<{
 // portalled to `body`, so it shares a stacking context with every dialog and
 // overlay in the app, and a menu has to sit above a dialog rather than under it.
 const CONTENT_CLASS =
-  "min-w-[228px] max-w-[300px] rounded-md border border-[var(--border)] " +
-  "bg-[var(--card)] shadow-md py-1";
+  "min-w-[228px] max-w-[300px] rounded-md border border-border " + "bg-card shadow-md py-1";
 
 /**
  * Shown when the background revocation did not land — offline, or an Atlas
@@ -59,12 +58,12 @@ const RESIDUAL_SESSION =
 // can act on from what is only being reported.
 const ITEM_CLASS =
   "flex items-center gap-2 px-3 h-[26px] text-xs cursor-pointer outline-none " +
-  "text-[var(--secondary-foreground)] data-[highlighted]:bg-[var(--atlas-element-hover)] " +
-  "data-[highlighted]:text-[var(--foreground)]";
+  "text-secondary-foreground data-[highlighted]:bg-element-hover " +
+  "data-[highlighted]:text-foreground";
 
 // Hoisted for the same reason as the two above: this menu now has three
 // separators, and a rule one of them disagreed with would be visible.
-const SEPARATOR_CLASS = "my-1 h-px bg-[var(--border)]";
+const SEPARATOR_CLASS = "my-1 h-px bg-border";
 
 /**
  * The menu behind the title bar's avatar — who you are, the parts of Settings
@@ -119,7 +118,7 @@ export function AccountMenu({
             {!signedIn && (
               <>
                 <DropdownMenu.Item onClick={() => void beginSignIn()} className={ITEM_CLASS}>
-                  <LogIn size={13} className="shrink-0 text-[var(--muted-foreground)]" />
+                  <LogIn size={13} className="shrink-0 text-muted-foreground" />
                   <span className="flex-1 text-left">Sign In</span>
                 </DropdownMenu.Item>
                 <DropdownMenu.Separator className={SEPARATOR_CLASS} />
@@ -131,7 +130,7 @@ export function AccountMenu({
                 onClick={() => openSettingsSection(item.section)}
                 className={ITEM_CLASS}
               >
-                <item.icon size={13} className="shrink-0 text-[var(--muted-foreground)]" />
+                <item.icon size={13} className="shrink-0 text-muted-foreground" />
                 <span className="flex-1 text-left">{item.label}</span>
                 {item.shortcut && <KbdCombo combo={item.shortcut} />}
               </DropdownMenu.Item>
@@ -144,7 +143,7 @@ export function AccountMenu({
               <>
                 <DropdownMenu.Separator className={SEPARATOR_CLASS} />
                 <DropdownMenu.Item onClick={() => void onSignOut()} className={ITEM_CLASS}>
-                  <LogOut size={13} className="shrink-0 text-[var(--muted-foreground)]" />
+                  <LogOut size={13} className="shrink-0 text-muted-foreground" />
                   <span className="flex-1 text-left">Sign Out</span>
                 </DropdownMenu.Item>
               </>
@@ -179,9 +178,9 @@ function Header({ user }: { user: AccountUser }) {
           {/* `flex-1 min-w-0` against the content's max width is what makes a
             long address truncate rather than stretch the whole menu. */}
           <div className="flex-1 min-w-0">
-            <div className="truncate text-sm font-medium text-[var(--foreground)]">{primary}</div>
+            <div className="truncate text-sm font-medium text-foreground">{primary}</div>
             {email && email !== primary && (
-              <div className="truncate text-xs text-[var(--muted-foreground)]">{email}</div>
+              <div className="truncate text-xs text-muted-foreground">{email}</div>
             )}
           </div>
         </DropdownMenu.GroupLabel>

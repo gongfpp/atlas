@@ -12,7 +12,9 @@ export type ThemeKeyValue = string | ThemeKeyStyle;
 export interface ThemeVariant {
   base: Record<string, string>;
   palette: Record<string, string>;
-  keys: Record<string, ThemeKeyValue>;
+  /** Sparse: a theme sets only the keys it has an opinion on, and the
+   *  resolver derives the rest. */
+  keys: Partial<Record<string, ThemeKeyValue>>;
 }
 
 export interface Theme {

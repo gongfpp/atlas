@@ -240,7 +240,7 @@ function Row({
             onDoubleClick={() => onRecord("change")}
             className={cn(
               GRID,
-              "group h-[28px] px-2 text-xs border-b border-border-subtle cursor-default select-none",
+              "group h-[28px] px-2 text-xs border-b border-hairline cursor-default select-none",
               selected ? "bg-element-selected" : "hover:bg-element-hover",
             )}
           >
@@ -285,12 +285,7 @@ function Row({
               {row.invalid.length > 0 && (
                 <Tooltip>
                   <TooltipTrigger
-                    render={
-                      <AlertTriangle
-                        size={11}
-                        className="shrink-0 text-[var(--atlas-status-error-foreground)]"
-                      />
-                    }
+                    render={<AlertTriangle size={11} className="shrink-0 text-error" />}
                   />
                   <TooltipContent>
                     Invalid in keybindings.json: {row.invalid.join(", ")}
@@ -312,11 +307,7 @@ function Row({
                       >
                         <AlertTriangle
                           size={11}
-                          className={
-                            worst === "hard"
-                              ? "text-[var(--atlas-status-error-foreground)]"
-                              : "text-[var(--atlas-status-warning-foreground)]"
-                          }
+                          className={worst === "hard" ? "text-error" : "text-warning"}
                         />
                       </button>
                     }

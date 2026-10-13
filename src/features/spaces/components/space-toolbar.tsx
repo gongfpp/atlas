@@ -78,9 +78,7 @@ export function SpaceToolbar({
 }) {
   // Bottom is a row; left/right are columns pinned to the middle of that edge.
   const horizontal = dock === "bottom";
-  const divider = horizontal
-    ? "mx-0.5 h-5 w-px bg-border-subtle"
-    : "my-0.5 h-px w-5 bg-border-subtle";
+  const divider = horizontal ? "mx-0.5 h-5 w-px bg-hairline" : "my-0.5 h-px w-5 bg-hairline";
   const hintSide = horizontal ? null : dock === "right" ? "left" : "right";
   return (
     <HintGroup side="top">
@@ -88,7 +86,7 @@ export function SpaceToolbar({
         <div
           className={cn(
             "absolute z-panel flex items-center gap-1 p-1",
-            "rounded-xl border border-border-subtle bg-[var(--card)]/70 shadow-md backdrop-blur-2xl",
+            "rounded-xl border border-hairline bg-card/70 shadow-md backdrop-blur-2xl",
             horizontal
               ? "bottom-3 left-1/2 -translate-x-1/2 flex-row"
               : "top-1/2 -translate-y-1/2 flex-col",
@@ -175,7 +173,11 @@ function DockHint({
 }) {
   const side = useContext(DockHintSide);
   if (side === null) {
-    return <HintItem label={shortcut ? `${label} (${shortcut})` : label}>{children}</HintItem>;
+    return (
+      <HintItem label={label} shortcut={shortcut}>
+        {children}
+      </HintItem>
+    );
   }
   return (
     <Hint label={label} shortcut={shortcut} side={side}>
@@ -212,7 +214,7 @@ function DockMenu({
               className={cn(
                 "flex h-8 w-8 cursor-pointer items-center justify-center rounded-lg transition-colors",
                 open
-                  ? "bg-[var(--primary)]/20 text-[var(--foreground)]"
+                  ? "bg-primary/20 text-foreground"
                   : "text-secondary-foreground hover:bg-element-hover hover:text-foreground",
               )}
             >
@@ -228,7 +230,7 @@ function DockMenu({
           align="end"
           sideOffset={8}
         >
-          <Popover.Popup className="atlas-panel-in-tl inset-highlight shadow-md select-none overflow-hidden rounded-xl border border-border-subtle bg-[var(--card)]/95 backdrop-blur-2xl">
+          <Popover.Popup className="atlas-panel-in-tl inset-highlight shadow-md select-none overflow-hidden rounded-xl border border-hairline bg-card/95 backdrop-blur-2xl">
             <div className="flex w-[168px] flex-col py-1">
               <div className="px-3 pb-1 pt-1 text-2xs font-semibold uppercase tracking-wider text-muted-foreground">
                 Dock position
@@ -242,14 +244,14 @@ function DockMenu({
                     setOpen(false);
                   }}
                   className={cn(
-                    "flex cursor-pointer items-center gap-2 px-3 py-1.5 text-left text-xs transition-colors hover:bg-[var(--atlas-element-hover)]",
+                    "flex cursor-pointer items-center gap-2 px-3 py-1.5 text-left text-xs transition-colors hover:bg-element-hover",
                     dock === d.dock ? "text-foreground" : "text-secondary-foreground",
                   )}
                 >
                   <d.icon size={12} className="shrink-0 text-muted-foreground" />
                   {d.label}
                   {dock === d.dock && (
-                    <span className="ml-auto h-1.5 w-1.5 rounded-full bg-[var(--primary)]" />
+                    <span className="ml-auto h-1.5 w-1.5 rounded-full bg-primary" />
                   )}
                 </button>
               ))}
@@ -278,7 +280,7 @@ function ToolButton({
         className={cn(
           "flex h-8 w-8 cursor-pointer items-center justify-center rounded-lg transition-colors",
           active
-            ? "bg-[var(--primary)]/20 text-[var(--foreground)]"
+            ? "bg-primary/20 text-foreground"
             : "text-secondary-foreground hover:bg-element-hover hover:text-foreground",
         )}
       >

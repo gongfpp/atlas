@@ -156,11 +156,11 @@ export function ChatCommentsPanel({ tabId, onClose }: { tabId: string; onClose: 
       tabIndex={-1}
       onKeyDown={onKeyDown}
       style={{ width: bashPanel.width }}
-      className="relative h-full max-w-[50%] shrink-0 flex flex-col border-l border-[var(--border)] bg-[var(--sidebar)] outline-none animate-slide-in-right"
+      className="relative h-full max-w-[50%] shrink-0 flex flex-col border-l border-border bg-sidebar outline-none animate-slide-in-right"
     >
       <div
         onMouseDown={onResizeStart}
-        className="absolute left-0 top-0 bottom-0 z-10 w-1 cursor-col-resize hover:bg-[var(--atlas-border-strong)]"
+        className="absolute left-0 top-0 bottom-0 z-10 w-1 cursor-col-resize hover:bg-border-strong"
         aria-hidden
       />
       <CommentsPanelBase anchors={anchors} comments={comments} onJump={onJump} onClose={onClose} />

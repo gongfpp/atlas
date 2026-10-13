@@ -373,7 +373,7 @@ export function TimelineSidebar({ sessions, loading, filtered, openKey, period, 
           type="button"
           onClick={() => virtualizer.scrollToIndex(0, { align: "start" })}
           className={cn(
-            "pointer-events-auto flex h-7 cursor-pointer items-center gap-1.5 rounded-full border border-[var(--border)] bg-[var(--card)]/85 px-3 text-xs text-[var(--secondary-foreground)] shadow-md backdrop-blur-xl transition-opacity duration-150 hover:text-[var(--foreground)]",
+            "pointer-events-auto flex h-7 cursor-pointer items-center gap-1.5 rounded-full border border-border bg-card/85 px-3 text-xs text-secondary-foreground shadow-md backdrop-blur-xl transition-opacity duration-150 hover:text-foreground",
             edges.top ? "opacity-100" : "pointer-events-none opacity-0",
           )}
           tabIndex={edges.top ? undefined : -1}
@@ -500,15 +500,10 @@ const DayRow = memo(function DayRow({ row }: { row: Extract<Row, { kind: "day" }
         lane={0}
         r={DAY_R}
         cy={DAY_H / 2}
-        className={today ? "bg-[var(--primary)]" : undefined}
+        className={today ? "bg-primary" : undefined}
         style={today ? undefined : { background: DOT_NEUTRAL }}
       />
-      <span
-        className={cn(
-          "truncate",
-          today ? "text-[var(--primary)]" : "text-[var(--secondary-foreground)]",
-        )}
-      >
+      <span className={cn("truncate", today ? "text-primary" : "text-secondary-foreground")}>
         {row.label}
       </span>
     </div>
@@ -532,12 +527,12 @@ const DayRow = memo(function DayRow({ row }: { row: Extract<Row, { kind: "day" }
  * reason it could not simply use the 4%/6% pair.
  */
 const ROW =
-  "relative flex h-full w-full cursor-pointer items-center pr-3 text-left transition-colors hover:bg-[var(--atlas-element-hover)]";
+  "relative flex h-full w-full cursor-pointer items-center pr-3 text-left transition-colors hover:bg-element-hover";
 /** The two-line variant: the title over the Project-and-author byline. */
 const ROW_STACKED =
-  "relative flex h-full w-full cursor-pointer flex-col justify-center gap-0.5 pr-3 text-left transition-colors hover:bg-[var(--atlas-element-hover)]";
+  "relative flex h-full w-full cursor-pointer flex-col justify-center gap-0.5 pr-3 text-left transition-colors hover:bg-element-hover";
 /** Held on hover too, so pointing at the open row does not brighten it. */
-const ROW_SELECTED = "bg-[var(--atlas-element-active)] hover:bg-[var(--atlas-element-active)]";
+const ROW_SELECTED = "bg-element-active hover:bg-element-active";
 
 // memo: the board re-renders on every capture/git event while the tab is open;
 // with the parent's same-data bailout keeping row identities stable, memo
@@ -577,8 +572,8 @@ const SessionRow = memo(function SessionRow({
         r={SESSION_R}
         cy={SESSION_DOT_Y}
         className={cn(
-          state === "live" && "atlas-live-pulse bg-[var(--atlas-status-success-foreground)]",
-          state === "attention" && "bg-[var(--atlas-status-warning-foreground)]",
+          state === "live" && "atlas-live-pulse bg-success",
+          state === "attention" && "bg-warning",
         )}
         style={
           state === "live"
@@ -594,11 +589,11 @@ const SessionRow = memo(function SessionRow({
       <FadingTitle
         className={cn(
           selected
-            ? "text-[var(--foreground)]"
+            ? "text-foreground"
             : lane === 2 || state === "done"
-              ? "text-[var(--secondary-foreground)]"
-              : "text-[var(--foreground)]",
-          !title && "text-[var(--muted-foreground)]",
+              ? "text-secondary-foreground"
+              : "text-foreground",
+          !title && "text-muted-foreground",
         )}
       >
         {title ?? "Untitled session"}
@@ -636,24 +631,15 @@ const SessionMeta = memo(function SessionMeta({
   const Icon = session.synced ? Check : Laptop;
   const author = authorOf(session.authorId, directory);
   return (
-    <span className="flex w-full min-w-0 items-center gap-1.5 text-2xs leading-tight text-[var(--muted-foreground)]">
+    <span className="flex w-full min-w-0 items-center gap-1.5 text-2xs leading-tight text-muted-foreground">
       <Icon
         size={9}
-        className={cn(
-          "shrink-0",
-          session.synced
-            ? "text-[var(--atlas-status-success-foreground)]"
-            : "text-[var(--atlas-text-disabled)]",
-        )}
+        className={cn("shrink-0", session.synced ? "text-success" : "text-disabled")}
         aria-label={session.synced ? "Shared with your Organization" : "This machine only"}
       />
       {/* The Project first, because it is what a reader scanning the day is
        *  grouping by. It is the part that gives way when the pane is narrow. */}
-      {live && (
-        <span className="shrink-0 font-medium text-[var(--atlas-status-success-foreground)]">
-          Live ·
-        </span>
-      )}
+      {live && <span className="shrink-0 font-medium text-success">Live ·</span>}
       <span className="min-w-0 truncate">{session.projectName}</span>
       {/* Whose work it is, pinned right by `ml-auto` rather than by letting the
        *  Project grow into the gap: a Project name short enough not to truncate
@@ -669,9 +655,7 @@ const SessionMeta = memo(function SessionMeta({
             {authorOnline && !author.isSelf && <OnlineDot px={4} />}
           </span>
         )}
-        <span className={cn(author.isSelf && "text-[var(--atlas-text-disabled)]")}>
-          {author.label}
-        </span>
+        <span className={cn(author.isSelf && "text-disabled")}>{author.label}</span>
       </span>
     </span>
   );
@@ -771,19 +755,15 @@ const ClusterRow = memo(function ClusterRow({
       <span
         className={cn(
           "min-w-0 truncate text-base leading-tight tracking-[-0.01em]",
-          holdsOpen ? "text-[var(--foreground)]" : "text-[var(--secondary-foreground)]",
+          holdsOpen ? "text-foreground" : "text-secondary-foreground",
         )}
       >
         {row.title}
       </span>
-      <span className="ml-1.5 shrink-0 font-mono text-2xs text-[var(--muted-foreground)]">
+      <span className="ml-1.5 shrink-0 font-mono text-2xs text-muted-foreground">
         ×{row.sessions.length}
       </span>
-      <Chevron
-        size={11}
-        strokeWidth={1.5}
-        className="ml-auto shrink-0 text-[var(--muted-foreground)]"
-      />
+      <Chevron size={11} strokeWidth={1.5} className="ml-auto shrink-0 text-muted-foreground" />
     </button>
   );
 });
@@ -836,11 +816,11 @@ export function clusterRows(rows: BoardSession[]): ListItem[] {
 function Empty({ filtered }: { filtered: boolean }) {
   return (
     <div className="px-4 py-12 text-center">
-      <p className="text-sm text-[var(--secondary-foreground)]">
+      <p className="text-sm text-secondary-foreground">
         {filtered ? "No sessions match this filter." : "No sessions captured yet."}
       </p>
       {!filtered && (
-        <p className="mt-1 text-xs text-[var(--muted-foreground)]">
+        <p className="mt-1 text-xs text-muted-foreground">
           Send a prompt to an agent in this Project and it will appear here.
         </p>
       )}

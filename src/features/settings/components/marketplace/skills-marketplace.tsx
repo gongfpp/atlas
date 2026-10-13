@@ -286,7 +286,7 @@ export function SkillsMarketplace({
                   onKeyDown={(e) => {
                     if (e.key === "Enter" || e.key === " ") setSelected(hit);
                   }}
-                  className="flex w-full cursor-pointer items-center h-[40px] border-b border-border-subtle px-3 text-left transition-colors hover:bg-element-hover"
+                  className="flex w-full cursor-pointer items-center h-[40px] border-b border-hairline px-3 text-left transition-colors hover:bg-element-hover"
                 >
                   <span
                     className={cn(

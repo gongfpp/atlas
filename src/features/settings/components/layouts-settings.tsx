@@ -1,14 +1,13 @@
 import { toast } from "sonner";
-import { useActionShortcut } from "@/features/keybindings/lib/use-action-shortcut";
+import { ActionKbd } from "@/features/keybindings/components/action-kbd";
 import { cn } from "@/lib/utils";
 import { useLayoutStore } from "@/features/layout/stores/layout-store";
 import { LAYOUT_TEMPLATES, type LayoutTemplate } from "@/features/layout/templates";
 import { LayoutThumbnail } from "@/features/layout/components/layout-thumbnail";
 
-/** Settings → Layouts: the same predefined templates the ⌘⌥L switcher offers,
- *  applied with a click. */
+/** Settings → Layouts: the same predefined templates the layout switcher
+ *  (`nav.layoutSwitcher`) offers, applied with a click. */
 export function LayoutsSettings() {
-  const switcherHint = useActionShortcut("nav.layoutSwitcher")?.label ?? "⌘⌥L";
   const apply = (t: LayoutTemplate) => {
     useLayoutStore.getState().actions.applyLayoutTemplate(t);
     toast.success(`Applied “${t.name}” layout`);
@@ -20,10 +19,7 @@ export function LayoutsSettings() {
         <h2 className="text-sm font-semibold text-foreground">Layouts</h2>
         <p className="text-xs text-muted-foreground mt-0.5">
           Rearrange panels and tabs into a ready-made project. Press{" "}
-          <kbd className="px-1 py-0.5 rounded bg-card border border-border font-mono text-3xs">
-            {switcherHint}
-          </kbd>{" "}
-          anytime to switch layouts.
+          <ActionKbd id="nav.layoutSwitcher" size="2xs" fallback="⌘⌥L" /> anytime to switch layouts.
         </p>
       </div>
 
@@ -34,7 +30,7 @@ export function LayoutsSettings() {
             onClick={() => apply(t)}
             className={cn(
               "text-left rounded-xl border border-border bg-card p-3",
-              "hover:border-[var(--atlas-border-strong)] transition-colors outline-none",
+              "hover:border-border-strong transition-colors outline-none",
             )}
           >
             <LayoutThumbnail template={t} />

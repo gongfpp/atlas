@@ -62,15 +62,15 @@ export function NotificationPanel() {
       <aside
         className={cn(
           "fixed right-0 top-0 bottom-0 z-drawer w-[360px] flex flex-col",
-          "border-l border-[var(--border)]",
-          "bg-[var(--card)]/60 backdrop-blur-2xl",
+          "border-l border-border",
+          "bg-card/60 backdrop-blur-2xl",
           "shadow-md animate-slide-in-right",
         )}
         role="dialog"
         aria-label="Notifications"
       >
         {/* Header — matches the window titlebar height (30px). */}
-        <div className="flex items-center gap-2 px-4 h-[30px] shrink-0 border-b border-[var(--border)]">
+        <div className="flex items-center gap-2 px-4 h-[30px] shrink-0 border-b border-border">
           <Bell size={13} className="text-secondary-foreground" strokeWidth={1.5} />
           <span className="text-sm font-semibold text-foreground">Notifications</span>
           <div className="flex-1" />
@@ -89,7 +89,7 @@ export function NotificationPanel() {
           {items.length === 0 ? (
             <div className="grid h-full place-items-center px-6">
               <div className="text-center">
-                <div className="mx-auto grid h-11 w-11 place-items-center rounded-2xl border border-border-subtle bg-element-hover">
+                <div className="mx-auto grid h-11 w-11 place-items-center rounded-2xl border border-hairline bg-element-hover">
                   <Bell size={18} className="text-muted-foreground" strokeWidth={1.5} />
                 </div>
                 <p className="mt-3 text-sm text-muted-foreground">No notifications</p>
@@ -99,7 +99,7 @@ export function NotificationPanel() {
             <div className="pb-3">
               {groups.map((g) => (
                 <section key={g.label}>
-                  <div className="sticky top-0 z-10 px-4 pt-3 pb-1.5 bg-[var(--card)]/40 backdrop-blur-sm text-3xs font-semibold uppercase tracking-wider text-muted-foreground">
+                  <div className="sticky top-0 z-10 px-4 pt-3 pb-1.5 bg-card/40 backdrop-blur-sm text-3xs font-semibold uppercase tracking-wider text-muted-foreground">
                     {g.label}
                   </div>
                   <div className="flex flex-col gap-1.5 px-3">
@@ -134,7 +134,7 @@ function NotificationCard({ n }: { n: AppNotification }) {
         if (e.key === "Enter") onOpen();
       }}
       className={cn(
-        "group relative flex items-start gap-2.5 rounded-xl border border-border-subtle px-3 py-2.5",
+        "group relative flex items-start gap-2.5 rounded-xl border border-hairline px-3 py-2.5",
         "bg-element-hover hover:bg-element-selected transition-colors cursor-pointer select-none",
       )}
     >
@@ -143,7 +143,7 @@ function NotificationCard({ n }: { n: AppNotification }) {
       </span>
       <div className="min-w-0 flex-1">
         <div className="flex items-center gap-2">
-          {!n.read && <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--primary)]" />}
+          {!n.read && <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />}
           <span className="truncate text-sm font-medium text-foreground">{n.title}</span>
           {/* Gives way to the Dismiss button, which takes its place on hover. */}
           <span className="ml-auto shrink-0 text-3xs text-muted-foreground tabular-nums transition-opacity group-hover:opacity-0 group-has-[[data-dismiss]:focus-visible]:opacity-0">
@@ -195,7 +195,7 @@ function CardActions({ n, onRun }: { n: AppNotification; onRun: () => void }) {
             void runNotificationAction(a.id, { kind: n.kind, target, args: a.args });
           }}
           onKeyDown={(e) => e.stopPropagation()}
-          className="h-6 px-2 rounded-md border border-border text-2xs font-medium text-foreground bg-[var(--card)] hover:bg-element-active transition-colors"
+          className="h-6 px-2 rounded-md border border-border text-2xs font-medium text-foreground bg-card hover:bg-element-active transition-colors"
         >
           {a.label}
         </button>

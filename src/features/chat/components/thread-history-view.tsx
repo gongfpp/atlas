@@ -168,7 +168,7 @@ export function ThreadHistoryView({
                         onOpenThread(thread);
                         onOpenChange(false);
                       }}
-                      className="group flex cursor-pointer select-none items-center gap-2 border-b border-border-subtle px-3 py-2 transition-colors last:border-b-0 hover:bg-element-hover"
+                      className="group flex cursor-pointer select-none items-center gap-2 border-b border-hairline px-3 py-2 transition-colors last:border-b-0 hover:bg-element-hover"
                     >
                       <span className="min-w-0 flex-1">
                         <span className="block truncate text-xs text-foreground">
@@ -190,7 +190,7 @@ export function ThreadHistoryView({
                             void remove(thread);
                           }}
                           aria-label="Delete thread"
-                          className="flex h-4 w-4 shrink-0 items-center justify-center rounded text-muted-foreground opacity-0 transition-opacity hover:bg-card hover:text-[var(--atlas-status-error-foreground)] group-hover:opacity-100 focus-visible:opacity-100 cursor-pointer"
+                          className="flex h-4 w-4 shrink-0 items-center justify-center rounded text-muted-foreground opacity-0 transition-opacity hover:bg-card hover:text-error group-hover:opacity-100 focus-visible:opacity-100 cursor-pointer"
                         >
                           <Trash2 size={10} />
                         </button>

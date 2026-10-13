@@ -89,7 +89,7 @@ export function MemoryReviewView({
   return (
     <div className={cn("flex-1 min-h-0 overflow-y-auto px-3 py-2", className)}>
       {loaded && empty ? (
-        <p className="py-8 text-center text-sm text-[var(--muted-foreground)]">
+        <p className="py-8 text-center text-sm text-muted-foreground">
           {loadError ? `Couldn't read the review queue: ${loadError}` : "Nothing to review"}
         </p>
       ) : null}
@@ -97,8 +97,8 @@ export function MemoryReviewView({
         <Section title="Proposed by the nightly review" count={dreams.length}>
           {dreams.map((d) => (
             <Card key={d.id}>
-              <div className="text-xs text-[var(--foreground)]">{dreamLabel(d.op)}</div>
-              {d.why && <div className="text-2xs text-[var(--muted-foreground)]">{d.why}</div>}
+              <div className="text-xs text-foreground">{dreamLabel(d.op)}</div>
+              {d.why && <div className="text-2xs text-muted-foreground">{d.why}</div>}
               {d.entries.map((e) => (
                 <Line key={e.id} entry={e} muted />
               ))}
@@ -228,7 +228,7 @@ function Section({
 }) {
   return (
     <section className="mb-3">
-      <h3 className="mb-1.5 flex items-center gap-1.5 text-3xs uppercase tracking-wider text-[var(--atlas-text-disabled)]">
+      <h3 className="mb-1.5 flex items-center gap-1.5 text-3xs uppercase tracking-wider text-disabled">
         {title}
         <span className="tabular-nums">{count}</span>
       </h3>
@@ -239,7 +239,7 @@ function Section({
 
 function Card({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex flex-col gap-1 rounded-md border border-[var(--border)] bg-[var(--card)] px-2.5 py-2">
+    <div className="flex flex-col gap-1 rounded-md border border-border bg-card px-2.5 py-2">
       {children}
     </div>
   );
@@ -249,19 +249,19 @@ function Line({ label, entry, muted }: { label?: string; entry: MemoryEntry; mut
   return (
     <div className="flex items-baseline gap-2 text-xs">
       {label && (
-        <span className="w-12 shrink-0 text-3xs uppercase tracking-wide text-[var(--atlas-text-disabled)]">
+        <span className="w-12 shrink-0 text-3xs uppercase tracking-wide text-disabled">
           {label}
         </span>
       )}
       <span
         className={cn(
           "min-w-0 flex-1 break-words",
-          muted ? "text-[var(--muted-foreground)]" : "text-[var(--foreground)]",
+          muted ? "text-muted-foreground" : "text-foreground",
         )}
       >
         {entry.content}
       </span>
-      <span className="shrink-0 text-2xs text-[var(--muted-foreground)]">
+      <span className="shrink-0 text-2xs text-muted-foreground">
         {entry.kind} · {entry.agent || entry.source} · {Math.round(entry.confidence * 100)}%
       </span>
     </div>
@@ -277,7 +277,7 @@ function Action({ label, onClick }: { label: string; onClick: () => void }) {
     <button
       type="button"
       onClick={onClick}
-      className="h-6 rounded-md border border-[var(--border)] px-2 text-xs text-[var(--secondary-foreground)] transition-colors hover:bg-[var(--atlas-element-hover)] hover:text-[var(--foreground)]"
+      className="h-6 rounded-md border border-border px-2 text-xs text-secondary-foreground transition-colors hover:bg-element-hover hover:text-foreground"
     >
       {label}
     </button>

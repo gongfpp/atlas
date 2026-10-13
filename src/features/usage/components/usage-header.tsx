@@ -48,9 +48,9 @@ export function UsageHeader({
       className="flex h-control-lg shrink-0 items-center gap-2"
       style={{ paddingInline: inset + 6 }}
     >
-      <span className="shrink-0 text-sm font-semibold text-[var(--foreground)]">Usage</span>
+      <span className="shrink-0 text-sm font-semibold text-foreground">Usage</span>
       {orgName && (
-        <span className="min-w-0 truncate text-xs text-[var(--muted-foreground)]" title={orgName}>
+        <span className="min-w-0 truncate text-xs text-muted-foreground" title={orgName}>
           {orgName}
         </span>
       )}
@@ -71,11 +71,13 @@ export function UsageHeader({
   );
 }
 
-const ITEMS: ReadonlyArray<{ kind: ExportKind; label: string; hint: string; icon: typeof Copy }> = [
-  { kind: "pdf", label: "PDF report", hint: ".pdf", icon: FileType2 },
-  { kind: "jpeg", label: "JPEG image", hint: ".jpg", icon: ImageIcon },
-  { kind: "markdown", label: "Markdown report", hint: ".md", icon: FileText },
-  { kind: "copy-markdown", label: "Copy as Markdown", hint: "⌘C", icon: Copy },
+/** `ext` is the file a row writes. The copy row writes none — it used to show
+ *  "⌘C" there, a shortcut nothing was bound to. */
+const ITEMS: ReadonlyArray<{ kind: ExportKind; label: string; ext?: string; icon: typeof Copy }> = [
+  { kind: "pdf", label: "PDF report", ext: ".pdf", icon: FileType2 },
+  { kind: "jpeg", label: "JPEG image", ext: ".jpg", icon: ImageIcon },
+  { kind: "markdown", label: "Markdown report", ext: ".md", icon: FileText },
+  { kind: "copy-markdown", label: "Copy as Markdown", icon: Copy },
 ];
 
 /** Export, as a dock glyph — same shape the Timeline's export takes. */
@@ -106,7 +108,7 @@ function ExportMenu({
             `--transform-origin` is Base UI's spelling of Radix's
             `--radix-popover-content-transform-origin`. */}
         <Popover.Positioner className="z-popover" align="end" sideOffset={6}>
-          <Popover.Popup className="w-[196px] origin-[var(--transform-origin)] overflow-hidden rounded-lg border border-[var(--border)] bg-[var(--card)]/90 p-1 shadow-md backdrop-blur-2xl data-closed:animate-scale-out data-open:animate-scale-in">
+          <Popover.Popup className="w-[196px] origin-(--transform-origin) overflow-hidden rounded-lg border border-border bg-card/90 p-1 shadow-md backdrop-blur-2xl data-closed:animate-scale-out data-open:animate-scale-in">
             {ITEMS.map((item) => (
               <Popover.Close
                 key={item.kind}
@@ -114,13 +116,13 @@ function ExportMenu({
                   <button
                     type="button"
                     onClick={() => onExport(item.kind)}
-                    className="flex h-control-md w-full cursor-pointer items-center gap-2 rounded-md px-2 text-left text-xs text-[var(--secondary-foreground)] outline-none transition-colors hover:bg-[var(--atlas-element-hover)] hover:text-[var(--foreground)]"
+                    className="flex h-control-md w-full cursor-pointer items-center gap-2 rounded-md px-2 text-left text-xs text-secondary-foreground outline-none transition-colors hover:bg-element-hover hover:text-foreground"
                   >
-                    <item.icon size={12} className="shrink-0 text-[var(--muted-foreground)]" />
+                    <item.icon size={12} className="shrink-0 text-muted-foreground" />
                     <span className="min-w-0 flex-1 truncate">{item.label}</span>
-                    <span className="shrink-0 text-2xs text-[var(--atlas-text-disabled)]">
-                      {item.hint}
-                    </span>
+                    {item.ext && (
+                      <span className="shrink-0 text-2xs text-disabled">{item.ext}</span>
+                    )}
                   </button>
                 }
               />

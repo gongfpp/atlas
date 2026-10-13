@@ -29,7 +29,7 @@ export function CommsDraftTab({ convId, draftId }: { convId: string; draftId: st
   }
 
   return (
-    <div className="flex h-full flex-col bg-[var(--background)]">
+    <div className="flex h-full flex-col bg-background">
       {/* Keyed by draft: the editor's session (its Y.Doc, the socket relay,
           `ready`) belongs to ONE draft and is not rebuilt when the prop changes. */}
       <DraftEditor key={draft.id} conv={conv} draft={draft} />

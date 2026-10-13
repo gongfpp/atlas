@@ -93,7 +93,7 @@ export function PagesPanel({ width = 240 }: { width?: number }) {
               e.stopPropagation();
               deleteTreeEntry(entry.id);
             }}
-            className="hidden shrink-0 rounded p-0.5 text-muted-foreground hover:text-[var(--atlas-status-error-foreground)] group-hover/row:block"
+            className="hidden shrink-0 rounded p-0.5 text-muted-foreground hover:text-error group-hover/row:block"
           >
             <Trash2 size={11} />
           </button>
@@ -103,10 +103,7 @@ export function PagesPanel({ width = 240 }: { width?: number }) {
   };
 
   return (
-    <div
-      className="flex h-full shrink-0 flex-col border-r border-border bg-[var(--card)]"
-      style={{ width }}
-    >
+    <div className="flex h-full shrink-0 flex-col border-r border-border bg-card" style={{ width }}>
       <div className="flex h-8 shrink-0 items-center gap-1 px-2 pl-3">
         <span className="flex-1 text-2xs font-semibold uppercase leading-none tracking-wider text-muted-foreground">
           Pages

@@ -85,7 +85,7 @@ export function UsagePanel() {
     // the page's content sits INSIDE a rounded, ringed panel rather than
     // bleeding into the window's edges. Same inset constant, so the two tabs
     // line up when they sit side by side in a split.
-    <div className="flex h-full min-h-0 flex-col bg-[var(--card)]">
+    <div className="flex h-full min-h-0 flex-col bg-card">
       <UsageHeader
         orgName={orgName}
         range={range}
@@ -110,18 +110,14 @@ export function UsagePanel() {
           onScroll={onScroll}
         >
           {!data && loading && (
-            <div className="p-6 text-sm text-[var(--muted-foreground)]">Reading usage…</div>
+            <div className="p-6 text-sm text-muted-foreground">Reading usage…</div>
           )}
-          {error && (
-            <div className="p-6 text-sm text-[var(--atlas-status-error-foreground)]">
-              Failed to load: {error}
-            </div>
-          )}
+          {error && <div className="p-6 text-sm text-error">Failed to load: {error}</div>}
           {data && view.all.length === 0 && !loading && (
             <div className="p-4">
               <Card index={0} section="empty">
-                <div className="text-xs font-medium text-[var(--foreground)]">Nothing yet</div>
-                <div className="mt-0.5 text-2xs leading-snug text-[var(--muted-foreground)]">
+                <div className="text-xs font-medium text-foreground">Nothing yet</div>
+                <div className="mt-0.5 text-2xs leading-snug text-muted-foreground">
                   Usage appears after the first agent turn in one of this organization's projects.
                 </div>
               </Card>
@@ -129,7 +125,7 @@ export function UsagePanel() {
           )}
           {data && view.all.length > 0 && (
             <div className="flex flex-col gap-3 p-4">
-              <div ref={captureRef} className="flex flex-col gap-3 bg-[var(--background)]">
+              <div ref={captureRef} className="flex flex-col gap-3 bg-background">
                 <StatStrip
                   totals={view.totals}
                   prevTotals={view.prevTotals}

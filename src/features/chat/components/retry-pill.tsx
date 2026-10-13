@@ -38,15 +38,15 @@ export function RetryPill({ tabId }: { tabId: string }) {
   return (
     <div
       data-testid="retry-pill"
-      className="mb-2 flex items-center gap-2 px-3 py-1.5 rounded-lg border border-[var(--border)] bg-[var(--card)] text-xs text-[var(--secondary-foreground)]"
+      className="mb-2 flex items-center gap-2 px-3 py-1.5 rounded-lg border border-border bg-card text-xs text-secondary-foreground"
       title={retry.lastError}
     >
-      <RotateCw size={12} className="animate-spin text-[var(--muted-foreground)]" />
-      <span className="font-medium text-[var(--foreground)]">
+      <RotateCw size={12} className="animate-spin text-muted-foreground" />
+      <span className="font-medium text-foreground">
         Retrying {retry.attempt}/{retry.maxAttempts}
         {secs > 0 ? ` in ${secs}s` : "…"}
       </span>
-      <span className="truncate text-[var(--muted-foreground)]">{cause}</span>
+      <span className="truncate text-muted-foreground">{cause}</span>
     </div>
   );
 }

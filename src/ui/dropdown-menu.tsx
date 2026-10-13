@@ -3,6 +3,7 @@ import { Menu as MenuPrimitive } from "@base-ui/react/menu";
 import { Check, ChevronRight } from "lucide-react";
 
 import { cn } from "@/lib/utils";
+import { KbdCombo } from "@/ui/kbd";
 
 /**
  * The house dropdown menu (decision 16), built on `@base-ui/react/menu`.
@@ -53,7 +54,7 @@ const POPUP = [
   "max-h-(--available-height) min-w-[11rem] overflow-y-auto overflow-x-hidden",
   "rounded-lg p-0.5",
   "bg-popover border border-border text-foreground shadow-md",
-  "origin-[var(--transform-origin)] animate-scale-in outline-none",
+  "origin-(--transform-origin) animate-scale-in outline-none",
 ];
 
 type PositionerProps = Pick<
@@ -245,17 +246,21 @@ function DropdownMenuSeparator({
   );
 }
 
-function DropdownMenuShortcut({ className, ...props }: React.ComponentProps<"span">) {
+/** The item's shortcut. A combo string ("⌘C", "Ctrl+C") is drawn one cap per
+ *  key; anything else is shown as given. */
+function DropdownMenuShortcut({ className, children, ...props }: React.ComponentProps<"span">) {
   return (
     <span
       data-slot="dropdown-menu-shortcut"
       className={cn(
-        "ml-auto pl-3 text-3xs text-disabled",
+        "ml-auto inline-flex pl-3 text-3xs text-disabled",
         "group-focus/dropdown-menu-item:text-secondary-foreground",
         className,
       )}
       {...props}
-    />
+    >
+      {typeof children === "string" ? <KbdCombo combo={children} size="2xs" /> : children}
+    </span>
   );
 }
 

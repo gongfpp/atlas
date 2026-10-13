@@ -27,7 +27,7 @@ export function ClassTrackers({ totals }: { totals: Metrics }) {
   return (
     <Card index={1} section="classes" className="!px-0 !py-0">
       <div
-        className="grid divide-x divide-[var(--atlas-element-selected)]"
+        className="grid divide-x divide-element-selected"
         style={{ gridTemplateColumns: `repeat(${classes.length}, minmax(0, 1fr))` }}
       >
         {classes.map((c) => {
@@ -38,7 +38,7 @@ export function ClassTrackers({ totals }: { totals: Metrics }) {
             <div key={c.key} className="min-w-0 px-3 py-2.5">
               <div className="flex items-baseline justify-between gap-2">
                 <span className={CAPTION}>{c.label}</span>
-                <span className="text-3xs tabular-nums text-[var(--muted-foreground)]">
+                <span className="text-3xs tabular-nums text-muted-foreground">
                   {all > 0 ? fmtPct(c.value / all) : "—"}
                 </span>
               </div>

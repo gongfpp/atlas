@@ -129,9 +129,9 @@ export function DraftsTab({ conv }: { conv: ChatConversation }) {
         {drafts === undefined &&
           [0, 1, 2].map((i) => (
             <div key={i} className="flex items-center gap-2.5 px-3 py-[9px]">
-              <div className="h-4 w-4 rounded bg-[var(--card)] opacity-50 atlas-marker-running" />
+              <div className="h-4 w-4 rounded bg-card opacity-50 atlas-marker-running" />
               <div
-                className="h-[9px] rounded bg-[var(--card)] opacity-50 atlas-marker-running"
+                className="h-[9px] rounded bg-card opacity-50 atlas-marker-running"
                 style={{ width: 110 + ((i * 37) % 60) }}
               />
             </div>
@@ -153,7 +153,7 @@ export function DraftsTab({ conv }: { conv: ChatConversation }) {
               onKeyDown={(e) => {
                 if (e.key === "Enter") openInCenter(d);
               }}
-              className="flex cursor-pointer items-center gap-2 border-b border-border-subtle px-3 py-2 transition-colors last:border-b-0 hover:bg-element-hover"
+              className="flex cursor-pointer items-center gap-2 border-b border-hairline px-3 py-2 transition-colors last:border-b-0 hover:bg-element-hover"
             >
               <div className="min-w-0 flex-1">
                 <div className="flex min-w-0 items-center gap-1.5">
@@ -161,7 +161,7 @@ export function DraftsTab({ conv }: { conv: ChatConversation }) {
                     {d.title}
                   </span>
                   {d.sent_at !== null && (
-                    <span className="shrink-0 rounded-full bg-[var(--atlas-element-active)] px-1.5 py-px text-2xs font-medium text-foreground">
+                    <span className="shrink-0 rounded-full bg-element-active px-1.5 py-px text-2xs font-medium text-foreground">
                       sent
                     </span>
                   )}

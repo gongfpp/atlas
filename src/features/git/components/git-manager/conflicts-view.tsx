@@ -57,7 +57,7 @@ export function ConflictsView({ onOpenFile }: { onOpenFile: (path: string) => vo
 
   return (
     <div className="shrink-0 border-b border-border">
-      <div className="flex items-center justify-between px-2 h-control-sm bg-[var(--sidebar)] border-b border-border-subtle">
+      <div className="flex items-center justify-between px-2 h-control-sm bg-sidebar border-b border-hairline">
         <span className="text-2xs font-semibold text-muted-foreground uppercase tracking-wider">
           Conflicts ({state.files.length})
         </span>
@@ -75,7 +75,7 @@ export function ConflictsView({ onOpenFile }: { onOpenFile: (path: string) => vo
             {f.path}
           </span>
           {f.markerCount > 0 ? (
-            <span className="shrink-0 text-3xs font-mono text-[var(--atlas-status-warning-foreground)]">
+            <span className="shrink-0 text-3xs font-mono text-warning">
               {f.markerCount} marker{f.markerCount === 1 ? "" : "s"}
             </span>
           ) : (

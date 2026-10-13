@@ -300,7 +300,7 @@ function PermissionModalImpl({ tabId, onSendMessage }: PermissionModalProps) {
                         "text-sm text-foreground transition-colors hover:bg-background",
                       )}
                     >
-                      <AlertTriangle className="size-3.5 shrink-0 text-[var(--atlas-status-error-foreground)]" />
+                      <AlertTriangle className="size-3.5 shrink-0 text-error" />
                       <span className="flex-1">
                         Yes, and bypass permissions
                         <span className="block text-xs text-secondary-foreground">
@@ -350,11 +350,10 @@ function PermissionModalImpl({ tabId, onSendMessage }: PermissionModalProps) {
   return (
     <div className="px-4 pt-2">
       <div
-        // A card resting in the composer stack, not a menu: `shadow-md` is the
-        // menu elevation (0 16px 48px at 90%) and read as a black slab over the
-        // transcript. This sits between `shadow-sm` and that, with no step to name.
-        // ratchet-allow: an in-flow raised card, softer than the menu elevation
-        className="mx-auto w-full max-w-[720px] overflow-hidden rounded-xl border border-[var(--border)] bg-[var(--card)] shadow-[0_8px_24px_rgba(0,0,0,0.35)]"
+        // A card resting in the composer stack over the transcript: it floats
+        // over content it is not part of, so it takes the menu rung, which
+        // Standards made soft enough to sit there (it used to be the 2xl slab).
+        className="mx-auto w-full max-w-[720px] overflow-hidden rounded-xl border border-border bg-card shadow-md"
       >
         <div className="flex items-start gap-2 px-3 pt-3">
           <div className="flex-1 min-w-0">
@@ -394,7 +393,7 @@ function PermissionModalImpl({ tabId, onSendMessage }: PermissionModalProps) {
             }}
             rows={1}
             placeholder="Tell the agent what to do instead…"
-            className="w-full resize-none rounded-md border border-border bg-background px-2.5 py-1.5 text-sm text-foreground outline-none placeholder:text-muted-foreground focus:border-[var(--atlas-border-strong)]"
+            className="w-full resize-none rounded-md border border-border bg-background px-2.5 py-1.5 text-sm text-foreground outline-none placeholder:text-muted-foreground focus:border-border-strong"
           />
         </div>
       </div>
@@ -421,9 +420,9 @@ function PermissionOption({
   const label = relabelAgentBrand(option.name, agentType);
 
   const tone = isPrimary
-    ? "border-transparent bg-[var(--primary)] text-[var(--background)] hover:bg-[var(--atlas-primary-hover)]"
+    ? "border-transparent bg-primary text-background hover:bg-primary-hover"
     : reject
-      ? "border-border bg-background text-[var(--atlas-status-error-foreground)] hover:bg-[var(--atlas-status-error-background)]"
+      ? "border-border bg-background text-error hover:bg-error-muted"
       : "border-border bg-background text-foreground hover:bg-element-hover";
 
   return (
@@ -439,9 +438,7 @@ function PermissionOption({
         <span
           className={cn(
             "flex h-4 w-4 shrink-0 items-center justify-center rounded text-2xs font-semibold",
-            isPrimary
-              ? "bg-[var(--background)]/15 text-[var(--background)]"
-              : "bg-card text-secondary-foreground",
+            isPrimary ? "bg-background/15 text-background" : "bg-card text-secondary-foreground",
           )}
         >
           {index}
@@ -449,11 +446,7 @@ function PermissionOption({
       )}
       <Icon className="size-3.5 shrink-0" />
       <span className="min-w-0 flex-1 font-medium break-words">{label}</span>
-      {isPrimary && (
-        <Kbd className="border-[var(--background)]/20 bg-[var(--background)]/10 text-[var(--background)]">
-          ↵
-        </Kbd>
-      )}
+      {isPrimary && <Kbd className="border-background/20 bg-background/10 text-background">↵</Kbd>}
     </button>
   );
 }

@@ -52,9 +52,9 @@ export function ExportButton({ detail }: { detail: Detail }) {
       </HintItem>
       <Popover.Portal>
         <Popover.Positioner className="z-popover" align="end" sideOffset={6}>
-          <Popover.Popup className="w-[184px] origin-[var(--transform-origin)] overflow-hidden rounded-lg border border-[var(--border)] bg-[var(--card)]/90 p-1 shadow-md backdrop-blur-2xl data-closed:animate-scale-out data-open:animate-scale-in">
-            <ExportItem onClick={() => void run("md")} label="Markdown" hint=".md" />
-            <ExportItem onClick={() => void run("json")} label="JSON" hint=".json" />
+          <Popover.Popup className="w-[184px] origin-(--transform-origin) overflow-hidden rounded-lg border border-border bg-card/90 p-1 shadow-md backdrop-blur-2xl data-closed:animate-scale-out data-open:animate-scale-in">
+            <ExportItem onClick={() => void run("md")} label="Markdown" ext=".md" />
+            <ExportItem onClick={() => void run("json")} label="JSON" ext=".json" />
           </Popover.Popup>
         </Popover.Positioner>
       </Popover.Portal>
@@ -62,24 +62,16 @@ export function ExportButton({ detail }: { detail: Detail }) {
   );
 }
 
-function ExportItem({
-  label,
-  hint,
-  onClick,
-}: {
-  label: string;
-  hint: string;
-  onClick: () => void;
-}) {
+function ExportItem({ label, ext, onClick }: { label: string; ext: string; onClick: () => void }) {
   return (
     <button
       type="button"
       onClick={onClick}
-      className="flex w-full cursor-pointer items-center gap-2 rounded-md px-2 py-1.5 text-left text-sm text-[var(--secondary-foreground)] transition-colors hover:bg-[var(--atlas-element-hover)] hover:text-[var(--foreground)]"
+      className="flex w-full cursor-pointer items-center gap-2 rounded-md px-2 py-1.5 text-left text-sm text-secondary-foreground transition-colors hover:bg-element-hover hover:text-foreground"
     >
       {label}
       <span className="flex-1" />
-      <span className="font-mono text-2xs text-[var(--atlas-text-disabled)]">{hint}</span>
+      <span className="font-mono text-2xs text-disabled">{ext}</span>
     </button>
   );
 }

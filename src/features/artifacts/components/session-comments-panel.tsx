@@ -131,11 +131,11 @@ export function CommentsPanelBase({
   const resolvedCount = threads.filter((t) => t.resolved).length;
 
   return (
-    <div className="flex h-full min-h-0 w-full flex-col bg-[var(--background)]">
-      <header className="flex h-9 shrink-0 items-center gap-2 border-b border-[var(--border)] pl-3 pr-2">
-        <MessageSquare size={13} className="shrink-0 text-[var(--muted-foreground)]" />
-        <span className="text-xs font-medium text-[var(--foreground)]">Comments</span>
-        <span className="font-mono text-2xs text-[var(--atlas-text-disabled)]">
+    <div className="flex h-full min-h-0 w-full flex-col bg-background">
+      <header className="flex h-9 shrink-0 items-center gap-2 border-b border-border pl-3 pr-2">
+        <MessageSquare size={13} className="shrink-0 text-muted-foreground" />
+        <span className="text-xs font-medium text-foreground">Comments</span>
+        <span className="font-mono text-2xs text-disabled">
           {shown.length}
           {narrowed && threads.length !== shown.length && ` / ${threads.length}`}
         </span>
@@ -151,15 +151,15 @@ export function CommentsPanelBase({
           <button
             type="button"
             onClick={onClose}
-            className="flex size-6 shrink-0 cursor-pointer items-center justify-center rounded text-[var(--muted-foreground)] transition-colors hover:bg-[var(--atlas-element-hover)] hover:text-[var(--foreground)]"
+            className="flex size-6 shrink-0 cursor-pointer items-center justify-center rounded text-muted-foreground transition-colors hover:bg-element-hover hover:text-foreground"
           >
             <X size={14} />
           </button>
         </Hint>
       </header>
 
-      <div className="flex h-9 shrink-0 items-center gap-2 border-b border-[var(--border)] px-3">
-        <Search size={12} className="shrink-0 text-[var(--muted-foreground)]" />
+      <div className="flex h-9 shrink-0 items-center gap-2 border-b border-border px-3">
+        <Search size={12} className="shrink-0 text-muted-foreground" />
         <input
           value={filters.query}
           onChange={(e) => setFilters((f) => ({ ...f, query: e.target.value }))}
@@ -174,14 +174,14 @@ export function CommentsPanelBase({
           placeholder="Search comments…"
           spellCheck={false}
           aria-label="Search comments"
-          className="min-w-0 flex-1 border-0 bg-transparent p-0 text-xs text-[var(--foreground)] outline-none placeholder:text-[var(--muted-foreground)]"
+          className="min-w-0 flex-1 border-0 bg-transparent p-0 text-xs text-foreground outline-none placeholder:text-muted-foreground"
         />
         {filters.query && (
           <button
             type="button"
             aria-label="Clear search"
             onClick={() => setFilters((f) => ({ ...f, query: "" }))}
-            className="flex size-4 shrink-0 cursor-pointer items-center justify-center rounded-full text-[var(--muted-foreground)] transition-colors hover:text-[var(--foreground)]"
+            className="flex size-4 shrink-0 cursor-pointer items-center justify-center rounded-full text-muted-foreground transition-colors hover:text-foreground"
           >
             <X size={12} />
           </button>
@@ -256,7 +256,7 @@ const ThreadRow = memo(function ThreadRow({
       type="button"
       onClick={() => onJump(thread.anchorId)}
       className={cn(
-        "flex w-full cursor-pointer flex-col items-start gap-1 border-b border-[var(--border)] px-3 py-2.5 text-left transition-colors hover:bg-[var(--atlas-element-hover)]",
+        "flex w-full cursor-pointer flex-col items-start gap-1 border-b border-border px-3 py-2.5 text-left transition-colors hover:bg-element-hover",
         // Resolved is done, not gone: still listed when asked for, but it
         // should not compete with the threads that still need an answer.
         thread.resolved && "opacity-55",
@@ -268,20 +268,16 @@ const ThreadRow = memo(function ThreadRow({
         {faces.length > 0 && (
           <span className="flex shrink-0 items-center -space-x-1.5">
             {faces.slice(0, 3).map((member) => (
-              <span key={member.userId} className="rounded-full ring-1 ring-[var(--background)]">
+              <span key={member.userId} className="rounded-full ring-1 ring-background">
                 <AccountAvatar user={avatarUser(member)} size={14} />
               </span>
             ))}
           </span>
         )}
-        <span className="min-w-0 truncate text-2xs font-medium text-[var(--foreground)]">
-          {name}
-        </span>
+        <span className="min-w-0 truncate text-2xs font-medium text-foreground">{name}</span>
         <span className="flex-1" />
-        {thread.resolved && (
-          <Check size={10} className="shrink-0 text-[var(--atlas-status-success-foreground)]" />
-        )}
-        <span className="shrink-0 font-mono text-3xs text-[var(--atlas-text-disabled)]">
+        {thread.resolved && <Check size={10} className="shrink-0 text-success" />}
+        <span className="shrink-0 font-mono text-3xs text-disabled">
           {timeAgo(thread.lastActivityAt, { suffix: true })}
         </span>
       </span>
@@ -295,9 +291,9 @@ const ThreadRow = memo(function ThreadRow({
         </span>
       )}
       {/* The comment itself, unprefixed — the byline above already said who. */}
-      <span className="line-clamp-2 w-full text-xs leading-snug text-[var(--secondary-foreground)]">
+      <span className="line-clamp-2 w-full text-xs leading-snug text-secondary-foreground">
         {thread.root.deletedAt ? (
-          <span className="italic text-[var(--atlas-text-disabled)]">deleted this comment</span>
+          <span className="italic text-disabled">deleted this comment</span>
         ) : (
           // Mentions are stored as `<@user-id>`; the preview names them, as
           // the thread itself does.
@@ -311,12 +307,12 @@ const ThreadRow = memo(function ThreadRow({
       {/* What it is attached to, and how big the discussion got. The anchor is
        *  the footnote rather than the headline: it tells you where you will land
        *  once you have decided the comment is worth landing on. */}
-      <span className="flex w-full min-w-0 items-center gap-2 text-2xs text-[var(--muted-foreground)]">
+      <span className="flex w-full min-w-0 items-center gap-2 text-2xs text-muted-foreground">
         <span className="flex min-w-0 items-center gap-1">
           {/* The glyph says this line points *somewhere* — the row is a link to
            *  a node, and the anchor kind alone reads as a label rather than a
            *  destination. */}
-          <CornerDownRight size={10} className="shrink-0 text-[var(--atlas-text-disabled)]" />
+          <CornerDownRight size={10} className="shrink-0 text-disabled" />
           <span className="min-w-0 truncate">{label}</span>
         </span>
         {/* Top-level comments and replies apart: a second comment on the same
@@ -356,10 +352,10 @@ function FilterMenu({
       <DropdownMenuTrigger
         aria-label="Filter comments"
         className={cn(
-          "flex size-6 shrink-0 cursor-pointer items-center justify-center rounded transition-colors hover:bg-[var(--atlas-element-hover)]",
+          "flex size-6 shrink-0 cursor-pointer items-center justify-center rounded transition-colors hover:bg-element-hover",
           active
-            ? "bg-[var(--atlas-element-active)] text-[var(--foreground)]"
-            : "text-[var(--muted-foreground)] hover:text-[var(--foreground)]",
+            ? "bg-element-active text-foreground"
+            : "text-muted-foreground hover:text-foreground",
         )}
       >
         <Filter size={13} />
@@ -382,9 +378,7 @@ function FilterMenu({
           <Tick on={filters.showResolved} />
           Show resolved
           {resolvedCount > 0 && (
-            <span className="ml-auto pl-2 font-mono text-2xs text-[var(--atlas-text-disabled)]">
-              {resolvedCount}
-            </span>
+            <span className="ml-auto pl-2 font-mono text-2xs text-disabled">{resolvedCount}</span>
           )}
         </DropdownMenuItem>
 
@@ -435,20 +429,20 @@ function Empty({
 }) {
   return (
     <div className="px-4 py-10 text-center">
-      <p className="text-xs text-[var(--muted-foreground)]">
+      <p className="text-xs text-muted-foreground">
         {hasAny ? "No comments match these filters." : "No comments on this session yet."}
       </p>
       {hasAny && narrowed && (
         <button
           type="button"
           onClick={onClear}
-          className="mt-2 cursor-pointer text-2xs text-[var(--secondary-foreground)] underline underline-offset-2 transition-colors hover:text-[var(--foreground)]"
+          className="mt-2 cursor-pointer text-2xs text-secondary-foreground underline underline-offset-2 transition-colors hover:text-foreground"
         >
           Clear filters
         </button>
       )}
       {!hasAny && (
-        <p className="mt-1.5 text-2xs text-[var(--atlas-text-disabled)]">
+        <p className="mt-1.5 text-2xs text-disabled">
           Comment on any step from its row in the transcript.
         </p>
       )}

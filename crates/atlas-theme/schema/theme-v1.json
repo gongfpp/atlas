@@ -238,6 +238,78 @@
               ],
               "description": "Selected overlay for ordinary elements. Source: base.foreground → Atlas default. Transform: alpha 0.06."
             },
+            "hue.amber": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/ThemeKeyValue"
+                }
+              ],
+              "description": "Identity hue: amber. Source: palette.yellow → Atlas default."
+            },
+            "hue.cyan": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/ThemeKeyValue"
+                }
+              ],
+              "description": "Identity hue: cyan. Source: palette.cyan → Atlas default."
+            },
+            "hue.green": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/ThemeKeyValue"
+                }
+              ],
+              "description": "Identity hue: green. Source: palette.green → Atlas default."
+            },
+            "hue.grey": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/ThemeKeyValue"
+                }
+              ],
+              "description": "Identity hue: grey. Source: base.muted-foreground → Atlas default."
+            },
+            "hue.indigo": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/ThemeKeyValue"
+                }
+              ],
+              "description": "Identity hue: indigo. Source: palette.blue → Atlas default."
+            },
+            "hue.orange": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/ThemeKeyValue"
+                }
+              ],
+              "description": "Identity hue: orange. Source: palette.orange → Atlas default."
+            },
+            "hue.purple": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/ThemeKeyValue"
+                }
+              ],
+              "description": "Identity hue: purple. Source: palette.purple → Atlas default."
+            },
+            "hue.red": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/ThemeKeyValue"
+                }
+              ],
+              "description": "Identity hue: red. Source: palette.red → Atlas default."
+            },
+            "illustration.background": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/ThemeKeyValue"
+                }
+              ],
+              "description": "A card inside a card; in dark, the brightest resting plane. Source: base.card → Atlas default. Transform: mix 0.02 toward base.foreground."
+            },
             "panel.background": {
               "allOf": [
                 {
@@ -302,6 +374,22 @@
               ],
               "description": "A search match in the document. Source: palette.yellow → Atlas default. Transform: alpha 0.22."
             },
+            "segment.thumb": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/ThemeKeyValue"
+                }
+              ],
+              "description": "The raised thumb that slides inside a segmented track. Always a step lighter. Source: base.popover → Atlas default. Transform: mix 0.08 toward base.foreground."
+            },
+            "segment.track": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/ThemeKeyValue"
+                }
+              ],
+              "description": "A segmented control's recessed track. Source: base.card → Atlas default."
+            },
             "selection.background": {
               "allOf": [
                 {
@@ -309,6 +397,22 @@
                 }
               ],
               "description": "Document text selection. Source: base.primary → Atlas default. Transform: alpha 0.18."
+            },
+            "shell.canvas": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/ThemeKeyValue"
+                }
+              ],
+              "description": "The app frame the curved panels are set into. Source: base.popover → Atlas default."
+            },
+            "shell.edge": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/ThemeKeyValue"
+                }
+              ],
+              "description": "The opaque edge of a panel set into the frame. Source: base.border → Atlas default. Transform: mix 0.12 toward base.foreground."
             },
             "status.error.foreground": {
               "allOf": [
@@ -341,6 +445,22 @@
                 }
               ],
               "description": "Warning status foreground. Source: palette.yellow → Atlas default."
+            },
+            "surface.background": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/ThemeKeyValue"
+                }
+              ],
+              "description": "One step above the page: a sidebar, a pane behind cards. Source: base.sidebar → Atlas default."
+            },
+            "surface.raised": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/ThemeKeyValue"
+                }
+              ],
+              "description": "A raised block within a card: a stat cell, a code well. Source: base.muted → Atlas default."
             },
             "syntax.attribute": {
               "allOf": [

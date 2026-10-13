@@ -37,15 +37,15 @@ function segmentPath(seg: LaneSegment): string {
 
 function badgeClass(kind: RefBadge["kind"], isCurrent: boolean) {
   if (kind === "tag") {
-    return "bg-[var(--muted-foreground)]/15 text-[var(--muted-foreground)] border-[var(--muted-foreground)]/30";
+    return "bg-muted-foreground/15 text-muted-foreground border-muted-foreground/30";
   }
   if (kind === "remote") {
-    return "bg-[var(--card)] text-[var(--muted-foreground)] border-[var(--border)]";
+    return "bg-card text-muted-foreground border-border";
   }
   if (isCurrent) {
-    return "bg-[var(--primary)]/20 text-[var(--primary)] border-[var(--primary)]/40";
+    return "bg-primary/20 text-primary border-primary/40";
   }
-  return "bg-[var(--card)] text-[var(--secondary-foreground)] border-[var(--border)]";
+  return "bg-card text-secondary-foreground border-border";
 }
 
 export const CommitRowView = memo(function CommitRowView({
@@ -73,8 +73,8 @@ export const CommitRowView = memo(function CommitRowView({
       className={cn(
         "group flex items-center cursor-pointer select-none",
         selected
-          ? "bg-[var(--primary)]/15 text-[var(--foreground)]"
-          : "hover:bg-[var(--atlas-element-hover)] text-[var(--secondary-foreground)]",
+          ? "bg-primary/15 text-foreground"
+          : "hover:bg-element-hover text-secondary-foreground",
       )}
       style={{ height: ROW_HEIGHT }}
     >
@@ -116,12 +116,7 @@ export const CommitRowView = memo(function CommitRowView({
               {r.name}
             </span>
           ))}
-          <span
-            className={cn(
-              "text-sm truncate",
-              selected ? "text-[var(--foreground)] font-medium" : "",
-            )}
-          >
+          <span className={cn("text-sm truncate", selected ? "text-foreground font-medium" : "")}>
             {row.message}
           </span>
         </div>
@@ -130,16 +125,14 @@ export const CommitRowView = memo(function CommitRowView({
             {/* Author column — fixed width, avatar + name, aligned across all rows */}
             <div className="flex items-center gap-1.5 w-[200px] shrink-0">
               <CommitAvatar email={row.email} repoPath={repoPath} size={16} />
-              <span className="text-xs text-[var(--secondary-foreground)] truncate">
-                {row.author}
-              </span>
+              <span className="text-xs text-secondary-foreground truncate">{row.author}</span>
             </div>
             {/* Short sha column */}
-            <span className="text-xs font-mono text-[var(--muted-foreground)] shrink-0 w-[68px]">
+            <span className="text-xs font-mono text-muted-foreground shrink-0 w-[68px]">
               {row.shortSha}
             </span>
             {/* Date column */}
-            <span className="text-xs font-mono text-[var(--muted-foreground)] shrink-0 w-[160px] text-right">
+            <span className="text-xs font-mono text-muted-foreground shrink-0 w-[160px] text-right">
               {row.date}
             </span>
           </>

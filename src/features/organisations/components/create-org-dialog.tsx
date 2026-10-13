@@ -157,10 +157,10 @@ export function CreateOrgDialog({
   };
 
   const fieldBase =
-    "h-8 w-full rounded-lg border border-input bg-panel-input px-2.5 text-sm text-[var(--foreground)] placeholder:text-[var(--muted-foreground)] outline-none transition-colors focus:border-border-strong";
+    "h-8 w-full rounded-lg border border-input bg-panel-input px-2.5 text-sm text-foreground placeholder:text-muted-foreground outline-none transition-colors focus:border-border-strong";
   /** The app's pill-button language (matches "Save to KB" / "Commit changes"). */
   const pillButton =
-    "inline-flex items-center gap-1.5 rounded-full border border-[var(--border)] px-3 py-1.5 text-xs font-medium leading-none cursor-pointer transition-colors";
+    "inline-flex items-center gap-1.5 rounded-full border border-border px-3 py-1.5 text-xs font-medium leading-none cursor-pointer transition-colors";
 
   return (
     <Dialog.Root open={open} onOpenChange={onOpenChange}>
@@ -179,28 +179,28 @@ export function CreateOrgDialog({
           }}
           className={cn(
             "fixed left-1/2 top-1/2 z-modal -translate-x-1/2 -translate-y-1/2",
-            "w-[400px] max-w-[92vw] overflow-hidden rounded-xl border border-[var(--border)]",
+            "w-[400px] max-w-[92vw] overflow-hidden rounded-xl border border-border",
             // Frosted, same language as the notification overlay.
-            "bg-[var(--card)]/60 backdrop-blur-2xl",
+            "bg-card/60 backdrop-blur-2xl",
             "shadow-lg animate-scale-in",
           )}
         >
           <Hint label="Close">
-            <Dialog.Close className="absolute right-2.5 top-2.5 flex h-6 w-6 cursor-pointer items-center justify-center rounded-md text-[var(--muted-foreground)] transition-colors hover:bg-[var(--atlas-element-active)] hover:text-[var(--foreground)]">
+            <Dialog.Close className="absolute right-2.5 top-2.5 flex h-6 w-6 cursor-pointer items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-element-active hover:text-foreground">
               <X size={13} />
             </Dialog.Close>
           </Hint>
 
           <div className="px-4 pt-3.5 pb-4">
-            <Dialog.Title className="flex items-center gap-2 text-base font-semibold tracking-[-0.01em] text-[var(--foreground)]">
-              <Building2 size={13} className="text-[var(--muted-foreground)]" />
+            <Dialog.Title className="flex items-center gap-2 text-base font-semibold tracking-[-0.01em] text-foreground">
+              <Building2 size={13} className="text-muted-foreground" />
               Create organization
             </Dialog.Title>
 
             <div className="mt-3.5 space-y-3">
               {/* Display name — anything the user wants. */}
               <label className="block">
-                <span className="text-xs font-medium text-[var(--secondary-foreground)]">Name</span>
+                <span className="text-xs font-medium text-secondary-foreground">Name</span>
                 <input
                   autoFocus
                   value={name}
@@ -212,16 +212,14 @@ export function CreateOrgDialog({
 
               {/* Handle — prefix + input, with live availability. */}
               <div>
-                <span className="text-xs font-medium text-[var(--secondary-foreground)]">
-                  Handle
-                </span>
+                <span className="text-xs font-medium text-secondary-foreground">Handle</span>
                 <div
                   className={cn(
                     "mt-1 flex h-8 items-center overflow-hidden rounded-lg border bg-panel-input transition-colors focus-within:border-border-strong",
                     slug.kind === "taken" ? "border-error" : "border-input",
                   )}
                 >
-                  <span className="flex h-full shrink-0 select-none items-center border-r border-input px-2.5 text-xs text-[var(--muted-foreground)]">
+                  <span className="flex h-full shrink-0 select-none items-center border-r border-input px-2.5 text-xs text-muted-foreground">
                     {HANDLE_PREFIX}
                   </span>
                   <input
@@ -231,9 +229,9 @@ export function CreateOrgDialog({
                       setHandle(e.target.value);
                     }}
                     placeholder="acme"
-                    className="h-full min-w-0 flex-1 bg-transparent px-2.5 text-sm text-[var(--foreground)] placeholder:text-[var(--muted-foreground)] outline-none"
+                    className="h-full min-w-0 flex-1 bg-transparent px-2.5 text-sm text-foreground placeholder:text-muted-foreground outline-none"
                   />
-                  <span className="flex w-7 shrink-0 items-center justify-center text-[var(--muted-foreground)]">
+                  <span className="flex w-7 shrink-0 items-center justify-center text-muted-foreground">
                     {slug.kind === "checking" && <Loader2 size={11} className="animate-spin" />}
                     {slug.kind === "available" && <Check size={11} className="text-success" />}
                   </span>
@@ -242,7 +240,7 @@ export function CreateOrgDialog({
                 <p
                   className={cn(
                     "mt-1 h-[13px] text-2xs leading-[13px]",
-                    slug.kind === "taken" ? "text-error" : "text-[var(--muted-foreground)]",
+                    slug.kind === "taken" ? "text-error" : "text-muted-foreground",
                   )}
                 >
                   {slug.kind === "taken"
@@ -258,7 +256,7 @@ export function CreateOrgDialog({
               {/* Cloud vs local. Signed out there is nothing to sync to, so
                   cloud is unavailable rather than merely unselected. */}
               <div>
-                <span className="text-xs font-medium text-[var(--secondary-foreground)]">Type</span>
+                <span className="text-xs font-medium text-secondary-foreground">Type</span>
                 <div className="mt-1 flex gap-1.5">
                   {(
                     [
@@ -276,10 +274,10 @@ export function CreateOrgDialog({
                         className={cn(
                           "rounded-full border px-2.5 py-1 text-xs transition-colors",
                           isDisabled
-                            ? "cursor-not-allowed border-border bg-panel-input text-[var(--muted-foreground)] opacity-40"
+                            ? "cursor-not-allowed border-border bg-panel-input text-muted-foreground opacity-40"
                             : on
-                              ? "cursor-pointer border-border-strong bg-[var(--atlas-element-selected)] text-[var(--foreground)]"
-                              : "cursor-pointer border-border bg-panel-input text-[var(--muted-foreground)] hover:text-[var(--secondary-foreground)]",
+                              ? "cursor-pointer border-border-strong bg-element-selected text-foreground"
+                              : "cursor-pointer border-border bg-panel-input text-muted-foreground hover:text-secondary-foreground",
                         )}
                       >
                         {label}
@@ -287,7 +285,7 @@ export function CreateOrgDialog({
                     );
                   })}
                 </div>
-                <p className="mt-1 text-2xs text-[var(--muted-foreground)]">
+                <p className="mt-1 text-2xs text-muted-foreground">
                   {cloud
                     ? "Synced across your devices and shareable with your team."
                     : "Private and offline. Turn on sync later to share it."}
@@ -297,9 +295,7 @@ export function CreateOrgDialog({
               {/* Region — pill selector. Meaningless for a local org, which
                   never leaves this machine. */}
               <div className={cn(!cloud && "opacity-40")}>
-                <span className="text-xs font-medium text-[var(--secondary-foreground)]">
-                  Region
-                </span>
+                <span className="text-xs font-medium text-secondary-foreground">Region</span>
                 <div className="mt-1 flex gap-1.5">
                   {REGIONS.map((r) => {
                     const on = region === r.id;
@@ -319,10 +315,10 @@ export function CreateOrgDialog({
                         className={cn(
                           "rounded-full border px-2.5 py-1 text-xs transition-colors",
                           isDisabled
-                            ? "cursor-not-allowed border-border bg-panel-input text-[var(--muted-foreground)] opacity-40"
+                            ? "cursor-not-allowed border-border bg-panel-input text-muted-foreground opacity-40"
                             : on
-                              ? "cursor-pointer border-border-strong bg-[var(--atlas-element-selected)] text-[var(--foreground)]"
-                              : "cursor-pointer border-border bg-panel-input text-[var(--muted-foreground)] hover:text-[var(--secondary-foreground)]",
+                              ? "cursor-pointer border-border-strong bg-element-selected text-foreground"
+                              : "cursor-pointer border-border bg-panel-input text-muted-foreground hover:text-secondary-foreground",
                         )}
                       >
                         {r.label}
@@ -339,7 +335,7 @@ export function CreateOrgDialog({
                 onClick={() => onOpenChange(false)}
                 className={cn(
                   pillButton,
-                  "bg-[var(--card)] text-[var(--secondary-foreground)] hover:bg-[var(--atlas-element-hover)] hover:text-[var(--foreground)]",
+                  "bg-card text-secondary-foreground hover:bg-element-hover hover:text-foreground",
                 )}
               >
                 Cancel
@@ -349,7 +345,7 @@ export function CreateOrgDialog({
                 onClick={() => void submit()}
                 className={cn(
                   pillButton,
-                  "bg-[var(--card)] text-[var(--foreground)] hover:bg-[var(--atlas-element-hover)]",
+                  "bg-card text-foreground hover:bg-element-hover",
                   "disabled:cursor-not-allowed disabled:opacity-40",
                 )}
               >

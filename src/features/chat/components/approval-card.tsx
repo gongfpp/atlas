@@ -2,8 +2,9 @@
 //
 // One question per step — radio options (or checkboxes for multiSelect), a
 // free-text "answer in your own words" field, progress dots, back/next. The
-// shape follows beui's ApprovalCard, rebuilt on Atlas tokens and with NO
-// motion library: the only animation is CSS transitions, per the house rules.
+// shape follows beui's ApprovalCard, rebuilt on Atlas tokens. Its only
+// animation is colour and state transitions, which stay CSS (`src/lib/motion.ts`
+// says what goes where).
 //
 // The card is PURE: it collects answers and hands them back. Mapping an answer
 // onto a wire — resolving an ACP permission option, composing a user message,
@@ -134,31 +135,28 @@ export function ApprovalCard({
 
   return (
     <div
-      // A card resting in the composer stack, not a menu: `shadow-md` is the
-      // menu elevation (0 16px 48px at 90%) and read as a black slab over the
-      // transcript. This sits between `shadow-sm` and that, with no step to name.
-      // ratchet-allow: an in-flow raised card, softer than the menu elevation
-      className="mx-auto w-full max-w-[720px] overflow-hidden rounded-xl border border-[var(--border)] bg-[var(--card)] shadow-[0_8px_24px_rgba(0,0,0,0.35)]"
+      // A card resting in the composer stack over the transcript: it floats
+      // over content it is not part of, so it takes the menu rung, which
+      // Standards made soft enough to sit there (it used to be the 2xl slab).
+      className="mx-auto w-full max-w-[720px] overflow-hidden rounded-xl border border-border bg-card shadow-md"
     >
       <div className="px-4 pt-3.5 pb-4">
         {/* Header: icon, question, step counter. */}
         <div className="flex items-start gap-2.5">
-          <CircleHelp className="mt-0.5 size-4 shrink-0 text-[var(--muted-foreground)]" />
+          <CircleHelp className="mt-0.5 size-4 shrink-0 text-muted-foreground" />
           <div className="min-w-0 flex-1">
             {q.header && (
-              <div className="text-2xs uppercase tracking-[0.08em] text-[var(--muted-foreground)]">
+              <div className="text-2xs uppercase tracking-[0.08em] text-muted-foreground">
                 {q.header}
               </div>
             )}
-            <div className="text-md font-medium leading-snug text-[var(--foreground)]">
+            <div className="text-md font-medium leading-snug text-foreground">
               {q.question || "The agent has a question"}
             </div>
-            {queueNote && (
-              <div className="mt-0.5 text-xs text-[var(--muted-foreground)]">{queueNote}</div>
-            )}
+            {queueNote && <div className="mt-0.5 text-xs text-muted-foreground">{queueNote}</div>}
           </div>
           {questions.length > 1 && (
-            <span className="shrink-0 font-mono text-xs tabular-nums text-[var(--muted-foreground)]">
+            <span className="shrink-0 font-mono text-xs tabular-nums text-muted-foreground">
               {step + 1}/{questions.length}
             </span>
           )}
@@ -175,7 +173,7 @@ export function ApprovalCard({
                 onClick={() => (q.multiSelect ? toggle(o.label) : pick(o.label))}
                 className={cn(
                   "flex min-h-9 w-full items-start gap-3 rounded-lg px-2 py-1.5 text-left transition-colors",
-                  on ? "bg-[var(--atlas-element-active)]" : "hover:bg-[var(--atlas-element-hover)]",
+                  on ? "bg-element-active" : "hover:bg-element-hover",
                 )}
               >
                 {/* Radio circle / check square, drawn by hand so the tone
@@ -185,31 +183,25 @@ export function ApprovalCard({
                   className={cn(
                     "mt-[3px] grid size-[15px] shrink-0 place-items-center border transition-colors",
                     q.multiSelect ? "rounded-sm" : "rounded-full",
-                    on
-                      ? "border-[var(--primary)] bg-[var(--primary)]"
-                      : "border-[var(--atlas-border-strong)]",
+                    on ? "border-primary bg-primary" : "border-border-strong",
                   )}
                 >
                   {on &&
                     (q.multiSelect ? (
-                      <Check size={10} strokeWidth={3} className="text-[var(--background)]" />
+                      <Check size={10} strokeWidth={3} className="text-background" />
                     ) : (
-                      <span className="size-[5px] rounded-full bg-[var(--background)]" />
+                      <span className="size-[5px] rounded-full bg-background" />
                     ))}
                 </span>
                 <span className="min-w-0 flex-1">
-                  <span className="block text-base leading-snug text-[var(--foreground)]">
-                    {o.label}
-                  </span>
+                  <span className="block text-base leading-snug text-foreground">{o.label}</span>
                   {o.description && (
-                    <span className="mt-0.5 block text-xs leading-snug text-[var(--secondary-foreground)]">
+                    <span className="mt-0.5 block text-xs leading-snug text-secondary-foreground">
                       {o.description}
                     </span>
                   )}
                 </span>
-                <span className="mt-0.5 shrink-0 font-mono text-2xs text-[var(--atlas-text-disabled)]">
-                  {i + 1}
-                </span>
+                <span className="mt-0.5 shrink-0 font-mono text-2xs text-disabled">{i + 1}</span>
               </button>
             );
           })}
@@ -226,7 +218,7 @@ export function ApprovalCard({
             }
             placeholder={q.options.length > 0 ? "Answer in your own words…" : "Type your answer…"}
             className={cn(
-              "h-10 w-full rounded-lg border-0 bg-[var(--background)]/70 px-3 text-base text-[var(--foreground)] outline-none transition-colors placeholder:text-[var(--muted-foreground)] focus:bg-[var(--background)]",
+              "h-10 w-full rounded-lg border-0 bg-background/70 px-3 text-base text-foreground outline-none transition-colors placeholder:text-muted-foreground focus:bg-background",
               q.options.length > 0 && "mt-1.5",
             )}
           />
@@ -246,8 +238,8 @@ export function ApprovalCard({
                 className={cn(
                   "grid size-8 place-items-center rounded-full transition-colors",
                   step === 0
-                    ? "cursor-default text-[var(--atlas-text-disabled)]"
-                    : "cursor-pointer text-[var(--muted-foreground)] hover:bg-[var(--atlas-element-hover)] hover:text-[var(--foreground)]",
+                    ? "cursor-default text-disabled"
+                    : "cursor-pointer text-muted-foreground hover:bg-element-hover hover:text-foreground",
                 )}
               >
                 <ArrowLeft size={15} />
@@ -263,7 +255,7 @@ export function ApprovalCard({
                   key={i}
                   aria-hidden
                   className={cn(
-                    "rounded-full bg-[var(--foreground)] transition-all duration-200",
+                    "rounded-full bg-foreground transition-all duration-200",
                     i === step ? "size-2 opacity-100" : "size-1.5",
                     i < step ? "opacity-70" : i > step ? "opacity-30" : "",
                   )}
@@ -278,7 +270,7 @@ export function ApprovalCard({
                   clearAdvance();
                   onSkip();
                 }}
-                className="ml-auto cursor-pointer rounded-full px-2.5 py-1.5 text-sm text-[var(--muted-foreground)] transition-colors hover:bg-[var(--atlas-element-hover)] hover:text-[var(--foreground)]"
+                className="ml-auto cursor-pointer rounded-full px-2.5 py-1.5 text-sm text-muted-foreground transition-colors hover:bg-element-hover hover:text-foreground"
               >
                 {skipLabel}
               </button>
@@ -295,8 +287,8 @@ export function ApprovalCard({
                 className={cn(
                   "flex h-9 items-center gap-1.5 rounded-full px-3 text-sm font-medium transition-colors",
                   isAnswered(answer)
-                    ? "cursor-pointer bg-[var(--primary)] text-[var(--primary-foreground)] hover:bg-[var(--atlas-primary-hover)]"
-                    : "cursor-default bg-[var(--background)] text-[var(--atlas-text-disabled)]",
+                    ? "cursor-pointer bg-primary text-primary-foreground hover:bg-primary-hover"
+                    : "cursor-default bg-background text-disabled",
                 )}
               >
                 {last && questions.length > 1 && <span>Submit</span>}

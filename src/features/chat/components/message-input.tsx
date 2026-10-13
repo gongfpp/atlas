@@ -289,14 +289,14 @@ function NativeMemoryPill() {
       onClick={reindex}
       disabled={indexing}
       title="Codebase index that grounds the agent's memory recall — click to re-index"
-      className="flex items-center px-2 h-6.5 rounded-full border border-[var(--border)] bg-[var(--card)] text-2xs leading-none font-medium text-[var(--muted-foreground)] hover:bg-[var(--atlas-element-hover)] hover:text-[var(--foreground)] transition-colors cursor-pointer tabular-nums disabled:cursor-default"
+      className="flex items-center px-2 h-6.5 rounded-full border border-border bg-card text-2xs leading-none font-medium text-muted-foreground hover:bg-element-hover hover:text-foreground transition-colors cursor-pointer tabular-nums disabled:cursor-default"
     >
       {indexing ? (
-        <Loader2 size={11} className="animate-spin text-[var(--primary)]" />
+        <Loader2 size={11} className="animate-spin text-primary" />
       ) : (
         <Database
           size={11}
-          className={status?.indexed ? "text-[var(--primary)]" : "text-[var(--muted-foreground)]"}
+          className={status?.indexed ? "text-primary" : "text-muted-foreground"}
         />
       )}
       <span className={composerPillLabelClass("early")}>{label}</span>
@@ -322,13 +322,10 @@ function EffortPill({ tabId }: { tabId: string }) {
   return (
     <button
       onClick={cycle}
-      className="flex items-center px-2 h-6.5 rounded-full border border-[var(--border)] bg-[var(--card)] text-2xs leading-none font-medium text-[var(--secondary-foreground)] hover:bg-[var(--atlas-element-hover)] hover:text-[var(--foreground)] transition-colors cursor-pointer"
+      className="flex items-center px-2 h-6.5 rounded-full border border-border bg-card text-2xs leading-none font-medium text-secondary-foreground hover:bg-element-hover hover:text-foreground transition-colors cursor-pointer"
       title="Reasoning effort (thinking budget) — Anthropic models"
     >
-      <Brain
-        size={11}
-        className={active ? "text-[var(--primary)]" : "text-[var(--muted-foreground)]"}
-      />
+      <Brain size={11} className={active ? "text-primary" : "text-muted-foreground"} />
       <span className={composerPillLabelClass("early")}>
         {active ? `Think: ${effort}` : "Think"}
       </span>
@@ -357,15 +354,15 @@ const GROUP_ORDER: ComposerGroup[] = ["agent", "mode", "model"];
 function claudeModeDotClass(mode: ClaudePermissionMode): string {
   switch (mode) {
     case "acceptEdits":
-      return "bg-[var(--atlas-status-success-foreground)]";
+      return "bg-success";
     case "plan":
-      return "bg-[var(--primary)]";
+      return "bg-primary";
     case "bypassPermissions":
-      return "bg-[var(--atlas-status-error-foreground)]";
+      return "bg-error";
     case "auto":
-      return "bg-[var(--atlas-status-warning-foreground)]";
+      return "bg-warning";
     default:
-      return "bg-[var(--muted-foreground)]";
+      return "bg-muted-foreground";
   }
 }
 
@@ -524,8 +521,8 @@ function ComposerGroupsMenu({
     cn(
       "flex items-center px-1.5 h-6.5 rounded-full border text-2xs leading-none font-medium transition-colors cursor-pointer",
       active
-        ? "border-[var(--atlas-border-strong)] bg-[var(--atlas-element-selected)] text-[var(--foreground)]"
-        : "border-[var(--border)] bg-[var(--card)] text-[var(--secondary-foreground)] hover:bg-[var(--atlas-element-hover)] hover:text-[var(--foreground)]",
+        ? "border-border-strong bg-element-selected text-foreground"
+        : "border-border bg-card text-secondary-foreground hover:bg-element-hover hover:text-foreground",
     );
 
   return (
@@ -570,14 +567,12 @@ function ComposerGroupsMenu({
                         }}
                         className={cn(
                           "flex w-full items-center gap-2 rounded-md px-2 py-1.5 text-left transition-colors cursor-pointer",
-                          active
-                            ? "bg-[var(--atlas-element-selected)]"
-                            : "hover:bg-[var(--atlas-element-hover)]",
+                          active ? "bg-element-selected" : "hover:bg-element-hover",
                         )}
                       >
                         <AgentMark agentType={a} className="!h-4 !w-4 !text-3xs !rounded" />
                         <span className="flex-1 truncate label">{agentMeta(a).label}</span>
-                        {active && <Check size={11} className="text-[var(--primary)]" />}
+                        {active && <Check size={11} className="text-primary" />}
                       </button>
                     );
                   })}
@@ -591,13 +586,13 @@ function ComposerGroupsMenu({
                     close();
                   }}
                 />
-                <div className="h-px bg-[var(--border)]" />
+                <div className="h-px bg-border" />
                 <button
                   onClick={() => {
                     close();
                     openSettingsSection("agents");
                   }}
-                  className="flex w-full items-center gap-1.5 px-3 py-2 text-xs text-[var(--secondary-foreground)] transition-colors cursor-pointer hover:bg-[var(--atlas-element-hover)] hover:text-[var(--foreground)]"
+                  className="flex w-full items-center gap-1.5 px-3 py-2 text-xs text-secondary-foreground transition-colors cursor-pointer hover:bg-element-hover hover:text-foreground"
                 >
                   <Plus size={11} className="shrink-0" />
                   Add more agents
@@ -618,16 +613,14 @@ function ComposerGroupsMenu({
                       }}
                       className={cn(
                         "flex w-full items-center gap-2 rounded-md px-2 py-1.5 text-left transition-colors cursor-pointer",
-                        active
-                          ? "bg-[var(--atlas-element-selected)]"
-                          : "hover:bg-[var(--atlas-element-hover)]",
+                        active ? "bg-element-selected" : "hover:bg-element-hover",
                       )}
                     >
                       <span
                         className={cn("h-1.5 w-1.5 shrink-0 rounded-full", claudeModeDotClass(m))}
                       />
                       <span className="flex-1 label">{CLAUDE_PERMISSION_MODE_LABEL[m]}</span>
-                      {active && <Check size={11} className="text-[var(--primary)]" />}
+                      {active && <Check size={11} className="text-primary" />}
                     </button>
                   );
                 })}
@@ -637,7 +630,7 @@ function ComposerGroupsMenu({
             {openGroup === "mode" && !isClaude && (
               <div className="p-1">
                 {!hasAcpModes ? (
-                  <div className="flex items-center gap-1.5 px-2 py-2 text-xs text-[var(--muted-foreground)]">
+                  <div className="flex items-center gap-1.5 px-2 py-2 text-xs text-muted-foreground">
                     <Loader2 size={11} className="animate-spin" /> Loading modes…
                   </div>
                 ) : (
@@ -652,9 +645,7 @@ function ComposerGroupsMenu({
                         }}
                         className={cn(
                           "flex w-full items-start gap-1.5 rounded-md px-2 py-1.5 text-left transition-colors cursor-pointer",
-                          active
-                            ? "bg-[var(--atlas-element-selected)]"
-                            : "hover:bg-[var(--atlas-element-hover)]",
+                          active ? "bg-element-selected" : "hover:bg-element-hover",
                         )}
                       >
                         <span
@@ -664,10 +655,10 @@ function ComposerGroupsMenu({
                         <span className="min-w-0 flex-1">
                           <span className="flex items-center gap-1.5 label">
                             {displayModeName(m.name)}
-                            {active && <Check size={11} className="text-[var(--primary)]" />}
+                            {active && <Check size={11} className="text-primary" />}
                           </span>
                           {m.description && (
-                            <span className="mt-0.5 block text-3xs leading-snug text-[var(--muted-foreground)]">
+                            <span className="mt-0.5 block text-3xs leading-snug text-muted-foreground">
                               {m.description}
                             </span>
                           )}
@@ -728,46 +719,44 @@ function ComposerGroupsMenu({
       </div>
 
       {/* Pill tab strip */}
-      <button
-        onClick={() => toggle("agent")}
-        className={pillCls(openGroup === "agent")}
-        title={
-          cycleAgentHint ? `Coding agent — pick here, ${cycleAgentHint} cycles` : "Coding agent"
-        }
+      <Hint
+        label={cycleAgentHint ? "Coding agent — pick here, or cycle with" : "Coding agent"}
+        shortcut={cycleAgentHint}
+        side="top"
       >
-        <AgentMark agentType={agentType} className="!h-4 !w-4 !text-3xs !rounded" />
-        <span className={composerPillLabelClass("late")}>{agentMeta(currentAgent).label}</span>
-      </button>
+        <button onClick={() => toggle("agent")} className={pillCls(openGroup === "agent")}>
+          <AgentMark agentType={agentType} className="!h-4 !w-4 !text-3xs !rounded" />
+          <span className={composerPillLabelClass("late")}>{agentMeta(currentAgent).label}</span>
+        </button>
+      </Hint>
 
       {showMode && (
-        <button
-          onClick={() => toggle("mode")}
-          className={pillCls(openGroup === "mode")}
-          title="Permission mode — pick here, ⇧⇥ cycles"
-        >
-          {isClaude ? (
-            <span
-              className={cn(
-                "h-1.5 w-1.5 shrink-0 rounded-full",
-                claudeModeDotClass(permissionMode),
-              )}
-            />
-          ) : (
-            <span
-              className="h-1.5 w-1.5 shrink-0 rounded-full"
-              style={{ background: acpModeColor(currentMode) }}
-            />
-          )}
-          <span className={composerPillLabelClass("late")}>
-            {isClaude
-              ? CLAUDE_PERMISSION_MODE_LABEL[permissionMode]
-              : currentAcpMode
-                ? displayModeName(currentAcpMode.name)
-                : modesPending
-                  ? "Loading…"
-                  : "Mode"}
-          </span>
-        </button>
+        <Hint label="Permission mode — pick here, or cycle with" shortcut="⇧⇥" side="top">
+          <button onClick={() => toggle("mode")} className={pillCls(openGroup === "mode")}>
+            {isClaude ? (
+              <span
+                className={cn(
+                  "h-1.5 w-1.5 shrink-0 rounded-full",
+                  claudeModeDotClass(permissionMode),
+                )}
+              />
+            ) : (
+              <span
+                className="h-1.5 w-1.5 shrink-0 rounded-full"
+                style={{ background: acpModeColor(currentMode) }}
+              />
+            )}
+            <span className={composerPillLabelClass("late")}>
+              {isClaude
+                ? CLAUDE_PERMISSION_MODE_LABEL[permissionMode]
+                : currentAcpMode
+                  ? displayModeName(currentAcpMode.name)
+                  : modesPending
+                    ? "Loading…"
+                    : "Mode"}
+            </span>
+          </button>
+        </Hint>
       )}
 
       {showModel && (
@@ -788,7 +777,7 @@ function ComposerGroupsMenu({
           >
             {currentModelInfo ? modelLabel(currentModelInfo) : (currentModel ?? "Model")}
           </span>
-          <ChevronDown size={10} className="ml-0.5 shrink-0 text-[var(--muted-foreground)]" />
+          <ChevronDown size={10} className="ml-0.5 shrink-0 text-muted-foreground" />
         </button>
       )}
     </div>
@@ -1905,7 +1894,7 @@ export function MessageInput({
         {/* Queued messages above the input */}
         {queue.length > 0 && (
           <div className="mb-2 flex flex-col gap-1">
-            <div className="text-2xs uppercase tracking-wider text-[var(--muted-foreground)] px-1">
+            <div className="text-2xs uppercase tracking-wider text-muted-foreground px-1">
               Queued · {queue.length}
             </div>
             <div className="flex flex-wrap gap-1.5">
@@ -1973,7 +1962,7 @@ export function MessageInput({
             // its exposed bottom strip; the INNER surface below holds the
             // input + send button (the focus ring lives there — the "active
             // field" is the input surface, not the toolbar).
-            "relative z-30 rounded-2xl border border-[var(--border)] bg-[var(--card)]",
+            "relative z-30 rounded-2xl border border-border bg-card",
             // The footer pills' labels collapse against THIS width.
             "@container",
             "shadow-md",
@@ -1990,8 +1979,8 @@ export function MessageInput({
           onFocusCapture={handleFocusCapture}
         >
           {githubSyncing !== null && (
-            <div className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center rounded-2xl bg-[var(--background)]/40 backdrop-blur-[1px]">
-              <span className="flex items-center gap-2 rounded-full bg-[var(--card)] px-3 py-1 text-xs font-medium text-[var(--secondary-foreground)] shadow">
+            <div className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center rounded-2xl bg-background/40 backdrop-blur-[1px]">
+              <span className="flex items-center gap-2 rounded-full bg-card px-3 py-1 text-xs font-medium text-secondary-foreground shadow">
                 <Loader2 size={12} className="animate-spin" />
                 Syncing {githubSyncing}…
               </span>
@@ -2014,20 +2003,18 @@ export function MessageInput({
                   "pointer-events-none absolute inset-2 z-40 flex items-center justify-center",
                   // The scrim dims the thread behind: the label must read as the one
                   // live layer, not float among the welcome tiles.
-                  "rounded-xl border border-dashed border-[var(--primary)] bg-[var(--background)]/80",
+                  "rounded-xl border border-dashed border-primary bg-background/80",
                   "opacity-0 transition-opacity duration-instant ease-out-strong",
                   "data-[active=true]:opacity-100 data-[active=true]:duration-0",
                 )}
               >
-                <div className="flex flex-col items-center gap-1 rounded-xl border border-[var(--border)] bg-[var(--card)] px-4 py-3 shadow-md">
-                  <AtSign size={16} className="text-[var(--primary)]" />
-                  <span className="text-sm font-medium text-[var(--foreground)]">
-                    Drop to reference
-                  </span>
+                <div className="flex flex-col items-center gap-1 rounded-xl border border-border bg-card px-4 py-3 shadow-md">
+                  <AtSign size={16} className="text-primary" />
+                  <span className="text-sm font-medium text-foreground">Drop to reference</span>
                   {/* Says what will happen, because the two gestures now differ:
                       a drop writes a chip into the sentence, the "+" menu
                       attaches. */}
-                  <span className="text-xs text-[var(--muted-foreground)]">
+                  <span className="text-xs text-muted-foreground">
                     Added as an @mention in your message
                   </span>
                 </div>
@@ -2046,12 +2033,12 @@ export function MessageInput({
               // `.atlas-chat-cm-host` block) the field collapses and the
               // button hangs out over the footer. The floor makes the
               // geometry hold even with no editor mounted at all.
-              "relative m-1 min-h-[44px] rounded-xl border border-[var(--border)] bg-[var(--background)]",
+              "relative m-1 min-h-[44px] rounded-xl border border-border bg-background",
               "transition-[border-color,box-shadow] duration-150",
               // Focus treatment at HALF strength: the full border-focus +
               // /20 accent ring read far too loud on the nested surface.
               "focus-within:border-[color-mix(in_srgb,var(--atlas-border-strong)_50%,var(--border))]",
-              "focus-within:ring-1 focus-within:ring-[var(--primary)]/10",
+              "focus-within:ring-1 focus-within:ring-primary/10",
               // The disabled dim, scoped to the field the lock actually
               // applies to (see the shell above). No red tint — the send
               // button is already disabled and submit()/Cmd+Enter are gated
@@ -2131,8 +2118,8 @@ export function MessageInput({
                   // button at 8px top centers at 22px at EVERY UI scale.
                   "absolute top-[8px] right-[8px] flex items-center justify-center w-[28px] h-[28px] rounded-lg border transition-colors",
                   buttonEnabled
-                    ? "border-transparent text-[var(--foreground)] hover:bg-[var(--atlas-element-hover)] hover:border-[var(--border)] cursor-pointer"
-                    : "border-transparent text-[var(--muted-foreground)] cursor-not-allowed",
+                    ? "border-transparent text-foreground hover:bg-element-hover hover:border-border cursor-pointer"
+                    : "border-transparent text-muted-foreground cursor-not-allowed",
                 )}
               >
                 {/* Updates in place: Enter sends, so the arrow↔stop swap is
@@ -2254,19 +2241,19 @@ function QueueChip({
   onRemove: () => void;
 }) {
   return (
-    <div className="group flex items-center gap-1 max-w-[260px] h-6 pl-2 pr-1 rounded-full border border-[var(--border)] bg-[var(--card)] text-xs text-[var(--secondary-foreground)]">
+    <div className="group flex items-center gap-1 max-w-[260px] h-6 pl-2 pr-1 rounded-full border border-border bg-card text-xs text-secondary-foreground">
       <button
         onClick={onEdit}
-        className="flex items-center gap-1 min-w-0 cursor-pointer hover:text-[var(--foreground)]"
+        className="flex items-center gap-1 min-w-0 cursor-pointer hover:text-foreground"
         title="Edit / merge into input"
       >
-        <Pencil size={9} className="text-[var(--muted-foreground)] shrink-0" />
+        <Pencil size={9} className="text-muted-foreground shrink-0" />
         <span className="truncate">{text.replace(/\s+/g, " ")}</span>
       </button>
       <Hint label="Remove from queue" side="top">
         <button
           onClick={onRemove}
-          className="flex items-center justify-center w-4 h-4 rounded-full hover:bg-[var(--atlas-element-hover)] text-[var(--muted-foreground)] hover:text-[var(--atlas-status-error-foreground)] cursor-pointer shrink-0"
+          className="flex items-center justify-center w-4 h-4 rounded-full hover:bg-element-hover text-muted-foreground hover:text-error cursor-pointer shrink-0"
         >
           <X size={10} />
         </button>

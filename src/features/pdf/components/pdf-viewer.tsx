@@ -104,7 +104,7 @@ export function PdfViewer({ filePath, tabId }: PdfViewerProps) {
   }, [save, saving]);
 
   return (
-    <div className="flex h-full w-full flex-col bg-[var(--background)]">
+    <div className="flex h-full w-full flex-col bg-background">
       <PdfToolbar
         fileName={fileName}
         zoom={zoom}
@@ -113,23 +113,16 @@ export function PdfViewer({ filePath, tabId }: PdfViewerProps) {
         onZoomOut={() => setZoom((z) => Math.max(0.5, z - 0.2))}
       />
 
-      <div
-        ref={scrollRef}
-        className="flex flex-1 justify-center overflow-auto bg-[var(--atlas-panel-background)] p-8"
-      >
+      <div ref={scrollRef} className="flex flex-1 justify-center overflow-auto bg-panel p-8">
         {error ? (
-          <div className="mt-20 text-sm text-[var(--atlas-status-error-foreground)]">{error}</div>
+          <div className="mt-20 text-sm text-error">{error}</div>
         ) : pdfFile ? (
           <Document
             file={pdfFile}
             onLoadSuccess={(pdf) => setNumPages(pdf.numPages)}
             onLoadError={(e) => setError(e.message || "Failed to load PDF document.")}
             loading={<PdfSpinner label="Loading PDF" />}
-            error={
-              <div className="mt-20 text-sm text-[var(--atlas-status-error-foreground)]">
-                Failed to load PDF document.
-              </div>
-            }
+            error={<div className="mt-20 text-sm text-error">Failed to load PDF document.</div>}
             className="flex flex-col items-center gap-4"
           >
             {Array.from({ length: numPages }, (_, i) => (
@@ -175,7 +168,7 @@ function PdfPage({
             className="flex items-center justify-center bg-white"
             style={{ width, height: width * 1.29 }}
           >
-            <Loader2 size={16} className="animate-spin text-[var(--muted-foreground)]" />
+            <Loader2 size={16} className="animate-spin text-muted-foreground" />
           </div>
         }
       />
@@ -188,7 +181,7 @@ function PdfPage({
 
 function PdfSpinner({ label }: { label: string }) {
   return (
-    <div className="mt-20 flex flex-col items-center gap-2 text-[var(--muted-foreground)]">
+    <div className="mt-20 flex flex-col items-center gap-2 text-muted-foreground">
       <Loader2 size={18} className="animate-spin" />
       <span className="text-xs">{label}</span>
     </div>

@@ -38,9 +38,9 @@ export function MemoryPanel() {
   const { setSubTab } = useMemoryStore.use.actions();
 
   return (
-    <div className="h-full flex flex-col bg-[var(--background)]">
+    <div className="h-full flex flex-col bg-background">
       {/* Header: nav (left) · sharing controls (right) */}
-      <div className="flex items-center h-[32px] shrink-0 border-b border-[var(--border)] px-2">
+      <div className="flex items-center h-[32px] shrink-0 border-b border-border px-2">
         <PillGroup>
           <PillSeg
             active={sub === "graph"}
@@ -77,9 +77,7 @@ export function MemoryPanel() {
           <SharedMemoryView projectPath={projectPath} />
         ) : (
           <Centered>
-            <p className="text-sm text-[var(--muted-foreground)]">
-              Open a project to view shared memory.
-            </p>
+            <p className="text-sm text-muted-foreground">Open a project to view shared memory.</p>
           </Centered>
         )}
       </div>
@@ -90,7 +88,7 @@ export function MemoryPanel() {
 /** Rounded container that groups the segmented nav pills. */
 function PillGroup({ children }: { children: React.ReactNode }) {
   return (
-    <div className="inline-flex items-center gap-0.5 rounded-full border border-[var(--border)] bg-[var(--card,var(--card))] p-0.5">
+    <div className="inline-flex items-center gap-0.5 rounded-full border border-border bg-card p-0.5">
       {children}
     </div>
   );
@@ -113,8 +111,8 @@ function PillSeg({
       className={cn(
         "flex items-center gap-1.5 h-control-xs px-2.5 rounded-full text-xs font-medium outline-none transition-colors cursor-pointer",
         active
-          ? "bg-[var(--atlas-element-selected)] text-[var(--foreground)]"
-          : "text-[var(--muted-foreground)] hover:text-[var(--secondary-foreground)] hover:bg-[var(--atlas-element-hover)]",
+          ? "bg-element-selected text-foreground"
+          : "text-muted-foreground hover:text-secondary-foreground hover:bg-element-hover",
       )}
     >
       {icon}
@@ -144,14 +142,14 @@ function MemoryHealthLine({ projectPath }: { projectPath: string | null }) {
     }
   };
   return (
-    <span className="flex items-center gap-1.5 text-2xs text-[var(--muted-foreground)]">
+    <span className="flex items-center gap-1.5 text-2xs text-muted-foreground">
       {line}
       {chainBroken(status) && (
         <>
           <button
             type="button"
             onClick={() => setConfirm(true)}
-            className="underline underline-offset-2 hover:text-[var(--foreground)]"
+            className="underline underline-offset-2 hover:text-foreground"
           >
             I made this edit
           </button>

@@ -1,41 +1,41 @@
 :root {
   /* Base tokens are the source of truth. The active variant overwrites this
      complete set through the resolved-theme style element. */
-  --background: #000000;
-  --foreground: #ffffff;
-  --card: #0f0f0f;
-  --card-foreground: #ffffff;
-  --popover: #1c1c1c;
-  --popover-foreground: #ffffff;
-  --primary: #ffffff;
-  --primary-foreground: #000000;
-  --secondary: #0f0f0f;
-  --secondary-foreground: #aaaaaa;
-  --muted: #171717;
-  --muted-foreground: #585858;
-  --accent: #171717;
-  --accent-foreground: #ffffff;
-  --destructive: #f44747;
-  --destructive-foreground: #ffffff;
-  --border: #1e1e1e;
-  --input: #1e1e1e;
+  --background: oklch(0.08 0 0);
+  --foreground: oklch(0.97 0 0);
+  --card: oklch(0.12 0 0);
+  --card-foreground: oklch(0.97 0 0);
+  --popover: oklch(0.17 0 0);
+  --popover-foreground: oklch(0.97 0 0);
+  --primary: oklch(0.97 0 0);
+  --primary-foreground: oklch(0.08 0 0);
+  --secondary: oklch(0.16 0 0);
+  --secondary-foreground: oklch(0.8 0 0);
+  --muted: oklch(0.15 0 0);
+  --muted-foreground: oklch(0.62 0 0);
+  --accent: oklch(0.16 0 0);
+  --accent-foreground: oklch(0.97 0 0);
+  --destructive: oklch(0.68 0.19 22);
+  --destructive-foreground: oklch(0.99 0 0);
+  --border: oklch(1 0 0 / 8%);
+  --input: oklch(1 0 0 / 10%);
   /* A real accent, not the strong border (decision 31). Every built-in theme
      already sets `ring` to its `primary`; this fallback matches, so the focus
      ring reads as focus even before a theme has been resolved. */
-  --ring: #ffffff;
-  --chart-1: #61afef;
-  --chart-2: #98c379;
-  --chart-3: #d19a66;
-  --chart-4: #c678dd;
-  --chart-5: #e06c75;
-  --sidebar: #0a0a0a;
-  --sidebar-foreground: #ffffff;
-  --sidebar-primary: #ffffff;
-  --sidebar-primary-foreground: #000000;
-  --sidebar-accent: #0f0f0f;
-  --sidebar-accent-foreground: #ffffff;
-  --sidebar-border: #141414;
-  --sidebar-ring: #3d3d3d;
+  --ring: oklch(0.97 0 0 / 40%);
+  --chart-1: #f5f5f5;
+  --chart-2: #b7b7b7;
+  --chart-3: #808080;
+  --chart-4: #4d4d4d;
+  --chart-5: #292929;
+  --sidebar: oklch(0.1 0 0);
+  --sidebar-foreground: oklch(0.97 0 0);
+  --sidebar-primary: oklch(0.97 0 0);
+  --sidebar-primary-foreground: oklch(0.08 0 0);
+  --sidebar-accent: oklch(0.15 0 0);
+  --sidebar-accent-foreground: oklch(0.97 0 0);
+  --sidebar-border: oklch(1 0 0 / 6%);
+  --sidebar-ring: oklch(0.97 0 0 / 40%);
   --font-sans: -apple-system, "SF Pro Text", system-ui, sans-serif;
   --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", serif;
   --font-mono: "SF Mono", "Geist Mono", "JetBrains Mono", "Fira Code", monospace;
@@ -77,23 +77,23 @@
   --radius-xl: calc(var(--radius-base) + 4px);
   --radius-full: 9999px;
 
-  /* Elevation (decision 27). Three rungs, and they must READ as three: raised,
-     menus/popovers, dialogs. Each is built from the theme's own shadcn shadow
-     tokens, so the shadow colour and weight come from the theme and a light
-     variant gets a light shadow for free. globals.css maps `shadow-sm` /
-     `shadow-md` / `shadow-lg` onto these three.
+  /* Elevation — Atlas Standards: rings, not shadows. A raised block is a
+     lighter surface step with `ring-1 ring-foreground/10`, or a border, and
+     casts nothing. Only what floats over content it is not part of casts, and
+     only two rungs: `shadow-md` for menus, popovers and floating buttons,
+     `shadow-lg` for dialogs and sheets. Each reads the theme's own `shadow-md`
+     / `shadow-lg`, so the colour and weight come from the theme and a light
+     variant gets a light shadow.
+
+     `--elevation-raised` survives only so `shadow-sm` still compiles; the
+     ratchet bans the utility (`raised-shadow`).
 
      These names sit outside Tailwind's `--shadow-*` namespace on purpose: a
      `@theme inline` entry that pointed `--shadow-sm` back at `--shadow-sm`
      would make Tailwind re-emit the variable and close the loop. */
   --elevation-raised: var(--shadow-sm);
-  --elevation-menu: var(--shadow-2xl);
-  /* A dialog sits above the menus, so it cannot share their shadow — `md` and
-     `lg` resolved to the same value and every dialog read as a popover. Two of
-     the theme's own shadows stacked: the widest one for the spread, with the
-     next one down under it for the contact edge. Still entirely theme-derived,
-     and still one step up from `--elevation-menu` in every theme. */
-  --elevation-dialog: var(--shadow-xl), var(--shadow-2xl);
+  --elevation-menu: var(--shadow-md);
+  --elevation-dialog: var(--shadow-lg);
   /* The 1px top edge on raised glass, composed as Tailwind's
      `--tw-inset-shadow` so `inset-highlight shadow-md` stacks correctly.
 
@@ -241,84 +241,99 @@
    with no resolved theme. Rewritten by
    `ATLAS_WRITE_TOKENS=1 bunx vitest run src/features/theme/tokens-fallback.test.ts`. */
 :root {
-  --atlas-border-subtle: #141414;
-  --atlas-border-strong: #3d3d3d;
-  --atlas-element-hover: rgba(255, 255, 255, 0.04);
-  --atlas-element-selected: rgba(255, 255, 255, 0.06);
-  --atlas-element-active: rgba(255, 255, 255, 0.08);
-  --atlas-element-highlight: rgba(255, 255, 255, 0.06);
-  --atlas-primary-hover: #ffffff;
-  --atlas-primary-muted: rgba(255, 255, 255, 0.06);
-  --atlas-text-disabled: #464646;
-  --atlas-status-success-foreground: #9ecf8a;
-  --atlas-status-warning-foreground: #ffff00;
-  --atlas-status-error-foreground: #f44747;
-  --atlas-status-info-foreground: #6796e6;
-  --atlas-selection-background: rgba(255, 255, 255, 0.18);
-  --atlas-terminal-foreground: #ffffff;
-  --atlas-terminal-background: #000000;
-  --atlas-terminal-cursor: #ffffff;
+  --atlas-border-subtle: oklch(1 0 0 / 6%);
+  --atlas-border-strong: oklch(1 0 0 / 16%);
+  --atlas-element-hover: oklch(1 0 0 / 5%);
+  --atlas-element-selected: oklch(1 0 0 / 8%);
+  --atlas-element-active: oklch(1 0 0 / 11%);
+  --atlas-element-highlight: oklch(1 0 0 / 6%);
+  --atlas-primary-hover: oklch(0.9 0 0);
+  --atlas-primary-muted: oklch(0.97 0 0 / 8%);
+  --atlas-text-disabled: oklch(0.4 0 0);
+  --atlas-status-success-foreground: oklch(0.72 0.16 155);
+  --atlas-status-warning-foreground: oklch(0.8 0.15 78);
+  --atlas-status-error-foreground: oklch(0.68 0.19 22);
+  --atlas-status-info-foreground: oklch(0.7 0.13 232);
+  --atlas-selection-background: oklch(0.97 0 0 / 22%);
+  --atlas-terminal-foreground: oklch(0.97 0 0);
+  --atlas-terminal-background: oklch(0.08 0 0);
+  --atlas-terminal-cursor: oklch(0.97 0 0);
   --atlas-terminal-ansi-black: #1f1f1f;
-  --atlas-terminal-ansi-red: #f44747;
-  --atlas-terminal-ansi-green: #9ecf8a;
-  --atlas-terminal-ansi-yellow: #ffff00;
-  --atlas-terminal-ansi-blue: #6796e6;
-  --atlas-terminal-ansi-magenta: #c9a2f5;
-  --atlas-terminal-ansi-cyan: #7fd1e8;
-  --atlas-terminal-ansi-white: #ffffff;
-  --atlas-terminal-ansi-bright-black: #585858;
-  --atlas-terminal-ansi-bright-red: #f66363;
-  --atlas-terminal-ansi-bright-green: #add69c;
-  --atlas-terminal-ansi-bright-yellow: #ffff26;
-  --atlas-terminal-ansi-bright-blue: #7ea6ea;
-  --atlas-terminal-ansi-bright-magenta: #d1b0f7;
-  --atlas-terminal-ansi-bright-cyan: #92d8eb;
-  --atlas-terminal-ansi-bright-white: #ffffff;
-  --atlas-syntax-comment: #8f8f8f;
-  --atlas-syntax-keyword: #c9a2f5;
-  --atlas-syntax-string: #9ecf8a;
-  --atlas-syntax-number: #e0b070;
-  --atlas-syntax-type: #7fd1e8;
-  --atlas-syntax-function: #ffff00;
-  --atlas-syntax-variable: #eaeaea;
-  --atlas-syntax-operator: #9a9a9a;
-  --atlas-syntax-tag: #7fd1e8;
-  --atlas-syntax-attribute: #d9b47a;
-  --atlas-syntax-constant: #e0b070;
-  --atlas-syntax-regexp: #e59a72;
-  --atlas-syntax-escape: #e59a72;
-  --atlas-syntax-definition: #ffffff;
-  --atlas-syntax-property: #c8c8c8;
-  --atlas-editor-background: #000000;
-  --atlas-editor-foreground: #d4d4d4;
-  --atlas-editor-caret: #d4d4d4;
-  --atlas-editor-gutter-background: #000000;
-  --atlas-editor-gutter-foreground: #666666;
-  --atlas-editor-active-line-background: #ffffff0a;
-  --atlas-editor-active-line-gutter-foreground: #d4d4d4;
-  --atlas-editor-selection-background: #303030;
-  --atlas-editor-match-bracket-background: #2d2d2d;
-  --atlas-editor-match-bracket-border: #3d3d3d;
-  --atlas-search-match-background: rgba(255, 255, 0, 0.22);
-  --atlas-search-match-active-background: rgba(255, 255, 0, 0.5);
-  --atlas-scrollbar-thumb-background: rgba(255, 255, 255, 0.16);
-  --atlas-scrollbar-thumb-hover: rgba(255, 255, 255, 0.26);
-  --atlas-panel-background: #0a0a0a;
-  --atlas-panel-input-background: #0a0a0a;
-  --atlas-diff-added-background: #0d2211;
-  --atlas-diff-added-emphasis: rgba(158, 207, 138, 0.34);
-  --atlas-diff-added-text: #9ecf8a;
-  --atlas-diff-removed-background: #220d0d;
-  --atlas-diff-removed-emphasis: rgba(244, 71, 71, 0.34);
-  --atlas-diff-removed-text: #f44747;
-  --atlas-diff-context-background: #0a0a0a;
-  --atlas-agent-chip-foreground: #ffffff;
-  --atlas-agent-chip-background: rgba(255, 255, 255, 0.06);
-  --atlas-status-success-background: rgba(158, 207, 138, 0.12);
-  --atlas-status-warning-background: rgba(255, 255, 0, 0.12);
-  --atlas-status-error-background: rgba(244, 71, 71, 0.12);
-  --atlas-status-info-background: rgba(103, 150, 230, 0.12);
-  --atlas-element-emphasis: rgba(255, 255, 255, 0.16);
-  --atlas-terminal-selection: rgba(255, 255, 255, 0.3);
+  --atlas-terminal-ansi-red: #ff6d79;
+  --atlas-terminal-ansi-green: #50c582;
+  --atlas-terminal-ansi-yellow: #f3af49;
+  --atlas-terminal-ansi-blue: #4e96ff;
+  --atlas-terminal-ansi-magenta: #b180fc;
+  --atlas-terminal-ansi-cyan: #3dc7c9;
+  --atlas-terminal-ansi-white: oklch(0.97 0 0);
+  --atlas-terminal-ansi-bright-black: oklch(0.62 0 0);
+  --atlas-terminal-ansi-bright-red: #fd818c;
+  --atlas-terminal-ansi-bright-green: #69cc93;
+  --atlas-terminal-ansi-bright-yellow: #f3b963;
+  --atlas-terminal-ansi-bright-blue: #67a4fd;
+  --atlas-terminal-ansi-bright-magenta: #bb92fb;
+  --atlas-terminal-ansi-bright-cyan: #59ced0;
+  --atlas-terminal-ansi-bright-white: #f7f7f7;
+  --atlas-syntax-comment: oklch(0.62 0 0);
+  --atlas-syntax-keyword: oklch(0.7 0.18 300);
+  --atlas-syntax-string: oklch(0.74 0.145 155);
+  --atlas-syntax-number: oklch(0.76 0.16 48);
+  --atlas-syntax-type: oklch(0.76 0.115 196);
+  --atlas-syntax-function: oklch(0.8 0.14 74);
+  --atlas-syntax-variable: oklch(0.92 0 0);
+  --atlas-syntax-operator: oklch(0.62 0 0);
+  --atlas-syntax-tag: oklch(0.76 0.115 196);
+  --atlas-syntax-attribute: oklch(0.8 0.14 74);
+  --atlas-syntax-constant: oklch(0.76 0.16 48);
+  --atlas-syntax-regexp: oklch(0.72 0.16 350);
+  --atlas-syntax-escape: oklch(0.72 0.16 350);
+  --atlas-syntax-definition: oklch(0.97 0 0);
+  --atlas-syntax-property: oklch(0.8 0 0);
+  --atlas-editor-background: oklch(0.08 0 0);
+  --atlas-editor-foreground: oklch(0.88 0 0);
+  --atlas-editor-caret: oklch(0.97 0 0);
+  --atlas-editor-gutter-background: oklch(0.08 0 0);
+  --atlas-editor-gutter-foreground: oklch(0.42 0 0);
+  --atlas-editor-active-line-background: oklch(1 0 0 / 4%);
+  --atlas-editor-active-line-gutter-foreground: oklch(0.8 0 0);
+  --atlas-editor-selection-background: oklch(1 0 0 / 14%);
+  --atlas-editor-match-bracket-background: oklch(1 0 0 / 8%);
+  --atlas-editor-match-bracket-border: oklch(1 0 0 / 16%);
+  --atlas-search-match-background: rgba(243, 175, 73, 0.22);
+  --atlas-search-match-active-background: rgba(243, 175, 73, 0.5);
+  --atlas-scrollbar-thumb-background: oklch(1 0 0 / 14%);
+  --atlas-scrollbar-thumb-hover: oklch(1 0 0 / 22%);
+  --atlas-panel-background: oklch(0.1 0 0);
+  --atlas-panel-input-background: oklch(0.08 0 0);
+  --atlas-surface-background: oklch(0.1 0 0);
+  --atlas-surface-raised: oklch(0.15 0 0);
+  --atlas-illustration-background: oklch(0.13 0 0);
+  --atlas-segment-track: oklch(0.13 0 0);
+  --atlas-segment-thumb: oklch(0.26 0 0);
+  --atlas-shell-canvas: oklch(0.17 0 0);
+  --atlas-shell-edge: oklch(0.27 0 0);
+  --atlas-diff-added-background: oklch(0.72 0.16 155 / 14%);
+  --atlas-diff-added-emphasis: oklch(0.72 0.16 155 / 28%);
+  --atlas-diff-added-text: oklch(0.72 0.16 155);
+  --atlas-diff-removed-background: oklch(0.68 0.19 22 / 14%);
+  --atlas-diff-removed-emphasis: oklch(0.68 0.19 22 / 28%);
+  --atlas-diff-removed-text: oklch(0.68 0.19 22);
+  --atlas-diff-context-background: oklch(0.1 0 0);
+  --atlas-agent-chip-foreground: oklch(0.97 0 0);
+  --atlas-agent-chip-background: oklch(1 0 0 / 8%);
+  --atlas-hue-grey: oklch(0.7 0.02 259);
+  --atlas-hue-indigo: oklch(0.68 0.18 259);
+  --atlas-hue-purple: oklch(0.7 0.18 300);
+  --atlas-hue-cyan: oklch(0.76 0.115 196);
+  --atlas-hue-green: oklch(0.74 0.145 155);
+  --atlas-hue-amber: oklch(0.8 0.14 74);
+  --atlas-hue-orange: oklch(0.76 0.16 48);
+  --atlas-hue-red: oklch(0.72 0.18 18);
+  --atlas-status-success-background: rgba(53, 193, 119, 0.12);
+  --atlas-status-warning-background: rgba(242, 176, 54, 0.12);
+  --atlas-status-error-background: rgba(247, 92, 97, 0.12);
+  --atlas-status-info-background: rgba(46, 171, 225, 0.12);
+  --atlas-element-emphasis: rgba(245, 245, 245, 0.16);
+  --atlas-terminal-selection: rgba(245, 245, 245, 0.3);
 }
 /* /generated:atlas-dark-fallback */

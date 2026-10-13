@@ -191,7 +191,7 @@ export function TerminalPanel({ tabId, projectId }: TerminalPanelProps) {
     : null;
 
   return (
-    <div ref={rootRef} className="h-full bg-[var(--atlas-terminal-background)] relative">
+    <div ref={rootRef} className="h-full bg-terminal relative">
       {zoomed ? (
         <PaneView pane={zoomed} tabId={tabId} panelVisible={panelVisible} zoomed />
       ) : (
@@ -295,7 +295,7 @@ function PaneView({
     <div
       className={cn(
         "h-full flex flex-col",
-        isActivePane && groupFocused && "ring-1 ring-[var(--atlas-element-hover)] ring-inset",
+        isActivePane && groupFocused && "ring-1 ring-element-hover ring-inset",
       )}
     >
       <div className="flex items-center h-control-lg shrink-0 border-b border-border bg-background px-1 gap-0.5">
@@ -315,7 +315,7 @@ function PaneView({
               )}
             >
               {busy[ptyId] ? (
-                <Loader2 size={9} className="animate-spin text-[var(--primary)]" />
+                <Loader2 size={9} className="animate-spin text-primary" />
               ) : (
                 <TerminalIcon size={9} />
               )}

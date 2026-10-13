@@ -35,7 +35,13 @@ describe("TerminalStopControl", () => {
       />,
     );
 
-    fireEvent.click(screen.getByRole("button", { name: "Stop process (Ctrl+C)" }));
+    // The shortcut is drawn as keycaps in the tooltip, and announced here
+    // rather than folded into the name.
+    expect(screen.getByRole("button", { name: "Stop process" })).toHaveAttribute(
+      "aria-keyshortcuts",
+      "Control+C",
+    );
+    fireEvent.click(screen.getByRole("button", { name: "Stop process" }));
     expect(onInterrupt).toHaveBeenCalledOnce();
     expect(screen.getByRole("button", { name: "Waiting for process to stop" })).toBeDisabled();
 
@@ -56,7 +62,7 @@ describe("TerminalStopControl", () => {
       />,
     );
 
-    fireEvent.click(screen.getByRole("button", { name: "Stop process (Ctrl+C)" }));
+    fireEvent.click(screen.getByRole("button", { name: "Stop process" }));
     act(() => vi.advanceTimersByTime(1500));
     await act(async () => {
       fireEvent.click(screen.getByRole("button", { name: "Force stop process" }));
@@ -75,7 +81,7 @@ describe("TerminalStopControl", () => {
     };
     const { rerender } = render(<TerminalStopControl active {...props} />);
 
-    fireEvent.click(screen.getByRole("button", { name: "Stop process (Ctrl+C)" }));
+    fireEvent.click(screen.getByRole("button", { name: "Stop process" }));
     rerender(<TerminalStopControl active={false} {...props} />);
     act(() => vi.advanceTimersByTime(1500));
 

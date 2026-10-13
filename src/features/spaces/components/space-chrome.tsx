@@ -97,7 +97,7 @@ export function SpaceHeaderPill({
     <div
       className={cn(
         "absolute left-3 top-3 z-panel flex items-center gap-1.5 py-1 pl-1 pr-1",
-        "rounded-xl border border-border-subtle bg-[var(--card)]/70 shadow-md backdrop-blur-2xl",
+        "rounded-xl border border-hairline bg-card/70 shadow-md backdrop-blur-2xl",
       )}
     >
       <Hint label={pagesOpen ? "Hide pages" : "Show pages"}>
@@ -114,7 +114,7 @@ export function SpaceHeaderPill({
           <RailGlyph open={pagesOpen} size="md" />
         </button>
       </Hint>
-      <div className="mx-0.5 h-4 w-px bg-border-subtle" />
+      <div className="mx-0.5 h-4 w-px bg-hairline" />
 
       {/* The page name is the shorthand page selector — the dock is the long
           way round, and a canvas is usually two clicks from another page. */}
@@ -136,7 +136,7 @@ export function SpaceHeaderPill({
         />
         <Popover.Portal>
           <Popover.Positioner className="z-popover" align="start" sideOffset={6}>
-            <Popover.Popup className="atlas-panel-in-tl inset-highlight shadow-md select-none overflow-hidden rounded-xl border border-border-subtle bg-[var(--card)]/95 backdrop-blur-2xl">
+            <Popover.Popup className="atlas-panel-in-tl inset-highlight shadow-md select-none overflow-hidden rounded-xl border border-hairline bg-card/95 backdrop-blur-2xl">
               <div className="flex max-h-[320px] w-[220px] flex-col overflow-y-auto py-1">
                 {selectable.map((p) => (
                   <button
@@ -147,13 +147,13 @@ export function SpaceHeaderPill({
                       setOpen(false);
                     }}
                     className={cn(
-                      "flex cursor-pointer items-center gap-2 px-3 py-1.5 text-left text-xs transition-colors hover:bg-[var(--atlas-element-hover)]",
+                      "flex cursor-pointer items-center gap-2 px-3 py-1.5 text-left text-xs transition-colors hover:bg-element-hover",
                       p.id === activePageId ? "text-foreground" : "text-secondary-foreground",
                     )}
                   >
                     <span className="min-w-0 flex-1 truncate">{p.name || "Untitled"}</span>
                     {p.id === activePageId && (
-                      <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--primary)]" />
+                      <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
                     )}
                   </button>
                 ))}
@@ -166,7 +166,7 @@ export function SpaceHeaderPill({
         </Popover.Portal>
       </Popover.Root>
 
-      <div className="mx-0.5 h-4 w-px bg-border-subtle" />
+      <div className="mx-0.5 h-4 w-px bg-hairline" />
       <ZoomReadout />
       <Hint label="Fit to view">
         <button
@@ -319,8 +319,8 @@ export function SpaceActionPill({
   return (
     <div
       className={cn(
-        "absolute right-3 top-3 z-panel flex h-8 items-center gap-1 rounded-xl border border-border-subtle px-1.5",
-        "bg-[var(--card)]/70 shadow-md backdrop-blur-2xl",
+        "absolute right-3 top-3 z-panel flex h-8 items-center gap-1 rounded-xl border border-hairline px-1.5",
+        "bg-card/70 shadow-md backdrop-blur-2xl",
       )}
     >
       {/* Presence */}
@@ -363,7 +363,7 @@ export function SpaceActionPill({
                   <CommsAvatar
                     member={me ? memberOf(me) : null}
                     size={18}
-                    className="rounded-full ring-2 ring-[var(--card)]"
+                    className="rounded-full ring-2 ring-card"
                   />
                 </span>
               }
@@ -380,7 +380,7 @@ export function SpaceActionPill({
           <Tooltip>
             <TooltipTrigger
               render={
-                <span className="ml-1.5 flex h-[18px] items-center gap-1 rounded-full bg-[var(--primary)]/15 px-1.5 text-2xs font-medium text-[var(--primary)]">
+                <span className="ml-1.5 flex h-[18px] items-center gap-1 rounded-full bg-primary/15 px-1.5 text-2xs font-medium text-primary">
                   <Eye size={10} />
                   {followers.length}
                 </span>
@@ -395,7 +395,7 @@ export function SpaceActionPill({
         )}
       </div>
 
-      <div className="mx-0.5 h-4 w-px bg-border-subtle" />
+      <div className="mx-0.5 h-4 w-px bg-hairline" />
 
       <Hint label="Open in web">
         <button
@@ -407,7 +407,7 @@ export function SpaceActionPill({
         </button>
       </Hint>
 
-      <div className="mx-0.5 h-4 w-px bg-border-subtle" />
+      <div className="mx-0.5 h-4 w-px bg-hairline" />
 
       <Popover.Root open={open} onOpenChange={setOpen}>
         <Hint label="Export canvas">
@@ -425,14 +425,14 @@ export function SpaceActionPill({
         </Hint>
         <Popover.Portal>
           <Popover.Positioner className="z-popover" align="end" sideOffset={6}>
-            <Popover.Popup className="atlas-panel-in-tl inset-highlight shadow-md select-none overflow-hidden rounded-xl border border-border-subtle bg-[var(--card)]/95 backdrop-blur-2xl">
+            <Popover.Popup className="atlas-panel-in-tl inset-highlight shadow-md select-none overflow-hidden rounded-xl border border-hairline bg-card/95 backdrop-blur-2xl">
               <div className="flex w-[140px] flex-col py-1">
                 {FORMATS.map((f) => (
                   <button
                     key={f.format}
                     type="button"
                     onClick={() => void run(f.format)}
-                    className="flex w-full cursor-pointer items-center gap-2 px-3 py-1.5 text-left text-xs text-secondary-foreground transition-colors hover:bg-[var(--atlas-element-hover)] hover:text-foreground"
+                    className="flex w-full cursor-pointer items-center gap-2 px-3 py-1.5 text-left text-xs text-secondary-foreground transition-colors hover:bg-element-hover hover:text-foreground"
                   >
                     <f.icon size={12} className="shrink-0 text-muted-foreground" />
                     {f.label}

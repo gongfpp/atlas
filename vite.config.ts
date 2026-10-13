@@ -266,6 +266,19 @@ export default defineConfig(() => ({
               test: (id) => !id.endsWith(".css") && id.includes("@base-ui"),
             },
             {
+              // `motion` and the three packages it is built from. Eager: the
+              // titlebar animates with it. Its own chunk so it caches apart
+              // from app code, and so its weight is visible in a build.
+              name: "vendor-motion",
+              priority: 45,
+              test: (id) =>
+                !id.endsWith(".css") &&
+                (id.includes("/node_modules/motion/") ||
+                  id.includes("/node_modules/framer-motion/") ||
+                  id.includes("/node_modules/motion-dom/") ||
+                  id.includes("/node_modules/motion-utils/")),
+            },
+            {
               name: "vendor-tanstack",
               priority: 40,
               test: (id) => !id.endsWith(".css") && id.includes("@tanstack"),

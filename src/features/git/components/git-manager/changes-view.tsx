@@ -48,9 +48,7 @@ function FieldToggle({
     >
       {open ? <ChevronUp size={10} /> : <ChevronDown size={10} />}
       {label}
-      {!open && hasContent && (
-        <span className="inline-block w-1 h-1 rounded-full bg-[var(--primary)]" />
-      )}
+      {!open && hasContent && <span className="inline-block w-1 h-1 rounded-full bg-primary" />}
     </button>
   );
 }
@@ -67,10 +65,9 @@ function statusBadge(status: string): { letter: string; cls: string } {
   if (s.includes("delet")) return { letter: "D", cls: "text-error" };
   if (s.includes("add") || s.includes("new") || s.includes("untrack"))
     return { letter: "A", cls: "text-success" };
-  if (s.includes("renam"))
-    return { letter: "R", cls: "text-[var(--atlas-status-info-foreground)]" };
+  if (s.includes("renam")) return { letter: "R", cls: "text-info" };
   if (s.includes("conflict") || s.includes("unmerg")) return { letter: "!", cls: "text-error" };
-  return { letter: "M", cls: "text-[var(--atlas-status-warning-foreground)]" };
+  return { letter: "M", cls: "text-warning" };
 }
 
 function FileRow({
@@ -145,7 +142,7 @@ function FileRow({
                   e.stopPropagation();
                   onDiscard();
                 }}
-                className="p-0.5 rounded text-muted-foreground hover:text-[var(--atlas-status-error-foreground)]"
+                className="p-0.5 rounded text-muted-foreground hover:text-error"
               >
                 <Undo2 size={11} />
               </button>
@@ -344,11 +341,8 @@ export function ChangesView() {
   return (
     <div className="h-full flex flex-col min-w-0">
       {inProgressLabel && (
-        <div className="shrink-0 flex items-center gap-2 px-3 py-2 border-b border-[var(--atlas-status-warning-foreground)]/30 bg-[var(--atlas-status-warning-foreground)]/10 text-xs">
-          <AlertTriangle
-            size={12}
-            className="text-[var(--atlas-status-warning-foreground)] shrink-0"
-          />
+        <div className="shrink-0 flex items-center gap-2 px-3 py-2 border-b border-warning/30 bg-warning/10 text-xs">
+          <AlertTriangle size={12} className="text-warning shrink-0" />
           <span className="flex-1 text-secondary-foreground">
             Resolving <span className="font-medium text-foreground">{inProgressLabel}</span>
           </span>
@@ -356,7 +350,7 @@ export function ChangesView() {
             onClick={() => run(() => actions.opControl(opKind, "continue"))}
             disabled={hasConflicts}
             title={hasConflicts ? "Resolve all conflicts first" : undefined}
-            className="px-2 h-6 rounded text-2xs font-medium bg-[var(--primary)] text-[var(--background)] hover:bg-[var(--atlas-primary-hover)] disabled:opacity-40 disabled:cursor-not-allowed"
+            className="px-2 h-6 rounded text-2xs font-medium bg-primary text-background hover:bg-primary-hover disabled:opacity-40 disabled:cursor-not-allowed"
           >
             Continue
           </button>
@@ -377,7 +371,7 @@ export function ChangesView() {
         {/* Staged */}
         {staged.length > 0 && (
           <div>
-            <div className="flex items-center justify-between px-2 h-control-sm sticky top-0 bg-[var(--sidebar)] border-b border-border-subtle">
+            <div className="flex items-center justify-between px-2 h-control-sm sticky top-0 bg-sidebar border-b border-hairline">
               <span className="text-2xs font-semibold text-muted-foreground uppercase tracking-wider">
                 Staged ({staged.length})
               </span>
@@ -405,7 +399,7 @@ export function ChangesView() {
 
         {/* Unstaged */}
         <div>
-          <div className="flex items-center justify-between px-2 h-control-sm sticky top-0 bg-[var(--sidebar)] border-b border-border-subtle">
+          <div className="flex items-center justify-between px-2 h-control-sm sticky top-0 bg-sidebar border-b border-hairline">
             <span className="text-2xs font-semibold text-muted-foreground uppercase tracking-wider">
               Changes ({unstaged.length})
             </span>
@@ -420,7 +414,7 @@ export function ChangesView() {
                 <span className="w-px h-3 bg-border" />
                 <button
                   onClick={() => setConfirmRevertAll(true)}
-                  className="text-2xs text-muted-foreground hover:text-[var(--atlas-status-error-foreground)]"
+                  className="text-2xs text-muted-foreground hover:text-error"
                   title="Discard all unstaged changes"
                 >
                   Revert all
@@ -518,7 +512,7 @@ export function ChangesView() {
               type="checkbox"
               checked={amend}
               onChange={(e) => setAmend(e.target.checked)}
-              className="accent-[var(--primary)]"
+              className="accent-primary"
             />
             Amend last commit
           </label>
@@ -532,7 +526,7 @@ export function ChangesView() {
           <button
             onClick={doCommit}
             disabled={!canCommit}
-            className="ml-auto inline-flex cursor-pointer items-center gap-1.5 rounded-full border border-[var(--border)] bg-[var(--card)] px-3 py-1.5 text-xs font-medium leading-none text-[var(--foreground)] transition-colors hover:bg-[var(--atlas-element-hover)] disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:bg-[var(--card)]"
+            className="ml-auto inline-flex cursor-pointer items-center gap-1.5 rounded-full border border-border bg-card px-3 py-1.5 text-xs font-medium leading-none text-foreground transition-colors hover:bg-element-hover disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:bg-card"
           >
             {committing ? (
               <Loader2 size={11} className="animate-spin" />

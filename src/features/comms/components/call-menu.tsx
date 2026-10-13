@@ -225,7 +225,7 @@ export function CallMenu({ convId, mode }: { convId: string; mode: CallMode }) {
       </Tooltip>
       <Popover.Portal>
         <Popover.Positioner className="z-popover" align="end" sideOffset={6}>
-          <Popover.Popup className="atlas-panel-in-tl select-none overflow-hidden rounded-xl border border-border bg-[var(--card)]/95 backdrop-blur-2xl shadow-lg inset-highlight">
+          <Popover.Popup className="atlas-panel-in-tl select-none overflow-hidden rounded-xl border border-border bg-card/95 backdrop-blur-2xl shadow-lg inset-highlight">
             <div className="flex w-[230px] flex-col py-1">
               {liveCall ? (
                 <>
@@ -297,7 +297,7 @@ function MenuRow({
       type="button"
       disabled={disabled}
       onClick={onClick}
-      className="flex cursor-pointer items-start gap-2 px-3 py-1.5 text-left transition-colors hover:bg-[var(--atlas-element-hover)] disabled:cursor-not-allowed disabled:opacity-60"
+      className="flex cursor-pointer items-start gap-2 px-3 py-1.5 text-left transition-colors hover:bg-element-hover disabled:cursor-not-allowed disabled:opacity-60"
     >
       <span className="mt-px flex h-4 w-4 shrink-0 items-center justify-center text-muted-foreground">
         {icon}

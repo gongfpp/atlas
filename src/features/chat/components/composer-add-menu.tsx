@@ -61,11 +61,10 @@ interface ComposerAddMenuProps {
 
 const ITEM_CLASS =
   "flex items-center gap-2 px-3 h-[26px] text-xs cursor-default outline-none " +
-  "text-[var(--secondary-foreground)] data-[highlighted]:bg-[var(--atlas-element-hover)] " +
-  "data-[highlighted]:text-[var(--foreground)]";
+  "text-secondary-foreground data-[highlighted]:bg-element-hover " +
+  "data-[highlighted]:text-foreground";
 
-const CONTENT_CLASS =
-  "atlas-menu-pop rounded-md border border-[var(--border)] bg-[var(--card)] " + "shadow-md py-1";
+const CONTENT_CLASS = "atlas-menu-pop rounded-md border border-border bg-card " + "shadow-md py-1";
 
 // Shared search-box header for the searchable submenus. `stopPropagation`
 // keeps the menu's typeahead from stealing the keystrokes (Escape excepted).
@@ -90,12 +89,12 @@ function SearchBox({
   // swallowing it here left the submenu impossible to dismiss from the box.
   return (
     <div
-      className="mx-1 mb-1 flex items-center gap-1.5 rounded border border-[var(--border)] px-2 h-[26px]"
+      className="mx-1 mb-1 flex items-center gap-1.5 rounded border border-border px-2 h-[26px]"
       onKeyDown={(e) => {
         if (e.key !== "Escape") e.stopPropagation();
       }}
     >
-      <Search size={11} className="shrink-0 text-[var(--muted-foreground)]" />
+      <Search size={11} className="shrink-0 text-muted-foreground" />
       <input
         value={value}
         onChange={(e) => onChange(e.target.value)}
@@ -103,7 +102,7 @@ function SearchBox({
           if (e.key === "Enter") onEnter?.();
         }}
         placeholder={placeholder}
-        className="flex-1 bg-transparent text-xs text-[var(--foreground)] outline-none placeholder:text-[var(--muted-foreground)]"
+        className="flex-1 bg-transparent text-xs text-foreground outline-none placeholder:text-muted-foreground"
       />
     </div>
   );
@@ -150,11 +149,11 @@ export function ComposerAddMenu({
             <button
               disabled={disabled}
               className={cn(
-                "flex items-center justify-center w-6.5 h-6.5 rounded-full border border-[var(--border)]",
-                "bg-[var(--card)] text-[var(--secondary-foreground)] transition-colors outline-none",
+                "flex items-center justify-center w-6.5 h-6.5 rounded-full border border-border",
+                "bg-card text-secondary-foreground transition-colors outline-none",
                 disabled
                   ? "opacity-50 cursor-default"
-                  : "hover:bg-[var(--atlas-element-hover)] hover:text-[var(--foreground)] cursor-pointer",
+                  : "hover:bg-element-hover hover:text-foreground cursor-pointer",
               )}
             >
               <PlusMinusGlyph open={open} size="md" />
@@ -177,7 +176,7 @@ export function ComposerAddMenu({
               <DropdownMenu.SubmenuTrigger className={ITEM_CLASS}>
                 <Camera size={11} />
                 <span>Take a screenshot</span>
-                <ChevronRight size={11} className="ml-auto text-[var(--muted-foreground)]" />
+                <ChevronRight size={11} className="ml-auto text-muted-foreground" />
               </DropdownMenu.SubmenuTrigger>
               <DropdownMenu.Portal>
                 <DropdownMenu.Positioner
@@ -206,7 +205,7 @@ export function ComposerAddMenu({
               </DropdownMenu.Portal>
             </DropdownMenu.SubmenuRoot>
 
-            <DropdownMenu.Separator className="my-1 h-px bg-[var(--border)]" />
+            <DropdownMenu.Separator className="my-1 h-px bg-border" />
 
             <GithubSubmenu projectPath={projectPath} onCloneRepo={onCloneRepo} />
 
@@ -226,14 +225,14 @@ export function ComposerAddMenu({
                 SWITCHING lives on the agent pill, not here — this menu is about
                 what you attach to a message, and the pill's picker now offers
                 one-click installs of its own (see FeaturedAgentOffers). */}
-            <DropdownMenu.Separator className="my-1 h-px bg-[var(--border)]" />
+            <DropdownMenu.Separator className="my-1 h-px bg-border" />
             <button
               type="button"
               onClick={() => {
                 setOpen(false);
                 openSettingsSection("agents");
               }}
-              className="flex w-full items-center gap-1.5 rounded px-2 py-1.5 text-xs text-[var(--secondary-foreground)] hover:text-[var(--foreground)] transition-colors cursor-pointer"
+              className="flex w-full items-center gap-1.5 rounded px-2 py-1.5 text-xs text-secondary-foreground hover:text-foreground transition-colors cursor-pointer"
             >
               <Plus size={11} />
               Add more agents
@@ -293,13 +292,13 @@ function GithubSubmenu({
       <DropdownMenu.SubmenuTrigger className={ITEM_CLASS}>
         <GithubIcon size={11} />
         <span>Add from GitHub</span>
-        <ChevronRight size={11} className="ml-auto text-[var(--muted-foreground)]" />
+        <ChevronRight size={11} className="ml-auto text-muted-foreground" />
       </DropdownMenu.SubmenuTrigger>
       <DropdownMenu.Portal>
         <DropdownMenu.Positioner className="z-popover" side="right" align="start" sideOffset={6}>
           <DropdownMenu.Popup className={cn(CONTENT_CLASS, "w-[300px]")}>
             {!projectPath ? (
-              <div className="px-3 py-1.5 text-xs text-[var(--muted-foreground)]">
+              <div className="px-3 py-1.5 text-xs text-muted-foreground">
                 Open a project to clone repos into it.
               </div>
             ) : (
@@ -307,6 +306,7 @@ function GithubSubmenu({
                 <SearchBox
                   value={query}
                   onChange={setQuery}
+                  // keycap-allow: an input placeholder is plain text and cannot hold a keycap.
                   placeholder="Search GitHub repos…  (Enter)"
                   onEnter={runSearch}
                 />
@@ -314,7 +314,7 @@ function GithubSubmenu({
                   {/* Already-downloaded repos — a plain, disabled list. */}
                   {cloned.length > 0 && (
                     <>
-                      <div className="px-3 pt-1 pb-0.5 text-3xs uppercase tracking-wide text-[var(--muted-foreground)]">
+                      <div className="px-3 pt-1 pb-0.5 text-3xs uppercase tracking-wide text-muted-foreground">
                         Downloaded
                       </div>
                       {cloned.map((c) => (
@@ -324,33 +324,27 @@ function GithubSubmenu({
                           className={cn(ITEM_CLASS, "opacity-60 data-[disabled]:opacity-60")}
                           title={`Already downloaded · ${c.path}`}
                         >
-                          <FolderGit2
-                            size={11}
-                            className="shrink-0 text-[var(--muted-foreground)]"
-                          />
+                          <FolderGit2 size={11} className="shrink-0 text-muted-foreground" />
                           <span className="truncate">{c.display_name}</span>
-                          <Check
-                            size={11}
-                            className="ml-auto shrink-0 text-[var(--atlas-status-success-foreground)]"
-                          />
+                          <Check size={11} className="ml-auto shrink-0 text-success" />
                         </DropdownMenu.Item>
                       ))}
-                      <DropdownMenu.Separator className="my-1 h-px bg-[var(--border)]" />
+                      <DropdownMenu.Separator className="my-1 h-px bg-border" />
                     </>
                   )}
 
                   {/* Search results. */}
                   {loading ? (
-                    <div className="flex items-center gap-2 px-3 h-[26px] text-xs text-[var(--muted-foreground)]">
+                    <div className="flex items-center gap-2 px-3 h-[26px] text-xs text-muted-foreground">
                       <Loader2 size={11} className="animate-spin" />
                       Searching…
                     </div>
                   ) : results === null ? (
-                    <div className="px-3 py-1.5 text-xs text-[var(--muted-foreground)]">
+                    <div className="px-3 py-1.5 text-xs text-muted-foreground">
                       Type a repo name and press Enter.
                     </div>
                   ) : results.length === 0 ? (
-                    <div className="px-3 py-1.5 text-xs text-[var(--muted-foreground)]">
+                    <div className="px-3 py-1.5 text-xs text-muted-foreground">
                       No repositories found.
                     </div>
                   ) : (
@@ -369,33 +363,25 @@ function GithubSubmenu({
                           title={repo.description || repo.full_name}
                         >
                           {already ? (
-                            <Check
-                              size={11}
-                              className="mt-0.5 shrink-0 text-[var(--atlas-status-success-foreground)]"
-                            />
+                            <Check size={11} className="mt-0.5 shrink-0 text-success" />
                           ) : (
-                            <Download
-                              size={11}
-                              className="mt-0.5 shrink-0 text-[var(--muted-foreground)]"
-                            />
+                            <Download size={11} className="mt-0.5 shrink-0 text-muted-foreground" />
                           )}
                           <div className="min-w-0 flex-1">
                             <div className="flex items-center gap-1.5">
-                              <span className="truncate text-[var(--foreground)]">
-                                {repo.full_name}
-                              </span>
+                              <span className="truncate text-foreground">{repo.full_name}</span>
                               {already ? (
-                                <span className="ml-auto shrink-0 text-3xs text-[var(--muted-foreground)]">
+                                <span className="ml-auto shrink-0 text-3xs text-muted-foreground">
                                   downloaded
                                 </span>
                               ) : (
-                                <span className="ml-auto flex shrink-0 items-center gap-0.5 text-3xs text-[var(--muted-foreground)]">
+                                <span className="ml-auto flex shrink-0 items-center gap-0.5 text-3xs text-muted-foreground">
                                   <Star size={9} /> {repo.stars}
                                 </span>
                               )}
                             </div>
                             {repo.description && (
-                              <div className="text-2xs text-[var(--muted-foreground)] line-clamp-2">
+                              <div className="text-2xs text-muted-foreground line-clamp-2">
                                 {repo.description}
                               </div>
                             )}
@@ -445,13 +431,13 @@ function SessionsSubmenu({
       <DropdownMenu.SubmenuTrigger className={ITEM_CLASS}>
         <MessageSquareText size={11} />
         <span>Attach a session</span>
-        <ChevronRight size={11} className="ml-auto text-[var(--muted-foreground)]" />
+        <ChevronRight size={11} className="ml-auto text-muted-foreground" />
       </DropdownMenu.SubmenuTrigger>
       <DropdownMenu.Portal>
         <DropdownMenu.Positioner className="z-popover" side="right" align="start" sideOffset={6}>
           <DropdownMenu.Popup className={cn(CONTENT_CLASS, "w-[300px]")}>
             {!projectPath ? (
-              <div className="px-3 py-1.5 text-xs text-[var(--muted-foreground)]">
+              <div className="px-3 py-1.5 text-xs text-muted-foreground">
                 Open a project to browse its sessions.
               </div>
             ) : (
@@ -459,12 +445,12 @@ function SessionsSubmenu({
                 <SearchBox value={query} onChange={setQuery} placeholder="Search sessions…" />
                 <div className="max-h-[300px] overflow-y-auto">
                   {sessions === null ? (
-                    <div className="flex items-center gap-2 px-3 h-[26px] text-xs text-[var(--muted-foreground)]">
+                    <div className="flex items-center gap-2 px-3 h-[26px] text-xs text-muted-foreground">
                       <Loader2 size={11} className="animate-spin" />
                       Loading sessions…
                     </div>
                   ) : filtered.length === 0 ? (
-                    <div className="px-3 py-1.5 text-xs text-[var(--muted-foreground)]">
+                    <div className="px-3 py-1.5 text-xs text-muted-foreground">
                       {sessions.length === 0 ? "No past sessions in this project." : "No matches."}
                     </div>
                   ) : (
@@ -477,11 +463,11 @@ function SessionsSubmenu({
                       >
                         <MessageSquareText
                           size={11}
-                          className="mt-0.5 shrink-0 text-[var(--muted-foreground)]"
+                          className="mt-0.5 shrink-0 text-muted-foreground"
                         />
                         <div className="min-w-0 flex-1">
-                          <div className="truncate text-[var(--foreground)]">{s.title}</div>
-                          <div className="text-2xs text-[var(--muted-foreground)]">
+                          <div className="truncate text-foreground">{s.title}</div>
+                          <div className="text-2xs text-muted-foreground">
                             {s.messageCount} message
                             {s.messageCount === 1 ? "" : "s"}
                           </div>
@@ -539,7 +525,7 @@ function ProjectSubmenu({
       <DropdownMenu.SubmenuTrigger className={ITEM_CLASS}>
         <Boxes size={11} />
         <span>Reference project</span>
-        <ChevronRight size={11} className="ml-auto text-[var(--muted-foreground)]" />
+        <ChevronRight size={11} className="ml-auto text-muted-foreground" />
       </DropdownMenu.SubmenuTrigger>
       <DropdownMenu.Portal>
         <DropdownMenu.Positioner className="z-popover" side="right" align="start" sideOffset={6}>
@@ -547,12 +533,12 @@ function ProjectSubmenu({
             <SearchBox value={query} onChange={setQuery} placeholder="Search projects…" />
             <div className="max-h-[300px] overflow-y-auto">
               {projects === null ? (
-                <div className="flex items-center gap-2 px-3 h-[26px] text-xs text-[var(--muted-foreground)]">
+                <div className="flex items-center gap-2 px-3 h-[26px] text-xs text-muted-foreground">
                   <Loader2 size={11} className="animate-spin" />
                   Loading projects…
                 </div>
               ) : projects.length === 0 ? (
-                <div className="px-3 py-1.5 text-xs text-[var(--muted-foreground)]">
+                <div className="px-3 py-1.5 text-xs text-muted-foreground">
                   {query ? "No matches." : "No other projects in this organization."}
                 </div>
               ) : (
@@ -563,12 +549,10 @@ function ProjectSubmenu({
                     onClick={() => onPickProject(w)}
                     title={w.absPath}
                   >
-                    <Boxes size={11} className="mt-0.5 shrink-0 text-[var(--muted-foreground)]" />
+                    <Boxes size={11} className="mt-0.5 shrink-0 text-muted-foreground" />
                     <div className="min-w-0 flex-1">
-                      <div className="truncate text-[var(--foreground)]">{w.displayName}</div>
-                      <div className="truncate text-2xs text-[var(--muted-foreground)]">
-                        {w.absPath}
-                      </div>
+                      <div className="truncate text-foreground">{w.displayName}</div>
+                      <div className="truncate text-2xs text-muted-foreground">{w.absPath}</div>
                     </div>
                   </DropdownMenu.Item>
                 ))

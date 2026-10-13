@@ -133,6 +133,7 @@ import {
   NotebookText,
 } from "lucide-react";
 import { PROJECTLESS_TYPES, type TabType } from "@/lib/constants";
+import { KbdCombo } from "@/ui/kbd";
 
 // Typed as the icon-theme fallback rather than `React.ElementType`: these are
 // what a tab falls back to when the icon theme has nothing for it, and
@@ -547,12 +548,12 @@ const TabColumn = memo(function TabColumn({
                 <span
                   aria-hidden
                   title="Active pane"
-                  className="self-center shrink-0 mx-1 h-1.5 w-1.5 rounded-full bg-[var(--primary)]"
+                  className="self-center shrink-0 mx-1 h-1.5 w-1.5 rounded-full bg-primary"
                 />
               )}
               <NewTabDropdown addTab={addTab} groupId={groupId} />
               {canSplit && (
-                <HintItem label={splitNewHint ? `Split right (${splitNewHint})` : "Split right"}>
+                <HintItem label="Split right" shortcut={splitNewHint}>
                   <button
                     onClick={addGroup}
                     className="self-center flex items-center justify-center w-6 h-6 text-muted-foreground hover:text-secondary-foreground hover:bg-element-hover rounded transition-colors shrink-0 cursor-pointer outline-none"
@@ -562,9 +563,7 @@ const TabColumn = memo(function TabColumn({
                 </HintItem>
               )}
               {canCloseGroup && (
-                <HintItem
-                  label={splitCloseHint ? `Close split (${splitCloseHint})` : "Close split"}
-                >
+                <HintItem label="Close split" shortcut={splitCloseHint}>
                   <button
                     onClick={() => closeGroup(groupId)}
                     className="self-center flex items-center justify-center w-6 h-6 text-muted-foreground hover:text-secondary-foreground hover:bg-element-hover rounded transition-colors shrink-0 cursor-pointer outline-none"
@@ -674,7 +673,15 @@ const TabContentContainer = memo(function TabContentContainer({
         style={{ flex: "1 1 0%", minHeight: 0, overflow: "hidden" }}
         className="flex items-center justify-center text-sm text-muted-foreground"
       >
-        Empty split — open a tab with +{newTabHint ? ` or ${newTabHint}` : ""}
+        <span className="inline-flex items-center gap-1.5">
+          Empty split — open a tab with +
+          {newTabHint && (
+            <>
+              {" or "}
+              <KbdCombo combo={newTabHint} size="2xs" />
+            </>
+          )}
+        </span>
       </div>
     );
   }

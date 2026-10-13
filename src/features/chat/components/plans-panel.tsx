@@ -96,7 +96,7 @@ export function PlansPanel({ onClose }: PlansPanelProps) {
       />
       <div
         style={{ width: plansPanel.width }}
-        className="absolute right-0 top-0 bottom-0 z-30 flex flex-col border-l border-[var(--border)] bg-[var(--sidebar)] shadow-md animate-slide-in-right"
+        className="absolute right-0 top-0 bottom-0 z-30 flex flex-col border-l border-border bg-sidebar shadow-md animate-slide-in-right"
       >
         {/* Left-edge resize handle */}
         <div
@@ -106,16 +106,16 @@ export function PlansPanel({ onClose }: PlansPanelProps) {
         />
 
         {/* Header */}
-        <div className="flex items-center justify-between px-3 h-[32px] border-b border-[var(--border)] shrink-0">
+        <div className="flex items-center justify-between px-3 h-[32px] border-b border-border shrink-0">
           <div className="flex items-center gap-1.5">
-            <ClipboardList size={11} className="text-[var(--muted-foreground)]" />
-            <span className="text-xs font-medium text-[var(--secondary-foreground)]">Plans</span>
-            <span className="text-2xs text-[var(--muted-foreground)]">· {plans.length}</span>
+            <ClipboardList size={11} className="text-muted-foreground" />
+            <span className="text-xs font-medium text-secondary-foreground">Plans</span>
+            <span className="text-2xs text-muted-foreground">· {plans.length}</span>
           </div>
           <Hint label="Hide plans">
             <button
               onClick={onClose}
-              className="p-1 rounded hover:bg-[var(--atlas-element-hover)] text-[var(--muted-foreground)] hover:text-[var(--foreground)] cursor-pointer transition-colors"
+              className="p-1 rounded hover:bg-element-hover text-muted-foreground hover:text-foreground cursor-pointer transition-colors"
             >
               <ChevronRight size={12} />
             </button>
@@ -125,7 +125,7 @@ export function PlansPanel({ onClose }: PlansPanelProps) {
         {/* List */}
         <div className="flex-1 overflow-y-auto hide-scrollbar">
           {plans.length === 0 ? (
-            <div className="px-3 py-3 text-xs text-[var(--muted-foreground)] leading-relaxed">
+            <div className="px-3 py-3 text-xs text-muted-foreground leading-relaxed">
               No plans yet. When Claude Code proposes a plan, it’s saved here with the message that
               triggered it.
             </div>
@@ -136,10 +136,7 @@ export function PlansPanel({ onClose }: PlansPanelProps) {
               return (
                 <div
                   key={p.id}
-                  className={cn(
-                    "px-3 py-2.5",
-                    !isLast && "border-b border-[var(--atlas-border-subtle)]",
-                  )}
+                  className={cn("px-3 py-2.5", !isLast && "border-b border-hairline")}
                 >
                   {/* Header row: user message + expand toggle */}
                   <button
@@ -148,19 +145,13 @@ export function PlansPanel({ onClose }: PlansPanelProps) {
                     title={isOpen ? "Collapse plan" : "Expand plan"}
                   >
                     {isOpen ? (
-                      <ChevronDown
-                        size={12}
-                        className="mt-0.5 shrink-0 text-[var(--muted-foreground)]"
-                      />
+                      <ChevronDown size={12} className="mt-0.5 shrink-0 text-muted-foreground" />
                     ) : (
-                      <ChevronRight
-                        size={12}
-                        className="mt-0.5 shrink-0 text-[var(--muted-foreground)]"
-                      />
+                      <ChevronRight size={12} className="mt-0.5 shrink-0 text-muted-foreground" />
                     )}
                     <span
                       className={cn(
-                        "text-sm leading-snug text-[var(--secondary-foreground)] group-hover:text-[var(--foreground)] transition-colors",
+                        "text-sm leading-snug text-secondary-foreground group-hover:text-foreground transition-colors",
                         !isOpen && "line-clamp-2",
                       )}
                     >
@@ -169,7 +160,7 @@ export function PlansPanel({ onClose }: PlansPanelProps) {
                   </button>
 
                   {/* Meta: human timestamp + relative age + session */}
-                  <div className="flex items-center gap-2 pl-[18px] mt-1 text-2xs text-[var(--muted-foreground)]">
+                  <div className="flex items-center gap-2 pl-[18px] mt-1 text-2xs text-muted-foreground">
                     <span title={p.timestamp}>{formatPlanTimestamp(p.timestamp)}</span>
                     <span>·</span>
                     <span>{planTimeAgo(p.timestamp)}</span>
@@ -183,7 +174,7 @@ export function PlansPanel({ onClose }: PlansPanelProps) {
 
                   {/* Expanded plan markdown */}
                   {isOpen && (
-                    <div className="pl-[18px] mt-2 rounded-md border border-[var(--atlas-border-subtle)] bg-[var(--background)] px-3 py-2 max-h-[420px] overflow-auto">
+                    <div className="pl-[18px] mt-2 rounded-md border border-hairline bg-background px-3 py-2 max-h-[420px] overflow-auto">
                       <Markdown className="text-sm">{p.plan}</Markdown>
                     </div>
                   )}

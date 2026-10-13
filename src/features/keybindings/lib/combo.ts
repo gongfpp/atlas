@@ -282,9 +282,20 @@ export function displayLabel(c: Combo): string {
   return displayKeys(c).join(isWindows || isLinux ? "+" : "");
 }
 
-/** Split a legacy glyph string ("⌘⇧F", "⌥Space") into keycaps: every modifier
- *  glyph is its own cap, the remainder is one cap. */
+/** Split a combo string into keycaps.
+ *
+ *  Two spellings arrive here. A glyph string ("⌘⇧F", "⌥Space"): every modifier
+ *  glyph is its own cap and the remainder is one cap. And what `displayLabel`
+ *  writes on Windows and Linux ("Ctrl+Shift+B", "Ctrl++"): one cap per
+ *  `+`-joined part, so the same live binding draws as separate caps on every
+ *  OS rather than as one cap reading "Ctrl+Shift+B". */
 export function splitGlyphCombo(combo: string): string[] {
+  const named = /^(?:Ctrl|Alt|Shift|Win|Super|Meta|Cmd)\+(.*)$/.exec(combo);
+  if (named) {
+    const [, rest] = named;
+    const head = combo.slice(0, combo.length - rest!.length - 1);
+    return [head, ...(rest === "" || rest === "+" ? ["+"] : splitGlyphCombo(rest!))];
+  }
   const keys: string[] = [];
   let rest = combo;
   while (rest.length > 0 && "⌃⌥⇧⌘".includes(rest[0]!)) {

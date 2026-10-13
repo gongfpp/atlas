@@ -66,6 +66,13 @@ scrollbar.thumb.background	Scrollbar thumb. Source: base.foreground → Atlas de
 scrollbar.thumb.hover	Hovered scrollbar thumb. Source: base.foreground → Atlas default. Transform: alpha 0.26.
 panel.background	Panel background. Source: base.sidebar → Atlas default.
 panel.input.background	Panel input background. Source: base.background → Atlas default.
+surface.background	One step above the page: a sidebar, a pane behind cards. Source: base.sidebar → Atlas default.
+surface.raised	A raised block within a card: a stat cell, a code well. Source: base.muted → Atlas default.
+illustration.background	A card inside a card; in dark, the brightest resting plane. Source: base.card → Atlas default. Transform: mix 0.02 toward base.foreground.
+segment.track	A segmented control's recessed track. Source: base.card → Atlas default.
+segment.thumb	The raised thumb that slides inside a segmented track. Always a step lighter. Source: base.popover → Atlas default. Transform: mix 0.08 toward base.foreground.
+shell.canvas	The app frame the curved panels are set into. Source: base.popover → Atlas default.
+shell.edge	The opaque edge of a panel set into the frame. Source: base.border → Atlas default. Transform: mix 0.12 toward base.foreground.
 diff.added.background	Added line or hunk. Source: palette.green → Atlas default. Transform: alpha 0.13.
 diff.added.emphasis	Changed words inside an added line. Source: palette.green → Atlas default. Transform: alpha 0.34.
 diff.added.text	Added diff text, and the +N line statistic. Source: palette.green → Atlas default.
@@ -75,3 +82,11 @@ diff.removed.text	Removed diff text, and the -N line statistic. Source: palette.
 diff.context.background	Unchanged diff context. Source: base.background → Atlas default.
 agent.chip.foreground	Agent identity chip text. Source: base.foreground → Atlas default.
 agent.chip.background	Agent identity chip fill. Source: base.foreground → Atlas default. Transform: alpha 0.06.
+hue.grey	Identity hue: grey. Source: base.muted-foreground → Atlas default.
+hue.indigo	Identity hue: indigo. Source: palette.blue → Atlas default.
+hue.purple	Identity hue: purple. Source: palette.purple → Atlas default.
+hue.cyan	Identity hue: cyan. Source: palette.cyan → Atlas default.
+hue.green	Identity hue: green. Source: palette.green → Atlas default.
+hue.amber	Identity hue: amber. Source: palette.yellow → Atlas default.
+hue.orange	Identity hue: orange. Source: palette.orange → Atlas default.
+hue.red	Identity hue: red. Source: palette.red → Atlas default.

@@ -83,7 +83,7 @@ export function AppLayout() {
           Only present when pinned + open; unpinned falls through to the overlay
           below. */}
       {docked && (
-        <div className="atlas-project-rail h-screen w-[244px] shrink-0 border-r border-border-subtle">
+        <div className="atlas-project-rail h-screen w-[244px] shrink-0 border-r border-hairline">
           <ProjectSidebar />
         </div>
       )}
@@ -207,7 +207,7 @@ export function AppLayout() {
           parked off the left edge, transparent. */}
           <div
             className={cn(
-              "absolute left-0 top-0 h-screen w-[244px] z-drawer border-r border-border-subtle backdrop-blur-2xl transition-[transform,opacity] ease-[cubic-bezier(0.32,0.72,0,1)] motion-reduce:transition-none [backface-visibility:hidden]",
+              "absolute left-0 top-0 h-screen w-[244px] z-drawer border-r border-hairline backdrop-blur-2xl transition-[transform,opacity] ease-[cubic-bezier(0.32,0.72,0,1)] motion-reduce:transition-none [backface-visibility:hidden]",
               // Closing (slide-out) is 50% slower than opening (300 → 450ms).
               sidebarOpen ? "duration-300" : "duration-[450ms]",
               // The gradient rail. Linux gets the opaque variant — no

@@ -100,7 +100,7 @@ function UnderlineTab({
       className={cn(
         "flex h-[29px] items-center gap-1.5 px-2.5 text-xs font-medium capitalize transition-colors border-b-2 -mb-px cursor-pointer",
         active
-          ? "text-foreground border-b-[var(--primary)]"
+          ? "text-foreground border-b-primary"
           : "text-secondary-foreground hover:text-foreground border-b-transparent",
         disabled && "cursor-not-allowed opacity-40 hover:text-secondary-foreground",
       )}

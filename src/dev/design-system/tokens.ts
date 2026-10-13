@@ -82,9 +82,9 @@ export const RADII = [
 ] as const;
 
 export const ELEVATIONS = [
-  { utility: "shadow-sm", cssVar: "--elevation-raised", use: "Raised off the surface." },
-  { utility: "shadow-md", cssVar: "--elevation-menu", use: "Menus and popovers." },
-  { utility: "shadow-lg", cssVar: "--elevation-dialog", use: "Dialogs." },
+  // Raised is a ring on a lighter step, not a shadow — Atlas Standards.
+  { utility: "shadow-md", cssVar: "--elevation-menu", use: "Menus, popovers, floating buttons." },
+  { utility: "shadow-lg", cssVar: "--elevation-dialog", use: "Dialogs and sheets." },
 ] as const;
 
 export const Z_LAYERS = [

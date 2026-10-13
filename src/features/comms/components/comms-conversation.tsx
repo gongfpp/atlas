@@ -317,11 +317,11 @@ export const CommsConversation = memo(function CommsConversation({
               aria-hidden
               className={cn(
                 "pointer-events-none absolute inset-0 z-panel flex items-center justify-center",
-                "bg-[var(--primary)]/8 transition-opacity duration-150",
+                "bg-primary/8 transition-opacity duration-150",
                 isDropTarget ? "opacity-100" : "opacity-0",
               )}
             >
-              <span className="rounded-full border border-[var(--primary)]/40 bg-card px-3 py-1 text-xs font-medium text-secondary-foreground shadow">
+              <span className="rounded-full border border-primary/40 bg-card px-3 py-1 text-xs font-medium text-secondary-foreground shadow">
                 Drop files to attach
               </span>
             </div>
@@ -418,7 +418,7 @@ export const CommsConversation = memo(function CommsConversation({
                     "atlas-pill-in pointer-events-auto inline-flex items-center gap-1.5 rounded-full px-3 py-1.5",
                     "border border-border bg-card",
                     "text-xs font-medium leading-none text-secondary-foreground",
-                    "shadow-sm transition-colors cursor-pointer",
+                    "shadow-md transition-colors cursor-pointer",
                     "hover:bg-element-hover hover:text-foreground",
                   )}
                 >
@@ -501,7 +501,7 @@ function SubTabStrip({
         type="button"
         onClick={openSpace}
         title="Open this conversation's Space"
-        className="ml-auto flex h-control-sm shrink-0 cursor-pointer items-center gap-1.5 rounded-full border border-border bg-[var(--atlas-element-selected)] px-3 text-xs font-medium text-muted-foreground transition-colors hover:bg-[var(--atlas-element-active)] hover:text-foreground"
+        className="ml-auto flex h-control-sm shrink-0 cursor-pointer items-center gap-1.5 rounded-full border border-border bg-element-selected px-3 text-xs font-medium text-muted-foreground transition-colors hover:bg-element-active hover:text-foreground"
       >
         <Frame size={11} />
         Spaces
@@ -636,7 +636,7 @@ function ConversationHeader({
                       <CommsAvatar
                         member={members.get(id) ?? null}
                         size={18}
-                        className="ring-2 ring-[var(--background)] rounded-full"
+                        className="ring-2 ring-background rounded-full"
                       />
                     </span>
                   }
@@ -681,11 +681,11 @@ function ConversationIntro({
 function DayDivider({ at }: { at: number }) {
   return (
     <div className="flex items-center gap-2 px-3 py-3">
-      <span className="h-px flex-1 bg-border-subtle" />
+      <span className="h-px flex-1 bg-hairline" />
       <span className="text-2xs font-medium uppercase tracking-wide text-disabled">
         {formatDayDivider(at)}
       </span>
-      <span className="h-px flex-1 bg-border-subtle" />
+      <span className="h-px flex-1 bg-hairline" />
     </div>
   );
 }
@@ -726,14 +726,14 @@ function TranscriptSkeleton() {
     <div className="flex flex-col gap-3 px-3 py-4">
       {[0, 1, 2, 3, 4].map((i) => (
         <div key={i} className="flex gap-2">
-          <div className="h-[30px] w-[30px] shrink-0 rounded-full bg-[var(--card)] opacity-50 atlas-marker-running" />
+          <div className="h-[30px] w-[30px] shrink-0 rounded-full bg-card opacity-50 atlas-marker-running" />
           <div className="flex min-w-0 flex-1 flex-col gap-1.5 pt-1">
             <div
-              className="h-[9px] rounded bg-[var(--card)] opacity-50 atlas-marker-running"
+              className="h-[9px] rounded bg-card opacity-50 atlas-marker-running"
               style={{ width: 90 + ((i * 31) % 50) }}
             />
             <div
-              className="h-[8px] rounded bg-[var(--card)] opacity-35 atlas-marker-running"
+              className="h-[8px] rounded bg-card opacity-35 atlas-marker-running"
               style={{ width: `${58 + ((i * 17) % 34)}%` }}
             />
           </div>

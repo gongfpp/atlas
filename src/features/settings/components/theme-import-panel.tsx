@@ -323,7 +323,7 @@ function CandidateCard({
       <IgnoredByCategory report={candidate.report} />
       <KeyLists report={candidate.report} />
 
-      <div className="flex flex-wrap items-end gap-2 border-t border-border-subtle pt-2">
+      <div className="flex flex-wrap items-end gap-2 border-t border-hairline pt-2">
         <Field label="Name" value={name} onChange={setName} className="min-w-40 flex-1" />
         <Field label="Id" value={id} onChange={setId} className="min-w-32 flex-1" />
         <Button size="sm" onClick={() => void save()} disabled={saving || !savedId}>
@@ -374,7 +374,7 @@ function Counts({ report }: { report: ThemeImportReport }) {
   return (
     <div className="grid grid-cols-3 gap-2">
       {items.map((item) => (
-        <div key={item.label} className="rounded border border-border-subtle bg-card px-2 py-1.5">
+        <div key={item.label} className="rounded border border-hairline bg-card px-2 py-1.5">
           <div className="text-md font-semibold tabular-nums text-foreground">{item.value}</div>
           <div className="eyebrow text-muted-foreground">{item.label}</div>
           <div className="caption">{item.hint}</div>
@@ -446,7 +446,7 @@ function Swatch({ value }: { value: string }) {
   if (!isColor) return <span className="size-3 shrink-0" />;
   return (
     <span
-      className="size-3 shrink-0 rounded-sm border border-border-subtle"
+      className="size-3 shrink-0 rounded-sm border border-hairline"
       style={{ backgroundColor: value }}
       title={value}
     />
@@ -455,11 +455,11 @@ function Swatch({ value }: { value: string }) {
 
 function Details({ summary, children }: { summary: string; children: React.ReactNode }) {
   return (
-    <details className="group rounded border border-border-subtle bg-card">
+    <details className="group rounded border border-hairline bg-card">
       <summary className="label cursor-pointer select-none px-2 py-1 text-secondary-foreground hover:text-foreground">
         {summary}
       </summary>
-      <div className="border-t border-border-subtle p-2">{children}</div>
+      <div className="border-t border-hairline p-2">{children}</div>
     </details>
   );
 }
@@ -536,7 +536,7 @@ function ExportView({ themes }: { themes: ThemeSummary[] }) {
                 {note}
               </p>
             ))}
-            <pre className="code max-h-72 overflow-auto rounded border border-border-subtle bg-card p-2 text-secondary-foreground">
+            <pre className="code max-h-72 overflow-auto rounded border border-hairline bg-card p-2 text-secondary-foreground">
               {result.json}
             </pre>
           </section>

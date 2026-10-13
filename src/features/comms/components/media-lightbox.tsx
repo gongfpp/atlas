@@ -192,7 +192,7 @@ function NavButton({
         onClick={onClick}
         className={cn(
           "absolute top-1/2 z-10 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full",
-          "border border-border bg-[var(--card)]/70 text-secondary-foreground backdrop-blur-xl",
+          "border border-border bg-card/70 text-secondary-foreground backdrop-blur-xl",
           "transition-opacity hover:text-foreground cursor-pointer",
           "disabled:cursor-default disabled:opacity-0",
           side === "left" ? "left-3" : "right-3",

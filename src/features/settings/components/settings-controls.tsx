@@ -16,7 +16,8 @@ export function SettingRow({
   children,
 }: {
   label: string;
-  description: string;
+  /** A node so a shortcut in it can be drawn as keycaps. */
+  description: React.ReactNode;
   children: React.ReactNode;
 }) {
   return (
@@ -79,15 +80,15 @@ export function Toggle({
         "relative inline-flex h-5 w-9 shrink-0 items-center",
         "rounded-full border-2 border-transparent transition-colors",
         disabled ? "opacity-40 cursor-not-allowed" : "cursor-pointer",
-        value ? "bg-[var(--primary)]" : "bg-[var(--card)]",
+        value ? "bg-primary" : "bg-card",
         className,
       )}
     >
       <span
         className={cn(
-          "pointer-events-none block h-4 w-4 rounded-full shadow-sm",
+          "pointer-events-none block h-4 w-4 rounded-full ring-1 ring-foreground/10",
           "transition-transform duration-150",
-          value ? "translate-x-4 bg-[var(--background)]" : "translate-x-0 bg-card-foreground",
+          value ? "translate-x-4 bg-background" : "translate-x-0 bg-card-foreground",
         )}
       />
     </button>

@@ -6,14 +6,10 @@
 // That is what produces the morph — the box appears to travel and resize
 // between items instead of one tooltip fading out and another fading in.
 //
-// Animated with CSS transitions on `transform` and `clip-path`, not a spring
-// library. The reference implementation uses framer-motion, which is not a
-// dependency here and would be a poor one to add for this: the titlebar is on
-// the eager boot path, so its cost would be paid before first paint by every
-// launch, to animate a hover. Timing and curves come from
-// `ui/tooltip-timing.ts`, shared with every other tooltip: the first label
-// waits for the open delay, and the next one is instant while any tooltip in
-// the app is warm.
+// The strip itself is `ui/slide-strip.tsx`, shared with `HintGroup`; it travels
+// on `motion`'s indicator spring. Timing comes from `ui/tooltip-timing.ts`,
+// shared with every other tooltip: the first label waits for the open delay,
+// and the next one is instant while any tooltip in the app is warm.
 //
 // It opens DOWNWARD. A titlebar tooltip has nothing above it but the window
 // edge and the traffic lights.
@@ -21,11 +17,11 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 import { slideGeometry, type SlideGeometry } from "@/ui/slide-geometry";
+import { SlideStrip } from "@/ui/slide-strip";
 import {
   isTooltipWarm,
   markTooltipClosed,
   markTooltipOpen,
-  slideTransition,
   TOOLTIP_OPEN_DELAY,
 } from "@/ui/tooltip-timing";
 
@@ -39,6 +35,8 @@ export interface DockItem {
   badge?: React.ReactNode;
   /** Overrides `label` for the accessible name where it says more. */
   title?: string;
+  /** A combo string, drawn as keycaps after the label in the tooltip. */
+  shortcut?: string;
 }
 
 interface Geometry extends SlideGeometry {
@@ -63,7 +61,7 @@ export function TitlebarDock({
   /** A control the dock hosts but does not render: the account button owns a
    *  Radix trigger, which has to be attached to the real element. It still
    *  gets a tooltip, so it is part of the strip's arithmetic. */
-  trailing?: { label: string; node: React.ReactNode };
+  trailing?: { label: string; shortcut?: string; node: React.ReactNode };
   className?: string;
 }) {
   const count = items.length + (trailing ? 1 : 0);
@@ -139,13 +137,16 @@ export function TitlebarDock({
     setVisible(false);
   }, [setVisible]);
 
+  const strip = [...items, ...(trailing ? [trailing] : [])];
+  const stripLabels = strip.map((i) => i.label);
+
   return (
     <div className={cn("relative", className)} onMouseLeave={onLeave}>
       <div
         ref={pill}
         className={cn(
           "flex h-6 items-center gap-1 rounded-full px-1 py-0.5",
-          "border border-border-subtle bg-card",
+          "border border-hairline bg-card",
         )}
       >
         {items.map((item, index) => (
@@ -212,36 +213,15 @@ export function TitlebarDock({
         className="pointer-events-none fixed left-0 z-tooltip pt-1.5"
         style={{ top: geometry?.top ?? 0 }}
       >
-        <div
-          className={cn(
-            "flex w-max",
-            "bg-popover text-foreground",
-            "outline outline-1 outline-[var(--border)]",
-            "shadow-md",
-          )}
-          style={{
-            opacity: visible ? 1 : 0,
-            transform: `translateX(${geometry?.tx ?? 0}px)`,
-            clipPath: `inset(0 ${geometry?.right ?? 0}% 0 ${geometry?.left ?? 0}% round 6px)`,
-            // Opacity is always eased and quick; position only animates once
-            // the strip is already up, and never under reduced motion.
-            transition: slideTransition({ visible, travel: geometry?.animate ?? false }),
+        <SlideStrip
+          labels={strip.map(({ label, shortcut }) => ({ key: label, label, shortcut }))}
+          geometry={geometry}
+          visible={visible}
+          travel={geometry?.animate ?? false}
+          labelRef={(key, el) => {
+            labels.current[stripLabels.indexOf(key)] = el;
           }}
-        >
-          {[...items.map((i) => i.label), ...(trailing ? [trailing.label] : [])].map(
-            (label, index) => (
-              <div
-                key={label}
-                ref={(el) => {
-                  labels.current[index] = el;
-                }}
-                className="flex h-[22px] shrink-0 items-center whitespace-nowrap px-2.5 text-xs leading-none"
-              >
-                {label}
-              </div>
-            ),
-          )}
-        </div>
+        />
       </div>
     </div>
   );

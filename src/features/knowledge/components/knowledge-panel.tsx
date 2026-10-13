@@ -985,7 +985,7 @@ function RepoTopbar({
 }) {
   return (
     <div
-      className="flex items-center shrink-0 border-b border-border-subtle"
+      className="flex items-center shrink-0 border-b border-hairline"
       style={{ height: 36, gap: 8, padding: "0 14px", background: "var(--atlas-panel-background)" }}
     >
       {onToggleSidebar && (

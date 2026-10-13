@@ -169,7 +169,7 @@ export function CommitView({ repoPath, sha }: { repoPath: string; sha: string })
   }
 
   return (
-    <div className="flex h-full min-w-0 flex-col bg-[var(--background)]">
+    <div className="flex h-full min-w-0 flex-col bg-background">
       {/* Toolbar */}
       <HintGroup>
         <div className="flex h-8 shrink-0 items-center gap-0.5 border-b border-border px-2">
@@ -301,9 +301,7 @@ export function CommitView({ repoPath, sha }: { repoPath: string; sha: string })
                     style={{ ...base, backgroundColor: "var(--atlas-diff-context-background)" }}
                     className="flex h-6 items-center border-x border-border px-2 font-mono text-2xs"
                   >
-                    <span className="truncate text-[var(--atlas-status-info-foreground)]/70 select-text">
-                      {row.header}
-                    </span>
+                    <span className="truncate text-info/70 select-text">{row.header}</span>
                   </div>
                 );
               }
@@ -534,7 +532,7 @@ function CommitActions({ repoPath, sha }: { repoPath: string; sha: string }) {
         </HintItem>
         <Popover.Portal>
           <Popover.Positioner className="z-popover" side="bottom" align="end" sideOffset={4}>
-            <Popover.Popup className="w-[220px] rounded-lg border border-border bg-[var(--card)] p-2 shadow-md">
+            <Popover.Popup className="w-[220px] rounded-lg border border-border bg-card p-2 shadow-md">
               <input
                 value={tagName}
                 onChange={(e) => setTagName(e.target.value)}
@@ -589,7 +587,7 @@ function ResetMenu({ onReset }: { onReset: (mode: "soft" | "mixed" | "hard") => 
       </HintItem>
       <Popover.Portal>
         <Popover.Positioner className="z-popover" side="bottom" align="end" sideOffset={4}>
-          <Popover.Popup className="w-[200px] rounded-lg border border-border bg-[var(--card)] shadow-md py-1">
+          <Popover.Popup className="w-[200px] rounded-lg border border-border bg-card shadow-md py-1">
             <div className="px-3 py-1 text-3xs uppercase tracking-wider text-muted-foreground">
               Reset to here
             </div>
@@ -664,7 +662,7 @@ function CommitSessions({ repoPath, sha }: { repoPath: string; sha: string }) {
   };
 
   return (
-    <div className="mt-2 max-w-xl border-t border-border-subtle pt-2">
+    <div className="mt-2 max-w-xl border-t border-hairline pt-2">
       <div className="text-3xs uppercase tracking-wider text-muted-foreground">
         Produced by {sessions.length} session{sessions.length === 1 ? "" : "s"}
       </div>

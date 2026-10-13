@@ -106,8 +106,8 @@ export function ActionButton({
         aria-pressed={active}
         className={cn(
           "flex h-5 w-5 items-center justify-center rounded-md cursor-pointer",
-          "hover:bg-[var(--card)] hover:text-[var(--foreground)]",
-          active ? "text-[var(--primary)]" : "text-[var(--muted-foreground)]",
+          "hover:bg-card hover:text-foreground",
+          active ? "text-primary" : "text-muted-foreground",
         )}
       >
         {children}

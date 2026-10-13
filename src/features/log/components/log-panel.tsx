@@ -52,54 +52,54 @@ const SOURCES: LogSource[] = [
 
 const SOURCE_COLOR: Record<LogSource, { text: string; bg: string; border: string }> = {
   agent: {
-    text: "text-[var(--primary)]",
-    bg: "bg-[var(--atlas-primary-muted)]",
-    border: "border-[var(--primary)]/30",
+    text: "text-primary",
+    bg: "bg-primary-muted",
+    border: "border-primary/30",
   },
   canvas: {
-    text: "text-[var(--muted-foreground)]",
-    bg: "bg-[var(--muted-foreground)]/15",
-    border: "border-[var(--muted-foreground)]/30",
+    text: "text-muted-foreground",
+    bg: "bg-muted-foreground/15",
+    border: "border-muted-foreground/30",
   },
   chat: {
-    text: "text-[var(--primary)]",
-    bg: "bg-[var(--atlas-primary-muted)]",
-    border: "border-[var(--primary)]/30",
+    text: "text-primary",
+    bg: "bg-primary-muted",
+    border: "border-primary/30",
   },
   git: {
-    text: "text-[var(--atlas-status-warning-foreground)]",
-    bg: "bg-[var(--atlas-status-warning-foreground)]/15",
-    border: "border-[var(--atlas-status-warning-foreground)]/30",
+    text: "text-warning",
+    bg: "bg-warning/15",
+    border: "border-warning/30",
   },
   knowledge: {
-    text: "text-[var(--atlas-status-info-foreground)]",
-    bg: "bg-[var(--atlas-status-info-foreground)]/15",
-    border: "border-[var(--atlas-status-info-foreground)]/30",
+    text: "text-info",
+    bg: "bg-info/15",
+    border: "border-info/30",
   },
   github: {
-    text: "text-[var(--foreground)]",
-    bg: "bg-[var(--card)]",
-    border: "border-[var(--border)]",
+    text: "text-foreground",
+    bg: "bg-card",
+    border: "border-border",
   },
   editor: {
-    text: "text-[var(--atlas-status-success-foreground)]",
-    bg: "bg-[var(--atlas-status-success-foreground)]/15",
-    border: "border-[var(--atlas-status-success-foreground)]/30",
+    text: "text-success",
+    bg: "bg-success/15",
+    border: "border-success/30",
   },
   project: {
-    text: "text-[var(--secondary-foreground)]",
-    bg: "bg-[var(--card)]",
-    border: "border-[var(--border)]",
+    text: "text-secondary-foreground",
+    bg: "bg-card",
+    border: "border-border",
   },
   system: {
-    text: "text-[var(--muted-foreground)]",
-    bg: "bg-[var(--card)]",
-    border: "border-[var(--border)]",
+    text: "text-muted-foreground",
+    bg: "bg-card",
+    border: "border-border",
   },
   atlas: {
-    text: "text-[var(--primary)]",
-    bg: "bg-[var(--atlas-primary-muted)]",
-    border: "border-[var(--primary)]/30",
+    text: "text-primary",
+    bg: "bg-primary-muted",
+    border: "border-primary/30",
   },
 };
 
@@ -224,7 +224,7 @@ export function LogPanel() {
                   e.stopPropagation();
                   toggleExpanded(row.original.id);
                 }}
-                className="p-0.5 text-[var(--muted-foreground)] hover:text-[var(--foreground)] cursor-pointer"
+                className="p-0.5 text-muted-foreground hover:text-foreground cursor-pointer"
               >
                 {open ? <ChevronDown size={11} /> : <ChevronRight size={11} />}
               </button>
@@ -239,7 +239,7 @@ export function LogPanel() {
         cell: ({ row }) => (
           <span
             title={new Date(row.original.timestamp).toLocaleString()}
-            className="text-2xs font-mono text-[var(--muted-foreground)]"
+            className="text-2xs font-mono text-muted-foreground"
           >
             {timeAgo(row.original.timestamp, { suffix: true, seconds: true })}
           </span>
@@ -270,7 +270,7 @@ export function LogPanel() {
         id: "kind",
         header: "Kind",
         cell: ({ row }) => (
-          <span className="text-2xs font-mono text-[var(--secondary-foreground)] truncate inline-block max-w-[120px]">
+          <span className="text-2xs font-mono text-secondary-foreground truncate inline-block max-w-[120px]">
             {row.original.kind}
           </span>
         ),
@@ -280,7 +280,7 @@ export function LogPanel() {
         id: "project",
         header: "Project",
         cell: ({ row }) => (
-          <span className="text-2xs font-mono text-[var(--muted-foreground)] truncate inline-block max-w-[140px]">
+          <span className="text-2xs font-mono text-muted-foreground truncate inline-block max-w-[140px]">
             {row.original.projectName ?? "—"}
           </span>
         ),
@@ -290,7 +290,7 @@ export function LogPanel() {
         id: "summary",
         header: "Summary",
         cell: ({ row }) => (
-          <span className="text-sm text-[var(--foreground)] truncate inline-block max-w-full">
+          <span className="text-sm text-foreground truncate inline-block max-w-full">
             {row.original.summary}
           </span>
         ),
@@ -312,10 +312,10 @@ export function LogPanel() {
                       else pin(e.id);
                     }}
                     className={cn(
-                      "p-1 rounded hover:bg-[var(--atlas-element-hover)] cursor-pointer transition-colors",
+                      "p-1 rounded hover:bg-element-hover cursor-pointer transition-colors",
                       e.pinned
-                        ? "text-[var(--primary)] hover:text-[var(--atlas-primary-hover)]"
-                        : "text-[var(--muted-foreground)] hover:text-[var(--foreground)]",
+                        ? "text-primary hover:text-primary-hover"
+                        : "text-muted-foreground hover:text-foreground",
                     )}
                   >
                     {e.pinned ? <PinOff size={11} /> : <Pin size={11} />}
@@ -327,7 +327,7 @@ export function LogPanel() {
                       ev.stopPropagation();
                       handleCopy(e);
                     }}
-                    className="p-1 rounded hover:bg-[var(--atlas-element-hover)] text-[var(--muted-foreground)] hover:text-[var(--foreground)] cursor-pointer transition-colors"
+                    className="p-1 rounded hover:bg-element-hover text-muted-foreground hover:text-foreground cursor-pointer transition-colors"
                   >
                     {copiedId === e.id ? <Check size={11} /> : <Copy size={11} />}
                   </button>
@@ -338,7 +338,7 @@ export function LogPanel() {
                       ev.stopPropagation();
                       handleCopyLine(e);
                     }}
-                    className="p-1 rounded hover:bg-[var(--atlas-element-hover)] text-[var(--muted-foreground)] hover:text-[var(--foreground)] cursor-pointer transition-colors opacity-0 group-hover:opacity-100 focus-visible:opacity-100"
+                    className="p-1 rounded hover:bg-element-hover text-muted-foreground hover:text-foreground cursor-pointer transition-colors opacity-0 group-hover:opacity-100 focus-visible:opacity-100"
                   >
                     {copiedLineId === e.id ? <Check size={11} /> : <ClipboardCopy size={11} />}
                   </button>
@@ -370,7 +370,7 @@ export function LogPanel() {
     <div className="h-full flex flex-col bg-background">
       {/* Toolbar */}
       <div className="flex items-center gap-2 px-3 h-[34px] shrink-0 border-b border-border">
-        <div className="flex items-center gap-1.5 h-6 rounded-md border border-border bg-card px-2 min-w-[240px] focus-within:border-[var(--atlas-border-strong)]">
+        <div className="flex items-center gap-1.5 h-6 rounded-md border border-border bg-card px-2 min-w-[240px] focus-within:border-border-strong">
           <Search size={11} className="text-muted-foreground shrink-0" />
           <input
             value={search}
@@ -393,7 +393,7 @@ export function LogPanel() {
           className={cn(
             "flex items-center gap-1 px-2 h-6 rounded text-2xs cursor-pointer outline-none transition-colors",
             showPinnedOnly
-              ? "text-[var(--primary)] bg-[var(--atlas-primary-muted)]"
+              ? "text-primary bg-primary-muted"
               : "text-muted-foreground hover:text-foreground hover:bg-element-hover",
           )}
           title="Pinned only"
@@ -413,7 +413,7 @@ export function LogPanel() {
             if (showPinnedOnly) clearPinned();
             else clearBuffer();
           }}
-          className="flex items-center gap-1 px-2 h-6 rounded text-2xs text-muted-foreground hover:text-[var(--atlas-status-error-foreground)] hover:bg-element-hover cursor-pointer transition-colors"
+          className="flex items-center gap-1 px-2 h-6 rounded text-2xs text-muted-foreground hover:text-error hover:bg-element-hover cursor-pointer transition-colors"
           title={showPinnedOnly ? "Clear pinned" : "Clear buffer"}
         >
           <Trash2 size={11} />
@@ -422,7 +422,7 @@ export function LogPanel() {
       </div>
 
       {/* Header row */}
-      <div className="flex items-center h-control-sm shrink-0 border-b border-border-subtle bg-background px-3 text-2xs uppercase tracking-wider text-muted-foreground font-medium">
+      <div className="flex items-center h-control-sm shrink-0 border-b border-hairline bg-background px-3 text-2xs uppercase tracking-wider text-muted-foreground font-medium">
         {table.getHeaderGroups().map((hg) => (
           <div key={hg.id} className="flex items-center w-full">
             {hg.headers.map((h) => (
@@ -469,8 +469,8 @@ export function LogPanel() {
                   <div
                     onClick={() => toggleExpanded(row.original.id)}
                     className={cn(
-                      "group flex items-center px-3 cursor-pointer border-b border-[var(--atlas-border-subtle)] hover:bg-element-hover",
-                      isExpanded && "bg-[var(--card)]/40",
+                      "group flex items-center px-3 cursor-pointer border-b border-hairline hover:bg-element-hover",
+                      isExpanded && "bg-card/40",
                     )}
                     style={{ height: 32 }}
                   >
@@ -485,8 +485,8 @@ export function LogPanel() {
                     ))}
                   </div>
                   {isExpanded && (
-                    <div className="px-3 pb-3 pt-1 bg-[var(--card)]/40 border-b border-[var(--atlas-border-subtle)]">
-                      <pre className="text-2xs font-mono text-[var(--secondary-foreground)] whitespace-pre-wrap break-words rounded bg-[var(--background)] border border-[var(--atlas-border-subtle)] p-2 max-h-[200px] overflow-auto">
+                    <div className="px-3 pb-3 pt-1 bg-card/40 border-b border-hairline">
+                      <pre className="text-2xs font-mono text-secondary-foreground whitespace-pre-wrap break-words rounded bg-background border border-hairline p-2 max-h-[200px] overflow-auto">
                         {JSON.stringify(row.original, null, 2)}
                       </pre>
                     </div>
@@ -530,7 +530,7 @@ function SourceFilter({
       />
       <DropdownMenu.Portal>
         <DropdownMenu.Positioner className="z-popover" align="start" sideOffset={4}>
-          <DropdownMenu.Popup className="rounded-md border border-[var(--border)] bg-[var(--card)] shadow-md py-1 min-w-[160px]">
+          <DropdownMenu.Popup className="rounded-md border border-border bg-card shadow-md py-1 min-w-[160px]">
             {SOURCES.map((s) => {
               const checked = active.has(s);
               return (
@@ -543,14 +543,12 @@ function SourceFilter({
                     else next.delete(s);
                     onChange(next);
                   }}
-                  className="flex items-center gap-2 px-3 h-control-sm text-xs text-[var(--secondary-foreground)] hover:bg-[var(--atlas-element-hover)] hover:text-[var(--foreground)] cursor-pointer outline-none capitalize"
+                  className="flex items-center gap-2 px-3 h-control-sm text-xs text-secondary-foreground hover:bg-element-hover hover:text-foreground cursor-pointer outline-none capitalize"
                 >
                   <span
                     className={cn(
                       "w-3 h-3 rounded-sm border flex items-center justify-center",
-                      checked
-                        ? "bg-[var(--primary)] border-[var(--primary)]"
-                        : "border-[var(--border)]",
+                      checked ? "bg-primary border-primary" : "border-border",
                     )}
                   >
                     {checked && <Check size={9} className="text-primary-foreground" />}
@@ -589,7 +587,7 @@ function ProjectScopeFilter({
       />
       <DropdownMenu.Portal>
         <DropdownMenu.Positioner className="z-popover" align="start" sideOffset={4}>
-          <DropdownMenu.Popup className="rounded-md border border-[var(--border)] bg-[var(--card)] shadow-md py-1 min-w-[160px]">
+          <DropdownMenu.Popup className="rounded-md border border-border bg-card shadow-md py-1 min-w-[160px]">
             {(
               [
                 { v: "all", label: "All projects" },
@@ -603,8 +601,8 @@ function ProjectScopeFilter({
                 className={cn(
                   "flex items-center gap-2 px-3 h-control-sm text-xs cursor-pointer outline-none",
                   value === v
-                    ? "text-[var(--foreground)] bg-[var(--atlas-element-selected)]"
-                    : "text-[var(--secondary-foreground)] hover:bg-[var(--atlas-element-hover)] hover:text-[var(--foreground)]",
+                    ? "text-foreground bg-element-selected"
+                    : "text-secondary-foreground hover:bg-element-hover hover:text-foreground",
                   v === "current" && !hasProject && "opacity-50 cursor-not-allowed",
                 )}
               >

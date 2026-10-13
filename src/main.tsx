@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { MotionConfig } from "motion/react";
 import { App } from "./App";
 import { TelemetryErrorBoundary } from "./features/telemetry/error-boundary";
 import { installGlobalErrorHandlers } from "./features/telemetry/error-handlers";
@@ -27,7 +28,11 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <TelemetryErrorBoundary>
       <QueryClientProvider client={queryClient}>
-        <App />
+        {/* `user`: springs and layout animations follow the OS's Reduce
+            Motion setting, the way globals.css already makes CSS ones. */}
+        <MotionConfig reducedMotion="user">
+          <App />
+        </MotionConfig>
       </QueryClientProvider>
     </TelemetryErrorBoundary>
   </React.StrictMode>,

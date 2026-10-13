@@ -36,12 +36,12 @@ export function TimelineInbox({
 
   return (
     <div className="flex h-full min-h-0 flex-col items-center justify-center px-8">
-      <Layers size={26} strokeWidth={1.2} className="text-[var(--atlas-text-disabled)]" />
-      <p className="mt-3 text-base text-[var(--secondary-foreground)]">Select a session</p>
+      <Layers size={26} strokeWidth={1.2} className="text-disabled" />
+      <p className="mt-3 text-base text-secondary-foreground">Select a session</p>
 
       {recent.length > 0 && (
         <div className="mt-9 w-full max-w-[460px]">
-          <p className="px-3 pb-2 font-mono text-2xs uppercase tracking-[0.08em] text-[var(--atlas-text-disabled)]">
+          <p className="px-3 pb-2 font-mono text-2xs uppercase tracking-[0.08em] text-disabled">
             Recent
           </p>
           <div className="flex flex-col gap-0.5">
@@ -54,7 +54,7 @@ export function TimelineInbox({
                   type="button"
                   onClick={() => onOpen(session.id, session.projectPath, session.remoteProjectId)}
                   title={title ?? undefined}
-                  className="flex h-10 cursor-pointer items-center gap-3 rounded-lg px-3 text-left transition-colors hover:bg-[var(--atlas-element-active)]"
+                  className="flex h-10 cursor-pointer items-center gap-3 rounded-lg px-3 text-left transition-colors hover:bg-element-active"
                 >
                   {session.agent ? (
                     <AgentGlyph agent={session.agent} mono />
@@ -64,9 +64,7 @@ export function TimelineInbox({
                   <span
                     className={cn(
                       "min-w-0 flex-1 truncate text-base leading-tight",
-                      title
-                        ? "text-[var(--secondary-foreground)]"
-                        : "text-[var(--muted-foreground)]",
+                      title ? "text-secondary-foreground" : "text-muted-foreground",
                     )}
                   >
                     {title ?? "Untitled session"}
@@ -74,9 +72,7 @@ export function TimelineInbox({
                   <span
                     className={cn(
                       "shrink-0 font-mono text-xs tabular-nums",
-                      live
-                        ? "text-[var(--atlas-status-success-foreground)]"
-                        : "text-[var(--atlas-text-disabled)]",
+                      live ? "text-success" : "text-disabled",
                     )}
                   >
                     {formatDuration(session.activeSeconds)}

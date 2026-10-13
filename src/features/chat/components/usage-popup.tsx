@@ -42,9 +42,9 @@ function Headline({ view }: { view: SessionUsageView }) {
         </div>
         <div className="mt-1 flex items-baseline gap-2">
           {/* ratchet-allow: the popup's hero figure, above the largest scale step (24px) */}
-          <span className="text-[28px] leading-none font-semibold tabular-nums text-[var(--foreground)]">
+          <span className="text-[28px] leading-none font-semibold tabular-nums text-foreground">
             {value.toFixed(value >= 10 ? 0 : 1)}
-            <span className="ml-0.5 text-md font-medium text-[var(--muted-foreground)]">%</span>
+            <span className="ml-0.5 text-md font-medium text-muted-foreground">%</span>
           </span>
           <StatusPill status={h.status} />
         </div>
@@ -54,8 +54,8 @@ function Headline({ view }: { view: SessionUsageView }) {
           <span>{fmtTokens(h.size)}</span>
         </div>
         {view.compacting ? (
-          <div className="mt-1.5 flex items-center gap-1.5 text-2xs text-[var(--primary)]">
-            <span className="h-1.5 w-1.5 rounded-full bg-[var(--primary)] animate-pulse" />
+          <div className="mt-1.5 flex items-center gap-1.5 text-2xs text-primary">
+            <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
             Compacting the context window…
           </div>
         ) : view.savedTokens ? (
@@ -71,7 +71,7 @@ function Headline({ view }: { view: SessionUsageView }) {
       <Card index={0} section="tokens-total">
         <div className={CAPTION}>Tokens · this session</div>
         {/* ratchet-allow: the popup's hero figure, above the largest scale step (24px) */}
-        <div className="mt-1 text-[28px] leading-none font-semibold tabular-nums text-[var(--foreground)]">
+        <div className="mt-1 text-[28px] leading-none font-semibold tabular-nums text-foreground">
           {fmtTokens(Math.round(value))}
         </div>
       </Card>
@@ -81,7 +81,7 @@ function Headline({ view }: { view: SessionUsageView }) {
     <Card index={0} section="cost-total">
       <div className={CAPTION}>Cost · this session{h.estimated ? " · est." : ""}</div>
       {/* ratchet-allow: the popup's hero figure, above the largest scale step (24px) */}
-      <div className="mt-1 text-[28px] leading-none font-semibold tabular-nums text-[var(--foreground)]">
+      <div className="mt-1 text-[28px] leading-none font-semibold tabular-nums text-foreground">
         {fmtCost(value, h.currency)}
       </div>
     </Card>
@@ -96,7 +96,7 @@ function TokenRows({ rows, index }: { rows: MetricRow[]; index: number }) {
       <div className="flex flex-col">
         {rows.map((r) => (
           <div key={r.key} className="flex h-6 items-center gap-2.5">
-            <span className="w-[76px] shrink-0 truncate text-xs text-[var(--secondary-foreground)]">
+            <span className="w-[76px] shrink-0 truncate text-xs text-secondary-foreground">
               {r.label}
             </span>
             <span className="min-w-0 flex-1">
@@ -117,7 +117,7 @@ function Cost({ cost, index }: { cost: NonNullable<SessionUsageView["cost"]>; in
         <span className={CAPTION}>Cost</span>
         <span className="flex items-baseline gap-1.5">
           {/* ratchet-allow: a subtotal one notch under text-lg (16px), which outshouted the rows */}
-          <span className="text-[15px] leading-none font-semibold tabular-nums text-[var(--foreground)]">
+          <span className="text-[15px] leading-none font-semibold tabular-nums text-foreground">
             {fmtCost(cost.total, cost.currency)}
           </span>
           {cost.estimated ? <EstTag /> : null}
@@ -127,8 +127,8 @@ function Cost({ cost, index }: { cost: NonNullable<SessionUsageView["cost"]>; in
         <div className="mt-1.5 grid grid-cols-2 gap-x-3 gap-y-0.5">
           {cost.rows.map((r) => (
             <div key={r.key} className="flex items-baseline justify-between">
-              <span className="text-2xs text-[var(--muted-foreground)]">{r.label}</span>
-              <span className="text-2xs tabular-nums text-[var(--secondary-foreground)]">
+              <span className="text-2xs text-muted-foreground">{r.label}</span>
+              <span className="text-2xs tabular-nums text-secondary-foreground">
                 {fmtCost(r.cost ?? 0, cost.currency)}
               </span>
             </div>
@@ -170,12 +170,10 @@ function QuotaRow({
   return (
     <div className="flex flex-col gap-1">
       <div className="flex items-baseline justify-between">
-        <span className="text-xs text-[var(--secondary-foreground)]">{label}</span>
+        <span className="text-xs text-secondary-foreground">{label}</span>
         <span className={VALUE}>
           {Math.round(pct)}%
-          {when ? (
-            <span className="ml-1.5 text-2xs text-[var(--muted-foreground)]">{when}</span>
-          ) : null}
+          {when ? <span className="ml-1.5 text-2xs text-muted-foreground">{when}</span> : null}
         </span>
       </div>
       <Bar
@@ -253,13 +251,9 @@ function Session({
     cells.push([
       "Lines",
       <span key="lines">
-        <span className="text-[var(--atlas-status-success-foreground)]">
-          +{session.insertions ?? 0}
-        </span>
-        <span className="mx-0.5 text-[var(--muted-foreground)]">/</span>
-        <span className="text-[var(--atlas-status-error-foreground)]">
-          −{session.deletions ?? 0}
-        </span>
+        <span className="text-success">+{session.insertions ?? 0}</span>
+        <span className="mx-0.5 text-muted-foreground">/</span>
+        <span className="text-error">−{session.deletions ?? 0}</span>
       </span>,
     ]);
   }
@@ -272,7 +266,7 @@ function Session({
       <div className="grid grid-cols-2 gap-x-4 gap-y-1">
         {cells.map(([label, value]) => (
           <div key={label} className="flex items-baseline justify-between gap-2">
-            <span className="text-2xs text-[var(--muted-foreground)]">{label}</span>
+            <span className="text-2xs text-muted-foreground">{label}</span>
             <span className={VALUE}>{value}</span>
           </div>
         ))}
@@ -291,7 +285,7 @@ export function UsagePopup({ view }: { view: SessionUsageView }) {
       {empty ? (
         <Card index={0} section="empty">
           <div className="label">Nothing yet</div>
-          <p className="mt-0.5 text-2xs leading-snug text-[var(--muted-foreground)]">
+          <p className="mt-0.5 text-2xs leading-snug text-muted-foreground">
             Usage shows up after the first turn — what this agent reports, and what Atlas records.
           </p>
         </Card>

@@ -29,13 +29,11 @@ export function ModeRestoreBar({ tabId }: { tabId: string }) {
       title="The agent would not take this mode on resume, so nothing is sent until you choose one"
     >
       <span className="flex min-w-0 items-center gap-1.5">
-        <ShieldAlert size={11} className="shrink-0 text-[var(--atlas-status-warning-foreground)]" />
+        <ShieldAlert size={11} className="shrink-0 text-warning" />
         <span className="min-w-0 truncate">
-          <span className="text-[var(--muted-foreground)]">Couldn't restore </span>
-          <span className="font-semibold text-[var(--foreground)]">
-            {modeName(wantedId, modes ?? [])}
-          </span>
-          <span className="text-[var(--muted-foreground)]"> · choose a mode to send</span>
+          <span className="text-muted-foreground">Couldn't restore </span>
+          <span className="font-semibold text-foreground">{modeName(wantedId, modes ?? [])}</span>
+          <span className="text-muted-foreground"> · choose a mode to send</span>
         </span>
       </span>
       <button

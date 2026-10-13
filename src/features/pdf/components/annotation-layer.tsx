@@ -252,7 +252,7 @@ export function AnnotationLayer({ pdfPath, page, pageW, pageH }: AnnotationLayer
           // highlighter colour the user picked (same argument as the exempt
           // `pdf-annotation-store` and `pdf-toolbar`). Atlas's theme does not
           // reach inside someone else's document.
-          className="absolute flex h-5 w-5 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-black/20 text-2xs font-bold text-black/70 shadow-sm"
+          className="absolute flex h-5 w-5 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-black/20 text-2xs font-bold text-black/70 shadow-md"
           style={{
             left: n.x * pageW,
             top: n.y * pageH,
@@ -286,7 +286,7 @@ export function AnnotationLayer({ pdfPath, page, pageW, pageH }: AnnotationLayer
             <button
               type="button"
               onClick={() => remove(pdfPath, selectedNote.id)}
-              className="inline-flex items-center gap-1 rounded-sm px-1.5 py-0.5 text-xs text-[var(--atlas-status-error-foreground)] hover:bg-[var(--atlas-status-error-background)]"
+              className="inline-flex items-center gap-1 rounded-sm px-1.5 py-0.5 text-xs text-error hover:bg-error-muted"
             >
               <Trash2 size={11} /> Delete
             </button>

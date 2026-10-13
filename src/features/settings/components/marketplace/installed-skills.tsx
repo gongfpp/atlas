@@ -318,7 +318,7 @@ export function InstalledSkills({
                   <button
                     key={`pack:${p.pack.name}`}
                     onClick={() => setTarget({ kind: "pack", pack: p })}
-                    className="flex w-full items-center h-[40px] border-b border-border-subtle px-3 text-left transition-colors hover:bg-element-hover"
+                    className="flex w-full items-center h-[40px] border-b border-hairline px-3 text-left transition-colors hover:bg-element-hover"
                   >
                     <span className={cn(COL.name, "flex items-center gap-2 min-w-0")}>
                       <Package size={13} className="shrink-0 text-muted-foreground" />
@@ -360,7 +360,7 @@ export function InstalledSkills({
                   <button
                     key={`skill:${s.pack ?? ""}:${s.name}`}
                     onClick={onClick}
-                    className="flex w-full items-center min-h-[44px] py-2 border-b border-border-subtle px-3 text-left transition-colors hover:bg-element-hover"
+                    className="flex w-full items-center min-h-[44px] py-2 border-b border-hairline px-3 text-left transition-colors hover:bg-element-hover"
                   >
                     <span className={cn(COL.name, "min-w-0 pr-6")}>
                       <span className="block truncate text-sm text-foreground">{s.name}</span>

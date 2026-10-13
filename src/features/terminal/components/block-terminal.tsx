@@ -84,11 +84,7 @@ function renderHL(text: string, query: string): ReactNode {
     }
     if (idx > i) nodes.push(text.slice(i, idx));
     nodes.push(
-      <mark
-        key={k++}
-        data-term-match
-        className="rounded-sm bg-[var(--atlas-status-warning-foreground)]/40 text-inherit"
-      >
+      <mark key={k++} data-term-match className="rounded-sm bg-warning/40 text-inherit">
         {text.slice(idx, idx + q.length)}
       </mark>,
     );
@@ -353,7 +349,7 @@ export const BlockTerminal = memo(function BlockTerminal({
       data-block-terminal
       // `@container` so the input-row badges respond to the PANE's width, not
       // the window's — split panes make viewport media queries meaningless.
-      className="@container relative flex h-full w-full flex-col bg-[var(--background)]"
+      className="@container relative flex h-full w-full flex-col bg-background"
       onClick={onFocus}
     >
       {/* Interactive surface — overlays the block list while an alt-screen app runs. */}
@@ -361,7 +357,7 @@ export const BlockTerminal = memo(function BlockTerminal({
         ref={xtermHostRef}
         // Keep Atlas's footer outside the app-controlled terminal viewport so
         // the stop control never covers top/htop clocks, menus, or editor UI.
-        className="absolute inset-x-0 top-0 bottom-[29px] z-10 bg-[var(--atlas-terminal-background)] px-1 py-1"
+        className="absolute inset-x-0 top-0 bottom-[29px] z-10 bg-terminal px-1 py-1"
         style={{
           visibility: altScreen ? "visible" : "hidden",
           pointerEvents: altScreen ? "auto" : "none",
@@ -370,8 +366,8 @@ export const BlockTerminal = memo(function BlockTerminal({
 
       {/* Search bar over the block history */}
       {search.open && !altScreen && (
-        <div className="absolute right-2 top-2 z-20 flex items-center gap-1 rounded-md border border-[var(--border)] bg-[var(--popover)] px-2 py-1 shadow-md">
-          <Search size={12} className="shrink-0 text-[var(--muted-foreground)]" />
+        <div className="absolute right-2 top-2 z-20 flex items-center gap-1 rounded-md border border-border bg-popover px-2 py-1 shadow-md">
+          <Search size={12} className="shrink-0 text-muted-foreground" />
           <input
             ref={searchInputRef}
             value={search.query}
@@ -381,9 +377,9 @@ export const BlockTerminal = memo(function BlockTerminal({
               else if (e.key === "Enter") navMatch(e.shiftKey ? -1 : 1);
             }}
             placeholder="Search output…"
-            className="w-44 bg-transparent text-sm text-[var(--foreground)] outline-none placeholder:text-[var(--muted-foreground)]"
+            className="w-44 bg-transparent text-sm text-foreground outline-none placeholder:text-muted-foreground"
           />
-          <span className="w-10 shrink-0 text-right text-2xs tabular-nums text-[var(--muted-foreground)]">
+          <span className="w-10 shrink-0 text-right text-2xs tabular-nums text-muted-foreground">
             {matchCount}
           </span>
           <HintGroup>
@@ -391,7 +387,7 @@ export const BlockTerminal = memo(function BlockTerminal({
               <button
                 type="button"
                 onClick={() => navMatch(-1)}
-                className="rounded p-0.5 text-[var(--muted-foreground)] hover:bg-[var(--atlas-element-hover)] hover:text-[var(--foreground)]"
+                className="rounded p-0.5 text-muted-foreground hover:bg-element-hover hover:text-foreground"
               >
                 <ChevronUp size={13} />
               </button>
@@ -400,7 +396,7 @@ export const BlockTerminal = memo(function BlockTerminal({
               <button
                 type="button"
                 onClick={() => navMatch(1)}
-                className="rounded p-0.5 text-[var(--muted-foreground)] hover:bg-[var(--atlas-element-hover)] hover:text-[var(--foreground)]"
+                className="rounded p-0.5 text-muted-foreground hover:bg-element-hover hover:text-foreground"
               >
                 <ChevronDown size={13} />
               </button>
@@ -409,7 +405,7 @@ export const BlockTerminal = memo(function BlockTerminal({
               <button
                 type="button"
                 onClick={closeSearch}
-                className="rounded p-0.5 text-[var(--muted-foreground)] hover:bg-[var(--atlas-element-hover)] hover:text-[var(--foreground)]"
+                className="rounded p-0.5 text-muted-foreground hover:bg-element-hover hover:text-foreground"
               >
                 <X size={13} />
               </button>
@@ -442,18 +438,18 @@ export const BlockTerminal = memo(function BlockTerminal({
       {/* Atlas-owned footer stays visible below both block and alternate-screen
           modes. Keeping process controls outside the PTY viewport prevents them
           from obscuring application content. */}
-      <div className="relative z-20 flex min-h-[29px] items-center gap-2 border-t border-[var(--border)] bg-[var(--background)] px-3 py-[5px]">
+      <div className="relative z-20 flex min-h-[29px] items-center gap-2 border-t border-border bg-background px-3 py-[5px]">
         {busy || altScreen ? (
-          <Loader2 size={13} className="shrink-0 animate-spin text-[var(--primary)]" />
+          <Loader2 size={13} className="shrink-0 animate-spin text-primary" />
         ) : (
-          <ChevronRight size={13} className="shrink-0 text-[var(--primary)]" />
+          <ChevronRight size={13} className="shrink-0 text-primary" />
         )}
         {exited ? (
-          <span className="min-w-0 flex-1 truncate text-xs text-[var(--muted-foreground)]">
+          <span className="min-w-0 flex-1 truncate text-xs text-muted-foreground">
             Shell exited — close this terminal or open a new one
           </span>
         ) : altScreen ? (
-          <span className="min-w-0 flex-1 truncate text-xs text-[var(--muted-foreground)]">
+          <span className="min-w-0 flex-1 truncate text-xs text-muted-foreground">
             Interactive process
           </span>
         ) : (
@@ -479,7 +475,7 @@ export const BlockTerminal = memo(function BlockTerminal({
             neighbours are visible: stop control needs `busy`, the badge hides
             in alt-screen and below the 300px container query. */}
         {busy && !altScreen && (
-          <span className="hidden h-3 w-px shrink-0 bg-[var(--border)] @[300px]:block" />
+          <span className="hidden h-3 w-px shrink-0 bg-border @[300px]:block" />
         )}
         {!altScreen && <StatusBadge cwd={cwd} git={git} />}
       </div>
@@ -496,8 +492,8 @@ function BlockPasswordInput({ onSubmit }: { onSubmit: (pw: string) => void }) {
     inputRef.current?.focus();
   }, []);
   return (
-    <div className="flex items-center gap-2 border-t border-[var(--atlas-border-subtle)] bg-[var(--background)] px-3 py-2">
-      <Lock size={12} className="shrink-0 text-[var(--primary)]" />
+    <div className="flex items-center gap-2 border-t border-hairline bg-background px-3 py-2">
+      <Lock size={12} className="shrink-0 text-primary" />
       <input
         ref={inputRef}
         type="password"
@@ -514,7 +510,7 @@ function BlockPasswordInput({ onSubmit }: { onSubmit: (pw: string) => void }) {
         autoComplete="off"
         spellCheck={false}
         placeholder="Enter password, then press Enter…"
-        className="flex-1 bg-transparent text-sm text-[var(--foreground)] outline-none placeholder:text-[var(--muted-foreground)]"
+        className="flex-1 bg-transparent text-sm text-foreground outline-none placeholder:text-muted-foreground"
         style={{ fontFamily: 'var(--font-mono, "JetBrains Mono", monospace)' }}
       />
     </div>
@@ -529,14 +525,14 @@ function StatusBadge({ cwd, git }: { cwd: string; git: TermGit | null }) {
     // Progressive disclosure as the PANE narrows (container query against the
     // terminal root): the git segment goes first, then the whole badge, so the
     // command input always keeps usable width. Long dir/branch names truncate.
-    <div className="ml-auto hidden shrink-0 items-center gap-2 text-2xs text-[var(--muted-foreground)] @[300px]:flex">
+    <div className="ml-auto hidden shrink-0 items-center gap-2 text-2xs text-muted-foreground @[300px]:flex">
       <span className="flex min-w-0 items-center gap-1" title={cwd}>
         <Folder size={9} className="shrink-0" />
         <span className="max-w-[96px] truncate">{dir}</span>
       </span>
       {git && (
         <>
-          <span className="hidden h-3 w-px bg-[var(--border)] @[420px]:block" />
+          <span className="hidden h-3 w-px bg-border @[420px]:block" />
           <span
             className="hidden min-w-0 items-center gap-1 @[420px]:flex"
             title={`On branch ${git.branch}`}
@@ -546,10 +542,7 @@ function StatusBadge({ cwd, git }: { cwd: string; git: TermGit | null }) {
             {git.ahead > 0 && <span>↑{git.ahead}</span>}
             {git.behind > 0 && <span>↓{git.behind}</span>}
             {git.dirty && (
-              <span
-                className="text-[var(--atlas-status-warning-foreground)]"
-                title="Uncommitted changes"
-              >
+              <span className="text-warning" title="Uncommitted changes">
                 ●
               </span>
             )}
@@ -612,7 +605,7 @@ const BlockCard = memo(function BlockCard({
 
   return (
     <div
-      className="group mb-2 overflow-hidden rounded-md border border-[var(--border)] bg-[var(--card)]"
+      className="group mb-2 overflow-hidden rounded-md border border-border bg-card"
       // A finished block skips layout and paint while off screen — without a
       // virtualizer and without promoting a layer (Safari 18+; older WebKit
       // ignores it). Never on the live card: its height changes every flush
@@ -624,21 +617,18 @@ const BlockCard = memo(function BlockCard({
       }
     >
       {hasHeader && (
-        <div className="flex items-center gap-2 border-b border-[var(--atlas-border-subtle)] px-2.5 h-control-md text-sm">
+        <div className="flex items-center gap-2 border-b border-hairline px-2.5 h-control-md text-sm">
           {block.running ? (
-            <Loader2 size={12} className="shrink-0 animate-spin text-[var(--primary)]" />
+            <Loader2 size={12} className="shrink-0 animate-spin text-primary" />
           ) : block.exitCode && block.exitCode !== 0 ? (
-            <XCircle size={12} className="shrink-0 text-[var(--atlas-status-error-foreground)]" />
+            <XCircle size={12} className="shrink-0 text-error" />
           ) : (
-            <CheckCircle2
-              size={12}
-              className="shrink-0 text-[var(--atlas-status-success-foreground)]"
-            />
+            <CheckCircle2 size={12} className="shrink-0 text-success" />
           )}
           <button
             type="button"
             onClick={() => setCollapsed((c) => !c)}
-            className="truncate text-left font-mono text-[var(--foreground)] hover:opacity-80"
+            className="truncate text-left font-mono text-foreground hover:opacity-80"
             title={collapsed ? "Expand" : "Collapse"}
           >
             {renderHL(block.command, query)}
@@ -646,14 +636,14 @@ const BlockCard = memo(function BlockCard({
 
           {block.firehose && (
             <span
-              className="flex shrink-0 items-center gap-1 rounded bg-[var(--atlas-status-warning-foreground)]/15 px-1.5 py-0.5 text-3xs text-[var(--atlas-status-warning-foreground)]"
+              className="flex shrink-0 items-center gap-1 rounded bg-warning/15 px-1.5 py-0.5 text-3xs text-warning"
               title="Large output — live view is throttled to keep the UI responsive"
             >
               {block.running ? "large output · throttled" : "large output"}
             </span>
           )}
 
-          <div className="ml-auto flex items-center gap-2 text-2xs text-[var(--muted-foreground)]">
+          <div className="ml-auto flex items-center gap-2 text-2xs text-muted-foreground">
             {/* Hover actions */}
             <HintGroup>
               <div className="flex items-center gap-0.5 opacity-0 transition-opacity group-hover:opacity-100 focus-within:opacity-100">
@@ -689,15 +679,13 @@ const BlockCard = memo(function BlockCard({
             )}
             {duration && <span>{duration}</span>}
             {!block.running && block.exitCode != null && block.exitCode !== 0 && (
-              <span className="text-[var(--atlas-status-error-foreground)]">
-                exit {block.exitCode}
-              </span>
+              <span className="text-error">exit {block.exitCode}</span>
             )}
           </div>
         </div>
       )}
       {!collapsed && (hidden > 0 || block.truncated) && (
-        <div className="px-3 pt-2 text-2xs italic text-[var(--muted-foreground)]">
+        <div className="px-3 pt-2 text-2xs italic text-muted-foreground">
           earlier output hidden — showing the latest {visible.length} lines (Copy gets more)
         </div>
       )}
@@ -725,7 +713,7 @@ function BlockAction({
       <button
         type="button"
         onClick={onClick}
-        className="flex h-5 w-5 items-center justify-center rounded text-[var(--muted-foreground)] hover:bg-[var(--atlas-element-hover)] hover:text-[var(--foreground)]"
+        className="flex h-5 w-5 items-center justify-center rounded text-muted-foreground hover:bg-element-hover hover:text-foreground"
       >
         <Icon size={11} className={cn("transition-transform", rotated && "-rotate-90")} />
       </button>
@@ -771,7 +759,7 @@ const LineList = memo(function LineList({
     // and back on only for inputs, `pre`, `code` and this class. This surface
     // used to be a `<pre>` and got selection for free; the line emulator
     // rework made it a `<div>` and selection silently died with the tag.
-    <div className="select-text whitespace-pre-wrap break-words px-3 py-2 font-mono text-sm leading-[1.45] text-[var(--secondary-foreground)]">
+    <div className="select-text whitespace-pre-wrap break-words px-3 py-2 font-mono text-sm leading-[1.45] text-secondary-foreground">
       {lines.map((line) => (
         <OutputLine
           key={line.id}
@@ -811,8 +799,10 @@ const OutputLine = memo(function OutputLine({
           <span
             key={i}
             style={r.style}
+            // keycap-allow: a native title on purpose — terminal output can hold
+            // hundreds of links, and a tooltip component per link is not free.
             title="⌘-click to open in browser"
-            className="cursor-pointer hover:text-[var(--primary)] hover:underline"
+            className="cursor-pointer hover:text-primary hover:underline"
             onClick={(e) => {
               if (e.metaKey || e.ctrlKey) onOpenLink(r.target ?? r.text);
             }}
@@ -823,8 +813,9 @@ const OutputLine = memo(function OutputLine({
           <span
             key={i}
             style={r.style}
+            // keycap-allow: native title, for the same reason as the URL above.
             title="⌘-click to open"
-            className="cursor-pointer hover:text-[var(--primary)] hover:underline"
+            className="cursor-pointer hover:text-primary hover:underline"
             onClick={(e) => {
               if (e.metaKey || e.ctrlKey) onOpenPath(r.target ?? r.text);
             }}

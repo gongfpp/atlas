@@ -181,11 +181,11 @@ function SideCell({
   const bg = sideBg(side, isLeft);
   return (
     <div className="flex min-w-0">
-      <span className="w-8 shrink-0 select-none border-r border-[var(--atlas-border-subtle)] pr-[3px] pl-[3px] text-right font-mono text-2xs leading-[18px] text-[var(--muted-foreground)]">
+      <span className="w-8 shrink-0 select-none border-r border-hairline pr-[3px] pl-[3px] text-right font-mono text-2xs leading-[18px] text-muted-foreground">
         {side?.lineNo ?? ""}
       </span>
       <code
-        className="diff-syntax block flex-1 overflow-hidden whitespace-pre pl-2 pr-2 font-mono leading-[18px] text-[var(--secondary-foreground)]"
+        className="diff-syntax block flex-1 overflow-hidden whitespace-pre pl-2 pr-2 font-mono leading-[18px] text-secondary-foreground"
         style={{
           fontSize: FONT_PX,
           background: bg,
@@ -231,7 +231,7 @@ function CenterMarker({ row }: { row: DiffRow }) {
   }
   return (
     <div
-      className="flex items-center justify-center border-x border-[var(--atlas-border-subtle)] font-mono text-xs leading-[18px] select-none"
+      className="flex items-center justify-center border-x border-hairline font-mono text-xs leading-[18px] select-none"
       style={{ color }}
     >
       {char}
@@ -450,7 +450,7 @@ export function GitDiffPanel({
       orientation="horizontal"
       defaultLayout={defaultLayout}
       onLayoutChanged={onLayoutChanged}
-      className="h-full bg-[var(--background)]"
+      className="h-full bg-background"
     >
       {/* Left: resizable + collapsible tree of changed files (+ commit picker) */}
       {/* Sizes are percentages: v4 reads bare numbers as PIXELS and unit-less
@@ -485,44 +485,40 @@ export function GitDiffPanel({
         <div className="flex h-full min-w-0 flex-col">
           {/* Toolbar */}
           <HintGroup>
-            <div className="flex h-8 shrink-0 items-center gap-2 border-b border-[var(--border)] px-3">
+            <div className="flex h-8 shrink-0 items-center gap-2 border-b border-border px-3">
               <HintItem label={treeCollapsed ? "Show changed files" : "Hide changed files"}>
                 <button
                   onClick={toggleTree}
-                  className="-ml-1 rounded p-1 text-[var(--muted-foreground)] hover:bg-[var(--atlas-element-hover)] hover:text-[var(--foreground)] cursor-pointer"
+                  className="-ml-1 rounded p-1 text-muted-foreground hover:bg-element-hover hover:text-foreground cursor-pointer"
                 >
                   <RailGlyph open={!treeCollapsed} size="sm" />
                 </button>
               </HintItem>
-              <FileCode2 size={12} className="shrink-0 text-[var(--muted-foreground)]" />
-              <span className="truncate font-mono text-xs text-[var(--secondary-foreground)]">
+              <FileCode2 size={12} className="shrink-0 text-muted-foreground" />
+              <span className="truncate font-mono text-xs text-secondary-foreground">
                 {file || "Git Diff"}
               </span>
               {staged && (
-                <span className="shrink-0 rounded bg-[var(--card)] px-1.5 py-px text-3xs uppercase tracking-wide text-[var(--muted-foreground)]">
+                <span className="shrink-0 rounded bg-card px-1.5 py-px text-3xs uppercase tracking-wide text-muted-foreground">
                   staged
                 </span>
               )}
               {stats && (
                 <span className="shrink-0 font-mono text-2xs">
-                  <span className="text-[var(--atlas-status-success-foreground)]">
-                    +{stats.additions}
-                  </span>{" "}
-                  <span className="text-[var(--atlas-status-error-foreground)]">
-                    -{stats.deletions}
-                  </span>
+                  <span className="text-success">+{stats.additions}</span>{" "}
+                  <span className="text-error">-{stats.deletions}</span>
                 </span>
               )}
               {!!file && (
                 <div className="ml-auto flex items-center gap-0.5">
-                  <span className="mr-1 font-mono text-2xs text-[var(--muted-foreground)] tabular-nums">
+                  <span className="mr-1 font-mono text-2xs text-muted-foreground tabular-nums">
                     {diffCount} diff{diffCount !== 1 ? "s" : ""}
                   </span>
                   <HintItem label="Previous change">
                     <button
                       onClick={() => jump(-1)}
                       disabled={diffCount === 0}
-                      className="rounded p-1 text-[var(--muted-foreground)] hover:bg-[var(--atlas-element-hover)] hover:text-[var(--foreground)] disabled:opacity-30 cursor-pointer"
+                      className="rounded p-1 text-muted-foreground hover:bg-element-hover hover:text-foreground disabled:opacity-30 cursor-pointer"
                     >
                       <ChevronUp size={12} />
                     </button>
@@ -531,7 +527,7 @@ export function GitDiffPanel({
                     <button
                       onClick={() => jump(1)}
                       disabled={diffCount === 0}
-                      className="rounded p-1 text-[var(--muted-foreground)] hover:bg-[var(--atlas-element-hover)] hover:text-[var(--foreground)] disabled:opacity-30 cursor-pointer"
+                      className="rounded p-1 text-muted-foreground hover:bg-element-hover hover:text-foreground disabled:opacity-30 cursor-pointer"
                     >
                       <ChevronDown size={12} />
                     </button>
@@ -539,7 +535,7 @@ export function GitDiffPanel({
                   <HintItem label="Refresh">
                     <button
                       onClick={() => void refetch()}
-                      className="rounded p-1 text-[var(--muted-foreground)] hover:bg-[var(--atlas-element-hover)] hover:text-[var(--foreground)] cursor-pointer"
+                      className="rounded p-1 text-muted-foreground hover:bg-element-hover hover:text-foreground cursor-pointer"
                     >
                       <RefreshCw size={11} />
                     </button>
@@ -550,7 +546,7 @@ export function GitDiffPanel({
                         void openFile(`${repoPath}/${file}`);
                         onOpenInEditor?.();
                       }}
-                      className="rounded p-1 text-[var(--muted-foreground)] hover:bg-[var(--atlas-element-hover)] hover:text-[var(--foreground)] cursor-pointer"
+                      className="rounded p-1 text-muted-foreground hover:bg-element-hover hover:text-foreground cursor-pointer"
                     >
                       <ExternalLink size={11} />
                     </button>
@@ -562,21 +558,17 @@ export function GitDiffPanel({
 
           {/* Body */}
           {!file ? (
-            <div className="flex flex-1 items-center justify-center px-3 text-center text-xs text-[var(--muted-foreground)]">
+            <div className="flex flex-1 items-center justify-center px-3 text-center text-xs text-muted-foreground">
               Pick a file from the left to view its diff.
             </div>
           ) : isLoading ? (
-            <div className="px-3 py-8 text-center text-xs text-[var(--muted-foreground)]">
-              Loading diff…
-            </div>
+            <div className="px-3 py-8 text-center text-xs text-muted-foreground">Loading diff…</div>
           ) : data?.isBinary ? (
-            <div className="px-3 py-8 text-center text-xs text-[var(--muted-foreground)]">
+            <div className="px-3 py-8 text-center text-xs text-muted-foreground">
               Binary file — no text diff to show.
             </div>
           ) : rows.length === 0 ? (
-            <div className="px-3 py-8 text-center text-xs text-[var(--muted-foreground)]">
-              No changes.
-            </div>
+            <div className="px-3 py-8 text-center text-xs text-muted-foreground">No changes.</div>
           ) : (
             <div className="flex min-h-0 flex-1">
               <div ref={scrollRef} className="min-h-0 flex-1 overflow-auto hide-scrollbar">

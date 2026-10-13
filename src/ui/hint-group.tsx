@@ -38,17 +38,17 @@ import {
   type ReactElement,
   type ReactNode,
 } from "react";
+import { motion } from "motion/react";
 import { createPortal } from "react-dom";
 
 import { cn } from "@/lib/utils";
 import { slideGeometry, type SlideGeometry } from "@/ui/slide-geometry";
+import { SlideStrip } from "@/ui/slide-strip";
 import { hintTriggerProps, isFocusVisible } from "@/ui/tooltip";
 import {
   isTooltipWarm,
   markTooltipClosed,
   markTooltipOpen,
-  prefersReducedMotion,
-  slideTransition,
   TOOLTIP_EASE,
   TOOLTIP_FADE_IN_MS,
   TOOLTIP_OPEN_DELAY,
@@ -63,6 +63,7 @@ const GAP = 6;
 
 interface Item {
   label: string;
+  shortcut?: string;
   el: HTMLElement | null;
 }
 
@@ -141,7 +142,13 @@ export function HintGroup({
       register: (id, item) => {
         const prev = items.current.get(id);
         items.current.set(id, item);
-        if (!prev || prev.label !== item.label || prev.el !== item.el) setVersion((v) => v + 1);
+        if (
+          !prev ||
+          prev.label !== item.label ||
+          prev.shortcut !== item.shortcut ||
+          prev.el !== item.el
+        )
+          setVersion((v) => v + 1);
       },
       unregister: (id) => {
         if (items.current.delete(id)) setVersion((v) => v + 1);
@@ -189,7 +196,7 @@ export function HintGroup({
         if (!a.el || !b.el) return 0;
         return a.el.compareDocumentPosition(b.el) & Node.DOCUMENT_POSITION_PRECEDING ? 1 : -1;
       })
-      .map(([id, item]) => ({ id, label: item.label }));
+      .map(([id, item]) => ({ id, label: item.label, shortcut: item.shortcut }));
   }, [version]);
 
   useLayoutEffect(() => {
@@ -219,56 +226,37 @@ export function HintGroup({
   }, [state.visible, hide]);
 
   const shown = state.visible && geometry !== null;
-  // The first reveal grows from the hovered control; travel between items
-  // doesn't scale. Reduced motion keeps only the fade.
-  const grow = !prefersReducedMotion();
 
   return (
     <GroupContext.Provider value={api}>
       {children}
       {mounted &&
         createPortal(
-          <div
+          // The first reveal grows from the hovered control; travel between
+          // items doesn't scale. `MotionConfig` drops the scale under reduced
+          // motion and keeps the strip's fade.
+          <motion.div
             aria-hidden
             data-slot="hint-group-tooltip"
             className="pointer-events-none fixed left-0 z-tooltip"
             style={{
               ...(side === "bottom" ? { top: geometry?.y ?? 0 } : { bottom: geometry?.y ?? 0 }),
               transformOrigin: `${geometry?.originX ?? 0}px ${side === "bottom" ? "0%" : "100%"}`,
-              transform: grow && !shown ? "scale(0.97)" : undefined,
-              transition: grow ? `transform ${TOOLTIP_FADE_IN_MS}ms ${TOOLTIP_EASE}` : undefined,
             }}
+            initial={{ scale: 0.97 }}
+            animate={{ scale: shown ? 1 : 0.97 }}
+            transition={{ duration: TOOLTIP_FADE_IN_MS / 1000, ease: TOOLTIP_EASE }}
           >
-            <div
-              className={cn(
-                "flex w-max",
-                "bg-[var(--popover)] text-foreground",
-                "outline outline-1 outline-[var(--border)]",
-                // The menu step, like every other popover in `src/ui`. It was a
-                // literal 50%-black halo, which is a hole punched in a cream
-                // surface on any light theme.
-                "shadow-md",
-              )}
-              style={{
-                opacity: shown ? 1 : 0,
-                transform: `translateX(${geometry?.tx ?? 0}px)`,
-                clipPath: `inset(0 ${geometry?.right ?? 0}% 0 ${geometry?.left ?? 0}% round 6px)`,
-                transition: slideTransition({ visible: shown, travel: state.animate }),
+            <SlideStrip
+              labels={order.map(({ id, label, shortcut }) => ({ key: id, label, shortcut }))}
+              geometry={geometry}
+              visible={shown}
+              travel={state.animate}
+              labelRef={(id, el) => {
+                labels.current.set(id, el);
               }}
-            >
-              {order.map(({ id, label }) => (
-                <div
-                  key={id}
-                  ref={(el) => {
-                    labels.current.set(id, el);
-                  }}
-                  className="flex h-[22px] shrink-0 items-center whitespace-nowrap px-2.5 text-xs leading-none"
-                >
-                  {label}
-                </div>
-              ))}
-            </div>
-          </div>,
+            />
+          </motion.div>,
           document.body,
         )}
     </GroupContext.Provider>
@@ -282,10 +270,14 @@ export function HintGroup({
  */
 export function HintItem({
   label,
+  shortcut,
   className,
   children,
 }: {
   label: string;
+  /** A combo string ("⌘B", or a live `useActionShortcut(...)?.label`), drawn
+   *  as keycaps after the label. Not part of the accessible name. */
+  shortcut?: string;
   className?: string;
   children: ReactElement<Record<string, unknown>>;
 }) {
@@ -295,8 +287,8 @@ export function HintItem({
 
   useLayoutEffect(() => {
     if (!api) return;
-    api.register(id, { label, el: ref.current });
-  }, [api, id, label]);
+    api.register(id, { label, shortcut, el: ref.current });
+  }, [api, id, label, shortcut]);
   useEffect(() => {
     if (!api) return;
     return () => api.unregister(id);

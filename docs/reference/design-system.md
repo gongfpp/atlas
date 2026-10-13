@@ -121,51 +121,76 @@ Rendered today: **4 / 6 / 8 / 12**. Before Foundations it was 2 / 4 / 6 with no
   be **squarer** than 8px finally can be. A theme file is the only place the
   scale is set; do not reintroduce a floor.
 
+## Surfaces, hues and appearance
+
+The palette is Atlas Standards' — the design system the desktop, web and
+mobile apps share — and the built-in `atlas` theme is its `themes.css`
+(`crates/atlas-theme/themes/atlas.toml`). Chrome is achromatic; the action
+colour is the foreground inverted; chroma has two jobs only.
+
+**The surface ramp** climbs away from the page, each a theme key with its own
+utility. In dark: `bg-background` 0.08 → `bg-surface` 0.10 → `bg-card` 0.12 →
+`bg-illustration` 0.13 → `bg-surface-raised` 0.15 → `bg-popover` 0.17. The app
+frame the panels are set into is `bg-shell-canvas`, edged with
+`border-shell-edge`. A segmented control is `bg-segment-track` with a
+`bg-segment-thumb` that is always a step lighter. Every one of these derives
+from a base token, so a third-party theme that has never heard of them still
+gets a sensible step.
+
+**Two rules, not one.** `border-hairline` (the `border.subtle` key, 6–7%) for a
+rule inside content — a pane seam, a table row; `border-border` (8–9%) for the
+edge of a thing; `border-border-strong` for focus.
+
+**Identity hues.** Eight — `grey indigo purple cyan green amber orange red` — as
+`--atlas-hue-*` keys and `text-hue-*` / `bg-hue-*` utilities. A hue is an
+identity (a label, a project, a person), never a status; status is `success /
+warning / error / info`. Reach them through the `tag tag-<hue>` pill and
+`hueFor(id)` (`src/lib/hue.ts`), which hashes exactly as Standards does, so an
+entity is the same hue on every platform.
+
+**Any element can switch appearance.** `data-appearance="light"` or `"dark"` on
+an element gives everything inside it that variant's variables — how Standards
+draws its share and comments panels in the opposite appearance to the page.
+`applyTheme` writes both variants into `#atlas-appearance-scopes` for this. The
+attribute is `data-appearance` because `data-theme` already names the theme.
+
 ## Elevation
 
-Three levels (decision 27). The shadow **colour comes from the theme**: each
-level points at one of the theme's shadcn `--shadow-*` tokens through an
-`--elevation-*` variable in `tokens.css`. A theme's `[light.base]` and
-`[dark.base]` tables set their own `--shadow-*` ramps independently — a light
-appearance is not the dark ramp reused as-is. Pure black at the dark table's
-alphas reads as a heavy halo on a light surface, so a light ramp should tint
-from the theme's own light-appearance foreground (or another dark-enough base
-colour) at a much lower alpha instead.
+Rings, not shadows (Atlas Standards). A raised block is a lighter step of the
+surface ramp with `ring-1 ring-foreground/10` or a border, and casts nothing.
+Only what floats over content it is not part of casts a shadow, and there are
+two rungs. The shadow **colour comes from the theme**: each points at the
+theme's own `--shadow-md` / `--shadow-lg` through an `--elevation-*` variable
+in `tokens.css`, so a light variant gets a light shadow.
 
 | utility | level |
 |---|---|
-| `shadow-sm` | raised off the surface |
-| `shadow-md` | menus and popovers |
-| `shadow-lg` | dialogs |
+| `shadow-md` | menus, popovers, floating buttons and pills |
+| `shadow-lg` | dialogs and sheets |
 
-`shadow-xl` and `shadow-2xl` are pointed at the dialog level as well, because
-left alone they render Tailwind's 10%-black default, which is invisible on
-Atlas's near-black chrome. Do not introduce a fourth level.
+`shadow-sm`, `-xl` and `-2xl` still compile, so a third-party theme's markup
+does not break, but the ratchet bans them (`raised-shadow`).
 
 Two more utilities belong here:
 
 - `inset-highlight` — the 1px top edge on raised glass. It delegates to
   Tailwind's own inset-shadow utility, so `inset-highlight shadow-md` composes
   instead of one replacing the other. Its colour is the `element.highlight`
-  theme key — the theme's foreground at 6% — so a light variant gets a dark
-  edge instead of the white-on-white one a hardcoded highlight would give it.
+  theme key, so a light variant gets a dark edge.
 - `backdrop-blur-glass` — the one glass blur (`--blur-glass`, 24px).
 - `glass-hud` — the frosted HUD: a hairline border, the raised top edge and the
-  menu-rung shadow, for a surface that floats over whatever the app is showing
-  (the hint-nav keycaps and their dock, the sign-in dock). Compose the blur and
-  the translucent fill with it —
-  `glass-hud backdrop-blur-glass bg-gradient-to-b from-popover/85 to-card/90` —
-  because the alpha is what lets the blur through and a smaller chip may want a
-  lighter one.
+  menu-rung shadow, for a surface that floats over whatever the app is showing.
+  Compose the blur and the translucent fill with it —
+  `glass-hud backdrop-blur-glass bg-gradient-to-b from-popover/85 to-card/90`.
 
-One thing to keep in mind:
+## Scroll regions
 
-- **`shadow-md` is pinned to the theme's `--shadow-2xl`**, which is what the
-  former `--shadow-overlay` alias rendered, so the sweep replaced all of its
-  call sites with `shadow-md` and moved nothing. Do not repoint it.
-  `shadow-lg` stacks the theme's `--shadow-xl` under its `--shadow-2xl` to get
-  a rung of its own — the shadcn scale has no fourth step, and `md` and `lg`
-  resolving to the same value made every dialog read as a popover.
+Scrollbars are hidden. A region that scrolls says so by dissolving its edge on
+the side there is more to see: wrap it in `ScrollFade` (`src/ui/scroll-fade.tsx`),
+which is the scroll container and drives the `scroll-fade` mask. The code
+editor (`.cm-scroller`), the terminal (`.xterm-viewport`) and anything marked
+`scrollbar-visible` keep a thin bar, because there the thumb is information —
+where you are in a long file.
 
 ## The scrim
 
@@ -196,7 +221,7 @@ tells you what is underneath.
 white hairline or a white wash is the *dark*-appearance reading of "this surface
 catches the light"; on cream it is nothing at all. Those 49 sites moved onto the
 element roles — `bg-element-hover` / `-selected` / `-active`,
-`border-border-subtle` / `-border` / `-border-strong` — which are the theme's own
+`border-hairline` / `-border` / `-border-strong` — which are the theme's own
 foreground at an alpha and therefore flip with the appearance.
 
 Three literals survive on purpose, all of them decision 3's documented
@@ -254,6 +279,33 @@ added without a decision.
 duration — a shared open delay, a warm-start window, reduced-motion handling.
 Copy its shape rather than scattering timers.
 
+### Springs: `motion`
+
+Anything that moves on a spring, animates layout (`layout` / `layoutId`) or
+enters and leaves (`AnimatePresence`) uses [`motion`](https://motion.dev)
+(`motion/react`). The CSS scale above keeps the rest: hover and state colour
+transitions, Base UI's `data-open` keyframes, the button-to-panel morph. That
+is the split Atlas Standards — the design system shared with the cloud apps —
+makes, and its spring and ease values are copied into `src/lib/motion.ts`:
+
+| constant | value | use |
+|---|---|---|
+| `SPRING_RAIL` | 420 / 40 | a sidebar changing width |
+| `SPRING_DOCK` | 380 / 40 | a dock or side panel opening beside the page |
+| `SPRING_INDICATOR` | 520 / 38 | a thumb, underline or tooltip sliding between options |
+| `SPRING_PILL` | 560 / 42 | a rail's active row sliding between destinations |
+| `EASE_PANEL` | `[0.22, 1, 0.36, 1]` | a panel entering, with `PANEL_ENTER` and `PANEL_STAGGER` |
+
+Import one; never write a stiffness at the call site. Reduced motion is handled
+once, by `<MotionConfig reducedMotion="user">` in `main.tsx` — which stills
+transforms only, so an animated `width` or `clipPath` checks
+`useReducedMotion()` itself (`artifacts-panel.tsx`, `tooltip-timing.ts`).
+
+In a happy-dom test, `motion` steps its frames on the `requestAnimationFrame` it
+captured at import, so fake timers do not reach it. See
+`src/components/titlebar-dock.test.tsx` for the `settle()` helper and
+`MotionGlobalConfig.instantAnimations`.
+
 ## Icons
 
 One wrapper: `src/ui/icon.tsx` (decision 30).
@@ -288,8 +340,9 @@ wrapper and uses it in the `src/ui` primitives only.
 
 ## States
 
-**Focus** (decision 31). There is one keyboard focus indicator: a 2px
-`var(--ring)` outline on `:focus-visible`, offset 1px, declared in `@layer base`
+**Focus** (decision 31, at Atlas Standards' weight). There is one keyboard
+focus indicator: a 1px `var(--ring)` outline — the foreground at 40% — on
+`:focus-visible`, offset 1px, declared in `@layer base`
 in `globals.css`. `:focus` stays bare, so a mouse click never draws a ring and a
 `role="tab"` host never looks stuck.
 

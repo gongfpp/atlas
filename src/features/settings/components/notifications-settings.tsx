@@ -4,7 +4,7 @@ import type { NotificationTier } from "@/features/notifications/lib/catalog";
 import { SectionTitle, SettingRow, Toggle } from "./settings-controls";
 
 const SELECT_CLASS =
-  "h-7 rounded-md border border-[var(--border)] bg-[var(--card)] px-2 text-xs text-[var(--foreground)] outline-none disabled:opacity-40";
+  "h-7 rounded-md border border-border bg-card px-2 text-xs text-foreground outline-none disabled:opacity-40";
 
 const DURATION_OPTIONS: { value: number; label: string }[] = [
   { value: 0, label: "Always" },
@@ -99,7 +99,7 @@ function TierGroup({ tier, masterOn }: { tier: NotificationTier; masterOn: boole
           />
         </SettingRow>
       )}
-      <ul className="flex flex-col gap-1.5 border-l border-[var(--border)] pl-3">
+      <ul className="flex flex-col gap-1.5 border-l border-border pl-3">
         {kinds.map(({ kind, entry }) => (
           <li key={kind} className="flex items-center justify-between gap-4">
             <span className="text-2xs text-muted-foreground">{entry.label}</span>

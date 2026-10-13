@@ -20,6 +20,12 @@ import { fileURLToPath } from "node:url";
  * finished and every count reached zero**, so the baseline is gone and this is
  * now a ban: a new violation fails, full stop.
  *
+ * Adopting Atlas Standards, the design system shared with the cloud apps,
+ * brought its rules here too. Those already at zero are bans like the rest;
+ * the ones with debt still owed carry a `ceiling` instead, and return to being
+ * bans as the sync pays them off. That is the old ratchet again, for those
+ * rules only.
+ *
  * That only works because the exits are real ones. A value that genuinely
  * cannot come from the scale gets `EXEMPT_FILES` (a whole file that DEFINES
  * the scale, or whose colours are not Atlas's to choose) or an inline
@@ -49,6 +55,13 @@ interface Rule {
   /** What to write instead. Printed on failure, so keep it actionable. */
   instead: string;
   pattern: RegExp;
+  /**
+   * Set only on a rule adopted from Atlas Standards before its debt was paid
+   * during the design-language sync. The count may not rise above
+   * it, and when it falls the ceiling has to come down with it, so a fix can
+   * never be quietly spent again. A rule without one is a ban.
+   */
+  ceiling?: number;
 }
 
 const RULES: Rule[] = [
@@ -118,6 +131,63 @@ const RULES: Rule[] = [
     // TSX is a string, so `zIndex: "var(--z-popover)"` is the correct fix and
     // the first version of this rule counted it as the violation.
     pattern: /\b(?:zIndex|fontSize|boxShadow)\s*:\s*(?!["'`]?\s*var\()["'`\d]/g,
+  },
+  {
+    id: "arbitrary-var",
+    instead:
+      "the named utility: text-muted-foreground, bg-element-hover, border-border-strong… " +
+      "A colour with no utility gets a `--color-*` line in globals.css; a non-colour " +
+      "variable uses Tailwind's shorthand, `origin-(--transform-origin)`.",
+    // Atlas Standards' rule. `text-[var(--muted-foreground)]` and
+    // `text-muted-foreground` compile to the same CSS, so the escape is a second
+    // spelling of every token: 2,929 of them were collapsed on 2026-10-13 with
+    // the screenshots byte-identical before and after. One name per pixel.
+    pattern: /\[var\(--/g,
+  },
+  {
+    id: "dark-variant",
+    instead:
+      "a token that already differs per appearance. A `dark:` class is a second " +
+      "colour system beside the theme, and it cannot reach a third-party theme's variant.",
+    pattern: /\bdark:[a-z[]/g,
+  },
+
+  {
+    id: "spring-literal",
+    instead:
+      "a spring from src/lib/motion.ts — SPRING_RAIL / SPRING_DOCK / SPRING_INDICATOR / " +
+      "SPRING_PILL. They are Standards' numbers, and one set is what makes the chrome " +
+      "move as one object.",
+    // The transition's `type`, not `stiffness:` — the graph views' force
+    // layouts have a stiffness of their own that is physics, not chrome.
+    pattern: /\btype:\s*["'`]spring["'`]/g,
+  },
+
+  // ── Adopted from Atlas Standards with debt still owed ──────────────────────
+  // Each carries a ceiling instead of being a ban. They reach zero during the
+  // design-language sync and then lose the ceiling.
+  {
+    id: "colour-function",
+    instead:
+      "a token. A tint of a token is its opacity modifier (`bg-primary/10`); a " +
+      "colour that is a role gets a key in keys.toml. Standards keeps `oklch()` " +
+      "and `color-mix()` in the token layer only.",
+    pattern: /\boklch\(|\bcolor-mix\(/g,
+    ceiling: 24,
+  },
+  {
+    id: "raised-shadow",
+    instead:
+      "a ring: `ring-1 ring-foreground/10` on a lighter surface step. Only what " +
+      "floats over content casts — `shadow-md` for menus and popovers, `shadow-lg` " +
+      "for dialogs and sheets.",
+    pattern: /\bshadow-(?:2?xs|sm|xl|2xl|black|white)(?:\/\d+)?\b/g,
+  },
+  {
+    id: "inline-radius",
+    instead: "a `rounded-*` class from the scale.",
+    pattern: /\bborderRadius\s*:\s*["'`]?\d/g,
+    ceiling: 12,
   },
 ];
 
@@ -375,7 +445,23 @@ describe("design-system ratchet", () => {
     ).toEqual([]);
   });
 
-  for (const rule of RULES) {
+  for (const rule of RULES.filter((r) => r.ceiling !== undefined)) {
+    it(`holds \`${rule.id}\` at its ceiling`, () => {
+      const ceiling = rule.ceiling ?? 0;
+      expect(
+        counts[rule.id],
+        [
+          `${counts[rule.id]} \`${rule.id}\` in ${SCAN_ROOTS.join(" + ")}; the ceiling is ${ceiling}.`,
+          counts[rule.id] > ceiling
+            ? `That is new debt. Use instead: ${rule.instead}`
+            : `It went DOWN — set this rule's \`ceiling\` to ${counts[rule.id]} so the fix stays fixed.`,
+          `Worst files: ${worst[rule.id].join(", ") || "none"}`,
+        ].join("\n"),
+      ).toBe(ceiling);
+    });
+  }
+
+  for (const rule of RULES.filter((r) => r.ceiling === undefined)) {
     it(`has no \`${rule.id}\``, () => {
       expect(
         counts[rule.id],

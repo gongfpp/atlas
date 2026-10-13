@@ -109,13 +109,8 @@ export function AiGrantBar({ turnRunning = false }: { turnRunning?: boolean }) {
         title="Atlas Agent works with organizations synced to your account"
       >
         <span className="min-w-0 truncate">
-          <span className="font-semibold text-[var(--foreground)]">
-            {orgName ?? "This organization"}
-          </span>
-          <span className="text-[var(--muted-foreground)]">
-            {" "}
-            is local — sync it to use Atlas Agent
-          </span>
+          <span className="font-semibold text-foreground">{orgName ?? "This organization"}</span>
+          <span className="text-muted-foreground"> is local — sync it to use Atlas Agent</span>
         </span>
 
         <div className="flex shrink-0 items-center gap-0.5">
@@ -137,7 +132,7 @@ export function AiGrantBar({ turnRunning = false }: { turnRunning?: boolean }) {
             <button
               type="button"
               onClick={() => dismiss()}
-              className="shrink-0 cursor-pointer rounded p-0.5 text-[var(--muted-foreground)] transition-colors hover:text-[var(--foreground)]"
+              className="shrink-0 cursor-pointer rounded p-0.5 text-muted-foreground transition-colors hover:text-foreground"
             >
               <X size={12} />
             </button>
@@ -152,10 +147,8 @@ export function AiGrantBar({ turnRunning = false }: { turnRunning?: boolean }) {
   return (
     <div data-testid="ai-grant-bar" className={STRIP} title={entitlement.message}>
       <span className="min-w-0 truncate">
-        <span className="font-semibold text-[var(--foreground)]">
-          {orgName ?? "This organization"}
-        </span>
-        <span className="text-[var(--muted-foreground)]"> doesn&apos;t have AI grants</span>
+        <span className="font-semibold text-foreground">{orgName ?? "This organization"}</span>
+        <span className="text-muted-foreground"> doesn&apos;t have AI grants</span>
       </span>
 
       <div className="flex shrink-0 items-center gap-0.5">
@@ -184,7 +177,7 @@ export function AiGrantBar({ turnRunning = false }: { turnRunning?: boolean }) {
           <button
             type="button"
             onClick={() => dismiss()}
-            className="shrink-0 cursor-pointer rounded p-0.5 text-[var(--muted-foreground)] transition-colors hover:text-[var(--foreground)]"
+            className="shrink-0 cursor-pointer rounded p-0.5 text-muted-foreground transition-colors hover:text-foreground"
           >
             <X size={12} />
           </button>

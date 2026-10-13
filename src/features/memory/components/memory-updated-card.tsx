@@ -61,55 +61,51 @@ export function MemoryUpdatedCard({
   return (
     <div
       className={cn(
-        "mx-auto my-2 w-full max-w-[760px] rounded-md border border-[var(--border)] bg-[var(--card)] text-xs",
+        "mx-auto my-2 w-full max-w-[760px] rounded-md border border-border bg-card text-xs",
         className,
       )}
     >
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
-        className="flex w-full items-center gap-1.5 px-2.5 py-1.5 text-left text-[var(--secondary-foreground)]"
+        className="flex w-full items-center gap-1.5 px-2.5 py-1.5 text-left text-secondary-foreground"
       >
         {open ? <ChevronDown size={12} /> : <ChevronRight size={12} />}
-        <Brain size={12} className="text-[var(--muted-foreground)]" />
+        <Brain size={12} className="text-muted-foreground" />
         <span>Memory updated: {writesSummary(writes)}</span>
       </button>
       {open && (
-        <ul className="flex flex-col border-t border-[var(--border)]">
+        <ul className="flex flex-col border-t border-border">
           {writes.map((w) => (
             <li key={w.rev} className="flex items-baseline gap-2 px-2.5 py-1.5">
-              <span className="w-16 shrink-0 text-3xs uppercase tracking-wide text-[var(--atlas-text-disabled)]">
+              <span className="w-16 shrink-0 text-3xs uppercase tracking-wide text-disabled">
                 {w.kind}
               </span>
               {w.live ? (
                 <button
                   type="button"
                   onClick={() => openEntry(w.id)}
-                  className="min-w-0 flex-1 break-words text-left text-[var(--foreground)] hover:underline"
+                  className="min-w-0 flex-1 break-words text-left text-foreground hover:underline"
                 >
                   {w.content}
                 </button>
               ) : (
-                <span className="min-w-0 flex-1 break-words text-[var(--foreground)]">
+                <span className="min-w-0 flex-1 break-words text-foreground">
                   {w.content || "(forgotten)"}
                 </span>
               )}
               {w.live && w.state === "candidate" && (
-                <span className="shrink-0 text-3xs uppercase text-[var(--muted-foreground)]">
-                  candidate
-                </span>
+                <span className="shrink-0 text-3xs uppercase text-muted-foreground">candidate</span>
               )}
               {/* Forgotten or archived since, by anyone: nothing left to forget. */}
               {!w.live && w.op !== "forget" && (
-                <span className="shrink-0 text-3xs uppercase text-[var(--muted-foreground)]">
-                  removed
-                </span>
+                <span className="shrink-0 text-3xs uppercase text-muted-foreground">removed</span>
               )}
               {w.live && (
                 <button
                   type="button"
                   onClick={() => setForgetting(w)}
-                  className="shrink-0 text-2xs text-[var(--muted-foreground)] hover:text-[var(--foreground)]"
+                  className="shrink-0 text-2xs text-muted-foreground hover:text-foreground"
                 >
                   Forget
                 </button>

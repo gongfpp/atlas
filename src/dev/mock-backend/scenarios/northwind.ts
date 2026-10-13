@@ -178,6 +178,7 @@ const text = (args: Record<string, unknown>, key: string) => String(args[key] ??
 export const northwind: Scenario = {
   name: "northwind",
   description:
+    // keycap-allow: scenario metadata for the console and the mock badge, not UI text.
     "Atlas Learn demo org: Northwind, northwind-shop on Cloud, #shop, Zuhayer — with live cues (Ctrl+Option+1…8).",
   commands: {
     ...northwindMiscCommands,

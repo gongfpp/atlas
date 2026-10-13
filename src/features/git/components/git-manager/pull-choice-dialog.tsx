@@ -41,7 +41,7 @@ export function PullChoiceDialog({ onChoose }: { onChoose: (strategy: PullStrate
     <Dialog.Root open={choice !== null} onOpenChange={(o) => !o && actions.dismissPullChoice()}>
       <Dialog.Portal>
         <Dialog.Backdrop className="fixed inset-0 scrim z-overlay" />
-        <Dialog.Popup className="fixed left-1/2 top-[24%] -translate-x-1/2 z-modal w-[440px] max-w-[calc(100vw-32px)] rounded-xl overflow-hidden bg-[var(--card)] border border-border shadow-md flex flex-col">
+        <Dialog.Popup className="fixed left-1/2 top-[24%] -translate-x-1/2 z-modal w-[440px] max-w-[calc(100vw-32px)] rounded-xl overflow-hidden bg-card border border-border shadow-md flex flex-col">
           {choice && (
             <>
               <div className="px-4 pt-3.5 pb-3 border-b border-border">
@@ -71,7 +71,7 @@ export function PullChoiceDialog({ onChoose }: { onChoose: (strategy: PullStrate
               </div>
 
               {choice.kind === "failed" && choice.error.rawStderr && (
-                <details className="border-t border-border bg-[var(--background)] px-3 py-2">
+                <details className="border-t border-border bg-background px-3 py-2">
                   <summary className="text-2xs text-muted-foreground cursor-pointer">
                     What git said
                   </summary>

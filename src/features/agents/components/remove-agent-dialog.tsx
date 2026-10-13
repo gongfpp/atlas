@@ -7,7 +7,7 @@ import { useRemoveAgentConfirmStore } from "../lib/remove-agent-confirm";
 
 /** The app's pill-button language (matches the stop-agents dialog). */
 const pillButton =
-  "inline-flex items-center gap-1.5 rounded-full border border-[var(--border)] px-3 py-1.5 text-xs font-medium leading-none cursor-pointer transition-colors";
+  "inline-flex items-center gap-1.5 rounded-full border border-border px-3 py-1.5 text-xs font-medium leading-none cursor-pointer transition-colors";
 
 /**
  * The destructive button, split out so its hover state cannot outlive the
@@ -33,7 +33,7 @@ function RemoveButton({ onConfirm }: { onConfirm: () => void }) {
       onPointerLeave={() => setArmed(false)}
       onFocus={() => setArmed(true)}
       onBlur={() => setArmed(false)}
-      className={cn(pillButton, "border-error/40 bg-[var(--card)] text-error hover:bg-error/10")}
+      className={cn(pillButton, "border-error/40 bg-card text-error hover:bg-error/10")}
     >
       <TrashGlyph armed={armed} size="sm" />
       Remove
@@ -59,17 +59,17 @@ export function RemoveAgentDialog() {
           aria-describedby={undefined}
           className={cn(
             "fixed left-1/2 top-1/2 z-modal -translate-x-1/2 -translate-y-1/2",
-            "w-[380px] max-w-[92vw] overflow-hidden rounded-xl border border-[var(--border)]",
-            "bg-[var(--card)]/60 backdrop-blur-2xl",
+            "w-[380px] max-w-[92vw] overflow-hidden rounded-xl border border-border",
+            "bg-card/60 backdrop-blur-2xl",
             "shadow-md animate-scale-in",
           )}
         >
           <div className="px-4 pt-3.5 pb-4">
-            <Dialog.Title className="flex items-center gap-2 text-base font-semibold tracking-[-0.01em] text-[var(--foreground)]">
+            <Dialog.Title className="flex items-center gap-2 text-base font-semibold tracking-[-0.01em] text-foreground">
               <Trash2 size={13} className="text-error" />
               Remove {pending.name}?
             </Dialog.Title>
-            <p className="mt-2 text-sm leading-relaxed text-[var(--secondary-foreground)]">
+            <p className="mt-2 text-sm leading-relaxed text-secondary-foreground">
               Chats with this agent stay in history. Any chat currently using it will be asked to
               switch agents. You can install it again at any time.
             </p>
@@ -79,7 +79,7 @@ export function RemoveAgentDialog() {
                 onClick={() => settle(false)}
                 className={cn(
                   pillButton,
-                  "bg-[var(--card)] text-[var(--secondary-foreground)] hover:bg-[var(--atlas-element-hover)] hover:text-[var(--foreground)]",
+                  "bg-card text-secondary-foreground hover:bg-element-hover hover:text-foreground",
                 )}
               >
                 Keep

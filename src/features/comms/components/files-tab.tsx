@@ -189,7 +189,7 @@ function MediaThumb({
         type="button"
         title={`${attachment.filename} · ${timeAgo(new Date(message.created_at).toISOString(), { suffix: true })}`}
         onClick={() => path && openMediaList(gallery, attachment.id)}
-        className="relative aspect-square overflow-hidden rounded-md border border-border-subtle bg-card cursor-zoom-in"
+        className="relative aspect-square overflow-hidden rounded-md border border-hairline bg-card cursor-zoom-in"
       >
         {path ? (
           isVideo ? (
@@ -202,7 +202,7 @@ function MediaThumb({
             />
           )
         ) : (
-          <span className="absolute inset-0 bg-[var(--card)] atlas-marker-running" />
+          <span className="absolute inset-0 bg-card atlas-marker-running" />
         )}
       </button>
     </>

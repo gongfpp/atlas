@@ -119,7 +119,7 @@ export function SearchOverlay({
           className={cn(
             "fixed top-[15%] left-1/2 -translate-x-1/2",
             "w-[600px] max-h-[500px] rounded-xl overflow-hidden",
-            "bg-[var(--card)] border border-[var(--border)]",
+            "bg-card border border-border",
             "shadow-md",
             "flex flex-col",
             "z-modal",
@@ -128,19 +128,17 @@ export function SearchOverlay({
           // preventDefault + focus(): hand it the element to land on.
           initialFocus={inputRef}
         >
-          <div className="flex items-center gap-2 px-4 h-[44px] shrink-0 border-b border-[var(--border)]">
-            <Search size={14} className="text-[var(--muted-foreground)] shrink-0" />
+          <div className="flex items-center gap-2 px-4 h-[44px] shrink-0 border-b border-border">
+            <Search size={14} className="text-muted-foreground shrink-0" />
             <input
               ref={inputRef}
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               onKeyDown={handleKeyDown}
               placeholder="Search in files..."
-              className="flex-1 bg-transparent border-none outline-none text-sm text-[var(--foreground)] placeholder:text-[var(--muted-foreground)]"
+              className="flex-1 bg-transparent border-none outline-none text-sm text-foreground placeholder:text-muted-foreground"
             />
-            {searching && (
-              <span className="text-2xs text-[var(--muted-foreground)]">Searching...</span>
-            )}
+            {searching && <span className="text-2xs text-muted-foreground">Searching...</span>}
             {TOGGLES.map(({ key, glyph, label }) => (
               <Hint key={key} label={label}>
                 <button
@@ -151,8 +149,8 @@ export function SearchOverlay({
                   className={cn(
                     "h-6 min-w-6 px-1 rounded-md font-mono text-2xs shrink-0 transition-colors",
                     options[key]
-                      ? "bg-[var(--atlas-element-hover)] text-[var(--foreground)]"
-                      : "text-[var(--muted-foreground)] hover:text-[var(--foreground)]",
+                      ? "bg-element-hover text-foreground"
+                      : "text-muted-foreground hover:text-foreground",
                   )}
                 >
                   {glyph}
@@ -163,19 +161,17 @@ export function SearchOverlay({
 
           <div className="overflow-y-auto flex-1 py-1">
             {error && !searching && (
-              <div className="px-4 py-6 text-center text-xs text-[var(--muted-foreground)]">
-                {error}
-              </div>
+              <div className="px-4 py-6 text-center text-xs text-muted-foreground">{error}</div>
             )}
             {results.length === 0 && hasSearched && !searching && !error && (
-              <div className="px-4 py-6 text-center text-xs text-[var(--muted-foreground)]">
+              <div className="px-4 py-6 text-center text-xs text-muted-foreground">
                 No results found
               </div>
             )}
             {!query.trim() && !hasSearched && session.searchHistory.length > 0 && (
               <div className="py-1">
                 <div className="flex items-center justify-between px-4 py-1">
-                  <span className="text-2xs text-[var(--muted-foreground)] uppercase tracking-wide font-semibold">
+                  <span className="text-2xs text-muted-foreground uppercase tracking-wide font-semibold">
                     Recent searches
                   </span>
                   <button
@@ -183,7 +179,7 @@ export function SearchOverlay({
                       clearSearchHistory();
                       if (currentProject) saveSession(currentProject.path);
                     }}
-                    className="text-3xs text-[var(--muted-foreground)] hover:text-[var(--secondary-foreground)] cursor-pointer"
+                    className="text-3xs text-muted-foreground hover:text-secondary-foreground cursor-pointer"
                   >
                     Clear all
                   </button>
@@ -191,7 +187,7 @@ export function SearchOverlay({
                 {session.searchHistory.slice(0, 8).map((q, i) => (
                   <div
                     key={`${q}-${i}`}
-                    className="flex items-center px-4 py-1.5 hover:bg-[var(--atlas-element-hover)] group"
+                    className="flex items-center px-4 py-1.5 hover:bg-element-hover group"
                   >
                     <button
                       onClick={() => {
@@ -200,8 +196,8 @@ export function SearchOverlay({
                       }}
                       className="flex items-center gap-2 flex-1 min-w-0 text-left"
                     >
-                      <Clock size={11} className="text-[var(--muted-foreground)] shrink-0" />
-                      <span className="text-xs text-[var(--secondary-foreground)] font-mono truncate">
+                      <Clock size={11} className="text-muted-foreground shrink-0" />
+                      <span className="text-xs text-secondary-foreground font-mono truncate">
                         {q}
                       </span>
                     </button>
@@ -211,7 +207,7 @@ export function SearchOverlay({
                           removeSearchHistory(q);
                           if (currentProject) saveSession(currentProject.path);
                         }}
-                        className="opacity-0 group-hover:opacity-100 focus-visible:opacity-100 p-0.5 text-[var(--muted-foreground)] hover:text-[var(--foreground)] shrink-0"
+                        className="opacity-0 group-hover:opacity-100 focus-visible:opacity-100 p-0.5 text-muted-foreground hover:text-foreground shrink-0"
                       >
                         <X size={9} />
                       </button>
@@ -221,7 +217,7 @@ export function SearchOverlay({
               </div>
             )}
             {!query.trim() && !hasSearched && session.searchHistory.length === 0 && (
-              <div className="px-4 py-6 text-center text-xs text-[var(--muted-foreground)]">
+              <div className="px-4 py-6 text-center text-xs text-muted-foreground">
                 Type to search across all files
               </div>
             )}
@@ -232,25 +228,23 @@ export function SearchOverlay({
                 onMouseEnter={() => setSelectedIndex(i)}
                 className={cn(
                   "w-full text-left px-4 py-1.5 transition-colors",
-                  i === selectedIndex ? "bg-[var(--atlas-element-hover)]" : "",
+                  i === selectedIndex ? "bg-element-hover" : "",
                 )}
               >
                 <div className="flex items-center gap-2">
-                  <FileCode size={12} className="text-[var(--muted-foreground)] shrink-0" />
-                  <span className="text-xs text-[var(--primary)] font-mono truncate">
-                    {result.path}
-                  </span>
-                  <span className="text-2xs text-[var(--muted-foreground)] font-mono shrink-0">
+                  <FileCode size={12} className="text-muted-foreground shrink-0" />
+                  <span className="text-xs text-primary font-mono truncate">{result.path}</span>
+                  <span className="text-2xs text-muted-foreground font-mono shrink-0">
                     :{result.line}
                   </span>
                 </div>
-                <div className="ml-5 text-xs font-mono text-[var(--secondary-foreground)] truncate mt-0.5">
+                <div className="ml-5 text-xs font-mono text-secondary-foreground truncate mt-0.5">
                   {result.text.trim()}
                 </div>
               </button>
             ))}
             {truncated && results.length > 0 && !searching && (
-              <div className="px-4 py-2 text-2xs text-[var(--muted-foreground)]">
+              <div className="px-4 py-2 text-2xs text-muted-foreground">
                 Showing the first {results.length} matches. Narrow the search to see the rest.
               </div>
             )}

@@ -44,7 +44,7 @@ export function AddProjectMenu() {
         <DropdownMenu.Trigger
           render={
             <button
-              className="flex size-6 items-center justify-center rounded-md text-[var(--muted-foreground)] hover:bg-[var(--atlas-element-hover)] hover:text-[var(--foreground)] outline-none transition-colors cursor-pointer"
+              className="flex size-6 items-center justify-center rounded-md text-muted-foreground hover:bg-element-hover hover:text-foreground outline-none transition-colors cursor-pointer"
               aria-label="Add project"
             >
               <Plus size={14} />
@@ -56,39 +56,39 @@ export function AddProjectMenu() {
         {/* Compact menu primitive — mirrors the source-control "filter files"
          *  dropdown: 26px rows, px-3 on both sides, border-b search header. */}
         <DropdownMenu.Positioner className="z-popover" align="end" sideOffset={4}>
-          <DropdownMenu.Popup className="w-[280px] max-h-[360px] rounded-lg border border-[var(--border)] bg-popover shadow-xl text-[var(--secondary-foreground)] flex flex-col overflow-hidden">
+          <DropdownMenu.Popup className="w-[280px] max-h-[360px] rounded-lg border border-border bg-popover shadow-md text-secondary-foreground flex flex-col overflow-hidden">
             <DropdownMenu.Item
               onClick={() => void pickAndAddProject()}
-              className="w-full flex items-center gap-2 px-3 h-[28px] text-xs outline-none hover:bg-[var(--atlas-element-hover)] hover:text-[var(--foreground)] cursor-default shrink-0"
+              className="w-full flex items-center gap-2 px-3 h-[28px] text-xs outline-none hover:bg-element-hover hover:text-foreground cursor-default shrink-0"
             >
-              <FolderOpen size={13} className="text-[var(--muted-foreground)] shrink-0" />
+              <FolderOpen size={13} className="text-muted-foreground shrink-0" />
               <span className="flex-1 text-left">Open Folder…</span>
             </DropdownMenu.Item>
             {recentProjects.length > 0 && (
               <>
                 <div
-                  className="flex items-center gap-1.5 px-3 h-[30px] border-y border-[var(--border)] shrink-0"
+                  className="flex items-center gap-1.5 px-3 h-[30px] border-y border-border shrink-0"
                   onKeyDown={(e) => {
                     // Keep keys from the popup's typeahead and arrow nav, but let Escape
                     // bubble to the dismiss handler so it still closes the popup.
                     if (e.key !== "Escape") e.stopPropagation();
                   }}
                 >
-                  <Search size={11} className="text-[var(--muted-foreground)] shrink-0" />
+                  <Search size={11} className="text-muted-foreground shrink-0" />
                   <input
                     autoFocus
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
                     placeholder="Search projects…"
-                    className="flex-1 bg-transparent outline-none text-2xs text-[var(--foreground)] placeholder:text-[var(--muted-foreground)]"
+                    className="flex-1 bg-transparent outline-none text-2xs text-foreground placeholder:text-muted-foreground"
                   />
                 </div>
-                <div className="px-3 pt-1.5 pb-0.5 text-3xs uppercase tracking-wide text-[var(--muted-foreground)] shrink-0">
+                <div className="px-3 pt-1.5 pb-0.5 text-3xs uppercase tracking-wide text-muted-foreground shrink-0">
                   Recent
                 </div>
                 <div className="overflow-y-auto py-1 hide-scrollbar">
                   {filtered.length === 0 ? (
-                    <div className="px-3 py-2 text-2xs text-[var(--muted-foreground)] text-center">
+                    <div className="px-3 py-2 text-2xs text-muted-foreground text-center">
                       No matches
                     </div>
                   ) : (
@@ -96,9 +96,9 @@ export function AddProjectMenu() {
                       <DropdownMenu.Item
                         key={p.path}
                         onClick={() => void addProject(p.path)}
-                        className="w-full flex items-center gap-2 px-3 h-control-md text-xs outline-none hover:bg-[var(--atlas-element-hover)] hover:text-[var(--foreground)] cursor-default"
+                        className="w-full flex items-center gap-2 px-3 h-control-md text-xs outline-none hover:bg-element-hover hover:text-foreground cursor-default"
                       >
-                        <Folder size={12} className="text-[var(--muted-foreground)] shrink-0" />
+                        <Folder size={12} className="text-muted-foreground shrink-0" />
                         <span className="truncate font-mono text-left flex-1">{p.name}</span>
                       </DropdownMenu.Item>
                     ))
@@ -106,7 +106,7 @@ export function AddProjectMenu() {
                 </div>
                 <DropdownMenu.Item
                   onClick={() => clearRecents()}
-                  className="w-full flex items-center gap-2 px-3 h-[28px] text-xs outline-none border-t border-[var(--border)] text-[var(--muted-foreground)] hover:bg-[var(--atlas-element-hover)] hover:text-error cursor-pointer shrink-0"
+                  className="w-full flex items-center gap-2 px-3 h-[28px] text-xs outline-none border-t border-border text-muted-foreground hover:bg-element-hover hover:text-error cursor-pointer shrink-0"
                 >
                   <Trash2 size={12} className="shrink-0" />
                   <span className="flex-1 text-left">Clear recent projects</span>

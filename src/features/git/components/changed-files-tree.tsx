@@ -60,30 +60,30 @@ function CommitPicker({
         type="button"
         onClick={() => setOpen((o) => !o)}
         title="Inspect a commit's changes"
-        className="flex h-6 w-full min-w-0 items-center gap-1 rounded border border-[var(--border)] bg-[var(--card)] px-1.5 text-2xs text-[var(--foreground)] outline-none hover:bg-[var(--atlas-element-hover)]"
+        className="flex h-6 w-full min-w-0 items-center gap-1 rounded border border-border bg-card px-1.5 text-2xs text-foreground outline-none hover:bg-element-hover"
       >
         {branch && (
-          <span className="flex shrink-0 items-center gap-0.5 rounded bg-[var(--card)] px-1 py-px text-3xs text-[var(--muted-foreground)]">
+          <span className="flex shrink-0 items-center gap-0.5 rounded bg-card px-1 py-px text-3xs text-muted-foreground">
             <GitBranch size={8} />
             <span className="max-w-[70px] truncate">{branch}</span>
           </span>
         )}
         <span className="min-w-0 flex-1 truncate text-left font-mono">{label}</span>
-        <ChevronDown size={11} className="shrink-0 text-[var(--muted-foreground)]" />
+        <ChevronDown size={11} className="shrink-0 text-muted-foreground" />
       </button>
       {open && (
         <>
           <div className="fixed inset-0 z-overlay" onClick={() => setOpen(false)} aria-hidden />
-          <div className="absolute left-0 right-0 top-full z-popover mt-1 overflow-hidden rounded-md border border-[var(--border)] bg-[var(--card)] shadow-md">
-            <div className="flex h-7 items-center gap-1.5 border-b border-[var(--atlas-border-subtle)] px-2">
-              <Search size={11} className="shrink-0 text-[var(--muted-foreground)]" />
+          <div className="absolute left-0 right-0 top-full z-popover mt-1 overflow-hidden rounded-md border border-border bg-card shadow-md">
+            <div className="flex h-7 items-center gap-1.5 border-b border-hairline px-2">
+              <Search size={11} className="shrink-0 text-muted-foreground" />
               <input
                 autoFocus
                 value={q}
                 onChange={(e) => setQ(e.target.value)}
                 placeholder="Search commits…"
                 spellCheck={false}
-                className="min-w-0 flex-1 bg-transparent text-2xs text-[var(--foreground)] outline-none placeholder:text-[var(--muted-foreground)]"
+                className="min-w-0 flex-1 bg-transparent text-2xs text-foreground outline-none placeholder:text-muted-foreground"
               />
             </div>
             <div className="max-h-[280px] overflow-y-auto hide-scrollbar py-1">
@@ -91,8 +91,8 @@ function CommitPicker({
                 type="button"
                 onClick={() => pick("")}
                 className={cn(
-                  "flex w-full items-center px-2 py-1.5 text-left text-2xs hover:bg-[var(--atlas-element-hover)]",
-                  !commit ? "text-[var(--foreground)]" : "text-[var(--secondary-foreground)]",
+                  "flex w-full items-center px-2 py-1.5 text-left text-2xs hover:bg-element-hover",
+                  !commit ? "text-foreground" : "text-secondary-foreground",
                 )}
               >
                 Working tree
@@ -103,20 +103,16 @@ function CommitPicker({
                   type="button"
                   onClick={() => pick(c.hash)}
                   className={cn(
-                    "flex w-full items-center gap-1.5 px-2 py-1.5 text-left text-2xs hover:bg-[var(--atlas-element-hover)]",
-                    c.hash === commit
-                      ? "text-[var(--foreground)]"
-                      : "text-[var(--secondary-foreground)]",
+                    "flex w-full items-center gap-1.5 px-2 py-1.5 text-left text-2xs hover:bg-element-hover",
+                    c.hash === commit ? "text-foreground" : "text-secondary-foreground",
                   )}
                 >
-                  <span className="shrink-0 font-mono text-[var(--muted-foreground)]">
-                    {c.short_hash}
-                  </span>
+                  <span className="shrink-0 font-mono text-muted-foreground">{c.short_hash}</span>
                   <span className="min-w-0 flex-1 truncate">{c.message}</span>
                 </button>
               ))}
               {filtered.length === 0 && (
-                <div className="px-2 py-2 text-2xs text-[var(--muted-foreground)]">No commits</div>
+                <div className="px-2 py-2 text-2xs text-muted-foreground">No commits</div>
               )}
             </div>
           </div>
@@ -348,13 +344,13 @@ export const ChangedFilesTree = memo(function ChangedFilesTree({
     });
 
   return (
-    <div className="flex h-full w-full flex-col border-r border-[var(--border)] bg-[var(--card)]">
-      <div className="flex h-8 shrink-0 items-center gap-1.5 border-b border-[var(--border)] px-2">
-        <GitCommit size={12} className="shrink-0 text-[var(--muted-foreground)]" />
+    <div className="flex h-full w-full flex-col border-r border-border bg-card">
+      <div className="flex h-8 shrink-0 items-center gap-1.5 border-b border-border px-2">
+        <GitCommit size={12} className="shrink-0 text-muted-foreground" />
         {!hidePicker && (
           <CommitPicker commit={commit} branch={branch} log={log} onPick={onPickCommit} />
         )}
-        <span className="shrink-0 text-2xs tabular-nums text-[var(--muted-foreground)]">
+        <span className="shrink-0 text-2xs tabular-nums text-muted-foreground">
           {rows.filter((r) => !r.node.isDir).length}
         </span>
       </div>
@@ -365,7 +361,7 @@ export const ChangedFilesTree = memo(function ChangedFilesTree({
             const pad = 6 + depth * 12;
             const common = {
               className:
-                "absolute left-0 right-0 flex items-center gap-1 pr-2 text-left hover:bg-[var(--atlas-element-hover)] cursor-pointer",
+                "absolute left-0 right-0 flex items-center gap-1 pr-2 text-left hover:bg-element-hover cursor-pointer",
               style: { top: vr.start, height: TREE_ROW_H, paddingLeft: pad },
             } as const;
             if (node.isDir) {
@@ -374,7 +370,7 @@ export const ChangedFilesTree = memo(function ChangedFilesTree({
                 <button
                   key={`d:${node.path}`}
                   onClick={() => toggle(node.path)}
-                  className={`${common.className} text-xs text-[var(--muted-foreground)]`}
+                  className={`${common.className} text-xs text-muted-foreground`}
                   style={common.style}
                 >
                   {open ? <ChevronDown size={11} /> : <ChevronRight size={11} />}
@@ -389,9 +385,7 @@ export const ChangedFilesTree = memo(function ChangedFilesTree({
                 onClick={() => openFile(node.path)}
                 title={node.path}
                 className={`${common.className} gap-1.5 text-xs ${
-                  active
-                    ? "bg-[var(--atlas-element-active,var(--atlas-element-hover))] text-[var(--foreground)]"
-                    : "text-[var(--secondary-foreground)]"
+                  active ? "bg-element-active text-foreground" : "text-secondary-foreground"
                 }`}
                 style={{ ...common.style, paddingLeft: pad + 12 }}
               >

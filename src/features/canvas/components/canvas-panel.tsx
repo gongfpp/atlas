@@ -60,7 +60,7 @@ export function CanvasPanel() {
         <Dialog.Backdrop className="fixed inset-0 z-overlay scrim" />
         <Dialog.Popup
           aria-describedby={undefined}
-          className="fixed top-12 left-6 right-6 bottom-6 z-modal rounded-xl border border-[var(--border)] bg-[var(--background)] overflow-hidden flex flex-col shadow-md focus:outline-none"
+          className="fixed top-12 left-6 right-6 bottom-6 z-modal rounded-xl border border-border bg-background overflow-hidden flex flex-col shadow-md focus:outline-none"
         >
           <Dialog.Title className="sr-only">Spaces</Dialog.Title>
           {surface}
@@ -473,7 +473,7 @@ function CanvasSurface({
           >
             {preview && (
               <div
-                className="absolute rounded border border-[var(--primary)] bg-[var(--primary)]/10 pointer-events-none"
+                className="absolute rounded border border-primary bg-primary/10 pointer-events-none"
                 style={{
                   left: preview.left,
                   top: preview.top,

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Loader2, OctagonX, Square } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { isMac } from "@/lib/platform";
 import { Hint } from "@/ui/tooltip";
 
 const FORCE_STOP_DELAY_MS = 1500;
@@ -46,7 +47,9 @@ export function TerminalStopControl({
         : force
           ? "Force stop process"
           : "Stop process";
-  const shortcut = phase === "ready" ? "Ctrl+C" : undefined;
+  // The terminal's own interrupt: Control on every OS, ⌃ being how a Mac
+  // draws it.
+  const shortcut = phase === "ready" ? (isMac ? "⌃C" : "Ctrl+C") : undefined;
 
   const stop = async () => {
     if (!force) {
@@ -69,12 +72,13 @@ export function TerminalStopControl({
         type="button"
         onClick={() => void stop()}
         disabled={pending}
-        aria-label={shortcut ? `${label} (${shortcut})` : label}
+        aria-label={label}
+        aria-keyshortcuts={shortcut ? "Control+C" : undefined}
         className={cn(
           "flex h-5 w-5 shrink-0 items-center justify-center rounded transition-colors",
           force
-            ? "text-[var(--atlas-status-error-foreground)] hover:bg-[var(--atlas-status-error-foreground)]/10"
-            : "text-[var(--muted-foreground)] hover:bg-[var(--atlas-element-hover)] hover:text-[var(--foreground)]",
+            ? "text-error hover:bg-error/10"
+            : "text-muted-foreground hover:bg-element-hover hover:text-foreground",
           pending ? "cursor-wait" : "cursor-pointer",
           className,
         )}

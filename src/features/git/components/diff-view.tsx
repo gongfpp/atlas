@@ -302,7 +302,7 @@ export function DiffView({
                     style={{ ...base, backgroundColor: "var(--atlas-diff-context-background)" }}
                     className="group/hunk flex items-center gap-2 px-2 h-[22px] border-x border-border text-2xs font-mono text-muted-foreground"
                   >
-                    <span className="truncate flex-1 text-[var(--atlas-status-info-foreground)]/70 select-text">
+                    <span className="truncate flex-1 text-info/70 select-text">
                       {row.hunk.header}
                     </span>
                     {selectable && hunkActions && (
@@ -350,7 +350,7 @@ export function DiffView({
                                 row.hunkIndex,
                               )
                             }
-                            className="px-1.5 h-[16px] rounded border border-border text-3xs text-secondary-foreground hover:text-[var(--atlas-status-error-foreground)] hover:bg-element-hover"
+                            className="px-1.5 h-[16px] rounded border border-border text-3xs text-secondary-foreground hover:text-error hover:bg-element-hover"
                           >
                             {label("Discard")}
                           </button>
@@ -492,7 +492,7 @@ function LangFilterPopover({
       </HintItem>
       <Popover.Portal>
         <Popover.Positioner className="z-popover" side="bottom" align="end" sideOffset={4}>
-          <Popover.Popup className="w-[140px] rounded-lg border border-border bg-[var(--card)] shadow-md py-1">
+          <Popover.Popup className="w-[140px] rounded-lg border border-border bg-card shadow-md py-1">
             <button
               onClick={() => onSelect(null)}
               className={cn(
@@ -543,7 +543,7 @@ function FileListPopover({
       </HintItem>
       <Popover.Portal>
         <Popover.Positioner className="z-popover" side="bottom" align="end" sideOffset={4}>
-          <Popover.Popup className="w-[280px] max-h-[300px] rounded-lg border border-border bg-[var(--card)] shadow-md flex flex-col">
+          <Popover.Popup className="w-[280px] max-h-[300px] rounded-lg border border-border bg-card shadow-md flex flex-col">
             <div className="flex items-center gap-1.5 px-2 h-[30px] border-b border-border shrink-0">
               <Search size={10} className="text-muted-foreground shrink-0" />
               <input

@@ -176,7 +176,7 @@ export function MergeBranchDialog({
       <Dialog.Portal>
         <Dialog.Backdrop className="fixed inset-0 scrim z-overlay" />
         <Dialog.Popup
-          className="fixed left-1/2 top-[22%] -translate-x-1/2 z-modal w-[420px] rounded-xl overflow-hidden bg-[var(--card)] border border-border shadow-md flex flex-col"
+          className="fixed left-1/2 top-[22%] -translate-x-1/2 z-modal w-[420px] rounded-xl overflow-hidden bg-card border border-border shadow-md flex flex-col"
           // Keep focus on the filter input (rendered below), not the list.
           // `false` is Base UI's spelling of Radix's preventDefault() here.
           initialFocus={false}
@@ -252,7 +252,7 @@ export function MergeBranchDialog({
               </p>
             )}
             {staleUpstream && (
-              <p className="text-xs text-[var(--atlas-status-warning-foreground)] flex items-start gap-1.5">
+              <p className="text-xs text-warning flex items-start gap-1.5">
                 <AlertTriangle size={11} className="shrink-0 mt-0.5" />
                 <span>
                   <span className="font-mono">{selected}</span> is behind{" "}
@@ -359,14 +359,14 @@ function MergePreviewLine({
       );
     case "invalid":
       return (
-        <p className="text-xs text-[var(--atlas-status-error-foreground)] flex items-center gap-1.5">
+        <p className="text-xs text-error flex items-center gap-1.5">
           <Ban size={11} className="shrink-0" />
           Unable to merge unrelated histories.
         </p>
       );
     case "conflicts":
       return (
-        <p className="text-xs text-[var(--atlas-status-warning-foreground)] flex items-center gap-1.5">
+        <p className="text-xs text-warning flex items-center gap-1.5">
           <AlertTriangle size={11} className="shrink-0" />
           <span>
             {plural(preview.conflictedFiles, "file")} will conflict when merging {src} into {dst}.

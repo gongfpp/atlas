@@ -161,7 +161,7 @@ const ProjectRow = memo(function ProjectRow({
         // The hover fill lands instantly now, which at this row height reads as
         // crisp rather than abrupt.
         "group relative flex items-center gap-2.5 pr-1.5 rounded-md cursor-pointer",
-        active ? "bg-[var(--atlas-element-active)]" : "hover:bg-[var(--atlas-element-hover)]",
+        active ? "bg-element-active" : "hover:bg-element-hover",
       )}
     >
       <GitDot summary={summary} className="size-1.5" />
@@ -181,7 +181,7 @@ const ProjectRow = memo(function ProjectRow({
               if (e.key === "Enter") commitRename();
               if (e.key === "Escape") endRenameProject();
             }}
-            className="block w-full bg-transparent outline-none text-sm leading-tight text-[var(--foreground)]"
+            className="block w-full bg-transparent outline-none text-sm leading-tight text-foreground"
           />
         ) : (
           <span
@@ -192,14 +192,14 @@ const ProjectRow = memo(function ProjectRow({
             className={cn(
               "block truncate text-sm leading-tight",
               active
-                ? "text-[var(--foreground)] font-medium"
-                : "text-[var(--secondary-foreground)] group-hover:text-[var(--foreground)]",
+                ? "text-foreground font-medium"
+                : "text-secondary-foreground group-hover:text-foreground",
             )}
           >
             {ws.name}
           </span>
         )}
-        <span className="mt-0.5 block truncate text-2xs leading-tight text-[var(--muted-foreground)]">
+        <span className="mt-0.5 block truncate text-2xs leading-tight text-muted-foreground">
           {summary?.isRepo ? summary.branch || "—" : "no source control"}
         </span>
       </div>
@@ -225,7 +225,7 @@ const ProjectRow = memo(function ProjectRow({
                 }}
                 // Hover-only even when pinned: the "Pinned" section already
                 // says so, and a resting PinOff sat on top of the +N/−M pill.
-                className="flex size-5 items-center justify-center rounded text-[var(--muted-foreground)] opacity-0 group-hover:opacity-100 focus-visible:opacity-100 hover:bg-[var(--card)] hover:text-[var(--foreground)] cursor-pointer"
+                className="flex size-5 items-center justify-center rounded text-muted-foreground opacity-0 group-hover:opacity-100 focus-visible:opacity-100 hover:bg-card hover:text-foreground cursor-pointer"
               >
                 {ws.pinned ? <PinOff size={11} /> : <Pin size={11} />}
               </button>
@@ -236,7 +236,7 @@ const ProjectRow = memo(function ProjectRow({
                   render={
                     <button
                       onClick={(e) => e.stopPropagation()}
-                      className="flex size-5 items-center justify-center rounded text-[var(--muted-foreground)] opacity-0 group-hover:opacity-100 focus-visible:opacity-100 hover:bg-[var(--card)] hover:text-[var(--foreground)] outline-none cursor-pointer"
+                      className="flex size-5 items-center justify-center rounded text-muted-foreground opacity-0 group-hover:opacity-100 focus-visible:opacity-100 hover:bg-card hover:text-foreground outline-none cursor-pointer"
                     >
                       <MoreHorizontal size={12} />
                     </button>
@@ -254,11 +254,11 @@ const ProjectRow = memo(function ProjectRow({
                     // commitRename → edit mode exits. `finalFocus={false}`
                     // leaves focus alone so the input keeps it.
                     finalFocus={false}
-                    className="min-w-[148px] rounded-md border border-[var(--border)] bg-popover py-0.5 shadow-md text-xs text-[var(--secondary-foreground)]"
+                    className="min-w-[148px] rounded-md border border-border bg-popover py-0.5 shadow-md text-xs text-secondary-foreground"
                   >
                     <DropdownMenu.Item
                       onClick={() => beginRenameProject(ws.id)}
-                      className="px-2.5 h-6 flex items-center gap-1.5 outline-none hover:bg-[var(--atlas-element-hover)] hover:text-[var(--foreground)] cursor-default"
+                      className="px-2.5 h-6 flex items-center gap-1.5 outline-none hover:bg-element-hover hover:text-foreground cursor-default"
                     >
                       <Pencil size={11} /> Rename
                     </DropdownMenu.Item>
@@ -269,23 +269,23 @@ const ProjectRow = memo(function ProjectRow({
                           .then(() => toast.success("Path copied"))
                           .catch(() => toast.error("Couldn't copy path"));
                       }}
-                      className="px-2.5 h-6 flex items-center gap-1.5 outline-none hover:bg-[var(--atlas-element-hover)] hover:text-[var(--foreground)] cursor-default"
+                      className="px-2.5 h-6 flex items-center gap-1.5 outline-none hover:bg-element-hover hover:text-foreground cursor-default"
                     >
                       <Copy size={11} /> Copy path
                     </DropdownMenu.Item>
-                    <DropdownMenu.Separator className="my-0.5 h-px bg-[var(--border)]" />
+                    <DropdownMenu.Separator className="my-0.5 h-px bg-border" />
                     <DropdownMenu.SubmenuRoot>
-                      <DropdownMenu.SubmenuTrigger className="flex items-center justify-between px-2.5 h-6 outline-none hover:bg-[var(--atlas-element-hover)] hover:text-[var(--foreground)] cursor-default">
+                      <DropdownMenu.SubmenuTrigger className="flex items-center justify-between px-2.5 h-6 outline-none hover:bg-element-hover hover:text-foreground cursor-default">
                         Move to group <ChevronRight size={11} />
                       </DropdownMenu.SubmenuTrigger>
                       <DropdownMenu.Portal>
                         <DropdownMenu.Positioner className="z-popover" side="right" align="start">
-                          <DropdownMenu.Popup className="min-w-[140px] rounded-md border border-[var(--border)] bg-popover py-0.5 shadow-md text-xs text-[var(--secondary-foreground)]">
+                          <DropdownMenu.Popup className="min-w-[140px] rounded-md border border-border bg-popover py-0.5 shadow-md text-xs text-secondary-foreground">
                             {groups.map((g) => (
                               <DropdownMenu.Item
                                 key={g.id}
                                 onClick={() => setGroup(ws.id, g.id)}
-                                className="px-2.5 h-6 flex items-center outline-none hover:bg-[var(--atlas-element-hover)] hover:text-[var(--foreground)] cursor-default"
+                                className="px-2.5 h-6 flex items-center outline-none hover:bg-element-hover hover:text-foreground cursor-default"
                               >
                                 {g.name}
                               </DropdownMenu.Item>
@@ -295,16 +295,16 @@ const ProjectRow = memo(function ProjectRow({
                                 const gid = addGroup("New Group");
                                 setGroup(ws.id, gid);
                               }}
-                              className="px-2.5 h-6 flex items-center gap-1.5 outline-none hover:bg-[var(--atlas-element-hover)] hover:text-[var(--foreground)] cursor-default"
+                              className="px-2.5 h-6 flex items-center gap-1.5 outline-none hover:bg-element-hover hover:text-foreground cursor-default"
                             >
                               <FolderPlus size={11} /> New group
                             </DropdownMenu.Item>
                             {ws.groupId && (
                               <>
-                                <DropdownMenu.Separator className="my-0.5 h-px bg-[var(--border)]" />
+                                <DropdownMenu.Separator className="my-0.5 h-px bg-border" />
                                 <DropdownMenu.Item
                                   onClick={() => setGroup(ws.id, null)}
-                                  className="px-2.5 h-6 flex items-center outline-none hover:bg-[var(--atlas-element-hover)] hover:text-[var(--foreground)] cursor-default"
+                                  className="px-2.5 h-6 flex items-center outline-none hover:bg-element-hover hover:text-foreground cursor-default"
                                 >
                                   Remove from group
                                 </DropdownMenu.Item>
@@ -314,10 +314,10 @@ const ProjectRow = memo(function ProjectRow({
                         </DropdownMenu.Positioner>
                       </DropdownMenu.Portal>
                     </DropdownMenu.SubmenuRoot>
-                    <DropdownMenu.Separator className="my-0.5 h-px bg-[var(--border)]" />
+                    <DropdownMenu.Separator className="my-0.5 h-px bg-border" />
                     <DropdownMenu.Item
                       onClick={() => void closeProject(ws.id)}
-                      className="px-2.5 h-6 flex items-center gap-1.5 outline-none hover:bg-[var(--atlas-element-hover)] hover:text-error cursor-default"
+                      className="px-2.5 h-6 flex items-center gap-1.5 outline-none hover:bg-element-hover hover:text-error cursor-default"
                     >
                       <X size={11} /> Remove from list
                     </DropdownMenu.Item>
@@ -361,16 +361,16 @@ const GroupHeaderRow = memo(function GroupHeaderRow({
     <div
       data-hint
       style={{ height: HEADER_H }}
-      className="group/h flex items-center gap-2 pl-2 pr-1.5 rounded-md cursor-pointer hover:bg-[var(--atlas-element-hover)]"
+      className="group/h flex items-center gap-2 pl-2 pr-1.5 rounded-md cursor-pointer hover:bg-element-hover"
       onClick={editing ? undefined : () => onToggle(group.id)}
     >
       {/* Icon and label are sized together: a 12px folder under an 11px label,
           the same pairing the rows below use. A 12px label over an 11px icon
           read as a heading that had lost its glyph. */}
       {collapsed ? (
-        <Folder size={12} className="text-[var(--muted-foreground)] shrink-0" />
+        <Folder size={12} className="text-muted-foreground shrink-0" />
       ) : (
-        <FolderOpen size={12} className="text-[var(--muted-foreground)] shrink-0" />
+        <FolderOpen size={12} className="text-muted-foreground shrink-0" />
       )}
       {editing ? (
         <input
@@ -385,7 +385,7 @@ const GroupHeaderRow = memo(function GroupHeaderRow({
             if (e.key === "Enter") commit();
             if (e.key === "Escape") endRenameGroup();
           }}
-          className="min-w-0 flex-1 bg-transparent outline-none text-xs leading-none text-[var(--foreground)]"
+          className="min-w-0 flex-1 bg-transparent outline-none text-xs leading-none text-foreground"
         />
       ) : (
         <span
@@ -393,7 +393,7 @@ const GroupHeaderRow = memo(function GroupHeaderRow({
             e.stopPropagation();
             beginRenameGroup(group.id);
           }}
-          className="min-w-0 flex-1 truncate text-xs leading-normal text-[var(--secondary-foreground)] group-hover/h:text-[var(--foreground)]"
+          className="min-w-0 flex-1 truncate text-xs leading-normal text-secondary-foreground group-hover/h:text-foreground"
         >
           {group.name}
         </span>
@@ -411,7 +411,7 @@ const GroupHeaderRow = memo(function GroupHeaderRow({
                   e.stopPropagation();
                   beginRenameGroup(group.id);
                 }}
-                className="flex size-5 items-center justify-center rounded text-[var(--muted-foreground)] opacity-0 hover:bg-[var(--card)] hover:text-[var(--foreground)] group-hover/h:opacity-100 focus-visible:opacity-100 cursor-pointer"
+                className="flex size-5 items-center justify-center rounded text-muted-foreground opacity-0 hover:bg-card hover:text-foreground group-hover/h:opacity-100 focus-visible:opacity-100 cursor-pointer"
               >
                 <Pencil size={10} />
               </button>
@@ -425,10 +425,10 @@ const GroupHeaderRow = memo(function GroupHeaderRow({
                 else pinGroup(group.id);
               }}
               className={cn(
-                "flex size-5 items-center justify-center rounded hover:bg-[var(--card)] cursor-pointer",
+                "flex size-5 items-center justify-center rounded hover:bg-card cursor-pointer",
                 group.pinned
-                  ? "opacity-100 text-[var(--primary)]"
-                  : "opacity-0 group-hover/h:opacity-100 focus-visible:opacity-100 text-[var(--muted-foreground)]",
+                  ? "opacity-100 text-primary"
+                  : "opacity-0 group-hover/h:opacity-100 focus-visible:opacity-100 text-muted-foreground",
               )}
             >
               {group.pinned ? <PinOff size={10} /> : <Pin size={10} />}
@@ -440,7 +440,7 @@ const GroupHeaderRow = memo(function GroupHeaderRow({
                 e.stopPropagation();
                 removeGroup(group.id);
               }}
-              className="flex size-5 items-center justify-center rounded text-[var(--muted-foreground)] opacity-0 hover:bg-[var(--card)] hover:text-[var(--foreground)] group-hover/h:opacity-100 focus-visible:opacity-100 cursor-pointer"
+              className="flex size-5 items-center justify-center rounded text-muted-foreground opacity-0 hover:bg-card hover:text-foreground group-hover/h:opacity-100 focus-visible:opacity-100 cursor-pointer"
             >
               <X size={10} />
             </button>
@@ -449,7 +449,7 @@ const GroupHeaderRow = memo(function GroupHeaderRow({
             <ChevronDown
               size={10}
               className={cn(
-                "shrink-0 text-[var(--muted-foreground)] transition-transform",
+                "shrink-0 text-muted-foreground transition-transform",
                 collapsed && "-rotate-90",
               )}
             />
@@ -494,9 +494,9 @@ const SectionHeaderRow = memo(function SectionHeaderRow({
         data-hint
         onClick={() => onToggle(id)}
         style={{ height: HEADER_H }}
-        className="group/s flex w-full items-center gap-1 rounded-md px-2 outline-none cursor-pointer hover:bg-[var(--atlas-element-hover)]"
+        className="group/s flex w-full items-center gap-1 rounded-md px-2 outline-none cursor-pointer hover:bg-element-hover"
       >
-        <span className="text-xs font-semibold leading-none text-[var(--secondary-foreground)] group-hover/s:text-[var(--foreground)]">
+        <span className="text-xs font-semibold leading-none text-secondary-foreground group-hover/s:text-foreground">
           {label}
         </span>
         {/* Promoted, and NO opacity tween on the action: fading an unpromoted
@@ -505,10 +505,7 @@ const SectionHeaderRow = memo(function SectionHeaderRow({
         <span className="flex items-center transform-gpu [backface-visibility:hidden]">
           <ChevronDown
             size={10}
-            className={cn(
-              "text-[var(--muted-foreground)] transition-transform",
-              collapsed && "-rotate-90",
-            )}
+            className={cn("text-muted-foreground transition-transform", collapsed && "-rotate-90")}
           />
         </span>
         {clearable && onClear && (
@@ -518,7 +515,7 @@ const SectionHeaderRow = memo(function SectionHeaderRow({
                 e.stopPropagation();
                 onClear(id);
               }}
-              className="ml-auto flex size-5 items-center justify-center rounded text-[var(--muted-foreground)] opacity-0 group-hover/s:opacity-100 focus-visible:opacity-100 hover:bg-[var(--card)] hover:text-error outline-none cursor-pointer transform-gpu [backface-visibility:hidden]"
+              className="ml-auto flex size-5 items-center justify-center rounded text-muted-foreground opacity-0 group-hover/s:opacity-100 focus-visible:opacity-100 hover:bg-card hover:text-error outline-none cursor-pointer transform-gpu [backface-visibility:hidden]"
             >
               <Trash2 size={11} />
             </button>
@@ -544,11 +541,11 @@ const RecentProjectRow = memo(function RecentProjectRow({
       data-hint
       onClick={() => onOpen(path)}
       style={{ height: ROW_CARD, paddingLeft: 8 }}
-      className="group flex items-center gap-2.5 pr-1.5 rounded-md cursor-pointer hover:bg-[var(--atlas-element-hover)]"
+      className="group flex items-center gap-2.5 pr-1.5 rounded-md cursor-pointer hover:bg-element-hover"
       title={path}
     >
-      <Folder size={13} className="shrink-0 text-[var(--muted-foreground)]" />
-      <span className="flex-1 min-w-0 truncate text-sm leading-normal text-[var(--secondary-foreground)] group-hover:text-[var(--foreground)]">
+      <Folder size={13} className="shrink-0 text-muted-foreground" />
+      <span className="flex-1 min-w-0 truncate text-sm leading-normal text-secondary-foreground group-hover:text-foreground">
         {name}
       </span>
     </div>
@@ -591,11 +588,11 @@ const ChatRow = memo(function ChatRow({
       data-hint
       onClick={() => onOpen(chat)}
       style={{ height: CHAT_CARD, paddingLeft: 8 }}
-      className="group relative flex items-start gap-2.5 pr-2 pt-1.5 rounded-md cursor-pointer hover:bg-[var(--atlas-element-hover)]"
+      className="group relative flex items-start gap-2.5 pr-2 pt-1.5 rounded-md cursor-pointer hover:bg-element-hover"
       title={`${chat.projectName} — ${chat.projectPath}`}
     >
       {running ? (
-        <AtlasLoader size={12} className="shrink-0 text-[var(--primary)]" />
+        <AtlasLoader size={12} className="shrink-0 text-primary" />
       ) : chat.agentType === "atlas-agent" ? (
         <AtlasIcon size={13} className="shrink-0" />
       ) : (
@@ -610,18 +607,16 @@ const ChatRow = memo(function ChatRow({
         <span
           className={cn(
             "block truncate text-sm leading-tight",
-            running
-              ? "text-[var(--foreground)]"
-              : "text-[var(--secondary-foreground)] group-hover:text-[var(--foreground)]",
+            running ? "text-foreground" : "text-secondary-foreground group-hover:text-foreground",
           )}
         >
           {stripInjectedContext(chat.title) || chat.projectName}
         </span>
-        <span className="mt-0.5 block truncate text-2xs leading-tight text-[var(--muted-foreground)]">
+        <span className="mt-0.5 block truncate text-2xs leading-tight text-muted-foreground">
           {chat.projectName}
         </span>
       </div>
-      <span className="absolute right-2 top-2 shrink-0 text-2xs leading-none tabular-nums text-[var(--muted-foreground)]">
+      <span className="absolute right-2 top-2 shrink-0 text-2xs leading-none tabular-nums text-muted-foreground">
         {relTime(chat.updatedAt)}
       </span>
     </div>
@@ -1086,7 +1081,8 @@ export function ProjectSidebar() {
                 <NavItem
                   icon={<Ellipsis size={14} />}
                   label="More"
-                  title={newTabHint ? `Open a module (${newTabHint})` : "Open a module"}
+                  title="Open a module"
+                  shortcut={newTabHint}
                   onClick={() => window.dispatchEvent(new CustomEvent("atlas:new-tab-palette"))}
                 />
               </>
@@ -1120,41 +1116,51 @@ function NavItem({
   active,
   disabled,
   title,
+  shortcut,
 }: {
   icon: React.ReactNode;
   label: string;
   onClick: () => void;
   active?: boolean;
   disabled?: boolean;
+  /** A tooltip, for a row whose label does not say everything. */
   title?: string;
+  /** A combo string, drawn as keycaps in that tooltip. */
+  shortcut?: string;
 }) {
-  return (
+  const row = (
     <button
       type="button"
       onClick={onClick}
       disabled={disabled}
-      title={title}
       aria-pressed={active}
       className={cn(
         "group/nav flex h-7 w-full items-center gap-2.5 rounded-md px-2 text-left text-sm leading-none outline-none transition-colors cursor-pointer",
         "disabled:cursor-default disabled:opacity-40",
         active
-          ? "bg-[var(--atlas-element-active)] text-[var(--foreground)]"
-          : "text-[var(--secondary-foreground)] hover:bg-[var(--atlas-element-hover)] hover:text-[var(--foreground)]",
+          ? "bg-element-active text-foreground"
+          : "text-secondary-foreground hover:bg-element-hover hover:text-foreground",
       )}
     >
       <span
         className={cn(
           "flex shrink-0 items-center justify-center",
           active
-            ? "text-[var(--foreground)]"
-            : "text-[var(--muted-foreground)] group-hover/nav:text-[var(--secondary-foreground)]",
+            ? "text-foreground"
+            : "text-muted-foreground group-hover/nav:text-secondary-foreground",
         )}
       >
         {icon}
       </span>
       <span className="truncate">{label}</span>
     </button>
+  );
+  return title ? (
+    <Hint label={title} shortcut={shortcut} side="right">
+      {row}
+    </Hint>
+  ) : (
+    row
   );
 }
 
@@ -1418,7 +1424,7 @@ function VirtualRail({
 }
 
 function EmptyRail() {
-  return <div className="px-2 py-3 text-xs text-[var(--muted-foreground)]">No projects yet.</div>;
+  return <div className="px-2 py-3 text-xs text-muted-foreground">No projects yet.</div>;
 }
 
 /** Where the help menu points. Grouped as they render: docs and support, then
@@ -1441,9 +1447,9 @@ function HelpItem({
   return (
     <DropdownMenu.Item
       onClick={onSelect}
-      className="flex h-control-md items-center gap-2 rounded-md px-1.5 text-xs text-[var(--secondary-foreground)] outline-none transition-colors hover:bg-[var(--atlas-element-hover)] hover:text-[var(--foreground)] cursor-pointer"
+      className="flex h-control-md items-center gap-2 rounded-md px-1.5 text-xs text-secondary-foreground outline-none transition-colors hover:bg-element-hover hover:text-foreground cursor-pointer"
     >
-      <span className="flex size-3.5 shrink-0 items-center justify-center text-[var(--muted-foreground)]">
+      <span className="flex size-3.5 shrink-0 items-center justify-center text-muted-foreground">
         {icon}
       </span>
       <span className="flex-1 text-left">{label}</span>
@@ -1463,7 +1469,7 @@ function HelpMenu() {
             <button
               type="button"
               aria-label="Help and community"
-              className="flex size-[22px] items-center justify-center rounded-full border border-border-subtle text-[var(--muted-foreground)] outline-none transition-colors hover:bg-[var(--atlas-element-hover)] hover:text-[var(--foreground)] cursor-pointer"
+              className="flex size-[22px] items-center justify-center rounded-full border border-hairline text-muted-foreground outline-none transition-colors hover:bg-element-hover hover:text-foreground cursor-pointer"
             >
               <HelpCircle size={12} />
             </button>
@@ -1472,7 +1478,7 @@ function HelpMenu() {
       </Hint>
       <DropdownMenu.Portal>
         <DropdownMenu.Positioner className="z-popover" align="start" side="top" sideOffset={6}>
-          <DropdownMenu.Popup className="w-[212px] overflow-hidden rounded-xl border border-border-subtle bg-[var(--card)]/95 p-1 backdrop-blur-2xl shadow-md select-none">
+          <DropdownMenu.Popup className="w-[212px] overflow-hidden rounded-xl border border-hairline bg-card/95 p-1 backdrop-blur-2xl shadow-md select-none">
             <HelpItem
               icon={<BookOpen size={12} />}
               label="Docs"
@@ -1574,7 +1580,7 @@ function AppVersion() {
           else toast.error("Could not copy the version.");
         });
       }}
-      className="cursor-pointer select-none pr-1 font-mono text-2xs tabular-nums text-[var(--muted-foreground)] transition-colors hover:text-[var(--secondary-foreground)]"
+      className="cursor-pointer select-none pr-1 font-mono text-2xs tabular-nums text-muted-foreground transition-colors hover:text-secondary-foreground"
     >
       v{version}
     </button>
@@ -1599,10 +1605,8 @@ function RailIconButton({
         type="button"
         onClick={onClick}
         className={cn(
-          "flex size-6 items-center justify-center rounded-md outline-none transition-colors cursor-pointer hover:bg-[var(--atlas-element-hover)]",
-          active
-            ? "text-[var(--primary)]"
-            : "text-[var(--muted-foreground)] hover:text-[var(--foreground)]",
+          "flex size-6 items-center justify-center rounded-md outline-none transition-colors cursor-pointer hover:bg-element-hover",
+          active ? "text-primary" : "text-muted-foreground hover:text-foreground",
         )}
       >
         {children}

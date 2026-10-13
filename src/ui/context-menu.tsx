@@ -2,6 +2,7 @@ import * as React from "react";
 import { ContextMenu as ContextMenuPrimitive } from "@base-ui/react/context-menu";
 import { Check, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { KbdCombo } from "@/ui/kbd";
 
 /**
  * Atlas-themed shadcn base-style context menu built on
@@ -30,7 +31,7 @@ const ContextMenuRadioGroup = ContextMenuPrimitive.RadioGroup;
 const POPUP = [
   "min-w-[11rem] overflow-hidden rounded-lg p-0.5",
   "bg-popover border border-border text-foreground shadow-md",
-  "origin-[var(--transform-origin)] animate-scale-in",
+  "origin-(--transform-origin) animate-scale-in",
 ];
 
 type PositionerProps = Pick<
@@ -219,17 +220,21 @@ function ContextMenuSeparator({
   );
 }
 
-function ContextMenuShortcut({ className, ...props }: React.ComponentProps<"span">) {
+/** The item's shortcut. A combo string ("⌘C", "Ctrl+C") is drawn one cap per
+ *  key; anything else is shown as given. */
+function ContextMenuShortcut({ className, children, ...props }: React.ComponentProps<"span">) {
   return (
     <span
       data-slot="context-menu-shortcut"
       className={cn(
-        "ml-auto pl-3 text-3xs text-disabled",
+        "ml-auto inline-flex pl-3 text-3xs text-disabled",
         "group-focus/context-menu-item:text-secondary-foreground",
         className,
       )}
       {...props}
-    />
+    >
+      {typeof children === "string" ? <KbdCombo combo={children} size="2xs" /> : children}
+    </span>
   );
 }
 

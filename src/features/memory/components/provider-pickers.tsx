@@ -101,7 +101,7 @@ function ModelCombo({
       <Popover.Portal>
         <Popover.Positioner className="z-popover" align="start" side="top" sideOffset={6}>
           <Popover.Popup className="w-[260px] overflow-hidden rounded-md border border-border bg-card shadow-md">
-            <div className="flex items-center gap-1.5 h-8 border-b border-border-subtle px-2.5">
+            <div className="flex items-center gap-1.5 h-8 border-b border-hairline px-2.5">
               <Search size={12} className="shrink-0 text-muted-foreground" />
               <input
                 autoFocus

@@ -108,7 +108,7 @@ export function FeedbackPanel() {
         // floating panels (a themed top edge plus a heavy drop shadow); the
         // old hardcoded black shadow rendered fine in dark but was much too
         // heavy for a light theme, so this is also a light-mode fix.
-        "border border-border-subtle bg-card/95 backdrop-blur-2xl inset-highlight shadow-lg",
+        "border border-hairline bg-card/95 backdrop-blur-2xl inset-highlight shadow-lg",
         "atlas-panel-in-br",
         // Still laid out (and animated in) while `screencapture` is on screen,
         // just invisible, so the panel never lands in the user's own shot.
@@ -119,7 +119,7 @@ export function FeedbackPanel() {
         // No `will-change` — it would isolate the layer and kill the blur.
       }}
     >
-      <div className="flex items-center gap-2 px-3.5 h-9 border-b border-border-subtle">
+      <div className="flex items-center gap-2 px-3.5 h-9 border-b border-hairline">
         <MessageCircleQuestion size={13} strokeWidth={1.5} className="text-secondary-foreground" />
         <span className="text-3xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">
           Send feedback
@@ -139,12 +139,8 @@ export function FeedbackPanel() {
 
       {sent ? (
         <div role="status" className="flex flex-col items-center gap-2 px-6 py-7">
-          <div className="grid h-9 w-9 place-items-center rounded-full border border-border-subtle bg-element-hover">
-            <Check
-              size={16}
-              strokeWidth={1.75}
-              className="text-[var(--atlas-status-success-foreground)]"
-            />
+          <div className="grid h-9 w-9 place-items-center rounded-full border border-hairline bg-element-hover">
+            <Check size={16} strokeWidth={1.75} className="text-success" />
           </div>
           <p className="text-sm text-foreground">Thanks — we got it.</p>
           <button
@@ -176,7 +172,7 @@ export function FeedbackPanel() {
                   "h-6 rounded-full px-2.5 text-xs border transition-colors cursor-pointer",
                   category === c.id
                     ? "border-border bg-element-active text-foreground"
-                    : "border-border-subtle bg-element-hover text-muted-foreground hover:text-secondary-foreground hover:bg-element-selected",
+                    : "border-hairline bg-element-hover text-muted-foreground hover:text-secondary-foreground hover:bg-element-selected",
                 )}
               >
                 {c.label}
@@ -197,7 +193,7 @@ export function FeedbackPanel() {
 
           <div className="flex items-center gap-2 px-3.5 pb-2.5">
             {shot ? (
-              <div className="group relative h-11 w-[72px] shrink-0 overflow-hidden rounded-md border border-border-subtle">
+              <div className="group relative h-11 w-[72px] shrink-0 overflow-hidden rounded-md border border-hairline">
                 <img
                   src={`data:${shot.mimeType};base64,${shot.dataBase64}`}
                   alt="Attached screenshot"
@@ -224,7 +220,7 @@ export function FeedbackPanel() {
                 type="button"
                 onClick={() => void a.attachScreenshot()}
                 title="Drag a region — or press Space, then click the Atlas window."
-                className="inline-flex h-6 items-center gap-1.5 rounded-md border border-border-subtle bg-element-hover px-2 text-xs text-muted-foreground hover:bg-element-selected hover:text-foreground transition-colors cursor-pointer"
+                className="inline-flex h-6 items-center gap-1.5 rounded-md border border-hairline bg-element-hover px-2 text-xs text-muted-foreground hover:bg-element-selected hover:text-foreground transition-colors cursor-pointer"
               >
                 <Camera size={11} strokeWidth={1.75} />
                 Attach screenshot
@@ -233,10 +229,7 @@ export function FeedbackPanel() {
           </div>
 
           {error && (
-            <p
-              role="alert"
-              className="px-3.5 pb-2 text-2xs text-[var(--atlas-status-error-foreground)]"
-            >
+            <p role="alert" className="px-3.5 pb-2 text-2xs text-error">
               {error}
             </p>
           )}
@@ -250,7 +243,7 @@ export function FeedbackPanel() {
             </p>
           )}
 
-          <div className="flex items-center gap-2 px-3.5 py-2 border-t border-border-subtle">
+          <div className="flex items-center gap-2 px-3.5 py-2 border-t border-hairline">
             {signedIn && user ? (
               <button
                 type="button"
@@ -287,7 +280,7 @@ export function FeedbackPanel() {
               className={cn(
                 "inline-flex h-6 items-center gap-1.5 rounded-full px-3 text-xs font-medium transition-colors",
                 canSubmit
-                  ? "bg-[var(--primary)] text-[var(--primary-foreground)] hover:opacity-90 cursor-pointer"
+                  ? "bg-primary text-primary-foreground hover:opacity-90 cursor-pointer"
                   : "bg-element-selected text-disabled cursor-not-allowed",
               )}
             >
@@ -297,7 +290,7 @@ export function FeedbackPanel() {
         </>
       )}
 
-      <div className="flex items-center gap-3 px-3.5 h-8 border-t border-border-subtle bg-muted/40">
+      <div className="flex items-center gap-3 px-3.5 h-8 border-t border-hairline bg-muted/40">
         <button
           type="button"
           onClick={() => void openExternal(issueUrl(category, message))}
@@ -306,7 +299,7 @@ export function FeedbackPanel() {
           <GithubIcon size={10} />
           Open a GitHub issue
         </button>
-        <div className="w-px h-3 bg-border-subtle" aria-hidden />
+        <div className="w-px h-3 bg-hairline" aria-hidden />
         <button
           type="button"
           onClick={() => void openExternal(DISCORD_URL)}

@@ -41,7 +41,7 @@ import { metaFromSearch, type ClonedRepo, type GithubRepo } from "@/features/git
  *  (`titlebar-dock.tsx`): a `bg-card` pill with a hairline, 20px round cells. */
 const GROUP_BUTTON =
   "flex size-5 items-center justify-center rounded-full text-muted-foreground hover:text-foreground hover:bg-element-active cursor-pointer disabled:cursor-default disabled:opacity-50 disabled:hover:bg-transparent";
-const GROUP = "flex items-center gap-px rounded-full border border-border-subtle bg-card p-0.5";
+const GROUP = "flex items-center gap-px rounded-full border border-hairline bg-card p-0.5";
 
 /** Top/bottom edge fades on a scroll container, only while there is more to scroll. */
 function useScrollEdges(ref: React.RefObject<HTMLDivElement | null>, deps: unknown[]) {
@@ -76,8 +76,8 @@ function ScrollFade({ at, visible }: { at: "top" | "bottom"; visible: boolean })
         // from the wrong colour was a faint grey wash over black, invisible.
         "pointer-events-none absolute inset-x-0 z-10 h-14 transition-opacity duration-200",
         at === "top"
-          ? "top-0 bg-gradient-to-b from-[var(--card)] via-[var(--card)]/80 to-transparent"
-          : "bottom-0 bg-gradient-to-t from-[var(--card)] via-[var(--card)]/80 to-transparent",
+          ? "top-0 bg-gradient-to-b from-card via-card/80 to-transparent"
+          : "bottom-0 bg-gradient-to-t from-card via-card/80 to-transparent",
         visible ? "opacity-100" : "opacity-0",
       )}
     />
@@ -154,12 +154,12 @@ function BranchPicker({
       <Popover.Portal>
         <Popover.Positioner className="z-popover" align="start" sideOffset={4}>
           <Popover.Popup
-            className="atlas-menu-pop w-[260px] overflow-hidden rounded-md border border-[var(--border)] bg-[var(--card)] shadow-md"
+            className="atlas-menu-pop w-[260px] overflow-hidden rounded-md border border-border bg-card shadow-md"
             // Land in the filter box, not on the first row. Base UI's
             // initialFocus replaces Radix's onOpenAutoFocus + preventDefault.
             initialFocus={filterRef}
           >
-            <div className="flex items-center gap-1.5 h-control-lg px-2.5 border-b border-[var(--border)]">
+            <div className="flex items-center gap-1.5 h-control-lg px-2.5 border-b border-border">
               <Search size={10} className="shrink-0 text-muted-foreground" />
               <input
                 ref={filterRef}
@@ -202,12 +202,12 @@ function BranchPicker({
                       className={cn(
                         "flex w-full items-center gap-2 px-3 h-control-md text-xs text-left cursor-pointer outline-none",
                         current
-                          ? "text-[var(--foreground)]"
-                          : "text-[var(--secondary-foreground)] hover:bg-[var(--atlas-element-hover)] hover:text-[var(--foreground)] focus-visible:bg-[var(--atlas-element-hover)]",
+                          ? "text-foreground"
+                          : "text-secondary-foreground hover:bg-element-hover hover:text-foreground focus-visible:bg-element-hover",
                       )}
                     >
                       <span className="truncate flex-1">{b}</span>
-                      {current ? <Check size={11} className="text-[var(--primary)]" /> : null}
+                      {current ? <Check size={11} className="text-primary" /> : null}
                     </button>
                   );
                 })

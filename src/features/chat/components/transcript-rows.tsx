@@ -121,7 +121,7 @@ export const UserRowView = memo(function UserRowView({
             // whose curve cuts off the first and last line at the corners.
             // ratchet-allow: 20px sits above the `rounded-*` scale (xl = 12px), and
             // a full radius clips multi-line bubbles.
-            "min-w-0 max-w-full rounded-[20px] bg-[var(--atlas-primary-muted)] px-4 py-2.5 select-text",
+            "min-w-0 max-w-full rounded-[20px] bg-primary-muted px-4 py-2.5 select-text",
             // Entrance only for THE message sent just now (id-scoped).
             justSent && "atlas-bubble-in",
           )}
@@ -151,7 +151,7 @@ export const UserRowView = memo(function UserRowView({
         {row.contextBlocks > 0 && (
           <button
             type="button"
-            className="mt-1 flex items-center gap-1 text-2xs text-[var(--muted-foreground)] hover:text-[var(--secondary-foreground)] cursor-pointer transition-colors"
+            className="mt-1 flex items-center gap-1 text-2xs text-muted-foreground hover:text-secondary-foreground cursor-pointer transition-colors"
             title="Context attached with @-mentions"
           >
             <Paperclip size={10} />
@@ -248,7 +248,7 @@ function ExpandToggle({
     <button
       type="button"
       onClick={() => onToggleExpand(row.id)}
-      className="mt-0.5 h-[18px] text-2xs text-[var(--muted-foreground)] hover:text-[var(--secondary-foreground)] cursor-pointer transition-colors"
+      className="mt-0.5 h-[18px] text-2xs text-muted-foreground hover:text-secondary-foreground cursor-pointer transition-colors"
     >
       {row.expanded ? "Show less" : "Show more"}
     </button>
@@ -310,13 +310,13 @@ export const ProseRowView = memo(function ProseRowView({
           degrades to a bare timestamp with no provenance at all. */}
       {row.showHeader && (
         <div className="flex h-[22px] items-center gap-1.5">
-          <span className="min-w-0 truncate font-mono text-2xs text-[var(--muted-foreground)]">
+          <span className="min-w-0 truncate font-mono text-2xs text-muted-foreground">
             {row.model || agentLabel}
           </span>
-          <span aria-hidden className="shrink-0 text-2xs text-[var(--atlas-text-disabled)]">
+          <span aria-hidden className="shrink-0 text-2xs text-disabled">
             ·
           </span>
-          <span className="shrink-0 font-mono text-2xs text-[var(--muted-foreground)]">
+          <span className="shrink-0 font-mono text-2xs text-muted-foreground">
             {new Date(row.timestamp).toLocaleTimeString([], {
               hour: "2-digit",
               minute: "2-digit",
@@ -375,7 +375,7 @@ export const ThinkingRowView = memo(function ThinkingRowView({
       type="button"
       onClick={() => onToggleExpand(row.id)}
       className={cn(
-        "flex h-[26px] items-center gap-2 text-left text-base text-[var(--muted-foreground)] hover:text-[var(--secondary-foreground)] cursor-pointer transition-colors",
+        "flex h-[26px] items-center gap-2 text-left text-base text-muted-foreground hover:text-secondary-foreground cursor-pointer transition-colors",
         discussed ? "min-w-0 flex-1" : "w-full",
       )}
     >
@@ -412,7 +412,7 @@ export const ThinkingRowView = memo(function ThinkingRowView({
       )}
       {row.expanded && (
         <div className="pb-3 pl-6">
-          <pre className="whitespace-pre-wrap break-words font-sans text-sm leading-[19px] text-[var(--muted-foreground)] select-text">
+          <pre className="whitespace-pre-wrap break-words font-sans text-sm leading-[19px] text-muted-foreground select-text">
             {row.text}
           </pre>
         </div>
@@ -459,9 +459,9 @@ export const MarkerRowView = memo(function MarkerRowView({
       disabled={!clickable}
       onClick={clickable ? onClick : undefined}
       className={cn(
-        "atlas-marker group/marker min-w-0 text-left text-base text-[var(--muted-foreground)]",
+        "atlas-marker group/marker min-w-0 text-left text-base text-muted-foreground",
         discussed ? "flex-1" : "w-full",
-        clickable && "cursor-pointer hover:text-[var(--secondary-foreground)]",
+        clickable && "cursor-pointer hover:text-secondary-foreground",
         row.state === "running" && "atlas-marker-running",
       )}
       title={
@@ -482,7 +482,7 @@ export const MarkerRowView = memo(function MarkerRowView({
             <span
               className={cn(
                 fileLink &&
-                  "text-[var(--atlas-text-disabled)] underline decoration-dotted underline-offset-[3px] group-hover/marker:text-[var(--secondary-foreground)]",
+                  "text-disabled underline decoration-dotted underline-offset-[3px] group-hover/marker:text-secondary-foreground",
               )}
             >
               {row.detail}
@@ -492,12 +492,8 @@ export const MarkerRowView = memo(function MarkerRowView({
       </span>
       {(row.added > 0 || row.removed > 0) && (
         <span className="ml-auto shrink-0 font-mono text-2xs tabular-nums">
-          {row.added > 0 && (
-            <span className="text-[var(--atlas-diff-added-text)]">+{row.added}</span>
-          )}
-          {row.removed > 0 && (
-            <span className="ml-1 text-[var(--atlas-status-error-foreground)]">−{row.removed}</span>
-          )}
+          {row.added > 0 && <span className="text-diff-added-foreground">+{row.added}</span>}
+          {row.removed > 0 && <span className="ml-1 text-error">−{row.removed}</span>}
         </span>
       )}
     </button>
@@ -563,7 +559,7 @@ export const MarkerGroupRowView = memo(function MarkerGroupRowView({
       aria-controls={`${row.id}:actions`}
       onClick={() => onExpandTurn(row.id)}
       className={cn(
-        "atlas-marker group/tool-summary cursor-pointer text-left text-base text-[var(--muted-foreground)] hover:text-[var(--secondary-foreground)]",
+        "atlas-marker group/tool-summary cursor-pointer text-left text-base text-muted-foreground hover:text-secondary-foreground",
         // Discussed, the line shares its row with the pill and has to fill
         // the space so the pill lands at the end of it.
         discussed ? "min-w-0 flex-1" : "max-w-full",
@@ -581,7 +577,7 @@ export const MarkerGroupRowView = memo(function MarkerGroupRowView({
           // written straight to the DOM and is blank for its first second, so
           // any separator React rendered beside it would dangle on its own
           // until the first tick.
-          <span className="ml-auto flex shrink-0 items-center gap-1.5 font-mono text-2xs text-[var(--atlas-text-disabled)] tabular-nums">
+          <span className="ml-auto flex shrink-0 items-center gap-1.5 font-mono text-2xs text-disabled tabular-nums">
             {row.liveDone > 0 && <span>{row.liveDone} done</span>}
             {row.liveStartedAt !== null && (
               <LiveElapsed startedAt={row.liveStartedAt} minMs={1000} />
@@ -712,13 +708,13 @@ export const WorkHeaderRowView = memo(function WorkHeaderRowView({
   );
   return (
     <Column className="pt-2 pb-2">
-      <div className="flex items-center border-b border-[var(--atlas-border-subtle)] pb-2">
+      <div className="flex items-center border-b border-hairline pb-2">
         {row.foldable ? (
           <button
             type="button"
             aria-expanded={row.open}
             onClick={() => onToggle(row.id)}
-            className="flex h-[22px] cursor-pointer items-center gap-1 text-base text-[var(--muted-foreground)] transition-colors hover:text-[var(--secondary-foreground)]"
+            className="flex h-[22px] cursor-pointer items-center gap-1 text-base text-muted-foreground transition-colors hover:text-secondary-foreground"
           >
             <span>{label}</span>
             <ChevronRight
@@ -730,7 +726,7 @@ export const WorkHeaderRowView = memo(function WorkHeaderRowView({
         ) : (
           // The span matters: straight inside a flex box, "Working for " is its
           // own flex item and loses the trailing space before the figure.
-          <div className="flex h-[22px] items-center text-base text-[var(--muted-foreground)]">
+          <div className="flex h-[22px] items-center text-base text-muted-foreground">
             <span>{label}</span>
           </div>
         )}
@@ -745,9 +741,9 @@ export const SeparatorRowView = memo(function SeparatorRowView({ row }: { row: S
   return (
     <Column className="flex h-[34px] items-center">
       <div className="flex w-full select-none items-center gap-2">
-        <span className="h-px flex-1 bg-[var(--atlas-border-subtle)]" />
-        <span className="shrink-0 text-2xs text-[var(--muted-foreground)]">{row.label}</span>
-        <span className="h-px flex-1 bg-[var(--atlas-border-subtle)]" />
+        <span className="h-px flex-1 bg-hairline" />
+        <span className="shrink-0 text-2xs text-muted-foreground">{row.label}</span>
+        <span className="h-px flex-1 bg-hairline" />
       </div>
     </Column>
   );
@@ -780,15 +776,13 @@ export const TurnFooterRowView = memo(function TurnFooterRowView({
           turn's result rather than another paragraph. Paths show basename only:
           the leading directories are identical on every row and were eating the
           width. */}
-      <div className="overflow-hidden rounded-xl border border-[var(--atlas-element-active)] bg-[var(--atlas-element-hover)]">
+      <div className="overflow-hidden rounded-xl border border-element-active bg-element-hover">
         <div className="flex h-[34px] items-center gap-2 px-3.5">
           <span className="label">{label}</span>
           {(added > 0 || removed > 0) && (
             <span className="font-mono text-2xs tabular-nums">
-              {added > 0 && <span className="text-[var(--atlas-diff-added-text)]">+{added}</span>}
-              {removed > 0 && (
-                <span className="ml-1 text-[var(--atlas-status-error-foreground)]">−{removed}</span>
-              )}
+              {added > 0 && <span className="text-diff-added-foreground">+{added}</span>}
+              {removed > 0 && <span className="ml-1 text-error">−{removed}</span>}
             </span>
           )}
           <div className="ml-auto flex items-center gap-1.5">
@@ -808,7 +802,7 @@ export const TurnFooterRowView = memo(function TurnFooterRowView({
             )}
           </div>
         </div>
-        <div className="border-t border-[var(--atlas-element-selected)] px-3.5 py-2">
+        <div className="border-t border-element-selected px-3.5 py-2">
           {files.map((f) => (
             <div key={f.path} className="flex h-[24px] items-center gap-2 text-xs" title={f.path}>
               <span
@@ -816,26 +810,20 @@ export const TurnFooterRowView = memo(function TurnFooterRowView({
                   "w-3 shrink-0 text-center font-mono text-2xs font-semibold",
                   f.kind === "edit"
                     ? f.created
-                      ? "text-[var(--atlas-diff-added-text)]"
-                      : "text-[var(--atlas-status-warning-foreground)]"
-                    : "text-[var(--muted-foreground)]",
+                      ? "text-diff-added-foreground"
+                      : "text-warning"
+                    : "text-muted-foreground",
                 )}
               >
                 {f.kind === "edit" ? (f.created ? "A" : "M") : "R"}
               </span>
-              <span className="min-w-0 flex-1 truncate font-mono text-[var(--secondary-foreground)]">
+              <span className="min-w-0 flex-1 truncate font-mono text-secondary-foreground">
                 {baseName(f.path)}
               </span>
               {f.kind === "edit" && (f.added > 0 || f.removed > 0) && (
                 <span className="shrink-0 font-mono text-2xs tabular-nums">
-                  {f.added > 0 && (
-                    <span className="text-[var(--atlas-diff-added-text)]">+{f.added}</span>
-                  )}
-                  {f.removed > 0 && (
-                    <span className="ml-1 text-[var(--atlas-status-error-foreground)]">
-                      −{f.removed}
-                    </span>
-                  )}
+                  {f.added > 0 && <span className="text-diff-added-foreground">+{f.added}</span>}
+                  {f.removed > 0 && <span className="ml-1 text-error">−{f.removed}</span>}
                 </span>
               )}
             </div>
@@ -844,7 +832,7 @@ export const TurnFooterRowView = memo(function TurnFooterRowView({
             <button
               type="button"
               onClick={() => setShowAll((v) => !v)}
-              className="flex h-[20px] cursor-pointer items-center gap-1 text-2xs text-[var(--muted-foreground)] transition-colors hover:text-[var(--secondary-foreground)]"
+              className="flex h-[20px] cursor-pointer items-center gap-1 text-2xs text-muted-foreground transition-colors hover:text-secondary-foreground"
             >
               <ChevronDown
                 size={10}
@@ -887,8 +875,8 @@ function FooterPill({
         "inline-flex h-[20px] cursor-pointer items-center gap-1 rounded-full border px-2",
         "text-2xs font-medium leading-none transition-colors",
         primary
-          ? "border-[var(--primary)]/40 bg-[var(--atlas-primary-muted)] text-[var(--primary)] hover:bg-[var(--primary)]/20"
-          : "border-border bg-[var(--atlas-element-hover)] text-[var(--secondary-foreground)] hover:bg-[var(--atlas-element-active)] hover:text-[var(--foreground)]",
+          ? "border-primary/40 bg-primary-muted text-primary hover:bg-primary/20"
+          : "border-border bg-element-hover text-secondary-foreground hover:bg-element-active hover:text-foreground",
       )}
     >
       {icon}

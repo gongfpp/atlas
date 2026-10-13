@@ -38,7 +38,7 @@ export function EditorTopbar({
 }: EditorTopbarProps) {
   return (
     <div
-      className="flex items-center shrink-0 border-b border-border-subtle"
+      className="flex items-center shrink-0 border-b border-hairline"
       style={{
         height: 36,
         gap: 8,

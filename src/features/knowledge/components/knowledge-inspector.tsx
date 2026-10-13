@@ -43,14 +43,14 @@ export function KnowledgeInspector({
 
   return (
     <aside
-      className="flex flex-col min-h-0 shrink-0 border-l border-border-subtle"
+      className="flex flex-col min-h-0 shrink-0 border-l border-hairline"
       style={{ width, background: "var(--background)" }}
     >
       {/* Pill-style tab strip — active tab gets a full rounded white
           background, inactive tabs are plain text. Matches the
           reference screenshot from the user's feedback. */}
       <div
-        className="flex items-center shrink-0 border-b border-border-subtle"
+        className="flex items-center shrink-0 border-b border-hairline"
         style={{ height: 36, gap: 4, padding: "0 10px" }}
       >
         {(["outline", "links"] as const).map((id) => {
@@ -125,12 +125,12 @@ export function KnowledgeInspector({
               })
             )}
 
-            <div className="mt-6 pt-3.5 border-t border-border-subtle" style={{ marginTop: 22 }}>
+            <div className="mt-6 pt-3.5 border-t border-hairline" style={{ marginTop: 22 }}>
               <div className="eyebrow mb-2.5">Page stats</div>
               {pageStats.map(([k, v]) => (
                 <div
                   key={k}
-                  className="flex justify-between border-b border-border-subtle text-muted-foreground text-sm"
+                  className="flex justify-between border-b border-hairline text-muted-foreground text-sm"
                   style={{ padding: "5px 0" }}
                 >
                   <span>{k}</span>

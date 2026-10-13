@@ -49,16 +49,16 @@ export function SvgViewer({ filePath }: SvgViewerProps) {
   };
 
   return (
-    <div className="h-full w-full flex flex-col bg-[var(--background)]">
-      <div className="flex items-center gap-2 px-3 h-[32px] border-b border-[var(--border)] shrink-0">
-        <span className="flex-1 min-w-0 truncate text-xs font-mono text-[var(--muted-foreground)]">
+    <div className="h-full w-full flex flex-col bg-background">
+      <div className="flex items-center gap-2 px-3 h-[32px] border-b border-border shrink-0">
+        <span className="flex-1 min-w-0 truncate text-xs font-mono text-muted-foreground">
           {filePath}
         </span>
         <button
           onClick={copy}
           disabled={!code}
           title="Copy SVG source"
-          className="flex items-center gap-1 px-2 h-6 rounded text-2xs cursor-pointer outline-none transition-colors text-[var(--muted-foreground)] hover:text-[var(--foreground)] hover:bg-[var(--atlas-element-hover)] disabled:opacity-40 disabled:cursor-default"
+          className="flex items-center gap-1 px-2 h-6 rounded text-2xs cursor-pointer outline-none transition-colors text-muted-foreground hover:text-foreground hover:bg-element-hover disabled:opacity-40 disabled:cursor-default"
         >
           <CopyGlyph copied={copied} size="sm" />
           {copied ? "Copied" : "Copy code"}
@@ -68,7 +68,7 @@ export function SvgViewer({ filePath }: SvgViewerProps) {
         {src ? (
           <ImageZoomView src={src} alt={name} fill checkerboard />
         ) : (
-          <div className="h-full flex items-center justify-center text-[var(--muted-foreground)]">
+          <div className="h-full flex items-center justify-center text-muted-foreground">
             <Loader2 size={16} className="animate-spin" />
           </div>
         )}

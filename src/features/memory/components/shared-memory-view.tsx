@@ -61,6 +61,7 @@ import type {
   MemoryEvent,
   Provenance,
 } from "../lib/shared-memory-api";
+import { Hint } from "@/ui/tooltip";
 
 interface Props {
   projectPath: string;
@@ -243,11 +244,11 @@ export function SharedMemoryView({ projectPath, className }: Props) {
   );
 
   return (
-    <div className={cn("h-full flex flex-col bg-[var(--background)]", className)}>
+    <div className={cn("h-full flex flex-col bg-background", className)}>
       {/* Toolbar */}
-      <div className="flex items-center gap-2 px-3 h-[32px] shrink-0 border-b border-[var(--border)]">
+      <div className="flex items-center gap-2 px-3 h-[32px] shrink-0 border-b border-border">
         {/* Events / Plans toggle — pill group, matches the Memory nav. */}
-        <div className="inline-flex items-center gap-0.5 rounded-full border border-[var(--border)] bg-[var(--card)] p-0.5">
+        <div className="inline-flex items-center gap-0.5 rounded-full border border-border bg-card p-0.5">
           <SegBtn
             active={tab === "events"}
             onClick={() => setTab("events")}
@@ -298,14 +299,14 @@ export function SharedMemoryView({ projectPath, className }: Props) {
 
         <div className="flex-1" />
 
-        <div className="flex items-center gap-1.5 h-6 rounded-md border border-[var(--border)] bg-[var(--card)] px-2 w-[190px] focus-within:border-[var(--atlas-border-strong)]">
-          <Search size={11} className="text-[var(--muted-foreground)] shrink-0" />
+        <div className="flex items-center gap-1.5 h-6 rounded-md border border-border bg-card px-2 w-[190px] focus-within:border-border-strong">
+          <Search size={11} className="text-muted-foreground shrink-0" />
           <input
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder={`Search ${tab}…`}
             spellCheck={false}
-            className="flex-1 min-w-0 bg-transparent outline-none text-xs text-[var(--foreground)] placeholder:text-[var(--muted-foreground)]"
+            className="flex-1 min-w-0 bg-transparent outline-none text-xs text-foreground placeholder:text-muted-foreground"
           />
         </div>
 
@@ -411,23 +412,18 @@ function EventRow({
   onToggle: () => void;
 }) {
   return (
-    <div className="border-b border-[var(--atlas-border-subtle)]">
+    <div className="border-b border-hairline">
       <button
         onClick={onToggle}
         className={cn(
           "w-full flex items-center h-[40px] px-3 text-left transition-colors cursor-pointer",
-          expanded ? "bg-[var(--card)]/50" : "hover:bg-[var(--atlas-element-hover)]",
+          expanded ? "bg-card/50" : "hover:bg-element-hover",
         )}
       >
-        <span
-          className={cn(
-            EVENT_COL.seq,
-            "font-mono text-2xs tabular-nums text-[var(--atlas-text-disabled)]",
-          )}
-        >
+        <span className={cn(EVENT_COL.seq, "font-mono text-2xs tabular-nums text-disabled")}>
           {e.seq}
         </span>
-        <span className={cn(EVENT_COL.time, "text-2xs text-[var(--muted-foreground)]")}>
+        <span className={cn(EVENT_COL.time, "text-2xs text-muted-foreground")}>
           {eventTime(e.ts)}
         </span>
         <span className={EVENT_COL.agent}>
@@ -437,15 +433,12 @@ function EventRow({
           <KindChip kind={e.kind} />
         </span>
         <span className={cn(EVENT_COL.detail, "min-w-0 pr-3")}>
-          <span className="block truncate text-sm text-[var(--secondary-foreground)]">
-            {eventDetail(e) || <span className="text-[var(--atlas-text-disabled)]">—</span>}
+          <span className="block truncate text-sm text-secondary-foreground">
+            {eventDetail(e) || <span className="text-disabled">—</span>}
           </span>
         </span>
         <span
-          className={cn(
-            EVENT_COL.chevron,
-            "flex items-center justify-end text-[var(--muted-foreground)]",
-          )}
+          className={cn(EVENT_COL.chevron, "flex items-center justify-end text-muted-foreground")}
         >
           {expanded ? <ChevronDown size={13} /> : <ChevronRight size={13} />}
         </span>
@@ -458,7 +451,7 @@ function EventRow({
 function EventDetail({ event: e }: { event: MemoryEvent }) {
   const detail = eventDetail(e);
   return (
-    <div className="bg-[var(--card)]/40 border-t border-[var(--atlas-border-subtle)] px-4 py-3 space-y-3">
+    <div className="bg-card/40 border-t border-hairline px-4 py-3 space-y-3">
       <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5">
         <MetaChip label="Seq" value={`#${e.seq}`} mono />
         <MetaChip label="Kind" value={e.kind.replace(/_/g, " ")} />
@@ -468,8 +461,8 @@ function EventDetail({ event: e }: { event: MemoryEvent }) {
         {e.sessionId && <MetaChip label="Session" value={e.sessionId.slice(0, 8)} mono />}
       </div>
       {detail && (
-        <div className="rounded-lg border border-[var(--border)] bg-[var(--background)] px-3 py-2">
-          <pre className="whitespace-pre-wrap break-words font-sans text-sm leading-[1.55] text-[var(--secondary-foreground)]">
+        <div className="rounded-lg border border-border bg-background px-3 py-2">
+          <pre className="whitespace-pre-wrap break-words font-sans text-sm leading-[1.55] text-secondary-foreground">
             {detail}
           </pre>
         </div>
@@ -523,23 +516,18 @@ function PlanRow({
   const status = str(e.payload?.status) || "active";
   const firstLine = text.split("\n").find((l) => l.trim()) ?? "";
   return (
-    <div className="border-b border-[var(--atlas-border-subtle)]">
+    <div className="border-b border-hairline">
       <button
         onClick={onToggle}
         className={cn(
           "w-full flex items-center h-[40px] px-3 text-left transition-colors cursor-pointer",
-          expanded ? "bg-[var(--card)]/50" : "hover:bg-[var(--atlas-element-hover)]",
+          expanded ? "bg-card/50" : "hover:bg-element-hover",
         )}
       >
-        <span
-          className={cn(
-            PLAN_COL.seq,
-            "font-mono text-2xs tabular-nums text-[var(--atlas-text-disabled)]",
-          )}
-        >
+        <span className={cn(PLAN_COL.seq, "font-mono text-2xs tabular-nums text-disabled")}>
           {e.seq}
         </span>
-        <span className={cn(PLAN_COL.time, "text-2xs text-[var(--muted-foreground)]")}>
+        <span className={cn(PLAN_COL.time, "text-2xs text-muted-foreground")}>
           {eventTime(e.ts)}
         </span>
         <span className={PLAN_COL.agent}>
@@ -549,29 +537,26 @@ function PlanRow({
           <StatusChip status={status} />
         </span>
         <span className={cn(PLAN_COL.plan, "min-w-0 pr-3")}>
-          <span className="block truncate text-sm text-[var(--secondary-foreground)]">
-            {firstLine || <span className="text-[var(--atlas-text-disabled)]">—</span>}
+          <span className="block truncate text-sm text-secondary-foreground">
+            {firstLine || <span className="text-disabled">—</span>}
           </span>
         </span>
         <span
-          className={cn(
-            PLAN_COL.chevron,
-            "flex items-center justify-end text-[var(--muted-foreground)]",
-          )}
+          className={cn(PLAN_COL.chevron, "flex items-center justify-end text-muted-foreground")}
         >
           {expanded ? <ChevronDown size={13} /> : <ChevronRight size={13} />}
         </span>
       </button>
       {expanded && (
-        <div className="bg-[var(--card)]/40 border-t border-[var(--atlas-border-subtle)] px-4 py-3 space-y-3">
+        <div className="bg-card/40 border-t border-hairline px-4 py-3 space-y-3">
           <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5">
             <MetaChip label="Seq" value={`#${e.seq}`} mono />
             <MetaChip label="Status" value={status} />
             <MetaChip label="Agent" value={agentMetaForSource(e.agent).label} />
             <MetaChip label="When" value={fmtDateTime(e.ts)} />
           </div>
-          <div className="rounded-lg border border-[var(--border)] bg-[var(--background)] px-3 py-2">
-            <pre className="whitespace-pre-wrap break-words font-sans text-sm leading-[1.55] text-[var(--secondary-foreground)]">
+          <div className="rounded-lg border border-border bg-background px-3 py-2">
+            <pre className="whitespace-pre-wrap break-words font-sans text-sm leading-[1.55] text-secondary-foreground">
               {text || "—"}
             </pre>
           </div>
@@ -627,12 +612,12 @@ function MemoriesTable({ rows }: { rows: MemoryEntry[] }) {
   return (
     <div ref={scroller} className="flex-1 min-h-0 overflow-auto hide-scrollbar">
       {chosen.length > 0 && (
-        <div className="flex items-center gap-2 border-b border-[var(--border)] px-3 py-1.5 text-xs text-[var(--muted-foreground)]">
+        <div className="flex items-center gap-2 border-b border-border px-3 py-1.5 text-xs text-muted-foreground">
           <span>{chosen.length} selected</span>
           <button
             type="button"
             onClick={() => setExporting(true)}
-            className="ml-auto h-6 rounded-md border border-[var(--border)] px-2 text-xs text-[var(--secondary-foreground)] transition-colors hover:bg-[var(--atlas-element-hover)] hover:text-[var(--foreground)]"
+            className="ml-auto h-6 rounded-md border border-border px-2 text-xs text-secondary-foreground transition-colors hover:bg-element-hover hover:text-foreground"
           >
             Export to AGENTS.md
           </button>
@@ -688,7 +673,7 @@ function EntryRow({
   onSelect: () => void;
 }) {
   return (
-    <div data-entry-id={e.id} className="border-b border-[var(--atlas-border-subtle)]">
+    <div data-entry-id={e.id} className="border-b border-hairline">
       <div className="flex items-center">
         <span className="flex w-6 shrink-0 items-center justify-end">
           {exportable(e) && (
@@ -697,7 +682,7 @@ function EntryRow({
               checked={selected}
               onChange={onSelect}
               aria-label={`Select ${e.content}`}
-              className="h-3 w-3 cursor-pointer accent-[var(--primary)]"
+              className="h-3 w-3 cursor-pointer accent-primary"
             />
           )}
         </span>
@@ -705,10 +690,10 @@ function EntryRow({
           onClick={onToggle}
           className={cn(
             "flex-1 min-w-0 flex items-center h-[40px] px-3 text-left transition-colors cursor-pointer",
-            expanded ? "bg-[var(--card)]/50" : "hover:bg-[var(--atlas-element-hover)]",
+            expanded ? "bg-card/50" : "hover:bg-element-hover",
           )}
         >
-          <span className={cn(ENTRY_COL.time, "text-2xs text-[var(--muted-foreground)]")}>
+          <span className={cn(ENTRY_COL.time, "text-2xs text-muted-foreground")}>
             {eventTime(e.updatedAt)}
           </span>
           <span className={ENTRY_COL.kind}>
@@ -722,29 +707,21 @@ function EntryRow({
             {entryAgent(e.agent) ? (
               <AgentTag agent={e.agent} />
             ) : (
-              <span className="font-mono text-2xs uppercase tracking-wider text-[var(--muted-foreground)]">
+              <span className="font-mono text-2xs uppercase tracking-wider text-muted-foreground">
                 {e.agent || "—"}
               </span>
             )}
           </span>
-          <span
-            className={cn(
-              ENTRY_COL.confidence,
-              "tabular-nums text-2xs text-[var(--muted-foreground)]",
-            )}
-          >
+          <span className={cn(ENTRY_COL.confidence, "tabular-nums text-2xs text-muted-foreground")}>
             {confidenceLabel(e.confidence)}
           </span>
           <span className={cn(ENTRY_COL.content, "min-w-0 pr-3")}>
-            <span className="block truncate text-sm text-[var(--secondary-foreground)]">
-              {e.content || <span className="text-[var(--atlas-text-disabled)]">—</span>}
+            <span className="block truncate text-sm text-secondary-foreground">
+              {e.content || <span className="text-disabled">—</span>}
             </span>
           </span>
           <span
-            className={cn(
-              ENTRY_COL.chevron,
-              "flex items-center justify-end text-[var(--muted-foreground)]",
-            )}
+            className={cn(ENTRY_COL.chevron, "flex items-center justify-end text-muted-foreground")}
           >
             {expanded ? <ChevronDown size={13} /> : <ChevronRight size={13} />}
           </span>
@@ -828,7 +805,7 @@ function EntryDetail({ entry: e }: { entry: MemoryEntry }) {
   };
 
   return (
-    <div className="bg-[var(--card)]/40 border-t border-[var(--atlas-border-subtle)] px-4 py-3 space-y-3">
+    <div className="bg-card/40 border-t border-hairline px-4 py-3 space-y-3">
       <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5">
         <MetaChip label="Kind" value={KIND_LABEL[e.kind] ?? e.kind.replace(/_/g, " ")} />
         <MetaChip label="Source" value={sourceLabel(e.source)} />
@@ -846,12 +823,16 @@ function EntryDetail({ entry: e }: { entry: MemoryEntry }) {
         <div className="flex items-center gap-1">
           {editing ? (
             <>
-              <IconButton label="Save (⌘Enter)" onClick={() => void save()}>
-                {saving ? <Loader2 size={12} className="animate-spin" /> : <Check size={12} />}
-              </IconButton>
-              <IconButton label="Cancel (Esc)" onClick={cancel}>
-                <X size={12} />
-              </IconButton>
+              <Hint label="Save" shortcut="⌘↵">
+                <IconButton label="Save" onClick={() => void save()}>
+                  {saving ? <Loader2 size={12} className="animate-spin" /> : <Check size={12} />}
+                </IconButton>
+              </Hint>
+              <Hint label="Cancel" shortcut="esc">
+                <IconButton label="Cancel" onClick={cancel}>
+                  <X size={12} />
+                </IconButton>
+              </Hint>
             </>
           ) : (
             <>
@@ -885,13 +866,13 @@ function EntryDetail({ entry: e }: { entry: MemoryEntry }) {
           rows={Math.min(8, Math.max(2, draft.split("\n").length))}
           aria-label="Memory content"
           className={cn(
-            "block w-full resize-y rounded-lg border bg-[var(--background)] px-3 py-2 font-sans text-sm leading-[1.55] text-[var(--foreground)] outline-none transition-colors",
-            dirty ? "border-[var(--atlas-border-strong)]" : "border-[var(--border)]",
+            "block w-full resize-y rounded-lg border bg-background px-3 py-2 font-sans text-sm leading-[1.55] text-foreground outline-none transition-colors",
+            dirty ? "border-border-strong" : "border-border",
           )}
         />
       ) : (
-        <div className="rounded-lg border border-[var(--border)] bg-[var(--background)] px-3 py-2">
-          <pre className="whitespace-pre-wrap break-words font-sans text-sm leading-[1.55] text-[var(--secondary-foreground)]">
+        <div className="rounded-lg border border-border bg-background px-3 py-2">
+          <pre className="whitespace-pre-wrap break-words font-sans text-sm leading-[1.55] text-secondary-foreground">
             {e.content || "—"}
           </pre>
         </div>
@@ -899,7 +880,7 @@ function EntryDetail({ entry: e }: { entry: MemoryEntry }) {
       {provenance.length > 0 && (
         <div className="space-y-0.5">
           {provenance.map((p, i) => (
-            <p key={`${p.source}-${i}`} className="text-xs text-[var(--muted-foreground)]">
+            <p key={`${p.source}-${i}`} className="text-xs text-muted-foreground">
               {provenanceLine(p)}
             </p>
           ))}
@@ -1379,7 +1360,7 @@ function ImportLineRow({
 
 function HeaderRow({ children }: { children: React.ReactNode }) {
   return (
-    <div className="sticky top-0 z-10 flex items-center h-[28px] border-b border-[var(--border)] bg-[var(--background)] px-3 text-2xs uppercase tracking-wider text-[var(--muted-foreground)]">
+    <div className="sticky top-0 z-10 flex items-center h-[28px] border-b border-border bg-background px-3 text-2xs uppercase tracking-wider text-muted-foreground">
       {children}
     </div>
   );
@@ -1387,9 +1368,7 @@ function HeaderRow({ children }: { children: React.ReactNode }) {
 
 function EmptyRows({ label }: { label: string }) {
   return (
-    <div className="grid place-items-center h-[160px] text-xs text-[var(--muted-foreground)]">
-      {label}
-    </div>
+    <div className="grid place-items-center h-[160px] text-xs text-muted-foreground">{label}</div>
   );
 }
 
@@ -1412,15 +1391,13 @@ function SegBtn({
       className={cn(
         "flex items-center gap-1.5 h-control-xs px-2.5 rounded-full text-xs font-medium transition-colors cursor-pointer",
         active
-          ? "bg-[var(--atlas-element-selected,var(--atlas-element-hover))] text-[var(--foreground)]"
-          : "text-[var(--muted-foreground)] hover:text-[var(--secondary-foreground)]",
+          ? "bg-element-selected text-foreground"
+          : "text-muted-foreground hover:text-secondary-foreground",
       )}
     >
       <span className={active ? "opacity-100" : "opacity-60"}>{icon}</span>
       {label}
-      {count > 0 && (
-        <span className="text-3xs tabular-nums text-[var(--atlas-text-disabled)]">{count}</span>
-      )}
+      {count > 0 && <span className="text-3xs tabular-nums text-disabled">{count}</span>}
     </button>
   );
 }
@@ -1469,8 +1446,8 @@ function FilterMenu({
         className={cn(
           "flex items-center gap-1 h-6 rounded-md border px-2 text-xs transition-colors cursor-pointer",
           active
-            ? "border-[var(--atlas-border-strong)] bg-[var(--card)] text-[var(--foreground)]"
-            : "border-[var(--border)] text-[var(--muted-foreground)] hover:bg-[var(--atlas-element-hover)] hover:text-[var(--secondary-foreground)]",
+            ? "border-border-strong bg-card text-foreground"
+            : "border-border text-muted-foreground hover:bg-element-hover hover:text-secondary-foreground",
         )}
       >
         <ListFilter size={11} className="shrink-0" />
@@ -1481,7 +1458,7 @@ function FilterMenu({
         />
       </button>
       {open && (
-        <div className="absolute top-full left-0 z-popover mt-1.5 max-h-[280px] min-w-[170px] overflow-y-auto hide-scrollbar rounded-lg border border-[var(--border)] bg-[var(--card)] p-1 shadow-lg">
+        <div className="absolute top-full left-0 z-popover mt-1.5 max-h-[280px] min-w-[170px] overflow-y-auto hide-scrollbar rounded-lg border border-border bg-card p-1 shadow-lg">
           <FilterOption
             label={`All ${label.toLowerCase()}s`}
             active={!value}
@@ -1522,12 +1499,12 @@ function FilterOption({
       className={cn(
         "flex w-full items-center gap-1.5 rounded-md px-2 py-1.5 text-left text-xs transition-colors cursor-pointer",
         active
-          ? "bg-[var(--atlas-element-selected,var(--atlas-element-hover))] text-[var(--foreground)]"
-          : "text-[var(--secondary-foreground)] hover:bg-[var(--atlas-element-hover)]",
+          ? "bg-element-selected text-foreground"
+          : "text-secondary-foreground hover:bg-element-hover",
       )}
     >
       <span className="min-w-0 flex-1 truncate">{label}</span>
-      {active && <Check size={11} className="shrink-0 text-[var(--primary)]" />}
+      {active && <Check size={11} className="shrink-0 text-primary" />}
     </button>
   );
 }
@@ -1538,7 +1515,7 @@ function AgentTag({ agent }: { agent: string }) {
   return (
     <span className="inline-flex items-center gap-1.5 min-w-0">
       <AgentMark agentType={pluginIdForSource(agent)} />
-      <span className="truncate font-mono text-2xs uppercase tracking-wider text-[var(--muted-foreground)]">
+      <span className="truncate font-mono text-2xs uppercase tracking-wider text-muted-foreground">
         {agentMetaForSource(agent).label}
       </span>
     </span>
@@ -1560,7 +1537,7 @@ const KIND_LABEL: Record<string, string> = {
 /** The table's small label chip (kind, source). */
 function Chip({ children }: { children: React.ReactNode }) {
   return (
-    <span className="inline-flex max-w-full items-center rounded bg-[var(--card)] px-1.5 py-0.5 text-2xs text-[var(--muted-foreground)]">
+    <span className="inline-flex max-w-full items-center rounded bg-card px-1.5 py-0.5 text-2xs text-muted-foreground">
       <span className="truncate">{children}</span>
     </span>
   );
@@ -1580,7 +1557,7 @@ export function provenanceLine(p: Provenance): string {
 /** A candidate or archived entry's state, beside its source. */
 function StateChip({ state }: { state: string }) {
   return (
-    <span className="text-3xs uppercase tracking-wide text-[var(--muted-foreground)] border border-[var(--border)] rounded px-1 py-px">
+    <span className="text-3xs uppercase tracking-wide text-muted-foreground border border-border rounded px-1 py-px">
       {state}
     </span>
   );
@@ -1601,9 +1578,7 @@ function StatusChip({ status }: { status: string }) {
     <span
       className={cn(
         "inline-flex items-center gap-1 rounded px-1.5 py-0.5 text-2xs",
-        done
-          ? "bg-[var(--atlas-status-success-background,var(--card))] text-[var(--atlas-status-success-foreground,var(--muted-foreground))]"
-          : "bg-[var(--card)] text-[var(--muted-foreground)]",
+        done ? "bg-success-muted text-success" : "bg-card text-muted-foreground",
       )}
     >
       {status}
@@ -1614,12 +1589,8 @@ function StatusChip({ status }: { status: string }) {
 function MetaChip({ label, value, mono }: { label: string; value: string; mono?: boolean }) {
   return (
     <span className="inline-flex items-center gap-1.5">
-      <span className="text-3xs uppercase tracking-wider text-[var(--atlas-text-disabled)]">
-        {label}
-      </span>
-      <span
-        className={cn("text-xs text-[var(--secondary-foreground)]", mono && "font-mono text-2xs")}
-      >
+      <span className="text-3xs uppercase tracking-wider text-disabled">{label}</span>
+      <span className={cn("text-xs text-secondary-foreground", mono && "font-mono text-2xs")}>
         {value}
       </span>
     </span>
@@ -1640,7 +1611,7 @@ function IconButton({
       <button
         type="button"
         onClick={onClick}
-        className="flex h-6 w-6 items-center justify-center rounded-md border border-[var(--border)] text-[var(--muted-foreground)] transition-colors hover:bg-[var(--atlas-element-hover)] hover:text-[var(--foreground)] active:scale-[0.96]"
+        className="flex h-6 w-6 items-center justify-center rounded-md border border-border text-muted-foreground transition-colors hover:bg-element-hover hover:text-foreground active:scale-[0.96]"
       >
         {children}
       </button>
@@ -1651,14 +1622,14 @@ function IconButton({
 function EmptyState() {
   return (
     <div className="flex flex-1 flex-col items-center justify-center gap-3 px-6 text-center">
-      <div className="flex h-10 w-10 items-center justify-center rounded-md border border-[var(--border)] bg-[var(--card)] text-[var(--muted-foreground)]">
+      <div className="flex h-10 w-10 items-center justify-center rounded-md border border-border bg-card text-muted-foreground">
         <Share2 size={16} />
       </div>
       <div className="flex flex-col gap-1">
-        <span className="text-base font-medium text-[var(--secondary-foreground)]">
+        <span className="text-base font-medium text-secondary-foreground">
           No shared memory yet
         </span>
-        <p className="max-w-[34ch] text-sm leading-[1.5] text-[var(--muted-foreground)]">
+        <p className="max-w-[34ch] text-sm leading-[1.5] text-muted-foreground">
           As agents plan, decide, and edit files, their work is captured here as events and shared
           with every agent on this project.
         </p>

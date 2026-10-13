@@ -52,13 +52,15 @@ export function AtlasBubbleMenu({ editor }: AtlasBubbleMenuProps) {
 
   const tool = (props: {
     title: string;
+    /** A combo string, drawn as keycaps in the tooltip. */
+    shortcut?: string;
     icon: typeof Bold;
     isActive?: boolean;
     onClick: () => void;
   }) => {
     const Icon = props.icon;
     return (
-      <HintItem label={props.title}>
+      <HintItem label={props.title} shortcut={props.shortcut}>
         <button
           type="button"
           onMouseDown={(e) => {
@@ -121,19 +123,22 @@ export function AtlasBubbleMenu({ editor }: AtlasBubbleMenuProps) {
         ) : (
           <>
             {tool({
-              title: "Bold (⌘B)",
+              title: "Bold",
+              shortcut: "⌘B",
               icon: Bold,
               isActive: editor.isActive("bold"),
               onClick: () => editor.chain().focus().toggleBold().run(),
             })}
             {tool({
-              title: "Italic (⌘I)",
+              title: "Italic",
+              shortcut: "⌘I",
               icon: Italic,
               isActive: editor.isActive("italic"),
               onClick: () => editor.chain().focus().toggleItalic().run(),
             })}
             {tool({
-              title: "Underline (⌘U)",
+              title: "Underline",
+              shortcut: "⌘U",
               icon: Underline,
               isActive: editor.isActive("underline"),
               onClick: () => editor.chain().focus().toggleUnderline().run(),
@@ -145,14 +150,16 @@ export function AtlasBubbleMenu({ editor }: AtlasBubbleMenuProps) {
               onClick: () => editor.chain().focus().toggleStrike().run(),
             })}
             {tool({
-              title: "Inline code (`)",
+              title: "Inline code",
+              shortcut: "`",
               icon: Code,
               isActive: editor.isActive("code"),
               onClick: () => editor.chain().focus().toggleCode().run(),
             })}
             <span className="atlas-bubble-sep" />
             {tool({
-              title: "Link (⌘K)",
+              title: "Link",
+              shortcut: "⌘K",
               icon: LinkIcon,
               isActive: editor.isActive("link"),
               onClick: () => {

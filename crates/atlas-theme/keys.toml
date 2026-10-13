@@ -120,6 +120,10 @@ description = "Added and removed regions, inline and side-by-side."
 name = "Agents and indicators"
 description = "The agent identity chip."
 
+[[group]]
+name = "Identity"
+description = "Eight hues that give a label, project, role or person a stable colour."
+
 
 # ── Borders ───────────────────────────────────────────────────────────────────
 
@@ -749,6 +753,73 @@ base = "background"
 dark = "#0a0a0a"
 light = "#fffaf3"
 
+# The Atlas Standards surface ramp, page → surface → card → illustration →
+# raised → popover, plus the canvas the app's panels are set into. Each one
+# derives from the base token nearest its job, so a third-party theme that has
+# never heard of them still gets a sensible step.
+
+[[key]]
+name = "surface.background"
+group = "Chrome surfaces"
+description = "One step above the page: a sidebar, a pane behind cards."
+base = "sidebar"
+dark = "oklch(0.1 0 0)"
+light = "oklch(0.975 0 0)"
+
+[[key]]
+name = "surface.raised"
+group = "Chrome surfaces"
+description = "A raised block within a card: a stat cell, a code well."
+base = "muted"
+dark = "oklch(0.15 0 0)"
+light = "oklch(0.962 0 0)"
+
+[[key]]
+name = "illustration.background"
+group = "Chrome surfaces"
+description = "A card inside a card; in dark, the brightest resting plane."
+base = "card"
+op = "toward_foreground"
+amount = 0.02
+dark = "oklch(0.13 0 0)"
+light = "oklch(1 0 0)"
+
+[[key]]
+name = "segment.track"
+group = "Chrome surfaces"
+description = "A segmented control's recessed track."
+base = "card"
+dark = "oklch(0.13 0 0)"
+light = "oklch(0.955 0 0)"
+
+[[key]]
+name = "segment.thumb"
+group = "Chrome surfaces"
+description = "The raised thumb that slides inside a segmented track. Always a step lighter."
+base = "popover"
+op = "toward_foreground"
+amount = 0.08
+dark = "oklch(0.26 0 0)"
+light = "oklch(1 0 0)"
+
+[[key]]
+name = "shell.canvas"
+group = "Chrome surfaces"
+description = "The app frame the curved panels are set into."
+base = "popover"
+dark = "oklch(0.17 0 0)"
+light = "oklch(0.935 0 0)"
+
+[[key]]
+name = "shell.edge"
+group = "Chrome surfaces"
+description = "The opaque edge of a panel set into the frame."
+base = "border"
+op = "toward_foreground"
+amount = 0.12
+dark = "oklch(0.27 0 0)"
+light = "oklch(0.85 0 0)"
+
 
 # ── Diff ──────────────────────────────────────────────────────────────────────
 
@@ -851,6 +922,77 @@ light = "rgba(0,0,0,0.06)"
 # ── Derived variables ─────────────────────────────────────────────────────────
 #
 # Not theme keys. See the header for what belongs here.
+
+# ── Identity ──────────────────────────────────────────────────────────────────
+#
+# A hue here is an IDENTITY, not a status: purple means "the Design label", not
+# "informational". `hueFor(id)` in src/lib/hue.ts picks one per entity so it
+# keeps its colour on every screen. Each derives from the palette hue of the
+# same name, so a theme's own reds and greens carry through.
+
+[[key]]
+name = "hue.grey"
+group = "Identity"
+description = "Identity hue: grey."
+base = "muted-foreground"
+dark = "oklch(0.7 0.02 259)"
+light = "oklch(0.5 0.025 262)"
+
+[[key]]
+name = "hue.indigo"
+group = "Identity"
+description = "Identity hue: indigo."
+palette = "blue"
+dark = "oklch(0.68 0.18 259)"
+light = "oklch(0.55 0.2 262)"
+
+[[key]]
+name = "hue.purple"
+group = "Identity"
+description = "Identity hue: purple."
+palette = "purple"
+dark = "oklch(0.7 0.18 300)"
+light = "oklch(0.55 0.2 300)"
+
+[[key]]
+name = "hue.cyan"
+group = "Identity"
+description = "Identity hue: cyan."
+palette = "cyan"
+dark = "oklch(0.76 0.115 196)"
+light = "oklch(0.6 0.12 196)"
+
+[[key]]
+name = "hue.green"
+group = "Identity"
+description = "Identity hue: green."
+palette = "green"
+dark = "oklch(0.74 0.145 155)"
+light = "oklch(0.58 0.15 152)"
+
+[[key]]
+name = "hue.amber"
+group = "Identity"
+description = "Identity hue: amber."
+palette = "yellow"
+dark = "oklch(0.8 0.14 74)"
+light = "oklch(0.66 0.15 70)"
+
+[[key]]
+name = "hue.orange"
+group = "Identity"
+description = "Identity hue: orange."
+palette = "orange"
+dark = "oklch(0.76 0.16 48)"
+light = "oklch(0.62 0.17 45)"
+
+[[key]]
+name = "hue.red"
+group = "Identity"
+description = "Identity hue: red."
+palette = "red"
+dark = "oklch(0.72 0.18 18)"
+light = "oklch(0.58 0.2 16)"
 
 [[derived]]
 name = "status.success.background"

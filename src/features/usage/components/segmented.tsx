@@ -38,7 +38,7 @@ export function Segmented<T extends string>({
       aria-label={label}
       title={label}
       className={cn(
-        "flex h-control-sm shrink-0 items-center rounded-full border border-[var(--border)] p-0.5",
+        "flex h-control-sm shrink-0 items-center rounded-full border border-border p-0.5",
         className,
       )}
     >
@@ -62,7 +62,5 @@ export function Segmented<T extends string>({
 /** A non-radio segment sharing a `Segmented` track — the custom-range trigger. */
 export const SEGMENT_TRIGGER =
   "flex h-full cursor-pointer items-center gap-1 rounded-full px-2 text-xs leading-none outline-none transition-colors";
-export const SEGMENT_ACTIVE =
-  "bg-[var(--atlas-element-active)] font-medium text-[var(--foreground)]";
-export const SEGMENT_IDLE =
-  "text-[var(--muted-foreground)] hover:text-[var(--secondary-foreground)]";
+export const SEGMENT_ACTIVE = "bg-element-active font-medium text-foreground";
+export const SEGMENT_IDLE = "text-muted-foreground hover:text-secondary-foreground";

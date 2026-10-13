@@ -68,8 +68,8 @@ const CONTROL_H = "h-[26px]";
  * much bigger jump than 22% on hover.
  */
 const OUTLINE = [
-  "border border-[color-mix(in_srgb,var(--foreground)_16%,transparent)] bg-[var(--atlas-element-hover)] text-[var(--muted-foreground)]",
-  "transition-colors hover:border-[color-mix(in_srgb,var(--foreground)_22%,transparent)] hover:bg-[var(--atlas-element-active)] hover:text-[var(--foreground)]",
+  "border border-[color-mix(in_srgb,var(--foreground)_16%,transparent)] bg-element-hover text-muted-foreground",
+  "transition-colors hover:border-[color-mix(in_srgb,var(--foreground)_22%,transparent)] hover:bg-element-active hover:text-foreground",
 ].join(" ");
 
 interface ChatHeaderProps {
@@ -150,7 +150,7 @@ function ChatHeaderImpl({
                     "flex min-w-0 max-w-[46%] items-center gap-1.5 rounded-full px-3",
                     CONTROL_H,
                     OUTLINE,
-                    "text-sm font-medium leading-none text-[var(--foreground)]",
+                    "text-sm font-medium leading-none text-foreground",
                     "cursor-pointer outline-none",
                   )}
                   title="Switch session"
@@ -159,7 +159,7 @@ function ChatHeaderImpl({
                   <ChevronDown
                     size={12}
                     className={cn(
-                      "shrink-0 text-[var(--muted-foreground)] transition-transform",
+                      "shrink-0 text-muted-foreground transition-transform",
                       pickerOpen && "rotate-180",
                     )}
                   />
@@ -174,7 +174,7 @@ function ChatHeaderImpl({
                     // Border, translucent fill, blur AND the enter animation all on
                     // THIS element. Splitting them isolates the layer and kills the
                     // backdrop blur (see the feedback panel for the same rule).
-                    "border border-[var(--atlas-element-active)] bg-[var(--card)]/95 backdrop-blur-2xl",
+                    "border border-element-active bg-card/95 backdrop-blur-2xl",
                     // Grows out of its trigger's top-left corner.
                     "atlas-panel-in-tl",
                   )}
@@ -213,24 +213,18 @@ function ChatHeaderImpl({
               title={commentsPanelOpen ? "Close comments" : "Comments"}
               onClick={onToggleComments}
               aria-pressed={commentsPanelOpen}
-              className={cn(
-                "relative",
-                commentsPanelOpen && "bg-[var(--atlas-element-active)] text-[var(--foreground)]",
-              )}
+              className={cn("relative", commentsPanelOpen && "bg-element-active text-foreground")}
             >
               <MessageSquare size={13} />
               {commentCount > 0 && (
-                <span className="absolute -right-1 -top-1 flex h-[14px] min-w-[14px] items-center justify-center rounded-full bg-[var(--primary)] px-1 font-mono text-3xs leading-none text-[var(--primary-foreground)] tabular-nums">
+                <span className="absolute -right-1 -top-1 flex h-[14px] min-w-[14px] items-center justify-center rounded-full bg-primary px-1 font-mono text-3xs leading-none text-primary-foreground tabular-nums">
                   {commentCount > 9 ? "9+" : commentCount}
                 </span>
               )}
             </HeaderCircleButton>
           )}
 
-          <HeaderCircleButton
-            title={findHint ? `Find in chat (${findHint})` : "Find in chat"}
-            onClick={onOpenSearch}
-          >
+          <HeaderCircleButton title="Find in chat" shortcut={findHint} onClick={onOpenSearch}>
             <Search size={13} />
           </HeaderCircleButton>
 
@@ -247,7 +241,7 @@ function ChatHeaderImpl({
             />
             <DropdownMenu.Portal>
               <DropdownMenu.Positioner className="z-popover" align="end" sideOffset={6}>
-                <DropdownMenu.Popup className="min-w-[180px] rounded-md border border-[var(--border)] bg-[var(--card)] py-1 shadow-md">
+                <DropdownMenu.Popup className="min-w-[180px] rounded-md border border-border bg-card py-1 shadow-md">
                   <MenuLabel>Filter messages</MenuLabel>
                   {(["all", "user", "assistant"] as const).map((f) => (
                     <DropdownMenu.Item
@@ -256,8 +250,8 @@ function ChatHeaderImpl({
                       className={cn(
                         "flex h-[26px] cursor-default items-center gap-2 px-3 text-xs capitalize outline-none",
                         roleFilter === f
-                          ? "bg-[var(--atlas-element-selected)] text-[var(--foreground)]"
-                          : "text-[var(--secondary-foreground)] hover:bg-[var(--atlas-element-hover)] hover:text-[var(--foreground)]",
+                          ? "bg-element-selected text-foreground"
+                          : "text-secondary-foreground hover:bg-element-hover hover:text-foreground",
                       )}
                     >
                       {f === "user" ? (
@@ -272,11 +266,11 @@ function ChatHeaderImpl({
                     </DropdownMenu.Item>
                   ))}
 
-                  <DropdownMenu.Separator className="my-1 h-px bg-[var(--atlas-border-subtle)]" />
+                  <DropdownMenu.Separator className="my-1 h-px bg-hairline" />
 
                   <DropdownMenu.Item
                     onClick={onToggleBash}
-                    className="flex h-[26px] cursor-default items-center gap-2 px-3 text-xs text-[var(--secondary-foreground)] outline-none hover:bg-[var(--atlas-element-hover)] hover:text-[var(--foreground)]"
+                    className="flex h-[26px] cursor-default items-center gap-2 px-3 text-xs text-secondary-foreground outline-none hover:bg-element-hover hover:text-foreground"
                   >
                     <TerminalSquare size={11} />
                     <span className="flex-1">Bash calls</span>
@@ -284,7 +278,7 @@ function ChatHeaderImpl({
                   </DropdownMenu.Item>
                   <DropdownMenu.Item
                     onClick={onTogglePlans}
-                    className="flex h-[26px] cursor-default items-center gap-2 px-3 text-xs text-[var(--secondary-foreground)] outline-none hover:bg-[var(--atlas-element-hover)] hover:text-[var(--foreground)]"
+                    className="flex h-[26px] cursor-default items-center gap-2 px-3 text-xs text-secondary-foreground outline-none hover:bg-element-hover hover:text-foreground"
                   >
                     <ClipboardList size={11} />
                     <span className="flex-1">Plans</span>
@@ -292,10 +286,10 @@ function ChatHeaderImpl({
                   </DropdownMenu.Item>
                   {onForkSession && (
                     <>
-                      <DropdownMenu.Separator className="my-1 h-px bg-[var(--atlas-border-subtle)]" />
+                      <DropdownMenu.Separator className="my-1 h-px bg-hairline" />
                       <DropdownMenu.Item
                         onClick={onForkSession}
-                        className="flex h-[26px] cursor-default items-center gap-2 px-3 text-xs text-[var(--secondary-foreground)] outline-none hover:bg-[var(--atlas-element-hover)] hover:text-[var(--foreground)]"
+                        className="flex h-[26px] cursor-default items-center gap-2 px-3 text-xs text-secondary-foreground outline-none hover:bg-element-hover hover:text-foreground"
                       >
                         <GitBranch size={11} />
                         <span className="flex-1">Branch from here</span>
@@ -334,11 +328,13 @@ const HeaderCircleButton = forwardRef<
   {
     children: React.ReactNode;
     title: string;
+    /** A combo string, drawn as keycaps in the tooltip. */
+    shortcut?: string;
     onClick?: () => void;
   } & React.ButtonHTMLAttributes<HTMLButtonElement>
->(function HeaderCircleButton({ children, title, onClick, className, ...rest }, ref) {
+>(function HeaderCircleButton({ children, title, shortcut, onClick, className, ...rest }, ref) {
   return (
-    <HintItem label={title}>
+    <HintItem label={title} shortcut={shortcut}>
       <button
         {...rest}
         ref={ref}
@@ -360,7 +356,7 @@ const HeaderCircleButton = forwardRef<
 
 function MenuLabel({ children }: { children: React.ReactNode }) {
   return (
-    <div className="px-3 pb-1 pt-1.5 text-3xs uppercase tracking-wider text-[var(--muted-foreground)]">
+    <div className="px-3 pb-1 pt-1.5 text-3xs uppercase tracking-wider text-muted-foreground">
       {children}
     </div>
   );

@@ -156,7 +156,7 @@ export function Titlebar() {
       onMouseDown={handleDrag}
       onDoubleClick={handleDoubleClick}
       className={cn(
-        "relative z-titlebar flex h-titlebar select-none items-center bg-[var(--background)] border-b border-border",
+        "relative z-titlebar flex h-titlebar select-none items-center bg-background border-b border-border",
         isWindows || isLinux ? "pr-0" : "pr-3",
         isFullscreen || dockedSidebar || !isMac ? "pl-3" : "pl-[72px]",
       )}
@@ -362,19 +362,17 @@ function ProjectLabel({
               // inherited line-height the label spans set a taller line box than
               // the dot, and `items-center` centred the dot against *that* — which
               // is why it sat visibly high.
-              className="group flex h-[19px] max-w-[320px] min-w-0 cursor-pointer items-center gap-1 rounded-full border border-border-subtle bg-card px-2 text-xs leading-none font-medium transition-colors hover:bg-element-hover"
+              className="group flex h-[19px] max-w-[320px] min-w-0 cursor-pointer items-center gap-1 rounded-full border border-hairline bg-card px-2 text-xs leading-none font-medium transition-colors hover:bg-element-hover"
               title={health?.summary ?? "Session capture"}
               aria-label={health?.summary ?? "Session capture"}
             >
               {orgName && (
                 <>
-                  <span className="min-w-0 shrink truncate text-[var(--muted-foreground)]">
-                    {orgName}
-                  </span>
-                  <span className="shrink-0 text-[var(--muted-foreground)] opacity-50">/</span>
+                  <span className="min-w-0 shrink truncate text-muted-foreground">{orgName}</span>
+                  <span className="shrink-0 text-muted-foreground opacity-50">/</span>
                 </>
               )}
-              <span className="min-w-0 truncate text-[var(--secondary-foreground)] transition-colors group-hover:text-[var(--foreground)]">
+              <span className="min-w-0 truncate text-secondary-foreground transition-colors group-hover:text-foreground">
                 {name}
               </span>
               {/* Only once capture is on. An always-present grey dot on every
@@ -392,7 +390,7 @@ function ProjectLabel({
                 // a transformed ancestor becomes the backdrop root — which
                 // flattens the panel's blur while it plays. Exit stays here
                 // because Base UI holds the popup mounted through it.
-                className="origin-[var(--transform-origin)] data-closed:animate-scale-out"
+                className="origin-(--transform-origin) data-closed:animate-scale-out"
               >
                 <CapturePopover
                   projectPath={path}
@@ -483,8 +481,7 @@ function DevModePill() {
 }
 
 function ProjectToggle() {
-  const hint = useActionShortcut("workspace.toggleSidebar")?.label;
-  const suffix = hint ? ` (${hint})` : "";
+  const toggleHint = useActionShortcut("workspace.toggleSidebar")?.label;
   const sidebarOpen = useProjectStore.use.sidebarOpen();
   const { toggleSidebar } = useProjectStore.use.actions();
   // Badge counts only the active org's projects (matches what the sidebar
@@ -492,7 +489,7 @@ function ProjectToggle() {
   const count = useActiveOrgProjects().length;
 
   return (
-    <HintItem label={sidebarOpen ? `Hide projects${suffix}` : `Show projects${suffix}`}>
+    <HintItem label={sidebarOpen ? "Hide projects" : "Show projects"} shortcut={toggleHint}>
       <button
         onClick={toggleSidebar}
         className={cn(
@@ -618,7 +615,7 @@ function useUpdateItem(): DockItem {
     ) : (
       <ArrowDownToLine size={12} />
     ),
-    badge: ready ? <DockBadge className="bg-[var(--primary)]" /> : undefined,
+    badge: ready ? <DockBadge className="bg-primary" /> : undefined,
   };
 }
 
@@ -649,11 +646,7 @@ function useNotificationItem(): DockItem {
         <DockBadge
           // Priority: error > needs-attention (green) > plain unread.
           className={cn(
-            hasError
-              ? "bg-[var(--atlas-status-error-foreground)]"
-              : needsAttention
-                ? "bg-[var(--atlas-status-success-foreground)] animate-pulse"
-                : "bg-foreground",
+            hasError ? "bg-error" : needsAttention ? "bg-success animate-pulse" : "bg-foreground",
           )}
           label={needsAttention ? "Something needs your attention" : "Unread notifications"}
         />
@@ -679,7 +672,7 @@ function DockBadge({ className, label }: { className?: string; label?: string })
     <span
       className={cn(
         "pointer-events-none absolute right-[3px] top-[3px] size-[6px] rounded-full",
-        "ring-1 ring-[var(--card)]",
+        "ring-1 ring-card",
         className,
       )}
       aria-label={label}

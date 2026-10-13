@@ -38,8 +38,8 @@ export function RemovedAgentBar({ tabId }: { tabId: string }) {
       title="Switch this chat to another agent, or reinstall it from Settings → Agents"
     >
       <span className="min-w-0 truncate">
-        <span className="font-semibold text-[var(--foreground)]">{agentMeta(agentType).label}</span>
-        <span className="text-[var(--muted-foreground)]"> is no longer installed</span>
+        <span className="font-semibold text-foreground">{agentMeta(agentType).label}</span>
+        <span className="text-muted-foreground"> is no longer installed</span>
       </span>
       <button
         type="button"

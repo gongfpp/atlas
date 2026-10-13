@@ -103,7 +103,7 @@ const TOP_BLUR_RAMP = 34;
 const ANCHOR_GAP = 24;
 /** The ring a comment jump leaves on the row it landed on, and for how long.
  *  Same treatment as the Timeline's `landed` row. */
-const LANDED_CLASSES = ["ring-1", "ring-[var(--atlas-border-strong)]", "rounded-lg"];
+const LANDED_CLASSES = ["ring-1", "ring-border-strong", "rounded-lg"];
 const LANDED_MS = 2_000;
 
 /** Breathing room between the last row and the composer. Applied as content
@@ -238,13 +238,13 @@ function StallNotice({
   onCopyDiagnostics?: () => void;
 }) {
   return (
-    <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5 pl-[17px] text-xs leading-[16px] text-[var(--muted-foreground)]">
+    <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5 pl-[17px] text-xs leading-[16px] text-muted-foreground">
       <span className="select-text">Still starting… this can take a few minutes on first run.</span>
       {onRestart && (
         <button
           type="button"
           onClick={onRestart}
-          className="cursor-pointer font-medium text-[var(--secondary-foreground)] underline-offset-2 hover:text-[var(--foreground)] hover:underline"
+          className="cursor-pointer font-medium text-secondary-foreground underline-offset-2 hover:text-foreground hover:underline"
         >
           Restart agent
         </button>
@@ -253,7 +253,7 @@ function StallNotice({
         <button
           type="button"
           onClick={onSwitch}
-          className="cursor-pointer font-medium text-[var(--secondary-foreground)] underline-offset-2 hover:text-[var(--foreground)] hover:underline"
+          className="cursor-pointer font-medium text-secondary-foreground underline-offset-2 hover:text-foreground hover:underline"
         >
           Switch agent
         </button>
@@ -262,7 +262,7 @@ function StallNotice({
         <button
           type="button"
           onClick={onCopyDiagnostics}
-          className="cursor-pointer font-medium text-[var(--secondary-foreground)] underline-offset-2 hover:text-[var(--foreground)] hover:underline"
+          className="cursor-pointer font-medium text-secondary-foreground underline-offset-2 hover:text-foreground hover:underline"
         >
           Copy diagnostics
         </button>
@@ -955,7 +955,7 @@ export const Transcript = forwardRef<TranscriptHandle, TranscriptProps>(function
           }}
         >
           {rows.length === 0 && !isStreaming && (
-            <div className="flex h-full items-center justify-center text-xs text-[var(--muted-foreground)]">
+            <div className="flex h-full items-center justify-center text-xs text-muted-foreground">
               No messages yet.
             </div>
           )}

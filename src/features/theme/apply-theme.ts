@@ -2,6 +2,8 @@ import type { Theme, ThemeMode } from "./lib/theme-api";
 import { resolveTheme, type ResolvedTheme, type ThemeOverride } from "./resolve-theme";
 
 const STYLE_ID = "atlas-resolved-theme";
+/** The second block: both appearances, scoped by `data-appearance`. */
+const SCOPES_ID = "atlas-appearance-scopes";
 /**
  * The selector the resolved block is written under — here and, from the launch
  * cache, by `index.html`'s inline boot script.
@@ -53,6 +55,37 @@ export function resolvedThemeCss(cssVars: Record<string, string>): string {
     .map(([name, value]) => `${name}:${value}`)
     .join(";");
   return `${THEME_SELECTOR}{${declarations}}`;
+}
+
+/**
+ * Both appearances of the theme, each scoped to `[data-appearance=…]`.
+ *
+ * Any element can draw itself in the other appearance by setting
+ * `data-appearance="light"` or `"dark"` on itself, and everything inside takes
+ * that variant's variables — the Atlas Standards contract its share and
+ * comments panels are drawn in. `data-theme` already names the theme id here,
+ * which is why the attribute is `data-appearance` rather than Standards'
+ * `data-theme`.
+ *
+ * Every value is resolved in JS, so a variable here never refers to another
+ * one and nothing resolves against the page's scope by mistake. `color` is
+ * reset too: an element inherits its parent's colour already resolved, so
+ * without it the text in a flipped panel would keep the page's ink.
+ *
+ * A separate `<style>` from `resolvedThemeCss`, which `index.html` replays at
+ * launch byte for byte; nothing flipped exists before the first render, so
+ * this one is not cached.
+ */
+export function appearanceScopesCss(theme: Theme, themeOverride: ThemeOverride = {}): string {
+  return (["dark", "light"] as const)
+    .map((appearance) => {
+      const { cssVars } = resolveTheme(theme, appearance, themeOverride);
+      const declarations = Object.entries(cssVars)
+        .map(([name, value]) => `${name}:${value}`)
+        .join(";");
+      return `[data-appearance="${appearance}"]{color-scheme:${appearance};color:var(--foreground);${declarations}}`;
+    })
+    .join("");
 }
 
 /**
@@ -141,6 +174,13 @@ export function applyTheme(
     document.head.append(style);
   }
   style.textContent = resolvedThemeCss(resolved.cssVars);
+  let scopes = document.getElementById(SCOPES_ID) as HTMLStyleElement | null;
+  if (!scopes) {
+    scopes = document.createElement("style");
+    scopes.id = SCOPES_ID;
+    style.after(scopes);
+  }
+  scopes.textContent = appearanceScopesCss(theme, themeOverride);
   const cache = launchCache(resolved);
   applyBootVars(root, cache);
   cacheLaunchTheme(cache);

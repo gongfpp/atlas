@@ -37,15 +37,12 @@ export function GitErrorDialog({ onForcePush }: { onForcePush?: () => void }) {
     <Dialog.Root open={payload !== null} onOpenChange={(o) => !o && actions.dismissErrorDialog()}>
       <Dialog.Portal>
         <Dialog.Backdrop className="fixed inset-0 scrim z-overlay" />
-        <Dialog.Popup className="fixed left-1/2 top-[24%] -translate-x-1/2 z-modal w-[440px] rounded-xl overflow-hidden bg-[var(--card)] border border-border shadow-md flex flex-col">
+        <Dialog.Popup className="fixed left-1/2 top-[24%] -translate-x-1/2 z-modal w-[440px] rounded-xl overflow-hidden bg-card border border-border shadow-md flex flex-col">
           {payload && (
             <>
               <div className="px-4 pt-3.5 pb-3 border-b border-border">
                 <Dialog.Title className="text-base font-semibold text-foreground flex items-center gap-1.5">
-                  <AlertTriangle
-                    size={13}
-                    className="text-[var(--atlas-status-error-foreground)] shrink-0"
-                  />
+                  <AlertTriangle size={13} className="text-error shrink-0" />
                   {gitErrorTitle(payload)}
                 </Dialog.Title>
                 <Dialog.Description className="text-xs text-secondary-foreground mt-1.5">
@@ -63,7 +60,7 @@ export function GitErrorDialog({ onForcePush }: { onForcePush?: () => void }) {
               </div>
 
               {payload.rawStderr && (
-                <div className="max-h-[180px] overflow-y-auto hide-scrollbar bg-[var(--background)] px-3 py-2">
+                <div className="max-h-[180px] overflow-y-auto hide-scrollbar bg-background px-3 py-2">
                   <pre className="font-mono text-2xs leading-[15px] text-secondary-foreground whitespace-pre-wrap break-all">
                     {payload.rawStderr}
                   </pre>

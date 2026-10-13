@@ -137,7 +137,7 @@ export function ProvidersSettings() {
             className={cn(
               "flex items-center gap-1.5 px-2.5 h-[40px] text-xs font-medium transition-colors border-b-2 -mb-px",
               category === t.id
-                ? "text-foreground border-b-[var(--primary)]"
+                ? "text-foreground border-b-primary"
                 : "text-secondary-foreground hover:text-foreground border-b-transparent",
             )}
           >
@@ -148,7 +148,7 @@ export function ProvidersSettings() {
 
         <div className="flex-1" />
 
-        <div className="flex items-center gap-1.5 h-6 rounded-md border border-border bg-card px-2 min-w-[200px] focus-within:border-[var(--atlas-border-strong)]">
+        <div className="flex items-center gap-1.5 h-6 rounded-md border border-border bg-card px-2 min-w-[200px] focus-within:border-border-strong">
           <Search size={11} className="text-muted-foreground shrink-0" />
           <input
             value={query}
@@ -177,7 +177,7 @@ export function ProvidersSettings() {
           </Hint>
           <DropdownMenu.Portal>
             <DropdownMenu.Positioner className="z-popover" align="end" sideOffset={4}>
-              <DropdownMenu.Popup className="rounded-md border border-[var(--border)] bg-[var(--card)] shadow-md py-1 min-w-[180px]">
+              <DropdownMenu.Popup className="rounded-md border border-border bg-card shadow-md py-1 min-w-[180px]">
                 {/* Base UI keeps the menu open on a checkbox item by default;
                     Radix closed it, and this toggle is a one-shot filter. */}
                 <DropdownMenu.CheckboxItem
@@ -192,7 +192,7 @@ export function ProvidersSettings() {
                   Set only
                 </DropdownMenu.CheckboxItem>
 
-                <DropdownMenu.Separator className="my-1 h-px bg-[var(--atlas-border-subtle)]" />
+                <DropdownMenu.Separator className="my-1 h-px bg-hairline" />
 
                 {/* The `Group` is what the label labels. Base UI's GroupLabel
                     reads it from context and throws without one, where Radix's
@@ -265,12 +265,12 @@ function ProviderTableRow({
   onToggle: () => void;
 }) {
   return (
-    <div className="border-b border-border-subtle">
+    <div className="border-b border-hairline">
       <button
         onClick={onToggle}
         className={cn(
           "w-full flex items-center h-[40px] px-3 text-left transition-colors",
-          expanded ? "bg-[var(--card)]/40" : "hover:bg-element-hover",
+          expanded ? "bg-card/40" : "hover:bg-element-hover",
         )}
       >
         <span className={cn(COL.provider, "flex items-center gap-2 min-w-0")}>
@@ -390,7 +390,7 @@ function ProviderEditor({
   };
 
   return (
-    <div className="bg-[var(--card)]/40 border-t border-border-subtle px-3 py-3">
+    <div className="bg-card/40 border-t border-hairline px-3 py-3">
       {readOnly && (
         <p className="mb-2.5 max-w-[640px] text-xs leading-snug text-muted-foreground">
           <span className="font-mono">{envVar}</span> is set outside your shell profile — Atlas
@@ -401,7 +401,7 @@ function ProviderEditor({
 
       {entry && (
         <div className="mb-2.5 flex items-center gap-2">
-          <code className="flex-1 min-w-0 truncate rounded bg-[var(--background)] border border-border-subtle px-2 py-1 font-mono text-xs text-secondary-foreground">
+          <code className="flex-1 min-w-0 truncate rounded bg-background border border-hairline px-2 py-1 font-mono text-xs text-secondary-foreground">
             {revealed !== null ? revealed || "(empty)" : `${envVar}=••••${entry.last4}`}
           </code>
           <Hint label={revealed !== null ? "Hide" : "Reveal"}>
@@ -458,7 +458,7 @@ function ProviderEditor({
                 disabled={busy || !draft.trim()}
                 className={cn(
                   "flex items-center gap-1.5 h-7 rounded-md px-3 text-xs font-medium",
-                  "bg-[var(--primary)] text-[var(--background)]",
+                  "bg-primary text-background",
                   "hover:opacity-90 transition-opacity",
                   "disabled:opacity-40 disabled:cursor-not-allowed",
                 )}

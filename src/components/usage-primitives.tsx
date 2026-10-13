@@ -46,9 +46,8 @@ export function useMounted(): boolean {
   return mounted;
 }
 
-export const CAPTION =
-  "text-2xs font-medium uppercase tracking-wider text-[var(--muted-foreground)]";
-export const VALUE = "text-xs tabular-nums text-[var(--foreground)]";
+export const CAPTION = "text-2xs font-medium uppercase tracking-wider text-muted-foreground";
+export const VALUE = "text-xs tabular-nums text-foreground";
 
 /** One staggered section card; `index` drives the `atlas-usage-in` delay. */
 export function Card({
@@ -66,7 +65,7 @@ export function Card({
     <section
       data-section={section}
       className={cn(
-        "atlas-usage-in rounded-lg border border-[var(--atlas-element-selected)] bg-[var(--card)] px-2.5 py-2",
+        "atlas-usage-in rounded-lg border border-element-selected bg-card px-2.5 py-2",
         className,
       )}
       style={{ "--i": index } as CSSProperties}
@@ -79,10 +78,10 @@ export function Card({
 export function StatusPill({ status, label }: { status: "ok" | "warn" | "full"; label?: string }) {
   const tone =
     status === "full"
-      ? "border-[var(--atlas-status-error-foreground)]/40 text-[var(--atlas-status-error-foreground)]"
+      ? "border-error/40 text-error"
       : status === "warn"
-        ? "border-[var(--atlas-status-warning-foreground)]/40 text-[var(--atlas-status-warning-foreground)]"
-        : "border-[var(--atlas-element-active)] text-[var(--secondary-foreground)]";
+        ? "border-warning/40 text-warning"
+        : "border-element-active text-secondary-foreground";
   return (
     <span
       className={cn(
@@ -105,7 +104,7 @@ export function Bar({
   color?: string;
 }) {
   return (
-    <span className="block h-[3px] w-full overflow-hidden rounded-full bg-[var(--atlas-element-selected)]">
+    <span className="block h-[3px] w-full overflow-hidden rounded-full bg-element-selected">
       <span
         className="block h-full rounded-full"
         style={{
@@ -121,7 +120,7 @@ export function Bar({
 /** The "est." chip beside any cost that came from the price map, not the provider. */
 export function EstTag() {
   return (
-    <span className="rounded-full border border-[var(--atlas-element-active)] px-1 text-3xs font-medium uppercase tracking-wider text-[var(--muted-foreground)]">
+    <span className="rounded-full border border-element-active px-1 text-3xs font-medium uppercase tracking-wider text-muted-foreground">
       est.
     </span>
   );

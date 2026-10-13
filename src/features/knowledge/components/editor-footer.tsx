@@ -135,7 +135,7 @@ export function EditorFooter({ wordCount, charCount, projectPath, entryId }: Edi
 
   return (
     <div
-      className="flex items-center shrink-0 border-t border-border-subtle text-muted-foreground text-2xs"
+      className="flex items-center shrink-0 border-t border-hairline text-muted-foreground text-2xs"
       style={{
         height: 24,
         gap: 14,
@@ -161,10 +161,9 @@ export function EditorFooter({ wordCount, charCount, projectPath, entryId }: Edi
               disabled={isBusy}
               className={cn(
                 "inline-flex items-center gap-1 h-5 px-2 rounded-full",
-                "border border-border bg-card text-[var(--foreground)]",
+                "border border-border bg-card text-foreground",
                 "text-2xs font-medium leading-none cursor-pointer",
                 "hover:bg-element-hover transition-colors",
-                "shadow-sm",
                 isBusy && "opacity-80 cursor-wait",
               )}
               title={busyLabel ?? "Export"}

@@ -2,8 +2,22 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { act, cleanup, fireEvent, render, screen } from "@testing-library/react";
 
-import { resetTooltipTiming, TOOLTIP_OPEN_DELAY, TOOLTIP_WARM_WINDOW } from "@/ui/tooltip-timing";
+import { MotionGlobalConfig } from "motion/react";
+
+import { SPRING_INDICATOR } from "@/lib/motion";
+import {
+  resetTooltipTiming,
+  slideTransition,
+  TOOLTIP_OPEN_DELAY,
+  TOOLTIP_WARM_WINDOW,
+} from "@/ui/tooltip-timing";
 import { TitlebarDock, type DockItem } from "./titlebar-dock";
+
+// Watched, not replaced: the strip still gets the real transition.
+vi.mock("@/ui/tooltip-timing", async (actual) => {
+  const real = await actual<typeof import("@/ui/tooltip-timing")>();
+  return { ...real, slideTransition: vi.fn(real.slideTransition) };
+});
 
 /**
  * happy-dom reports every rect as zero, and the whole tooltip is arithmetic
@@ -51,72 +65,95 @@ const insets = (el: HTMLElement) => {
   return { right: Number(m[1]), left: Number(m[2]) };
 };
 
+/**
+ * The strip is a `motion.div`, and `motion` steps its animations on the
+ * `requestAnimationFrame` it captured at import — before any test fakes the
+ * clock — so fake timers never reach it. Real time does: `settle` waits two
+ * frames' worth of it. Taken now, while `setTimeout` is still the real one.
+ *
+ * Animations are instant unless a test says otherwise, so after `settle` the
+ * strip shows where it is going rather than somewhere on the way.
+ */
+const realSetTimeout = globalThis.setTimeout;
+const settle = async () => {
+  for (let i = 0; i < 2; i++) {
+    // Zero-delay fake timers too: motion hands some of its work to one.
+    act(() => vi.advanceTimersByTime(0));
+    await act(async () => {
+      await new Promise((done) => realSetTimeout(done, 20));
+    });
+  }
+};
+
 beforeEach(() => {
   vi.useFakeTimers();
   resetTooltipTiming();
+  MotionGlobalConfig.instantAnimations = true;
 });
 afterEach(() => {
   cleanup();
   vi.useRealTimers();
+  MotionGlobalConfig.instantAnimations = false;
 });
 
-/** Hover and wait out the shared open delay. */
-function hover(el: Element) {
+/** Hover, wait out the shared open delay, and let the strip arrive. */
+async function hover(el: Element) {
   fireEvent.mouseEnter(el);
   act(() => vi.advanceTimersByTime(TOOLTIP_OPEN_DELAY));
+  await settle();
 }
 
 describe("TitlebarDock", () => {
-  it("renders one button per item, named for the tooltip", () => {
+  it("renders one button per item, named for the tooltip", async () => {
     render(<TitlebarDock items={items} />);
     expect(screen.getByLabelText("Notifications")).toBeTruthy();
     expect(screen.getAllByRole("button")).toHaveLength(3);
   });
 
-  it("invokes the item's action on click", () => {
+  it("invokes the item's action on click", async () => {
     render(<TitlebarDock items={items} />);
     fireEvent.click(screen.getByLabelText("Notifications"));
     expect(items[1].onClick).toHaveBeenCalledTimes(1);
   });
 
-  it("is invisible until something is hovered", () => {
+  it("is invisible until something is hovered", async () => {
     const { container } = render(<TitlebarDock items={items} />);
     const strip = container.querySelector("[style*='clip-path']") as HTMLElement;
     expect(strip.style.opacity).toBe("0");
   });
 
-  it("clips away every label but the hovered one", () => {
+  it("clips away every label but the hovered one", async () => {
     const { container } = render(<TitlebarDock items={items} />);
     const { strip, buttons } = layout(container);
 
-    hover(buttons[1]);
+    await hover(buttons[1]);
     // 40 of 180 to the left, 80 of 180 to the right.
     expect(insets(strip)).toEqual({ left: (40 / 180) * 100, right: (80 / 180) * 100 });
     expect(strip.style.opacity).toBe("1");
   });
 
-  it("shows the first label with nothing clipped on its left", () => {
+  it("shows the first label with nothing clipped on its left", async () => {
     const { container } = render(<TitlebarDock items={items} />);
     const { strip, buttons } = layout(container);
-    hover(buttons[0]);
+    await hover(buttons[0]);
     expect(insets(strip)).toEqual({ left: 0, right: ((60 + 80) / 180) * 100 });
   });
 
-  it("centres the hovered label on its icon", () => {
+  it("centres the hovered label on its icon", async () => {
     const { container } = render(<TitlebarDock items={items} />);
     const { strip, buttons } = layout(container);
 
-    hover(buttons[1]);
+    await hover(buttons[1]);
     // strip left 100 + 40 before + half of 60 = 170; icon centre 200.
     expect(translateX(strip)).toBe(30);
   });
 
-  it("pulls the tooltip back inside the window at the right edge", () => {
+  it("pulls the tooltip back inside the window at the right edge", async () => {
     const { container } = render(<TitlebarDock items={items} />);
     // Last icon near the edge: its 80px label would otherwise overhang.
     const { strip, buttons } = layout(container, [120, 200, window.innerWidth - 10]);
 
-    hover(buttons[2]);
+    await hover(buttons[2]);
     const centre = window.innerWidth - 10;
     const unclamped = centre - (100 + 40 + 60 + 40);
     const overflow = centre + 40 - (window.innerWidth - 8);
@@ -125,41 +162,43 @@ describe("TitlebarDock", () => {
     expect(100 + 100 + translateX(strip) + 80).toBe(window.innerWidth - 8);
   });
 
-  it("materialises in place on first hover, then animates between items", () => {
+  it("materialises in place on first hover, then travels between items", async () => {
     const { container } = render(<TitlebarDock items={items} />);
-    const { strip, buttons } = layout(container);
+    const { buttons } = layout(container);
+    const lastAsk = () => vi.mocked(slideTransition).mock.lastCall?.[0];
 
-    hover(buttons[0]);
-    // Nothing to travel from yet — a transform transition here would fly the
-    // tooltip in from the origin.
-    expect(strip.style.transition).not.toContain("transform");
+    await hover(buttons[0]);
+    // Nothing to travel from yet: travelling here would fly the tooltip in
+    // from the origin.
+    expect(lastAsk()).toEqual({ visible: true, travel: false });
 
-    hover(buttons[1]);
-    expect(strip.style.transition).toContain("transform");
-    expect(strip.style.transition).toContain("clip-path");
+    fireEvent.mouseEnter(buttons[1]);
+    expect(lastAsk()).toEqual({ visible: true, travel: true });
   });
 
-  it("fades out without moving, so the next hover travels from here", () => {
+  it("fades out without moving, so the next hover travels from here", async () => {
     const { container } = render(<TitlebarDock items={items} />);
     const { strip, buttons } = layout(container);
-    hover(buttons[1]);
+    await hover(buttons[1]);
     const held = strip.style.transform;
 
     fireEvent.mouseLeave(container.firstElementChild as HTMLElement);
+    act(() => vi.advanceTimersByTime(200));
+    await settle();
     expect(strip.style.opacity).toBe("0");
     expect(strip.style.transform).toBe(held);
   });
 
-  it("stays silent when nothing can be measured", () => {
+  it("stays silent when nothing can be measured", async () => {
     // The zero-rect case: a hidden titlebar, or a hover before layout. Better
     // to show no tooltip than one stacked at the origin.
     const { container } = render(<TitlebarDock items={items} />);
     const strip = container.querySelector("[style*='clip-path']") as HTMLElement;
-    hover(screen.getAllByRole("button")[1]);
+    await hover(screen.getAllByRole("button")[1]);
     expect(strip.style.opacity).toBe("0");
   });
 
-  it("hosts a trailing control and gives it a tooltip of its own", () => {
+  it("hosts a trailing control and gives it a tooltip of its own", async () => {
     const { container } = render(
       <TitlebarDock
         items={items}
@@ -177,13 +216,13 @@ describe("TitlebarDock", () => {
     // whoever rendered it (Radix attaches its trigger to the real element).
     const wrapper = screen.getByLabelText("Account").parentElement as HTMLElement;
     measure(wrapper, { left: 300, width: 20 });
-    hover(wrapper);
+    await hover(wrapper);
 
     expect(insets(strip)).toEqual({ left: ((40 + 60 + 80) / 230) * 100, right: 0 });
     expect(strip.style.opacity).toBe("1");
   });
 
-  it("marks a disabled item and does not fire it", () => {
+  it("marks a disabled item and does not fire it", async () => {
     const onClick = vi.fn();
     render(<TitlebarDock items={[{ label: "Checking…", icon: <i />, onClick, disabled: true }]} />);
     const button = screen.getByLabelText("Checking…") as HTMLButtonElement;
@@ -192,49 +231,53 @@ describe("TitlebarDock", () => {
     expect(onClick).not.toHaveBeenCalled();
   });
 
-  it("waits for the open delay before the first label", () => {
+  it("waits for the open delay before the first label", async () => {
     const { container } = render(<TitlebarDock items={items} />);
     const { strip, buttons } = layout(container);
     fireEvent.mouseEnter(buttons[0]);
+    await settle();
     expect(strip.style.opacity).toBe("0");
     act(() => vi.advanceTimersByTime(TOOLTIP_OPEN_DELAY - 1));
+    await settle();
     expect(strip.style.opacity).toBe("0");
     act(() => vi.advanceTimersByTime(1));
+    await settle();
     expect(strip.style.opacity).toBe("1");
   });
 
-  it("does not open if the pointer leaves during the delay", () => {
+  it("does not open if the pointer leaves during the delay", async () => {
     const { container } = render(<TitlebarDock items={items} />);
     const { strip, buttons } = layout(container);
     fireEvent.mouseEnter(buttons[0]);
     fireEvent.mouseLeave(container.firstElementChild as HTMLElement);
     act(() => vi.advanceTimersByTime(TOOLTIP_OPEN_DELAY * 2));
+    await settle();
     expect(strip.style.opacity).toBe("0");
   });
 
-  it("opens instantly right after a tooltip closed, then waits again once cold", () => {
+  it("opens instantly right after a tooltip closed, then waits again once cold", async () => {
     const { container } = render(<TitlebarDock items={items} />);
     const { strip, buttons } = layout(container);
     const dock = container.firstElementChild as HTMLElement;
-    hover(buttons[0]);
+    await hover(buttons[0]);
     fireEvent.mouseLeave(dock);
 
     fireEvent.mouseEnter(buttons[1]);
+    await settle();
     expect(strip.style.opacity).toBe("1");
     fireEvent.mouseLeave(dock);
 
     act(() => vi.advanceTimersByTime(TOOLTIP_WARM_WINDOW + 1));
     fireEvent.mouseEnter(buttons[2]);
+    await settle();
     expect(strip.style.opacity).toBe("0");
   });
 
-  it("slides without overshoot", () => {
-    const { container } = render(<TitlebarDock items={items} />);
-    const { strip, buttons } = layout(container);
-    hover(buttons[0]);
-    fireEvent.mouseEnter(buttons[1]);
-    expect(strip.style.transition).toContain("cubic-bezier(0.23, 1, 0.32, 1)");
-    expect(strip.style.transition).not.toMatch(/1\.2, 0\.36/);
+  it("travels on the shared indicator spring, and only once it is up", () => {
+    expect(slideTransition({ visible: true, travel: true }).x).toBe(SPRING_INDICATOR);
+    expect(slideTransition({ visible: true, travel: true }).clipPath).toBe(SPRING_INDICATOR);
+    // A first reveal: everything but the fade is instant.
+    expect(slideTransition({ visible: true, travel: false }).x).toEqual({ duration: 0 });
   });
 });
 

@@ -85,7 +85,7 @@ registry preamble it emits — the transform itself is one line of `color.ts`.
 
 ## Full key list and derivation sources
 
-All **73** keys, in the order and grouping of `crates/atlas-theme/keys.toml`.
+All **88** keys, in the order and grouping of `crates/atlas-theme/keys.toml`.
 **Source** is the first thing Atlas tries after an explicit `keys` value:
 `P:x` is `palette.x`, `B:x` is `base.x`, and `D` is the Atlas default for the
 active appearance, shown here as dark / light. **Transform** is applied to
@@ -224,6 +224,13 @@ Scrollbars and panel surfaces — the app frame.
 | `scrollbar.thumb.hover` | B:foreground → D | alpha 0.26 | `rgba(255,255,255,0.26)` / `rgba(0,0,0,0.26)` | Hovered scrollbar thumb. |
 | `panel.background` | B:sidebar → D | — | `#060706` / `#fffaf3` | Panel background. |
 | `panel.input.background` | B:background → D | — | `#0a0a0a` / `#fffaf3` | Panel input background. |
+| `surface.background` | B:sidebar → D | — | `oklch(0.1 0 0)` / `oklch(0.975 0 0)` | One step above the page: a sidebar, a pane behind cards. |
+| `surface.raised` | B:muted → D | — | `oklch(0.15 0 0)` / `oklch(0.962 0 0)` | A raised block within a card: a stat cell, a code well. |
+| `illustration.background` | B:card → D | mix 0.02 → B:foreground | `oklch(0.13 0 0)` / `oklch(1 0 0)` | A card inside a card; in dark, the brightest resting plane. |
+| `segment.track` | B:card → D | — | `oklch(0.13 0 0)` / `oklch(0.955 0 0)` | A segmented control's recessed track. |
+| `segment.thumb` | B:popover → D | mix 0.08 → B:foreground | `oklch(0.26 0 0)` / `oklch(1 0 0)` | The raised thumb that slides inside a segmented track. Always a step lighter. |
+| `shell.canvas` | B:popover → D | — | `oklch(0.17 0 0)` / `oklch(0.935 0 0)` | The app frame the curved panels are set into. |
+| `shell.edge` | B:border → D | mix 0.12 → B:foreground | `oklch(0.27 0 0)` / `oklch(0.85 0 0)` | The opaque edge of a panel set into the frame. |
 
 ### Diff
 
@@ -247,6 +254,21 @@ The agent identity chip.
 |---|---|---|---|---|
 | `agent.chip.foreground` | B:foreground → D | — | `#ffffff` / `#575279` | Agent identity chip text. |
 | `agent.chip.background` | B:foreground → D | alpha 0.06 | `rgba(255,255,255,0.06)` / `rgba(0,0,0,0.06)` | Agent identity chip fill. |
+
+### Identity
+
+Eight hues that give a label, project, role or person a stable colour.
+
+| Key | Source | Transform | D (dark / light) | What it colours |
+|---|---|---|---|---|
+| `hue.grey` | B:muted-foreground → D | — | `oklch(0.7 0.02 259)` / `oklch(0.5 0.025 262)` | Identity hue: grey. |
+| `hue.indigo` | P:blue → D | — | `oklch(0.68 0.18 259)` / `oklch(0.55 0.2 262)` | Identity hue: indigo. |
+| `hue.purple` | P:purple → D | — | `oklch(0.7 0.18 300)` / `oklch(0.55 0.2 300)` | Identity hue: purple. |
+| `hue.cyan` | P:cyan → D | — | `oklch(0.76 0.115 196)` / `oklch(0.6 0.12 196)` | Identity hue: cyan. |
+| `hue.green` | P:green → D | — | `oklch(0.74 0.145 155)` / `oklch(0.58 0.15 152)` | Identity hue: green. |
+| `hue.amber` | P:yellow → D | — | `oklch(0.8 0.14 74)` / `oklch(0.66 0.15 70)` | Identity hue: amber. |
+| `hue.orange` | P:orange → D | — | `oklch(0.76 0.16 48)` / `oklch(0.62 0.17 45)` | Identity hue: orange. |
+| `hue.red` | P:red → D | — | `oklch(0.72 0.18 18)` / `oklch(0.58 0.2 16)` | Identity hue: red. |
 
 ## Derived variables
 

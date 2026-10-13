@@ -54,7 +54,7 @@ export function BranchSwitcher() {
       />
       <Popover.Portal>
         <Popover.Positioner className="z-popover" side="bottom" align="start" sideOffset={4}>
-          <Popover.Popup className="w-[260px] rounded-lg border border-border bg-[var(--card)] shadow-md flex flex-col">
+          <Popover.Popup className="w-[260px] rounded-lg border border-border bg-card shadow-md flex flex-col">
             <div className="flex items-center gap-1.5 px-2 h-[30px] border-b border-border shrink-0">
               <Search size={11} className="text-muted-foreground shrink-0" />
               <input
@@ -121,7 +121,7 @@ export function BranchSwitcher() {
                               e.stopPropagation();
                               void run(() => actions.deleteBranch(b.name));
                             }}
-                            className="p-0.5 rounded text-muted-foreground hover:text-[var(--atlas-status-error-foreground)]"
+                            className="p-0.5 rounded text-muted-foreground hover:text-error"
                           >
                             <Trash2 size={11} />
                           </button>

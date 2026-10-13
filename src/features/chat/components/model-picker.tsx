@@ -44,7 +44,7 @@ import {
 import { useKeybindingsStore } from "@/features/keybindings/stores/keybindings-store";
 import { cn } from "@/lib/utils";
 import { Badge } from "@/ui/badge";
-import { Kbd } from "@/ui/kbd";
+import { KbdCombo } from "@/ui/kbd";
 import { Hint } from "@/ui/tooltip";
 import type { AgentType } from "@/types/agent";
 import type { SessionModeInfo } from "@/types/agents";
@@ -453,7 +453,7 @@ export function ModelPicker({
       )}
 
       <div className="flex min-w-0 flex-1 flex-col">
-        <div className="flex h-control-lg shrink-0 items-center gap-1.5 border-b border-border-subtle px-2.5">
+        <div className="flex h-control-lg shrink-0 items-center gap-1.5 border-b border-hairline px-2.5">
           <Search size={12} className="shrink-0 text-muted-foreground" />
           <input
             ref={searchRef}
@@ -497,7 +497,7 @@ export function ModelPicker({
             searching ? (
               <Empty>No models match “{q.trim()}”</Empty>
             ) : view === FAVORITES ? (
-              <Empty hint="Star a model to keep it here.">No favorites yet</Empty>
+              <Empty note="Star a model to keep it here.">No favorites yet</Empty>
             ) : (
               <Empty>No models</Empty>
             )
@@ -594,27 +594,28 @@ export function ModelPicker({
                     {m.id === currentModel && (
                       <Check size={12} className="shrink-0 text-foreground" aria-label="Current" />
                     )}
-                    {kbd && <Kbd className="shrink-0">{kbd}</Kbd>}
+                    {kbd && <KbdCombo combo={kbd} className="shrink-0" />}
                   </div>
-                  <button
-                    type="button"
-                    tabIndex={-1}
-                    aria-label={starLabel}
-                    aria-pressed={favorite}
-                    title={favoriteChord ? `${starLabel} (${favoriteChord})` : starLabel}
-                    onClick={() => {
-                      toggleFavorite(m.id);
-                      refocus();
-                    }}
-                    className={cn(
-                      "grid size-control-xs shrink-0 cursor-pointer place-items-center rounded-sm transition-opacity duration-fast hover:bg-element-active",
-                      favorite
-                        ? "text-foreground"
-                        : "text-muted-foreground opacity-0 group-data-highlighted/row:opacity-100",
-                    )}
-                  >
-                    <Star size={12} className={cn(favorite && "fill-current")} />
-                  </button>
+                  <Hint label={starLabel} shortcut={favoriteChord ?? undefined} side="left">
+                    <button
+                      type="button"
+                      tabIndex={-1}
+                      aria-label={starLabel}
+                      aria-pressed={favorite}
+                      onClick={() => {
+                        toggleFavorite(m.id);
+                        refocus();
+                      }}
+                      className={cn(
+                        "grid size-control-xs shrink-0 cursor-pointer place-items-center rounded-sm transition-opacity duration-fast hover:bg-element-active",
+                        favorite
+                          ? "text-foreground"
+                          : "text-muted-foreground opacity-0 group-data-highlighted/row:opacity-100",
+                      )}
+                    >
+                      <Star size={12} className={cn(favorite && "fill-current")} />
+                    </button>
+                  </Hint>
                 </div>
               );
             })
@@ -682,7 +683,7 @@ function ProviderRail({
       aria-orientation="vertical"
       aria-label="Providers"
       onKeyDown={onKeyDown}
-      className="relative flex w-10 shrink-0 flex-col items-center gap-0.5 overflow-y-auto border-r border-border-subtle py-1 hide-scrollbar"
+      className="relative flex w-10 shrink-0 flex-col items-center gap-0.5 overflow-y-auto border-r border-hairline py-1 hide-scrollbar"
     >
       {indicatorTop !== null && (
         <span
@@ -716,7 +717,7 @@ function ProviderRail({
             </button>
           </Hint>
           {g.key === FAVORITES && (
-            <span aria-hidden className="my-0.5 h-px w-5 shrink-0 bg-border-subtle" />
+            <span aria-hidden className="my-0.5 h-px w-5 shrink-0 bg-hairline" />
           )}
         </div>
       ))}
@@ -724,11 +725,11 @@ function ProviderRail({
   );
 }
 
-function Empty({ children, hint }: { children: ReactNode; hint?: string }) {
+function Empty({ children, note }: { children: ReactNode; note?: string }) {
   return (
     <div className="px-2 py-2 text-xs text-muted-foreground">
       {children}
-      {hint && <span className="mt-0.5 block caption">{hint}</span>}
+      {note && <span className="mt-0.5 block caption">{note}</span>}
     </div>
   );
 }

@@ -562,9 +562,7 @@ export function CachedMarkdown({ source, className, unstyled, priority = 0 }: Ca
   }, [html]);
 
   const cls = cn(
-    unstyled
-      ? "select-text"
-      : "prose-chat text-[var(--foreground)] leading-relaxed break-words select-text",
+    unstyled ? "select-text" : "prose-chat text-foreground leading-relaxed break-words select-text",
     className,
   );
 

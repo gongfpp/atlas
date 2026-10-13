@@ -142,10 +142,10 @@ export function CommsHome() {
               {/* Mirrors DirectRow exactly — same icon slot, same avatar size,
                   one line — so the roster landing does not shift the list. */}
               <RowIcon>
-                <div className="h-[22px] w-[22px] shrink-0 rounded-full bg-[var(--card)] opacity-50 atlas-marker-running" />
+                <div className="h-[22px] w-[22px] shrink-0 rounded-full bg-card opacity-50 atlas-marker-running" />
               </RowIcon>
               <div
-                className="h-[9px] rounded bg-[var(--card)] opacity-50 atlas-marker-running"
+                className="h-[9px] rounded bg-card opacity-50 atlas-marker-running"
                 style={{ width: 88 + ((i * 37) % 60) }}
               />
             </div>
@@ -274,7 +274,7 @@ function RowIcon({ children }: { children: React.ReactNode }) {
 function RowDivider() {
   return (
     <div className="py-1 pl-3.5 pr-2.5">
-      <div className="h-px bg-border-subtle" />
+      <div className="h-px bg-hairline" />
     </div>
   );
 }
@@ -469,7 +469,7 @@ function Badges({ unread, mentions }: { unread: number; mentions: number }) {
 function KeycapBadge({ ink, label }: { ink: string; label: string }) {
   return (
     <span
-      className="inline-flex min-w-[18px] shrink-0 items-center justify-center rounded-full border border-border bg-card px-1.5 font-sans text-2xs font-semibold leading-[16px] tabular-nums tracking-wide shadow-sm"
+      className="inline-flex min-w-[18px] shrink-0 items-center justify-center rounded-full border border-border bg-card px-1.5 font-sans text-2xs font-semibold leading-[16px] tabular-nums tracking-wide"
       style={{ color: ink }}
     >
       {label}

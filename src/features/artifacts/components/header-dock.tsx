@@ -34,7 +34,7 @@ import { HintGroup, HintItem } from "@/ui/hint-group";
 export function HeaderDock({ children }: { children: React.ReactNode }) {
   return (
     <HintGroup>
-      <div className="flex h-7 items-center gap-1.5 rounded-full border border-border-subtle bg-card p-1">
+      <div className="flex h-7 items-center gap-1.5 rounded-full border border-hairline bg-card p-1">
         {children}
       </div>
     </HintGroup>
@@ -52,11 +52,11 @@ export function HeaderDock({ children }: { children: React.ReactNode }) {
  */
 export const DOCK_TRIGGER =
   "relative flex size-5 cursor-pointer items-center justify-center rounded-full outline-none " +
-  "text-[var(--muted-foreground)] transition-colors duration-150 hover:bg-element-active hover:text-[var(--foreground)] " +
-  "data-popup-open:bg-element-active data-popup-open:text-[var(--foreground)]";
+  "text-muted-foreground transition-colors duration-150 hover:bg-element-active hover:text-foreground " +
+  "data-popup-open:bg-element-active data-popup-open:text-foreground";
 
 /** Applied on top of {@link DOCK_TRIGGER} when the control's mode is on. */
-export const DOCK_ACTIVE = "bg-element-active text-[var(--foreground)]";
+export const DOCK_ACTIVE = "bg-element-active text-foreground";
 
 /**
  * A plain button inside the dock. Its tooltip comes from the enclosing

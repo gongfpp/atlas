@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Lock } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { KbdKeys } from "@/ui/kbd";
+import { KbdKeys, KbdLegend } from "@/ui/kbd";
 import { ACTION_BY_ID, type ActionId } from "../lib/actions";
 import {
   type Combo,
@@ -110,7 +110,7 @@ export function KeybindingRecorder({
     >
       <div
         className={cn(
-          "w-[440px] rounded-lg border border-border bg-[var(--popover)]/95 backdrop-blur-xl",
+          "w-[440px] rounded-lg border border-border bg-popover/95 backdrop-blur-xl",
           "shadow-md p-3 animate-in fade-in-0 duration-150",
         )}
       >
@@ -139,7 +139,7 @@ export function KeybindingRecorder({
                   // Stay open: the next render sees an editable profile and
                   // the recorder proper takes over.
                 }}
-                className="h-7 rounded-md px-2.5 text-xs font-medium bg-[var(--foreground)] text-[var(--background)] hover:opacity-90 transition-opacity"
+                className="h-7 rounded-md px-2.5 text-xs font-medium bg-foreground text-background hover:opacity-90 transition-opacity"
               >
                 Duplicate &amp; edit
               </button>
@@ -174,18 +174,14 @@ export function KeybindingRecorder({
             </div>
             <div className="flex h-4 items-center justify-center text-xs">
               {reserved ? (
-                <span className="text-[var(--atlas-status-warning-foreground)]">
-                  {reserved} Atlas may never see it.
-                </span>
+                <span className="text-warning">{reserved} Atlas may never see it.</span>
               ) : combo && same.length > 0 ? (
                 <button
                   type="button"
                   onClick={() => onShowSame(combo)}
                   className={cn(
                     "underline underline-offset-2 hover:opacity-80 transition-opacity cursor-pointer",
-                    hard.length
-                      ? "text-[var(--atlas-status-warning-foreground)]"
-                      : "text-muted-foreground",
+                    hard.length ? "text-warning" : "text-muted-foreground",
                   )}
                 >
                   {same.length} existing {same.length === 1 ? "command has" : "commands have"} this
@@ -194,7 +190,13 @@ export function KeybindingRecorder({
               ) : combo ? (
                 <span className="text-muted-foreground">No other command uses this keybinding</span>
               ) : (
-                <span className="text-muted-foreground">Esc to cancel · ⌫ to clear</span>
+                <KbdLegend
+                  className="text-muted-foreground"
+                  items={[
+                    { keys: ["esc"], label: "cancel" },
+                    { keys: ["⌫"], label: "clear" },
+                  ]}
+                />
               )}
             </div>
           </div>
