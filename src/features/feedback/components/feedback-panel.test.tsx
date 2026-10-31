@@ -1,13 +1,20 @@
 // @vitest-environment happy-dom
-import { cleanup, render, screen } from "@testing-library/react";
+import { cleanup, render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 // The panel reaches Tauri only through the store's actions; `convertFileSrc` is
 // imported by the avatar for the photo path this fixture deliberately leaves
-// null. Neither is called here, but both imports have to resolve outside Tauri.
+// null. The submit test observes invoke; avatar imports resolve outside Tauri.
+const invokeMock = vi.hoisted(() =>
+  vi.fn(async (command: string) =>
+    command === "feedback_submit"
+      ? { sent: true, anonymous: true, screenshotDropped: false }
+      : null,
+  ),
+);
 vi.mock("@tauri-apps/api/core", () => ({
-  invoke: vi.fn(async () => null),
+  invoke: invokeMock,
   convertFileSrc: (path: string) => path,
 }));
 
@@ -37,6 +44,7 @@ const USER = {
  *  that which a screenshot cannot show. */
 describe("feedback anonymity control (issue #69)", () => {
   beforeEach(() => {
+    invokeMock.mockClear();
     useAuthStore.setState({
       snapshot: {
         status: "signed-in",
@@ -94,5 +102,23 @@ describe("feedback anonymity control (issue #69)", () => {
     expect(screen.queryByText("Sending as Jane Doe")).toBeNull();
     // The store is the submit payload's source, so the toggle has to land here.
     expect(useFeedbackStore.getState().anonymous).toBe(true);
+  });
+
+  it("passes anonymous mode through the actual feedback submission", async () => {
+    const user = userEvent.setup();
+    render(<FeedbackPanel />);
+
+    await user.type(screen.getByRole("textbox", { name: "Your feedback" }), "Anonymous report");
+    await user.click(switchControl());
+    await user.click(screen.getByRole("button", { name: "Send" }));
+
+    await waitFor(() =>
+      expect(invokeMock).toHaveBeenCalledWith("feedback_submit", {
+        input: expect.objectContaining({
+          anonymous: true,
+          message: "Anonymous report",
+        }),
+      }),
+    );
   });
 });
